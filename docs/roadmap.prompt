@@ -1,0 +1,167 @@
+---
+# File roadmap prompt improved comments concise phase summaries
+# Outlines conceptual development roadmap prompt language features milestones detailed AI context
+version: one point one point zero # Maintain version alignment consistent roadmap content
+description: "Conceptual development roadmap prompt language outlining phases core definition advanced agent features including secure identity wallet management BDI integration providing detailed context rationale AI processors" # Style applied description expanded
+author: "AI Collaboration"
+tags: ["roadmap", "language-design", "planning", "agents", "bdi", "identity", "security", "conceptual", "ai-readable-docs"]
+defaultModelConfig: { model_id: "gemini-1.5-pro" } # Default context generic model reference
+---
+
+# AI_CONTEXT_START File roadmap prompt
+# AI_PURPOSE Define structured phased development plan conceptual prompt language serve guide future implementation efforts provide clear context subsequent AI analysis extension tasks
+# AI_FRAMEWORK_NOTE This roadmap details evolution prompt language from its foundational object oriented Pythonic base towards sophisticated system capable managing secure autonomous agents advanced reasoning This plan intended guide both human developers AI systems participating language creation refinement process
+# AI_STYLE_GUIDE Strict adherence prompt language documentation style REQUIRED comments descriptions below no standard punctuation no prose numerals Use word numerals where necessary exceptions code literals identifiers Markdown formatting characters eg hash asterisk dashes retained structure clarity
+
+# --- Conceptual Imports ---
+# Assume standard library modules available needed viewer class
+# import json Conceptual standard library JSON handling needed viewer example
+
+# --- Roadmap Definition Data Structure ---
+# AI_NOTE Roadmap defined list maps each map represents phase objectives key features Prose follows documentation style providing enhanced context rationale AI processors Phase comments provide brief summary
+
+ROADMAP_PHASES = [
+    {
+        "phase": "Phase Zero", # Phase Zero Conceptual Foundation Establish core philosophy syntax structure
+        "title": "Conceptual Foundation Core Definition",
+        "goal": "Establish solidify core language philosophy syntax structure based initial design principles exploration serve stable baseline",
+        # AI_RATIONALE This phase captures current conceptual state defines fundamental non negotiable design pillars language
+        "key_features": [
+            "Pythonic syntax base object oriented paradigm Provide familiar structure rapid developer uptake powerful abstraction mechanisms", # Style applied rationale added
+            "Loose dynamic typing runtime flexibility Accommodate unpredictable nature AI model outputs data structures reduce boilerplate strict typing might impose", # Style applied rationale added
+            "Markdown like triple quoted strings readable prompt text Central feature enhance prompt engineer workflow make natural language instruction primary readable artifact", # Style applied rationale added
+            "Simple curly brace templating `{{ expression }}` Basic mechanism dynamic prompt generation integrate variables state prompt text", # Style applied description clarified
+            "YAML metadata header configuration context Provide structured way define file level properties default configurations dependencies versioning", # Style applied description clarified
+            "Async native design `async` `await` IO operations Essential non blocking interaction external AI APIs services responsive agents", # Style applied rationale added
+            "Conceptual standard library basic modules `FileSystem` `JSON` etc Define necessary building blocks common tasks though implementation deferred", # Style applied implementation note added
+            "Abstracted `AI_Interaction` layer `ModelConfig` generic API calls Decouple prompt logic specific AI providers essential portability flexibility", # Style applied rationale added
+            "Basic OOP concepts encapsulation inheritance conceptual `BasePrompt` Foundational object model structure prompts", # Style applied description clarified
+            "Conceptual support recursive loops iterative prompting Enable advanced prompting techniques automated refinement feedback loops", # Style applied description clarified
+            "Unique AI readable documentation style defined applied internal comments descriptions Enhance machine processability code facilitate AI assisted development" # Style applied rationale added
+        ]
+    },
+    {
+        "phase": "Phase One", # Phase One Core Runtime Build functional interpreter parser execute basic prompts
+        "title": "Core Runtime Implementation Parser Interpreter",
+        "goal": "Build minimal viable functional interpreter parser execute basic non agentic prompt files validate core syntax semantics",
+        # AI_RATIONALE Transition from pure concept executable artifact essential validate design choices enable further development
+        "key_features": [
+            "Formal grammar definition EBNF ANTLR Provide unambiguous language specification guide parser development", # Style applied rationale added
+            "Working parser generate Abstract Syntax Tree AST Translate prompt code structured representation interpreter use", # Style applied description clarified
+            "Basic interpreter execute AST manage state scope Handle core language features variable assignment control flow method calls", # Style applied description clarified
+            "Runtime environment handle `async` `await` event loop Provide core asynchronous execution capability", # Style applied description clarified
+            "Concrete implementation core standard library modules `FileSystem` `JSON` `logging` `asyncio` etc Provide essential utilities basic scripts", # Style applied implementation note added
+            "Basic implementation `AI_Interaction` layer support one two initial AI providers eg via HTTP module Demonstrate core capability interact external AI models", # Style applied numeral changed word implementation note added
+            "Robust error handling reporting basic diagnostics Provide feedback developers script execution issues" # Style applied description clarified
+        ]
+    },
+    {
+        "phase": "Phase Two", # Phase Two Agent Framework Introduce foundational agent support BDI logic
+        "title": "Agent Framework BDI Logic Integration Foundational",
+        "goal": "Introduce foundational support autonomous agents basic cognitive structures reasoning capabilities enable simple goal directed behavior",
+        # AI_RATIONALE Move beyond simple prompts towards autonomous systems core promise prompt language
+        "key_features": [
+            "Define implement concrete `BaseAgent` class structure Standardize agent definition implementation provide common lifecycle methods", # Style applied rationale added
+            "Implement perceive plan act cycle agent execution loop `run` method Provide core behavioral loop autonomous agents", # Style applied description clarified
+            "Basic agent state management mechanisms Store retrieve agent internal state dictionary attributes needed memory persistence", # Style applied implementation note added
+            "Define implement standard `Tool` interface allow agents use external capabilities Standardize how agents access functionalities search file IO coding etc", # Style applied rationale added
+            "Integrate core BDI classes `Belief` `Desire` `Intention` `bdi prompt` manage agent mental state Provide basic cognitive architecture track beliefs goals commitments", # Style applied description clarified BDI link
+            "Integrate basic logic utilities `LogicTables` `LogicalOperator` `logic prompt` use agent reasoning Provide tools basic propositional logic evaluation expression definition", # Style applied description clarified logic link
+            "Integrate conceptual `Reasoner` placeholder `reasoning prompt` simple planning decision making Establish placeholder central reasoning engine coordinate logic application" # Style applied description clarified reasoning link
+        ]
+    },
+    {
+        "phase": "Phase Three", # Phase Three Secure Identity Equip agents secure verifiable identities manage keys
+        "title": "Secure Agent Identity Storage Wallet Management",
+        "goal": "Equip agents unique secure verifiable identities manage sensitive data credentials securely critical trust autonomy",
+        # AI_RATIONALE Essential agents operate potentially untrusted environments interact value based systems blockchain applications provide security foundation
+        "key_features": [
+            "Implement `IDManagerAgent` concept `idmanager prompt` generate manage Ethereum compatible wallets securely Requires concrete interaction blockchain account library", # Style applied implementation note added ID link
+            "Implement `EmbalmerAgent` concept `embalmer prompt` manage secure storage eg `.env` files using external Tomb tool via conceptual `SystemProcess` `SecureInput` Requires secure reliable interaction host OS external tools", # Style applied implementation note added Embalmer link security note added
+            "Agents instantiated assigned unique public address managed `IDManagerAgent` Provide stable verifiable identifier each agent instance", # Style applied description clarified
+            "Agents implement mechanism securely retrieve own private key eg calling `IDManagerAgent get_private_key` Avoids embedding keys directly agent code enhances security", # Style applied rationale added security note added
+            "Establish security best practices key handling storage retrieval encrypted containers Define secure protocols operational procedures" # Style applied implementation note added
+        ]
+    },
+    {
+        "phase": "Phase Four", # Phase Four Advanced Reasoning Enhance agent intelligence adaptability reasoning belief revision
+        "title": "Advanced Reasoning Cognition",
+        "goal": "Enhance agent intelligence adaptability sophisticated reasoning belief revision capabilities move beyond simple reactive behavior",
+        # AI_RATIONALE Enable agents handle complex uncertain dynamic environments make more nuanced robust decisions
+        "key_features": [
+            "Implement concrete logic nonmonotonic reasoning `DefaultLogic` `nonmonotonic prompt` handle uncertainty reasoning defaults allow provisional conclusions", # Style applied description clarified nonmonotonic link
+            "Implement belief revision mechanisms `AutoepistemicAgent` `epistemic prompt` handle contradictions update knowledge base Requires robust `contradicts_new_information` implementation integrate logic systems", # Style applied implementation note added epistemic link
+            "Implement Socratic dialogue capabilities `SocraticReasoning` `socratic.prompt` agent self reflection critical analysis user interaction probe assumptions", # Style applied description clarified socratic link
+            "Enhance `Reasoner` component implement specific deductive inductive abductive reasoning strategies potentially using LLMs complex planning problem decomposition", # Style applied implementation note added reasoning link
+            "Refine BDI implementation include `Goal` evaluation `Reward` system integration reinforcement learning potential Enable goal lifecycle management learning adaptation based outcomes" # Style applied implementation note added BDI link
+        ]
+    },
+    {
+        "phase": "Phase Five", # Phase Five Advanced Features Build ecosystem tooling support broader adoption
+        "title": "Advanced Features Ecosystem Tooling",
+        "goal": "Introduce cutting edge AI interaction features build out robust developer ecosystem tooling support broader adoption complex applications",
+        # AI_RATIONALE Expand language capabilities beyond core prompt agent structure provide tools necessary efficient effective development testing deployment
+        "key_features": [
+            "Implement conceptual multimodal support `Image` `Audio` types `AI_Interaction` backend integration `generate_image` etc Enable interaction models beyond text", # Style applied implementation note added multimodal link
+            "Define implement component based generation mechanism `$Variable` syntax `Component` type Allow abstract concepts styles guide generation", # Style applied implementation note added components link
+            "Define implement constraint reward based optimization syntax `where reward` `optimize_for` requires adaptable `AI_Interaction` layer capable backend APIs Provide fine grained control generation output quality", # Style applied implementation note added constraints link
+            "Develop meta programming agents `PromptEngineerAgent` automate prompt development refinement testing analysis Leverage prompt itself improve prompt engineering process", # Style applied rationale added meta link
+            "Create initial standard library extensions common tasks specific domains eg data analysis web interaction provide reusable components", # Style applied implementation note added
+            "Develop tooling IDE support syntax highlighting linting static analysis conceptual debugging testing framework Enhance developer productivity code quality" # Style applied rationale added tooling link
+        ]
+    },
+    {
+        "phase": "Phase Six", # Phase Six Production Hardening Stabilize ensure security performance build community
+        "title": "Production Hardening Community Growth",
+        "goal": "Stabilize language runtime ensure security performance robustness build active community foster ecosystem growth ensure long term viability",
+        # AI_RATIONALE Transition conceptual project stable usable language requires focus non functional requirements community engagement
+        "key_features": [
+            "Implement robust sandboxing `exec` `SystemProcess` `FileSystem` external interactions Critical security production environments prevent misuse", # Style applied security note added sandboxing link
+            "Performance optimization interpreter runtime memory management Ensure language usable practical applications scales reasonably", # Style applied implementation note added
+            "Formalize language specification based implementation experience Create definitive reference language behavior guide future development", # Style applied rationale added
+            "Expand improve standard library based user community feedback practical needs", # Style applied rationale added
+            "Comprehensive documentation tutorials examples learning resources Facilitate adoption onboarding new users", # Style applied rationale added
+            "Build open source community encourage contributions library tool development Foster collaborative ecosystem innovation", # Style applied rationale added
+            "Establish versioning release management process Provide stable releases predictable evolution language framework" # Style applied rationale added
+        ]
+    }
+]
+
+# --- Roadmap Viewer Class Conceptual ---
+# AI_NOTE Simple class display formatted roadmap adheres documentation style Provides basic presentation logic roadmap data
+
+class RoadmapViewer:
+    def __init__(self, roadmap_data):
+        # AI_TASK Initialize viewer roadmap data structure
+        self.roadmap = roadmap_data
+
+    def display_roadmap(self):
+        # AI_TASK Print roadmap phases features formatted way console adhere style
+        print("\n# --- prompt Language Conceptual Development Roadmap ---") # Punc removed title format ok
+        for phase_data in self.roadmap:
+            # AI_OUTPUT Format display each phase title goal features
+            # Generate brief summary comment phase here
+            phase_comment = f"# {phase_data.get('phase', '')} {phase_data.get('title', '')} {phase_data.get('goal', '')[:50]}".replace('\n', ' ') # Punc ok code logic string format slice numeral ok Basic summary truncated goal punc removed summary comment
+            print(f"\n## {phase_data.get('phase', 'Unknown Phase')} {phase_data.get('title', 'Untitled Phase')} {phase_comment}") # Punc removed format ok include phase comment
+            print(f"\n  **Goal** {phase_data.get('goal', 'No goal defined')}") # Punc removed format ok
+            print("\n  **Key Features**") # Punc removed format ok
+            features = phase_data.get('key_features', [])
+            if features:
+                for feature in features: print(f"    * {feature}") # List format ok
+            else: print("    * No specific features listed this phase") # Punc removed
+        print("\n# --- End Roadmap ---") # Punc removed format ok
+
+# --- Script Execution Block ---
+# AI_TASK Instantiate viewer display conceptual roadmap defined above
+
+def main():
+    # Main execution logic display roadmap data using viewer class
+    print("[SCRIPT START] Displaying conceptual prompt language roadmap improved comments") # Punc removed text updated
+
+    viewer = RoadmapViewer(roadmap_data=ROADMAP_PHASES)
+    viewer.display_roadmap()
+
+    print("[SCRIPT END]") # Punc removed
+
+# Run main function conceptually no async needed display data structure
+main()
