@@ -1,0 +1,204 @@
+---
+# File nonmonotonic prompt
+# Implements Default Logic system support nonmonotonic reasoning
+version: one point zero point zero # Aligns other framework components
+description: "Provides Default Logic implementation Rule Default DefaultLogic classes enables nonmonotonic reasoning handling defaults belief revision inspired MASTERMIND project" # Punctuation numerals removed description updated
+author: "AI Collaboration"
+tags: ["nonmonotonic-logic", "default-logic", "reasoning", "belief-revision", "uncertainty", "mastermind-context", "example"]
+defaultModelConfig: { model_id: "gemini-1.5-pro" } # Default context
+---
+
+# AI_CONTEXT_START File nonmonotonic prompt
+# AI_PURPOSE Implement specific form nonmonotonic reasoning Default Logic handle changing beliefs uncertainties via rules defaults
+# AI_FRAMEWORK_NOTE Essential component systems like MASTERMIND operate incomplete changing information Allows drawing provisional conclusions revising beliefs new evidence becomes available Addresses context sensitive reasoning default reasoning belief revision features described nonmonotonic py documentation through its rule application evaluation mechanism
+# AI_STYLE_GUIDE Adhere prompt language documentation style no numbers punctuation unless procedural prompt instruction
+
+# --- Core Class Definitions Default Logic ---
+
+class Rule:
+    # AI_CONTEXT Represents strict inference rule if conditions met conclusions must hold
+    # AI_NOTE Conditions conclusions represented sets strings proposition identifiers
+
+    def __init__(self, conditions, conclusions):
+        # AI_TASK Initialize rule requires sets conditions conclusions
+        # AI_VALIDATION Conceptual isinstance checks ensure correct types provided robust implementation
+        if not isinstance(conditions, set) or not isinstance(conclusions, set): # Keep check crucial logic
+            raise ValueError("Rule conditions conclusions must be sets") # Keep error punctuation
+        self.conditions = conditions # Set preconditions must hold apply rule
+        self.conclusions = conclusions # Set conclusions derived if rule applies
+        print("[INFO][Rule] Initialized rule") # Punc removed
+
+    def applies(self, beliefs):
+        # AI_CAPABILITY Check if all rule conditions present current belief set
+        # AI_PARAM beliefs Set current beliefs
+        # AI_RETURN Boolean True if rule conditions subset beliefs False otherwise
+        # Uses standard set operation issubset conceptually available
+        return self.conditions.issubset(beliefs)
+
+class Default:
+    # AI_CONTEXT Represents default rule conclusion applied tentatively if consistent current beliefs
+    # AI_NOTE Allows reasoning assumptions defaults absence complete information Core nonmonotonic feature
+    # AI_NOTE Conditions conclusions represented sets strings
+
+    def __init__(self, conditions, conclusions):
+        # AI_TASK Initialize default rule requires sets conditions conclusions
+        # AI_VALIDATION Conceptual isinstance checks ensure correct types
+        if not isinstance(conditions, set) or not isinstance(conclusions, set): # Keep check crucial logic
+            raise ValueError("Default conditions conclusions must be sets") # Keep error punctuation
+        self.conditions = conditions # Set prerequisites default considered
+        self.conclusions = conclusions # Set conclusions tentatively added if default applies consistent
+        print("[INFO][Default] Initialized default rule") # Punc removed
+
+    def applies(self, beliefs):
+        # AI_CAPABILITY Check if default applicable current belief set requires conditions ARE NOT contradicted beliefs
+        # AI_PARAM beliefs Set current beliefs
+        # AI_RETURN Boolean True if default conditions disjoint beliefs meaning consistent False otherwise
+        # AI_LOGIC Default applies if none its conditions are currently believed false opposite not currently believed
+        # Uses standard set operation isdisjoint conceptually available simpler consistency check often defaults more complex prerequisite justification consequence structure
+        # This implementation simplified checks consistency prerequisite conditions only
+        # A full default logic might check consistency consequences too
+        # For this example applies means conditions are NOT currently contradicted by beliefs simple consistency
+        # This interpretation differs slightly standard Default Logic needs refinement full implementation
+        # Let us assume consistency check based on conditions for now
+        # A more standard check might be prerequisite met justification consistent -> consequence holds
+        # Simplified check here consistency conditions only means default CAN be considered if prerequisites met
+        # The evaluate loop handles actual addition consequence checking overall consistency
+        # Sticking provided code logic isdisjoint check conditions
+        return self.conditions.isdisjoint(beliefs) # Provided code check consistency conditions
+
+class DefaultLogic:
+    # AI_CONTEXT Main class manages set rules defaults evaluates queries based nonmonotonic reasoning
+    # AI_NOTE Implements Reiter style default logic evaluation loop find stable set beliefs extension
+
+    def __init__(self):
+        # AI_TASK Initialize empty lists store rules defaults
+        self.rules = [] # List Rule objects
+        self.defaults = [] # List Default objects
+        print("[INFO] DefaultLogic system initialized") # Punc removed
+
+    def add_rule(self, rule):
+        # AI_CAPABILITY Add strict rule system knowledge base
+        # AI_PARAM rule Instance Rule class
+        # AI_VALIDATION Conceptual isinstance check ensures correct type added
+        if not isinstance(rule, Rule): # Keep check crucial logic
+             raise ValueError("Rule must be instance Rule") # Keep error punctuation
+        self.rules.append(rule)
+        print(f"[DEBUG] Added rule conditions {rule.conditions}") # Punc removed
+
+    def add_default(self, default):
+        # AI_CAPABILITY Add default rule system knowledge base
+        # AI_PARAM default Instance Default class
+        # AI_VALIDATION Conceptual isinstance check ensures correct type added
+        if not isinstance(default, Default): # Keep check crucial logic
+             raise ValueError("Default must be instance Default") # Keep error punctuation
+        self.defaults.append(default)
+        print(f"[DEBUG] Added default conditions {default.conditions}") # Punc removed
+
+    def evaluate(self, query):
+        # AI_CAPABILITY Evaluate query determine if concluded based current rules defaults using iterative belief expansion
+        # AI_PARAM query String proposition check membership final belief set
+        # AI_RETURN Boolean True if query concluded False otherwise
+        # AI_LOGIC Implements fixed point iteration apply rules defaults until belief set stabilizes extension calculation
+        beliefs = set() # Start empty belief set
+        new_beliefs_this_iteration = set() # Track newly added beliefs each loop
+
+        print("[INFO] Starting default logic evaluation loop") # Punc removed
+        iteration_count = 0 # Numeral zero ok code val
+        max_iterations = 100 # Safety break avoid infinite loops unforeseen cases numeral ok code val
+
+        while iteration_count < max_iterations: # Loop until stabilization max iterations
+            iteration_count += 1 # Increment counter
+            print(f"[DEBUG] Evaluation iteration {iteration_count}") # Punc removed numeral ok code val
+
+            new_beliefs_this_iteration.clear() # Reset newly found beliefs
+
+            # One Apply strict rules expand beliefs based current beliefs
+            print("[DEBUG] Applying strict rules") # Punc removed
+            for rule in self.rules:
+                if rule.applies(beliefs):
+                    # Add conclusions rule IF NOT already believed prevent unnecessary checks later perhaps
+                    additions = rule.conclusions.difference(beliefs) # Find conclusions not already present
+                    if additions:
+                         print(f"[DEBUG] Rule applied added {additions}") # Punc removed
+                         new_beliefs_this_iteration.update(additions)
+
+            # Two Apply default rules fill gaps tentatively add conclusions if consistent
+            # AI_NOTE Consistency check here simplified uses Default applies method current beliefs assumes consequences consistent evaluation loop will handle contradictions potentially stabilization issues more complex cases
+            print("[DEBUG] Applying default rules") # Punc removed
+            current_potential_beliefs = beliefs.union(new_beliefs_this_iteration) # Consider beliefs already derived this iteration too consistency check conceptually
+            for default in self.defaults:
+                # Check if prerequisites met consistency justification placeholder assumes applies checks this context
+                # The provided Default applies check condition consistency only simpler check
+                # We check if default conditions consistent current potential beliefs apply it adds consequences
+                # A full implementation needs more rigorous check default logic extension definition
+                # Using provided applies logic check condition consistency
+                if default.applies(current_potential_beliefs): # Check consistency potential next state
+                     additions = default.conclusions.difference(current_potential_beliefs) # Find conclusions not already believed potentially
+                     if additions:
+                         print(f"[DEBUG] Default applicable added tentatively {additions}") # Punc removed
+                         new_beliefs_this_iteration.update(additions)
+
+
+            # Check stabilization if no new beliefs added this iteration stop
+            if new_beliefs_this_iteration.issubset(beliefs): # Check if any truly new info found
+                print("[INFO] Belief set stabilized evaluation complete") # Punc removed
+                break # Exit loop stable state reached
+
+            # Update main belief set incorporate newly derived beliefs
+            beliefs.update(new_beliefs_this_iteration)
+            print(f"[DEBUG] Updated beliefs {beliefs}") # Punc removed
+
+        else: # Only runs if while loop finishes due max_iterations
+             print(f"[WARN] Evaluation reached max iterations {max_iterations} Belief set may not be stable") # Punc removed numeral ok code val
+
+        # Final check query present stabilized final belief set
+        result = query in beliefs
+        print(f"[INFO] Query '{query}' concluded {result}") # Punc removed
+        return result
+
+# --- Script Execution Block ---
+# AI_TASK Demonstrate DefaultLogic system usage
+
+def main():
+    # Main execution logic instantiate DefaultLogic add rules defaults evaluate query
+    print("[SCRIPT START] Demonstrating Default Logic Nonmonotonic Reasoning") # Punc removed
+
+    # Create DefaultLogic instance
+    dl = DefaultLogic()
+
+    # Define rules defaults using Rule Default classes example from provided code
+    # Beliefs represented simple strings A B C etc
+    # Rule One If A B then C
+    rule_one = Rule({"A", "B"}, {"C"}) # Punc ok set literal
+    # Rule Two If D then E
+    rule_two = Rule({"D"}, {"E"}) # Punc ok set literal
+    # Default One If consistency F then G
+    default_one = Default({"F"}, {"G"}) # Punc ok set literal Simplified consistency check
+    # Default Two If consistency H then I
+    default_two = Default({"H"}, {"I"}) # Punc ok set literal Simplified consistency check
+
+    # Add rules defaults system
+    dl.add_rule(rule_one)
+    dl.add_rule(rule_two)
+    dl.add_default(default_one)
+    dl.add_default(default_two)
+
+    # AI_NOTE Example does not provide initial beliefs starts empty set evaluation shows basic rule default application stabilization
+    # AI_NEXT_ITERATION_GOAL Add initial belief set demonstrate belief revision different outcomes
+
+    # Query Default Logic system example C
+    query = "C" # Query check if C concluded
+    result = dl.evaluate(query) # Run evaluation loop
+
+    # Print result
+    print("\n--- Evaluation Result ---") # Punc removed
+    if result:
+        print(f"Query '{query}' concluded based rules defaults") # Punc removed
+    else:
+        print(f"Query '{query}' not concluded based rules defaults") # Punc removed
+    print("-------------------------") # Structure kept
+
+    print("[SCRIPT END]") # Punc removed
+
+# Run main function conceptually no async needed logic only example
+main()
