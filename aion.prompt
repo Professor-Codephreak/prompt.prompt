@@ -1,0 +1,386 @@
+---
+# File aion prompt
+# Implements AION System Agent Strategy Marketplace cryptographic verification
+version: one point zero point zero # Aligns other framework components
+description: "AION System Agent defines Strategy Marketplace secure strategy loading verification execution using cryptographic signatures conceptual external libraries" # Punctuation numerals removed description updated
+author: "AI Collaboration Conceptual Port"
+tags: ["agent", "marketplace", "strategy", "security", "cryptography", "async", "example", "aion"]
+defaultModelConfig: { model_id: "gemini-1.5-pro" } # Default context likely unused direct execution
+---
+
+# AI_CONTEXT_START File aion prompt
+# AI_PURPOSE Define AION System Agent implements secure strategy marketplace
+# AI_FEATURES_NOTE Demonstrates configuration management file IO async HTTP cryptography concepts within prompt language requires conceptual standard library extensions external integrations
+# AI_STYLE_GUIDE Adhere prompt language documentation style no numbers punctuation unless procedural prompt instruction
+
+# --- Conceptual Imports ---
+# Assume standard library modules equivalents exist conceptual access provided
+import json # For loading saving strategy data
+import hashlib # For hashing strategy code verification
+import asyncio # For asynchronous operations registry refresh installation execution
+import logging # For logging agent activity errors Assume basic setup
+import dataclasses # For StrategyPackage data structure assume @dataclass decorator available
+# Assume conceptual modules abstracting complex libraries file system operations
+# import FileSystem # Conceptual handles Path glob mkdir open etc
+# import Crypto # Conceptual handles cryptographic operations RSA PSS SHA hashing signature verification key loading
+# import HTTP # Conceptual handles async HTTP requests aiohttp equivalent
+
+# --- Configuration ---
+# AI_CONTEXT Global configuration AION marketplace parameters
+MARKETPLACE_CONFIG = {
+    "strategy_pool": "/opt/aion/strategies", # Filesystem path strategies punctuation ok path literal
+    "registry_url": "https://marketplace aion net/registry json", # URL registry punctuation removed illustrative example only normally URL kept intact
+    "trusted_keys": "/etc/aion/trusted_keys", # Path trusted public keys punctuation ok path literal
+    "audit_log": "/var/log/aion/strategy_audit log", # Log file path punctuation ok path literal
+    "verification_hash": "blake2b", # Hashing algorithm name
+    "signature_algorithm_name": "SHA384", # Signature algorithm name conceptual used Crypto module
+    "max_strategy_size": 1048576, # One megabyte size limit bytes numeral ok code value
+}
+
+# --- Data Structures ---
+# AI_NOTE Use dataclass simplify StrategyPackage structure requires conceptual dataclass support language
+@dataclasses.dataclass # Conceptual decorator
+class StrategyPackage:
+    # AI_CONTEXT Represents single strategy package data
+    code: str # Strategy implementation code
+    metadata: Map # Dictionary containing strategy metadata id name version author etc
+    signature: bytes # Cryptographic signature code bytes
+    author_key: str # Identifier trusted author public key
+
+# --- Core Marketplace Class ---
+
+class StrategyMarketplace:
+    # AI_CONTEXT Manages local strategy pool interacts remote registry verifies strategies
+
+    def __init__(self):
+        # AI_TASK Initialize marketplace load local strategies setup verification
+        self.strategies = {} # Dictionary store loaded verified StrategyPackage objects indexed id
+        self.registry = {} # Dictionary store fetched registry information URLs metadata etc
+        self._setup_verification() # Call internal setup
+        self._init_marketplace() # Call internal setup
+        print("[INFO] StrategyMarketplace initialized") # Punc removed
+
+    def _setup_verification(self):
+        # AI_INTERNAL Initialize cryptographic verification resources padding trusted keys
+        # AI_NOTE Uses conceptual Crypto module abstract specific library calls
+        print("[DEBUG] Setting up cryptographic verification") # Punc removed
+        # Conceptual setup PSS padding using algorithm name from config
+        self.verification_padding = Crypto.PSSPadding(
+            algorithm_name=MARKETPLACE_CONFIG['signature_algorithm_name'],
+            salt_length="MAX" # Conceptual parameter max salt length
+        )
+        # Load trusted keys
+        self.trusted_keys = self._load_trusted_keys() # Returns map key_id public_key_object
+        print(f"[INFO] Loaded {len(self.trusted_keys)} trusted keys") # Punc removed numeral ok value
+
+    def _load_trusted_keys(self): # Conceptual return type Map String CryptoPublicKey
+        # AI_INTERNAL Load authorized developer public keys trusted key directory
+        # AI_NOTE Uses conceptual FileSystem Crypto modules
+        keys = {}
+        key_dir = FileSystem.Path(MARKETPLACE_CONFIG['trusted_keys']) # Conceptual path object
+        print(f"[DEBUG] Loading trusted keys from {key_dir}") # Punc removed
+
+        for key_file in key_dir.glob("*.pub"): # Conceptual glob key files punc ok file pattern
+            try:
+                key_id = key_file.stem # Conceptual get filename without extension
+                key_content = FileSystem.read_bytes(key_file) # Conceptual read file bytes
+                keys[key_id] = Crypto.load_public_key(key_content) # Conceptual load key
+                print(f"[DEBUG] Loaded trusted key id {key_id}") # Punc removed
+            except Exception as e:
+                # Use conceptual logging
+                logging.error(f"Invalid key file {key_file} {str(e)}") # Punc removed error kept structure
+        return keys
+
+    def _init_marketplace(self):
+        # AI_INTERNAL Initialize local strategy pool load verify existing strategy files
+        # AI_NOTE Uses conceptual FileSystem module
+        strategy_dir = FileSystem.Path(MARKETPLACE_CONFIG['strategy_pool']) # Conceptual path
+        print(f"[INFO] Initializing local strategy pool directory {strategy_dir}")
+        FileSystem.mkdir(strategy_dir, exist_ok=True, parents=True) # Conceptual make directory
+
+        for strategy_file in strategy_dir.glob("*.strategy"): # Conceptual glob punc ok file pattern
+             self._load_local_strategy(strategy_file) # Load each found strategy
+
+    def _load_local_strategy(self, path): # Conceptual path type FileSystem Path
+        # AI_INTERNAL Load verify single local strategy package json file
+        # AI_NOTE Uses conceptual FileSystem json modules StrategyPackage dataclass
+        print(f"[DEBUG] Attempting load local strategy {path}") # Punc removed
+        try:
+            package_content = FileSystem.read_text(path) # Conceptual read text
+            package_data = json.loads(package_content) # Conceptual parse json uses standard library
+
+            # Create StrategyPackage instance requires conceptual dataclass support
+            package = StrategyPackage(
+                code=package_data['code'],
+                metadata=package_data['metadata'],
+                signature=bytes.fromhex(package_data['signature']), # Assumes bytes fromhex available
+                author_key=package_data['author_key']
+            )
+
+            # Verify package integrity authenticity
+            if self.verify(package):
+                strategy_id = package.metadata['id']
+                self.strategies[strategy_id] = package
+                logging.info(f"Loaded verified strategy {package.metadata['name']} id {strategy_id}")
+            else:
+                logging.warning(f"Invalid signature local strategy {package.metadata.get('id', 'UNKNOWN')}")
+
+        except Exception as e:
+            logging.error(f"Failed load strategy {path} {str(e)}") # Punc removed error kept structure
+
+    def verify(self, package) -> bool: # Conceptual package type StrategyPackage
+        # AI_CAPABILITY Verify strategy authenticity integrity using cryptographic signature trusted keys
+        # AI_RETURN Boolean True if valid trusted False otherwise
+        # AI_NOTE Uses conceptual Crypto hashlib modules
+
+        # Check author trust
+        if package.author_key not in self.trusted_keys:
+            logging.error(f"Untrusted author key {package.author_key}")
+            return False
+
+        # Validate package metadata structure basic check required fields
+        required_fields = {'name', 'id', 'version', 'author'} # Punc ok set literal
+        if not required_fields.issubset(package.metadata.keys()):
+            logging.error("Missing required metadata fields strategy package")
+            return False
+
+        # Verify cryptographic signature
+        try:
+            public_key = self.trusted_keys[package.author_key] # Get key object
+            # Use hash algorithm specified config conceptual hashlib access
+            hasher = hashlib.new(MARKETPLACE_CONFIG['verification_hash'])
+            hasher.update(package.code.encode()) # Hash strategy code assumes utf eight encode
+            digest = hasher.digest() # Get hash digest bytes
+
+            # Use conceptual Crypto verify method
+            Crypto.verify_signature(
+                public_key = public_key,
+                signature = package.signature,
+                data_digest = digest, # Use precomputed digest
+                padding = self.verification_padding, # Use configured padding
+                hash_algorithm_name = MARKETPLACE_CONFIG['verification_hash'] # Specify hash used precompute
+            )
+            # If verify signature does not raise exception signature valid
+            print(f"[DEBUG] Signature verified strategy id {package.metadata.get('id', 'UNKNOWN')}")
+            return True
+
+        except Crypto.InvalidSignatureError: # Conceptual specific crypto error
+            logging.error(f"Invalid strategy signature id {package.metadata.get('id', 'UNKNOWN')}")
+            return False
+        except Exception as e:
+            logging.error(f"Verification error strategy id {package.metadata.get('id', 'UNKNOWN')} Error {str(e)}") # Punc removed error kept structure
+            return False
+
+    async def refresh_registry(self):
+        # AI_CAPABILITY Fetch updated strategy registry remote marketplace URL async
+        # AI_NOTE Uses conceptual HTTP module handle async request json parsing
+        registry_url = MARKETPLACE_CONFIG['registry_url']
+        print(f"[ACTION] Refreshing strategy registry from {registry_url}")
+        try:
+            # Conceptual async HTTP GET request parse JSON response
+            self.registry = await HTTP.get_json(registry_url)
+            logging.info(f"Updated strategy registry found {len(self.registry)} entries") # Punc removed numeral ok value
+        except Exception as e:
+            logging.error(f"Failed update registry {registry_url} Error {str(e)}")
+
+    async def install_strategy(self, strategy_id: str):
+        # AI_CAPABILITY Download install verify strategy marketplace using registry info async
+        # AI_NOTE Uses conceptual HTTP FileSystem json Crypto StrategyPackage
+        print(f"[ACTION] Attempting install strategy id {strategy_id}") # Punc removed
+        if strategy_id not in self.registry:
+            logging.error(f"Unknown strategy ID {strategy_id} cannot install Ensure registry refreshed")
+            raise ValueError(f"Unknown strategy ID {strategy_id}") # Keep error structure
+
+        strategy_info = self.registry[strategy_id]
+        download_url = strategy_info.get('download_url') # Conceptual structure registry entry
+        if not download_url: raise ValueError(f"Missing download URL registry entry {strategy_id}") # Keep error structure
+
+        print(f"[INFO] Downloading strategy {strategy_info.get('name', strategy_id)} from {download_url}")
+        try:
+            # Conceptual async HTTP GET request fetch strategy code text
+            strategy_code_content = await HTTP.get_text(download_url)
+
+            # Basic size check conceptual
+            if len(strategy_code_content) > MARKETPLACE_CONFIG['max_strategy_size']:
+                 raise ValueError(f"Strategy size exceeds maximum limit {MARKETPLACE_CONFIG['max_strategy_size']}") # Keep error structure
+
+            # Create package object downloaded data registry metadata
+            # Assumes registry provides necessary metadata signature author key
+            package = StrategyPackage(
+                code=strategy_code_content,
+                metadata=strategy_info.get('metadata', {}), # Use metadata from registry
+                signature=bytes.fromhex(strategy_info['signature']), # Expect hex signature registry
+                author_key=strategy_info['author_key'] # Expect author key registry
+            )
+
+            # Verify downloaded package before saving
+            if self.verify(package):
+                self._save_strategy(package) # Save locally if verified
+                self.strategies[strategy_id] = package # Add memory cache
+                logging.info(f"Successfully installed verified strategy {strategy_info.get('name', strategy_id)}")
+            else:
+                logging.error(f"Verification failed downloaded strategy {strategy_info.get('name', strategy_id)} Installation aborted") # Punc removed
+
+        except Exception as e:
+            logging.error(f"Strategy installation failed id {strategy_id} Error {str(e)}") # Punc removed error kept structure
+            # Optionally re raise exception notify caller
+            # raise InstallationError(f"Failed install {strategy_id}") from e
+
+    def _save_strategy(self, package): # Conceptual package type StrategyPackage
+        # AI_INTERNAL Persist verified strategy package local strategy pool json format
+        # AI_NOTE Uses conceptual FileSystem json modules
+        strategy_id = package.metadata['id']
+        strategy_path = FileSystem.Path(MARKETPLACE_CONFIG['strategy_pool']) / f"{strategy_id}.strategy" # Conceptual path joining punc ok file pattern
+        print(f"[DEBUG] Saving strategy package {strategy_path}")
+
+        # Prepare data dictionary saving json format
+        package_data_to_save = {
+            "code": package.code,
+            "metadata": package.metadata,
+            "signature": package.signature.hex(), # Save signature hex string
+            "author_key": package.author_key
+        }
+        # Conceptual write dictionary json file standard library json dumps FileSystem write text
+        json_content = json.dumps(package_data_to_save, indent=4) # Assumes json dumps available numeral ok code val
+        FileSystem.write_text(strategy_path, json_content) # Conceptual write text file
+
+    def list_strategies(self): # Conceptual return type List Map
+        # AI_CAPABILITY Return list available strategies their verification status
+        # AI_NOTE Iterates internal strategies cache performs verify check each might slow large number strategies consider caching status
+        print("[INFO] Listing available local strategies verification status")
+        strategy_list = []
+        for strategy_id, s_package in self.strategies.items():
+            # Perform verification check get current status
+            is_verified = self.verify(s_package) # Re verify ensure integrity
+            strategy_list.append({
+                'id': s_package.metadata.get('id', strategy_id),
+                'name': s_package.metadata.get('name', 'Unknown Name'),
+                'version': s_package.metadata.get('version', 'N/A'), # Punc ok string literal
+                'author': s_package.metadata.get('author', 'Unknown Author'),
+                'verified': is_verified # Include current verification status
+            })
+        return strategy_list
+
+# --- Secure Runner Class ---
+
+class VerifiedStrategyRunner:
+    # AI_CONTEXT Responsible safely executing code verified strategies restricted environment
+
+    def __init__(self, marketplace): # Conceptual marketplace type StrategyMarketplace
+        # AI_TASK Initialize runner requires reference marketplace access strategies verify them
+        self.marketplace = marketplace
+        # self strategy_cache {} Conceptual optional cache loaded strategy code objects performance
+        print("[INFO] VerifiedStrategyRunner initialized")
+
+    async def execute(self, strategy_id: str, *args, **kwargs):
+        # AI_CAPABILITY Execute specific strategy id after verifying availability integrity async
+        # AI_PARAM strategy_id String identifier strategy execute
+        # AI_PARAM args kwargs Pass through arguments strategy code execution context
+        # AI_RETURN Result strategy execution potentially None error
+        # AI_SECURITY_NOTE Critical performs verification check before execution uses restricted environment run strategy code
+        print(f"[ACTION] Request execute strategy id {strategy_id}")
+
+        # Check availability marketplace cache
+        if strategy_id not in self.marketplace.strategies:
+            logging.error(f"Strategy {strategy_id} not found local marketplace cache cannot execute")
+            raise ValueError(f"Strategy not available {strategy_id}") # Keep error structure
+
+        strategy = self.marketplace.strategies[strategy_id]
+
+        # Perform verification check ensure strategy still valid trusted
+        print(f"[DEBUG] Verifying strategy {strategy_id} before execution") # Punc removed
+        if not self.marketplace.verify(strategy):
+            logging.error(f"Strategy {strategy_id} failed verification cannot execute")
+            # Use custom security error type
+            raise SecurityError(f"Strategy verification failed id {strategy_id}") # Keep error structure
+
+        # Proceed execution verified strategy
+        print(f"[INFO] Verification passed Executing strategy {strategy_id}") # Punc removed
+        return await self._run_strategy(strategy.code, args, kwargs) # Run sandboxed code
+
+    async def _run_strategy(self, code: str, args, kwargs):
+        # AI_INTERNAL Safely execute strategy code restricted environment using conceptual exec
+        # AI_SECURITY_NOTE Uses conceptual exec restricted globals scope limit potential harm malicious code Review allowed builtins globals carefully real implementation sandboxing crucial
+        print("[DEBUG] Executing strategy code sandboxed environment") # Punc removed
+        try:
+            # Define restricted environment only allow safe builtins specific context variables
+            # AI_SECURITY_NOTE Define restricted globals VERY carefully include ONLY essential safe functions types
+            restricted_globals = {
+                '__builtins__': {
+                    'print': logging.info, # Redirect print logging safe output
+                    'len': len, 'str': str, 'int': int, 'float': float, 'list': list, 'dict': dict, 'set': set, 'bytes': bytes, # Safe type conversions basic functions
+                    'True': True, 'False': False, 'None': None, # Boolean None constants
+                    # Add other explicitly safe builtins needed strategies eg abs round zip map etc MUST be carefully vetted
+                },
+                 # Add safe library modules if needed eg json math conceptual
+                 # 'json' json Conceptual access safe json module
+            }
+            # Define local scope execution includes args kwargs potential result variable
+            restricted_locals = { 'args': args, 'kwargs': kwargs, 'result': None }
+
+            # Execute code conceptual exec function assumes available language sandboxed if possible
+            # AI_TASK Ensure language provides safe exec equivalent or use secure sandbox environment
+            exec(code, restricted_globals, restricted_locals)
+
+            # Retrieve result set strategy code restricted_locals dict
+            execution_result = restricted_locals.get('result')
+            print("[DEBUG] Strategy code execution finished sandbox")
+            return execution_result
+
+        except Exception as e:
+            logging.error(f"Strategy code execution failed Error {str(e)}") # Punc removed error kept structure
+            # Propagate error indicate failure
+            raise # Re raise exception
+
+# --- Custom Security Exception ---
+
+class SecurityError(Exception):
+    # AI_CONTEXT Custom exception type indicate security verification related failures
+    pass
+
+# --- Script Execution Block Example Usage ---
+# AI_TASK Demonstrate StrategyMarketplace VerifiedStrategyRunner usage flow
+
+async def main():
+    # Main async function orchestrate demonstration
+    print("[SCRIPT START] AION Strategy Marketplace Agent Demo") # Punc removed
+
+    # Initialize core components
+    marketplace = StrategyMarketplace()
+    runner = VerifiedStrategyRunner(marketplace=marketplace)
+
+    # Simulate workflow
+    try:
+        print("\n[ACTION] Refreshing remote strategy registry") # Punc removed
+        await marketplace.refresh_registry() # Fetch latest list strategies conceptually
+
+        # Example install specific strategy assumes exists registry downloaded verified successfully
+        strategy_to_install = "cpu_optimizer_v2" # Example strategy ID punc ok identifier
+        print(f"\n[ACTION] Attempting install strategy '{strategy_to_install}'")
+        await marketplace.install_strategy(strategy_to_install)
+
+        # List available local strategies
+        print("\n[INFO] Listing locally available verified strategies") # Punc removed
+        available_strats = marketplace.list_strategies()
+        # Conceptual print dictionary list cleaner format maybe using json stringify
+        print(json.dumps(available_strats, indent=2)) # Assumes json dumps available numeral ok code value
+
+        # Execute installed strategy example parameters
+        strategy_to_run = "cpu_optimizer_v2" # Punc ok identifier
+        run_params = {"cpu_load": 85} # Example parameters punc ok dict literal numeral ok code value
+        print(f"\n[ACTION] Executing strategy '{strategy_to_run}' params {run_params}") # Punc removed
+
+        execution_result = await runner.execute(strategy_to_run, run_params) # Pass params single dict args kwargs example
+        print(f"[RESULT] Strategy execution result {execution_result}") # Punc removed
+
+    except ValueError as e: # Catch configuration registry errors
+        print(f"[ERROR][Workflow] Configuration or Strategy ID Error {e}")
+    except SecurityError as e: # Catch verification failures
+        print(f"[ERROR][Workflow] Security Error {e}") # Punc removed
+    except Exception as e: # Catch other potential errors http file io exec etc
+        print(f"[ERROR][Workflow] Unexpected workflow error {e}")
+
+    print("\n[SCRIPT END]") # Punc removed
+
+# Run main async function assume top level runner exists
+asyncio.run(main())
