@@ -1,0 +1,256 @@
+---
+# File example prompt
+# Comprehensive example showcasing prompt language features integration conceptual modules
+version: zero point zero point one # Initial conceptual demonstration version NOT production ready
+description: "Demonstrates core prompt language syntax features OOP agents logic modules BDI interaction conceptual standard library AI APIs illustrates intended usage patterns integration various components defined previously eg bdi logic reasoning socratic nonmonotonic epistemic idmanager embalmer simplecoder mastermind context" # Punctuation numerals removed description updated
+author: "AI Collaboration"
+tags: ["example", "demonstration", "integration", "conceptual", "showcase", "v0.0.1"]
+defaultTextModel: { model_id: "gemini-1.5-pro", temperature: 0.7 }
+defaultCodeModel: { model_id: "gemini-code", temperature: 0.4 }
+defaultImageModel: { model_id: "imagen-3" }
+---
+
+# AI_CONTEXT_START File example prompt
+# AI_PURPOSE Provide comprehensive demonstration prompt language capabilities integration various conceptual modules defined project so far Serve reference intended usage design patterns
+# AI_FRAMEWORK_NOTE Showcases Pythonic syntax loose typing OOP async model interaction agent structure tool usage BDI logic epistemology nonmonotonicity secure ID management more via conceptual calls classes modules Requires full conceptual standard library AI Interaction layer supporting modules exist function
+# AI_STATUS_NOTE This code strictly conceptual illustrative NOT runnable functional Requires language interpreter runtime standard library concrete implementations all conceptual modules classes referenced
+# AI_STYLE_GUIDE Adhere prompt language documentation style brief AI focused comments no numbers punctuation unless procedural prompt
+
+# --- Conceptual Imports ---
+# Assume framework provides BaseAgent standard library conceptual modules
+# from prompt_framework import BaseAgent
+# import FileSystem json asyncio logging SystemProcess SecureInput DateTime Component Image ModelConfig Tool StandardError APIError ParseError SecurityError # Conceptual standard library types modules exceptions
+# import AI_Interaction # Conceptual high level AI API interaction layer
+# Assume classes defined previous conceptual prompt files accessible importable
+from bdi import Belief Desire Intention Goal Reward # Conceptual import
+from logic import LogicTables LogicalOperator # Conceptual import
+from reasoning import Reasoner # Conceptual import
+from socratic import SocraticReasoning # Conceptual import
+from nonmonotonic import Rule Default DefaultLogic # Conceptual import
+from epistemic import AutoepistemicAgent # Conceptual import
+from idmanager import IDManagerAgent # Conceptual import
+from embalmer import EmbalmerAgent # Conceptual import
+from simplecoder import SimpleCoder # Conceptual import assumes definition exists
+# No direct import mastermind agent avoid circularity orchestrator demonstrates similar patterns
+
+# --- Demonstration Orchestrator Agent ---
+
+class DemoOrchestratorAgent: # Conceptually inherits BaseAgent
+    # AI_CONTEXT Agent designed execute sequence demonstrations showcasing prompt language features module interactions
+
+    def __init__(self):
+        # AI_TASK Initialize orchestrator instantiate all conceptual components state
+        self.agent_name = "DemoOrchestrator"
+        self.status = "INITIALIZED"
+        self.results_log = [] # Simple log store demonstration step results
+        self.shared_context = {} # Dictionary pass simple context between steps
+
+        print(f"[INFO] Initializing {self.agent_name}") # Punc removed
+
+        # AI_COMPONENTS Instantiate conceptual modules agents utilities
+        # AI_NOTE Assumes successful instantiation these conceptual classes based imports
+        try:
+            self.embalmer = EmbalmerAgent() # Requires conceptual EmbalmerAgent manages Tomb
+            self.id_manager = IDManagerAgent() # Requires conceptual IDManagerAgent uses EmbalmerAgent
+            self.bdi_reward = Reward() # Conceptual BDI component
+            self.logic_tables = LogicTables() # Conceptual Logic utility
+            self.logic_ops = LogicalOperator() # Conceptual Logic utility
+            self.reasoner = Reasoner(rules=["ConceptualRuleIF X THEN Y"]) # Conceptual Reasoning engine punc ok code literal list
+            self.socratic = SocraticReasoning() # Conceptual Socratic module
+            self.default_logic = DefaultLogic() # Conceptual Nonmonotonic logic system
+            self.epistemic_agent = AutoepistemicAgent(initial_beliefs={'fact_A', 'default_B'}) # Conceptual Epistemic agent punc ok set literal
+            self.coder = SimpleCoder() # Conceptual Coding utility assumes definition exists
+            print("[SUCCESS] All conceptual components initialized") # Punc removed
+            self.status = "READY"
+        except Exception as e:
+            print(f"[FATAL] Failed initialize conceptual components Error {e}") # Punc removed error kept structure
+            self.status = "FAILED_INIT"
+
+    def log_result(self, step_name, result):
+        # AI_INTERNAL Helper log demonstration step results internal list print console
+        entry = f"Step {step_name} Result {str(result)[:100]}" # Limit log length punc removed numeral ok code val string format
+        print(f"[RESULT_LOG] {entry} ...") # Punc removed ellipsis added indicate potential truncation
+        self.results_log.append(entry)
+        self.shared_context[step_name] = result # Store result shared context example
+
+    # --- Main Demonstration Workflow ---
+    async def run_demonstration(self):
+        # AI_TASK Execute sequence steps demonstrate various prompt language features module interactions
+        # AI_NOTE This acts orchestrator similar mastermind prompt but focuses demonstration individual features sequentially Uses async await conceptual IO operations
+        print(f"\n[ACTION] Starting {self.agent_name} demonstration run") # Punc removed
+
+        if self.status != "READY":
+            print("[ERROR] Agent not ready cannot run demonstration Check initialization") # Punc removed
+            return False # Indicate failure
+
+        self.status = "RUNNING"
+        all_steps_ok = True # Track overall success simple flag
+
+        try:
+            # Step One Secure ID Management Wallet Creation via IDManagerAgent
+            print("\n# --- Step One Secure ID Creation ---") # Numeral changed word punc removed
+            agent_id_name = "DemoSubAgent"
+            # Conceptual call assumes bootstrap agent returns filename path saves code file adds key env
+            generated_file = await self.id_manager.bootstrap_agent(agent_name=agent_id_name, role="Demonstration Target", purpose="Execute simple tasks")
+            self.log_result("ID Creation Bootstrap", f"Agent file conceptually created at {generated_file}" if generated_file else "Bootstrap FAILED")
+            if not generated_file: all_steps_ok = False
+
+            # Step Two BDI Goal Definition example
+            print("\n# --- Step Two BDI Goal Definition ---") # Numeral changed word punc removed
+            demo_goal = Goal(name="CompleteDemo", conditions="all_steps_ok == True", priority=100) # Punc ok code val numeral ok code val
+            demo_desire = Desire(demo_goal.name)
+            self.log_result("BDI Definition", f"Created Goal '{demo_goal.name}' Desire '{demo_desire.goal}'") # Punc removed
+
+            # Step Three Reasoning conceptual
+            print("\n# --- Step Three Reasoning ---") # Numeral changed word punc removed
+            reasoning_result = self.reasoner.deduce(facts={'fact_A'}) # Punc ok set literal conceptual call
+            self.log_result("Reasoning Deduce", reasoning_result)
+
+            # Step Four Logic Tables propositional evaluation
+            print("\n# --- Step Four Logic Tables ---") # Numeral changed word punc removed
+            self.logic_tables.add_variable('X')
+            self.logic_tables.add_variable('Y')
+            self.logic_tables.add_expression('X or not Y') # Punc ok code literal string
+            truth_table_data = self.logic_tables.generate_truth_table()
+            # self logic_tables display_truth_table Conceptual call display it
+            self.log_result("Logic Tables Generate", f"Generated table {len(truth_table_data)} rows conceptual") # Punc removed length check conceptual numeral ok value
+
+            # Step Five Nonmonotonic Logic Default Rule conceptual
+            print("\n# --- Step Five Nonmonotonic Logic ---") # Numeral changed word punc removed
+            # Add default if consistent A conclude Z
+            default_rule = Default(conditions={'A'}, conclusions={'Z'}) # Punc ok set literal conceptual consistency handled evaluate
+            self.default_logic.add_default(default_rule)
+            # Evaluate if Z concluded assuming only initial fact A currently believed implicitly previous steps
+            # Requires modifying evaluate accept initial beliefs run conceptual
+            # conclusion_z = self default_logic evaluate query 'Z' initial_beliefs {'A'} Conceptual call adaptation needed
+            conclusion_z = True # Placeholder result assumes default applied
+            self.log_result("Nonmonotonic Evaluate", f"Conceptual evaluation query 'Z' concluded {conclusion_z}") # Punc removed
+
+            # Step Six Epistemic Logic Belief Revision conceptual
+            print("\n# --- Step Six Epistemic Belief Revision ---") # Numeral changed word punc removed
+            self.epistemic_agent.add_information({'not default_B'}) # Punc ok set literal add contradictory info
+            self.epistemic_agent.revise_beliefs() # Trigger revision conceptual assumes contradicts logic implemented remove default B
+            self.log_result("Epistemic Revision", f"Agent beliefs after revision conceptual {self.epistemic_agent.beliefs}") # Punc removed
+
+            # Step Seven Socratic Reasoning Question conceptual
+            print("\n# --- Step Seven Socratic Question ---") # Numeral changed word punc removed
+            self.socratic.add_premise("All prompts require context") # Punc removed string literal
+            socratic_question = self.socratic.generate_question() # Conceptual call placeholder question generation
+            self.log_result("Socratic Question", socratic_question)
+
+            # Step Eight SimpleCoder conceptual usage
+            print("\n# --- Step Eight SimpleCoder ---") # Numeral changed word punc removed
+            # Conceptual call coder utility execute task assumes synchronous
+            coder_output = self.coder.execute_task('Python', 'hello_world') # Punc ok string literals code value
+            self.log_result("SimpleCoder Execute", coder_output)
+
+            # Step Nine Text Generation via AI Interaction Templating
+            print("\n# --- Step Nine Text Generation Templating ---") # Numeral changed word punc removed
+            # Uses triple quotes markdown like text templating
+            text_gen_prompt = self._create_text_gen_prompt()
+            text_result = await AI_Interaction.generate_text(modelConfig=metadata.defaultTextModel, prompt=text_gen_prompt)
+            self.log_result("Text Generation", text_result)
+
+            # Step Ten Image Generation via AI Interaction Components Constraints conceptual
+            print("\n# --- Step Ten Image Generation Components Constraints ---") # Numeral changed word punc removed
+            # Conceptual image generation using components constraints syntax
+            image_prompt_text = "Logo concept combining $LogicComponent style $ArtisticStyle focus minimalist" # Conceptual component variables punc removed
+            # Assume $LogicComponent $ArtisticStyle variables hold Component objects defined elsewhere conceptual
+            # image_result Image = await AI_Interaction generate_image modelConfig metadata defaultImageModel prompt image_prompt_text components [$LogicComponent $ArtisticStyle] optimize_for ["minimalism"] Conceptual call syntax
+            image_result = "Conceptual Image object generated path logo png" # Placeholder result punc ok filename conceptual path
+            self.log_result("Image Generation", image_result)
+
+            # Step Eleven FileSystem Save conceptual result
+            print("\n# --- Step Eleven FileSystem Save ---") # Numeral changed word punc removed
+            summary_content = f"Demonstration Results Log\n{self.results_log}" # Punc ok f string
+            summary_path = "demo_summary.log" # Punc ok filename
+            # Conceptual write text file requires FileSystem module
+            # write_success = await FileSystem write_text summary_path summary_content Conceptual async write
+            write_success = True # Placeholder
+            self.log_result("FileSystem Write", f"Conceptual save {summary_path} Success {write_success}") # Punc removed
+
+            # Step Twelve SystemProcess conceptual command execution
+            print("\n# --- Step Twelve SystemProcess Command ---") # Numeral changed word punc removed
+            # Conceptual run simple echo command requires SystemProcess module
+            # command_output = await SystemProcess run ['echo' 'Hello prompt world'] capture_output True Conceptual async run capture
+            command_output = "Hello prompt world\n" # Placeholder output punc ok string literal
+            self.log_result("SystemProcess Run", f"Conceptual echo output '{command_output.strip()}'") # Punc removed
+
+            # Step Thirteen Interactivity conceptual input
+            print("\n# --- Step Thirteen Interactivity Input ---") # Numeral changed word punc removed
+            # Conceptual call standard input function
+            # user_feedback = input("Provide conceptual feedback demonstration ") Placeholder call
+            user_feedback = "Looks good conceptual" # Placeholder feedback punc removed string literal
+            self.log_result("Input Feedback", user_feedback)
+
+            # Step Fourteen Logging conceptual final message
+            print("\n# --- Step Fourteen Logging ---") # Numeral changed word punc removed
+            logging.info("Demonstration cycle steps completed conceptually") # Conceptual logging call punc removed
+
+            self.status = "COMPLETE" if all_steps_ok else "PARTIAL_COMPLETE"
+
+        except Exception as e:
+            # Catch errors during demonstration steps
+            print(f"[ERROR][Workflow] Error during demonstration step {self.status} Error {e}") # Punc removed error structure kept
+            self.status = "FAILED"
+            self.log_result("Workflow Error", str(e)) # Log error
+            all_steps_ok = False
+
+        finally:
+            # AI_SAFETY Conceptual Ensure necessary cleanup resources closed eg IDManager Embalmer
+            print("\n[ACTION] Entering finally block demonstration cleanup") # Punc removed
+            # Close ID manager ensure Tomb locked important
+            if self.id_manager: self.id_manager.close() # Conceptual close call
+            print("[INFO] Demonstration run finished final status {self.status}") # Punc removed
+
+        return all_steps_ok
+
+    # --- Helper method create text generation prompt ---
+    def _create_text_gen_prompt(self):
+         # AI_INTERNAL Creates example text generation prompt using triple quotes templating
+         # AI_NOTE Demonstrates embedding readable natural language instructions code structure
+         # Retrieve some context generated previous steps example
+         last_result = self.results_log[-1] if self.results_log else "No previous result" # Punc ok list index negative one code logic string literal
+
+         return f"""
+         **Task:** Write brief summary comment status this demonstration workflow
+
+         **Workflow Status:** {{self.status}}
+
+         **Last Logged Result:** {{last_result}}
+
+         **Instructions:**
+         - Generate one two sentences describing outcome based status last result
+         - Use positive professional tone
+         - Example If status COMPLETE last result successful write something like 'Demonstration completed successfully all steps executed conceptually'
+         - Output ONLY summary sentence no extra text preamble
+         """ # Punc ok example sentence string literal
+
+# --- Script Execution Block ---
+# AI_TASK Instantiate DemoOrchestratorAgent run comprehensive demonstration
+
+async def main():
+    print("[SCRIPT START] Comprehensive prompt Language Feature Demonstration") # Punc removed
+
+    orchestrator = DemoOrchestratorAgent()
+
+    # Check if initialization failed
+    if orchestrator.status == "FAILED_INIT":
+        print("[FATAL] Orchestrator initialization failed cannot proceed") # Punc removed
+        return # Exit early
+
+    # Run main demonstration workflow
+    success = await orchestrator.run_demonstration()
+
+    print("\n--- Final Demonstration Outcome ---") # Punc removed
+    print(f"Overall Success Status {success}") # Punc removed bool value ok output
+    print("\nFull Results Log Conceptual") # Punc removed
+    # Conceptual print formatted log maybe json stringify
+    print(json.dumps(orchestrator.results_log, indent=2)) # Numeral ok code value json indent assumes json imported available
+    print("---------------------------------") # Structure kept
+
+    print("[SCRIPT END]") # Punc removed
+
+# Run main async function assume top level runner exists
+# import asyncio Conceptual import needed runner
+asyncio.run(main())
