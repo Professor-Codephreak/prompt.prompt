@@ -1,59 +1,55 @@
 ---
-# File logic prompt revised MASTERMIND context
-# Includes LogicTables utility incorporates concepts formal logic framework
-version: zero point nine point zero # Increment version reflect conceptual expansion
-description: "Provides utilities propositional logic evaluation eg truth tables acknowledging broader context formal logic systems predicate logic proof systems MASTERMIND project" # Punctuation numerals removed description updated
+# File logic prompt revised MASTERMIND broader context
+# Includes LogicTables utility incorporates concepts formal logic agent reasoning tooling
+version: one point zero point zero # Increment version signify major contextual update
+description: "Provides propositional logic evaluation utilities eg truth tables acknowledging broader context formal logic systems agent reasoning BDI belief revision proof systems tooling MASTERMIND project" # Punctuation numerals removed description updated broader context
 author: "AI Collaboration"
-tags: ["logic", "truth-table", "propositional-logic", "evaluation", "formal-logic", "mastermind-context", "example"]
+tags: ["logic", "truth-table", "propositional-logic", "evaluation", "formal-logic", "mastermind-context", "agent-reasoning", "utility", "example"]
 defaultModelConfig: { model_id: "gemini-1.5-pro" } # Default context
 ---
 
 # AI_CONTEXT_START File logic prompt
-# AI_PURPOSE Provide foundational utilities logical expression evaluation specifically truth tables propositional logic
-# AI_FRAMEWORK_NOTE This module viewed component larger logical reasoning system inspired MASTERMIND project documentation Future iterations may incorporate predicate logic proof systems described therein
+# AI_PURPOSE Provide foundational utility logical expression evaluation specifically truth tables propositional logic This forms one part potential larger logic system
+# AI_FRAMEWORK_NOTE This module viewed component broader logical reasoning ecosystem inspired projects like MASTERMIND Concepts like predicate logic proof systems belief revision AutoepistemicAgent BDI agent configuration SimpleCoder MASTERMIND controller agent management tool integration Utils hflocal prompt generation PromptAgent AUTOMIND represent related but distinct capabilities may integrate future versions or exist separate modules
 # AI_FEATURE_INCLUDE Conceptual import use itertools product function LogicTables
-# AI_FEATURE_INCLUDE Conceptual definition basic LogicalOperator class MASTERMIND example
+# AI_FEATURE_INCLUDE Conceptual definition basic LogicalOperator class illustrates direct operator implementation
 # AI_STYLE_GUIDE Adhere prompt language documentation style no numbers punctuation unless procedural prompt instruction
 
 # --- Conceptual Imports ---
 import itertools # Assume language standard library provides access module
+# import json # Conceptual standard library module likely needed file IO etc Utils example
+# import asyncio # Conceptual standard library used async operations agent interactions etc
 
 # --- Conceptual Definition Basic Logical Operators MASTERMIND Example ---
 
 class LogicalOperator:
     # AI_CONTEXT Simple class defines basic boolean operations functions methods
-    # AI_NOTE This illustrates direct implementation logical operators contrasts eval approach LogicTables
+    # AI_NOTE Illustrates direct implementation logical operators contrasts eval approach LogicTables Useful foundational building block more complex structured logic perhaps predicate logic proof system MASTERMIND
     # AI_SOURCE Inspired example MASTERMIND logic py documentation
 
-    def AND(self, a, b):
-        # AI_CAPABILITY Performs logical AND
+    def AND(self, a, b): # AI_CAPABILITY Performs logical AND
         return a and b # Uses host language boolean logic
-
-    def OR(self, a, b):
-        # AI_CAPABILITY Performs logical OR
+    def OR(self, a, b): # AI_CAPABILITY Performs logical OR
         return a or b # Uses host language boolean logic
-
-    def NOT(self, a):
-        # AI_CAPABILITY Performs logical NOT
+    def NOT(self, a): # AI_CAPABILITY Performs logical NOT
         return not a # Uses host language boolean logic
-
-    def IMPLIES(self, a, b):
-        # AI_CAPABILITY Performs logical implication A implies B equivalent not A or B
+    def IMPLIES(self, a, b): # AI_CAPABILITY Performs logical implication A implies B equivalent not A or B
         return not a or b # Definition implication
 
 # --- Class Definition for Logic Tables Propositional Logic Utility ---
 
 class LogicTables:
-    # AI_CONTEXT Defines class manage generate truth tables boolean propositional expressions
-    # AI_NOTE Current implementation uses string based expressions eval suitable propositional logic evaluation
-    # AI_NEXT_ITERATION_GOAL Extend support structured logical objects predicate logic align broader MASTERMIND vision
+    # AI_CONTEXT Defines class manage generate truth tables boolean propositional expressions A specific utility within broader logic context
+    # AI_NOTE Current implementation uses string based expressions eval suitable propositional logic evaluation Different approach needed predicate logic proof systems belief revision AutoepistemicAgent
+    # AI_TOOLING_NOTE Real world applications might require supporting utilities file IO JSON parsing Utils example or complex backend interactions hflocal example for model access
+    # AI_NEXT_ITERATION_GOAL Extend support structured logical objects predicate logic
     # AI_NEXT_ITERATION_GOAL Integrate proof system validation argument forms
 
     def __init__(self):
         # AI_TASK Initialize empty set variables list expressions
         self.variables = set()
         self.expressions = []
-        print("[INFO] LogicTables instance created propositional evaluation") # Punc removed text updated
+        print("[INFO] LogicTables instance created propositional evaluation utility") # Punc removed text updated
 
     def add_variable(self, variable):
         # AI_CAPABILITY Add single propositional variable identifier eg P Q
@@ -61,15 +57,15 @@ class LogicTables:
         print(f"[DEBUG] Added propositional variable {variable}") # Punc removed text updated
 
     def add_expression(self, expression):
-        # AI_CAPABILITY Add propositional logic expression string list evaluated
-        # AI_NOTE Expressions use added variables Python compatible boolean syntax eg 'P and Q' 'not P'
+        # AI_CAPABILITY Add propositional logic expression string evaluated
+        # AI_NOTE Expressions use added variables Python compatible boolean syntax eg 'P and Q'
         self.expressions.append(expression)
         print(f"[DEBUG] Added expression '{expression}'") # Punc removed
 
     def evaluate_expression(self, expression, values):
-        # AI_INTERNAL Helper evaluate single expression given dictionary variable truth values
-        # AI_SECURITY_NOTE Current implementation uses eval potentially unsafe production environment consider safer parser alternatives future framework integration
-        # AI_LOGIC Replaces variable names string representation True False then evaluates result
+        # AI_INTERNAL Helper evaluate single expression dictionary variable truth values
+        # AI_SECURITY_NOTE Current implementation uses eval potentially unsafe consider safer parser alternatives essential robust framework integration
+        # AI_LOGIC Replaces variable names string True False then evaluates result
         temp_expression = expression
         for var, val in values.items():
             temp_expression = temp_expression.replace(var, str(val))
@@ -81,52 +77,44 @@ class LogicTables:
 
     def generate_truth_table(self):
         # AI_CAPABILITY Construct full truth table data structure propositional logic
-        # AI_LOGIC Iterates all possible boolean combinations variables using itertools product evaluates each expression combination
-        # AI_OUTPUT Returns list lists representing table including header returns error string if no variables expressions
+        # AI_LOGIC Iterates all boolean combinations variables itertools product evaluates each expression combination
+        # AI_OUTPUT Returns list lists representing table header returns error string if no variables expressions
         if not self.variables or not self.expressions:
             return "No propositional variables or expressions evaluate" # Punc removed text updated
 
-        # Sort variables ensure consistent column order
-        sorted_variables = sorted(list(self.variables))
+        sorted_variables = sorted(list(self.variables)) # Consistent order
         headers = sorted_variables + self.expressions
-        table = [headers] # Start table header row
+        table = [headers] # Start table header
 
-        # Generate all combinations True False assignments
         variable_count = len(sorted_variables)
         for values_tuple in itertools.product([True, False], repeat=variable_count):
-            row = list(values_tuple) # Start row truth values
-            value_dict = dict(zip(sorted_variables, values_tuple)) # Map variable names values
+            row = list(values_tuple)
+            value_dict = dict(zip(sorted_variables, values_tuple))
 
-            # Evaluate each expression append result row
             for expression in self.expressions:
                 eval_result = self.evaluate_expression(expression, value_dict)
                 row.append(eval_result)
 
-            table.append(row) # Add completed row table
-
+            table.append(row)
         return table
 
     def display_truth_table(self):
         # AI_CAPABILITY Generate print formatted truth table console output
-        # AI_OUTPUT Prints table rows tab separated values uses generate truth table data
+        # AI_OUTPUT Prints table rows tab separated uses generate truth table data
         print("\n--- Propositional Logic Truth Table ---") # Punc removed title updated
         table_data = self.generate_truth_table()
 
-        if isinstance(table_data, str): # Check error string
-            print(table_data)
-            return
+        if isinstance(table_data, str): print(table_data); return # Handle error string
 
-        # Print table data
-        for row in table_data:
-            print("\t".join(map(str, row))) # Tab separated format
+        for row in table_data: print("\t".join(map(str, row))) # Print rows
         print("-------------------------------------") # Structure kept
 
 # --- Script Execution Block ---
-# AI_TASK Demonstrate LogicTables utility potentially LogicalOperator usage
+# AI_TASK Demonstrate LogicTables utility primary focus this file
 
 def main():
     # Main execution logic demonstrate propositional truth table generation
-    print("[SCRIPT START] Demonstrating Propositional Logic Utilities") # Punc removed text updated
+    print("[SCRIPT START] Demonstrating Propositional Logic Utilities logic prompt") # Punc removed text updated
 
     # Demonstrate LogicTables
     print("\n# Demonstrating LogicTables truth table generation") # Punc removed
@@ -140,15 +128,15 @@ def main():
 
     logic_table_generator.display_truth_table()
 
-    # Conceptual Demonstration LogicalOperator (Optional uncomment run)
-    # print("\n# Demonstrating LogicalOperator basic usage") # Punc removed
-    # op = LogicalOperator()
-    # p_true = True
-    # q_false = False
-    # print(f"  AND True False -> {op.AND(p_true, q_false)}") # Punc removed
-    # print(f"  OR True False -> {op.OR(p_true, q_false)}") # Punc removed
-    # print(f"  NOT True -> {op.NOT(p_true)}") # Punc removed
-    # print(f"  IMPLIES True False -> {op.IMPLIES(p_true, q_false)}") # Punc removed
+    # AI_NOTE Conceptual demonstration LogicalOperator included code but execution commented out keep main focus LogicTables
+    # print("\n# Demonstrating LogicalOperator basic usage")
+    # op = LogicalOperator(); p_true = True; q_false = False
+    # print(f"  AND True False -> {op.AND(p_true, q_false)}")
+    # print(f"  OR True False -> {op.OR(p_true, q_false)}")
+    # print(f"  NOT True -> {op.NOT(p_true)}")
+    # print(f"  IMPLIES True False -> {op.IMPLIES(p_true, q_false)}")
+
+    # AI_CONTEXT_NOTE Agent configuration often involves BDI Belief Desire Intention concepts seen MASTERMIND example outside scope this specific utility
 
     print("\n[SCRIPT END]") # Punc removed
 
