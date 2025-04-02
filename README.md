@@ -4,7 +4,7 @@
 
 ## Overview
 
-`.prompt` is a conceptual programming language designed specifically for the art and science of **advanced prompt engineering** and **AI interaction management**. Recognizing that interacting with increasingly sophisticated AI models (LLMs multimodal models agentic systems) requires more than simple text strings or general purpose glue code `.prompt` aims provide a dedicated robust and developer friendly environment.
+`.prompt` is a programming language designed specifically for the art and science of **advanced prompt engineering** and **AI interaction management**. Recognizing that interacting with increasingly sophisticated AI models (LLMs multimodal models agentic systems) requires more than simple text strings or general purpose glue code `.prompt` aims provide a dedicated robust and developer friendly environment.
 
 It originates from the need handle complex multi step AI workflows manage prompt variations define agent behaviors integrate diverse logical reasoning mechanisms and ensure secure reliable interactions all within a single coherent structure. We are building `.prompt` iteratively exploring features needed bridge human intent complex AI capabilities effectively.
 
