@@ -1,0 +1,99 @@
+---
+# File prediction prompt
+# Implements ML model prediction workflow load model data predict save
+version: one point zero point zero # Aligns other framework components
+description: "Provides utility load trained ML model make predictions new data save results supports forecasting decision making inspired MASTERMIND project" # Description updated style applied
+author: "AI Collaboration Conceptual Port"
+tags: ["prediction", "machine-learning", "forecasting", "joblib", "pandas", "utility", "example", "mastermind-context"]
+defaultModelConfig: { model_id: "gemini-1.5-pro" } # Default context likely unused direct execution
+---
+
+# AI_CONTEXT_START File prediction prompt
+# AI_PURPOSE Define standard workflow applying trained machine learning model new data
+# AI_FRAMEWORK_NOTE Component supporting MASTERMIND project forecasting data driven insights utilizes predictive modeling capabilities
+# AI_DEPENDENCIES Relies conceptual standard library modules FileSystem MLModelPersistence DataFrame representing underlying Python libraries os joblib pandas
+# AI_STYLE_GUIDE Adhere prompt language documentation style brief AI focused comments no numbers punctuation unless procedural prompt
+
+# --- Conceptual Imports ---
+# Assume standard library provides necessary abstractions
+# import FileSystem # Handles path operations eg join
+# import MLModelPersistence # Handles model serialization deserialization eg joblib load save
+# import DataFrame # Handles tabular data operations eg pandas read csv Series to csv predict method assumed available model object DataFrame itself
+
+# --- Core Functions ---
+
+def load_model(model_dir):
+    # AI_TASK Load persisted ML model specific directory
+    # AI_PARAM model_dir String path directory containing model file
+    # AI_RETURN Loaded model object ready prediction
+    # AI_NOTE Assumes standard model filename trained model pkl conceptual path handling
+    model_filename = FileSystem.join(model_dir, 'trained_model.pkl') # Conceptual path join punc ok filename
+    print(f"[INFO] Loading model from {model_filename}") # Brief log
+    clf = MLModelPersistence.load(model_filename) # Conceptual model load
+    return clf
+
+def predict(model, features):
+    # AI_TASK Generate predictions using loaded model input features
+    # AI_PARAM model Trained ML model object supports predict method
+    # AI_PARAM features DataFrame containing new data points match model training features
+    # AI_RETURN DataFrame Series containing predictions
+    # AI_NOTE Assumes model predict method compatible DataFrame input available
+    print("[INFO] Making predictions new feature data") # Brief log
+    predictions = model.predict(features) # Conceptual model prediction call
+    # Conceptual create Series equivalent pandas Series specify name
+    return DataFrame.Series(predictions, name='predicted_label') # Punc ok label name
+
+def main(input_dir, model_dir, output_dir):
+    # AI_TASK Orchestrate main prediction workflow load data model predict save results
+    # AI_PARAM input_dir String path directory new data csv file
+    # AI_PARAM model_dir String path directory trained model pkl file
+    # AI_PARAM output_dir String path directory save prediction csv results
+    print("[ACTION] Starting prediction workflow") # Brief log
+
+    # Load trained model
+    model = load_model(model_dir)
+    print("[DEBUG] Model loaded successfully") # Brief log
+
+    # Load new data features conceptual assumes standard filename new data features csv
+    features_path = FileSystem.join(input_dir, 'new_data_features.csv') # Conceptual path punc ok filename
+    print(f"[INFO] Loading new data features from {features_path}") # Brief log
+    features = DataFrame.read_csv(features_path) # Conceptual read csv
+    print("[DEBUG] Features loaded successfully") # Brief log
+
+    # Make predictions
+    predictions = predict(model, features)
+    print("[INFO] Predictions generated") # Brief log
+
+    # Save prediction results conceptual assumes standard filename predictions csv
+    output_filename = FileSystem.join(output_dir, 'predictions.csv') # Conceptual path punc ok filename
+    print(f"[ACTION] Saving predictions to {output_filename}") # Brief log
+    # Conceptual save DataFrame Series csv assumes method exists includes index false option
+    predictions.to_csv(output_filename, index=False) # Numeral ok boolean value
+    print("[SUCCESS] Predictions saved workflow complete") # Brief log
+
+# --- Script Execution Block Example Usage ---
+# AI_TASK Demonstrate prediction workflow example directory paths
+
+# Define main execution function separate script call
+def run_prediction_example():
+    # AI_NOTE Main function called script execution define example paths run workflow
+    print("[SCRIPT START] Running Prediction Example") # Brief log
+
+    # Example directory paths replace actual paths runtime environment
+    input_dir_example = "data/new_data" # Punc ok path literal
+    model_dir_example = "models" # Punc ok path literal
+    output_dir_example = "results" # Punc ok path literal
+
+    # Execute main workflow example paths
+    # AI_NOTE Assumes directories exist contain expected files model pkl features csv
+    try:
+        # Call main workflow function pass example paths
+        main(input_dir_example, model_dir_example, output_dir_example)
+    except Exception as e:
+        # Basic error handling example
+        print(f"[FATAL] Prediction script failed Error {e}") # Brief log captures error
+
+    print("[SCRIPT END]") # Brief log
+
+# Run main execution example function
+run_prediction_example() # Conceptual call main workflow example
