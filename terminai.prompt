@@ -1,0 +1,258 @@
+---
+# File terminai prompt
+# Defines TerminAI agent interactive terminal UI generic AI API ingestion command execution
+version: one point one point zero # Increment aligns idmanager prompt version conceptually
+description: "Provides TerminAI agent interactive terminal interface engages various AI models via generic API interaction layer executes local shell commands manages API keys securely" # Punctuation numerals removed description updated generic focus
+author: "AI Collaboration Conceptual Port"
+tags: ["agent", "terminal-ui", "curses", "ai-interaction", "generic-api", "command-execution", "example"]
+defaultTextModelConfig: { # Example default configuration structure
+    provider: "openai", # Conceptual identifier AI provider
+    model_id: "gpt-3.5-turbo", # Default model identifier
+    api_url: "https://api openai com/v1/chat/completions", # Punc removed illustrative URL
+    auth_type: "Bearer", # Conceptual authentication type
+    # Conceptual hints how AI Interaction layer should format requests parse responses
+    request_format: { "model": "{{model_id}}", "messages": "{{messages_list}}" },
+    response_parser: "choices[0].message.content" # Path extract response text conceptual
+}
+---
+
+# AI_CONTEXT_START File terminai prompt
+# AI_PURPOSE Define interactive terminal agent combine AI conversation local command execution generic API backend support
+# AI_FRAMEWORK_NOTE Demonstrates integration conceptual TerminalUI CursesInterface SystemProcess AI Interaction modules standard library provides seamless user experience terminal
+# AI_DEPENDENCIES Relies conceptual standard library modules FileSystem EnvManager SystemProcess TerminalUI AI Interaction assumes availability HTTP JSON etc
+# AI_STYLE_GUIDE Adhere prompt language documentation style brief AI focused comments no numbers punctuation unless procedural prompt
+
+# --- Conceptual Imports ---
+# Assume standard library provides necessary abstractions
+# import FileSystem # Handles path operations exists write read chmod makedirs
+# import EnvManager # Handles getting setting env variables file interaction
+# import SystemProcess # Handles running external shell commands subprocess equivalent
+# import TerminalUI # Handles terminal screen manipulation input output curses equivalent includes wrapper function
+# import AI_Interaction # Handles generic interaction different AI APIs HTTP equivalent configuration driven
+# import json # Conceptual standard library JSON handling
+
+import asyncio # Conceptual only if underlying interactions truly async curses typically blocking
+
+# --- API Key Management ---
+
+def get_api_key(provider_key_name="OPENAI_API_KEY"): # Example key name specific default
+    # AI_TASK Securely retrieve API key specified provider environment file prompt user if missing save
+    # AI_PARAM provider_key_name String environment variable name store retrieve key
+    # AI_RETURN String API key
+    env_file = './.env' # Punc ok code path literal
+    print(f"[INFO] Checking API key env file {env_file}") # Punc removed
+    # Conceptual check file existence EnvManager get
+    api_key = EnvManager.get(provider_key_name) # Try get from loaded env first
+    if api_key:
+        print("[INFO] API key found loaded environment") # Punc removed
+        return api_key
+    elif FileSystem.exists(env_file): # Check file specifically if EnvManager get failed load
+        # Conceptual read specific key file if necessary EnvManager load might handle implicitly
+        # Simplified Assume EnvManager handles loading properly check os variable directly
+        # Let's assume EnvManager load happened implicitly or needs explicit call
+        EnvManager.load(env_file) # Conceptual explicit load
+        api_key = EnvManager.get(provider_key_name)
+        if api_key:
+            print("[INFO] API key loaded environment file") # Punc removed
+            return api_key
+
+    # If not found environment file prompt user
+    print("[WARN] API key not found environment file") # Punc removed
+    # Use standard input prompt user
+    api_key_input = input(f"Enter your API key environment variable {provider_key_name} ").strip() # Punc removed prompt msg
+    if api_key_input:
+        # Conceptual write key env file ensure directory exists
+        FileSystem.ensure_dir_exists('.') # Conceptual ensure current dir exists trivial case
+        # Conceptual EnvManager set key write file
+        EnvManager.set(env_file, provider_key_name, api_key_input)
+        print(f"[SUCCESS] API key saved {env_file} Load environment again use") # Punc removed
+        # Reload environment after saving conceptually
+        EnvManager.load(env_file)
+        return api_key_input
+    else:
+        print("[ERROR] No API key provided Exiting") # Punc removed
+        System.exit(1) # Conceptual exit numeral ok code value
+        return None # Should not reach here
+
+# --- TerminAI Agent Class ---
+
+class TerminAI:
+    # AI_CONTEXT Main agent class manages terminal UI AI interaction command execution
+
+    # Conceptual type hint stdscr TerminalUI Window object
+    def __init__(self, stdscr, api_key, model_config=None):
+        # AI_TASK Initialize TerminAI agent screen object API key model config setup folder start main loop
+        # AI_PARAM stdscr Conceptual terminal screen object provided wrapper eg CursesInterface
+        # AI_PARAM api_key String API key use AI interactions
+        # AI_PARAM model_config Optional Map dictionary specific AI model configuration override default
+        self.stdscr = stdscr # Store terminal interface object
+        self.api_key = api_key
+        # Use provided model config or default metadata merge logic conceptual needed real case
+        self.model_config = model_config or metadata.defaultTextModelConfig
+        self.conversation_history = [ # Maintain simple message history
+             {"role": "system", "content": "You are helpful assistant"} # Punc ok dict literal role system
+        ]
+        print("[INFO] TerminAI initializing...") # Punc removed
+        self.setup_terminai_folder()
+        # AI_NOTE Main interaction loop started end init this design implies blocking nature wrapper perhaps better structure separate run method
+        self.main_loop() # Renamed main avoid conflict conceptual main execution function
+
+    def setup_terminai_folder(self):
+        # AI_TASK Ensure dedicated folder exists secure permissions
+        # AI_NOTE Uses conceptual FileSystem module makedirs chmod
+        folder_path = './terminai' # Punc ok path literal
+        print(f"[ACTION] Ensuring terminai folder exists path {folder_path}") # Punc removed
+        FileSystem.makedirs(folder_path, exist_ok=True) # Conceptual makedirs punc ok bool value
+        FileSystem.chmod(folder_path, 0o700) # Conceptual chmod numeral ok octal value
+        print(f"[SUCCESS] Terminai folder setup complete path {folder_path}") # Punc removed
+
+    # Method refactored generic AI interaction
+    async def talk_to_ai(self, message): # Made async assuming AI interaction async
+        # AI_CAPABILITY Send message configured AI model via generic AI Interaction layer handle response
+        # AI_PARAM message String user input message send AI
+        # AI_RETURN String AI response content None error
+        # AI_NOTE Relies AI Interaction module handle provider specific API URL headers body format response parsing based self model config
+        print(f"[ACTION] Sending message AI provider {self.model_config.get('provider', 'default')}") # Punc removed
+
+        # Append user message history keep simple context window management needed real application
+        self.conversation_history.append({"role": "user", "content": message}) # Punc ok dict literal role user
+
+        try:
+            # Conceptual call generic interaction layer pass config api key messages
+            ai_response_content = await AI_Interaction.generate_chat_completion(
+                modelConfig = self.model_config,
+                api_key = self.api_key, # Pass API key interaction layer handle auth
+                messages = self.conversation_history # Pass current history
+                # AI Interaction layer uses modelConfig determine exact URL headers body format response parsing
+            )
+
+            if ai_response_content:
+                 # Append AI response history
+                 self.conversation_history.append({"role": "assistant", "content": ai_response_content}) # Punc ok dict literal role assistant
+                 print("[SUCCESS] Received valid response AI") # Punc removed
+                 return ai_response_content
+            else:
+                 print("[ERROR] AI interaction returned empty invalid response") # Punc removed
+                 # Optionally remove last user message history failed call
+                 # self conversation_history pop
+                 return "AI response processing error" # Punc removed return error message
+
+        except Exception as e:
+            print(f"[ERROR] Failed talk AI Error {e}") # Punc removed error structure kept
+            # Optionally remove last user message history failed call
+            # self conversation_history pop
+            return f"Error communicating AI {e}" # Punc removed return error message
+
+    def execute_command(self, command):
+        # AI_CAPABILITY Execute local shell command capture output securely
+        # AI_PARAM command String shell command execute
+        # AI_RETURN String combined stdout stderr command execution error message
+        # AI_SECURITY_NOTE Executes commands user shell HIGHLY DANGEROUS potential executing harmful commands Validate sanitize input necessary production use restricted execution environment recommended
+        print(f"[ACTION] Executing shell command '{command}'") # Punc removed security warning implicit running arbitrary code
+        try:
+            # Conceptual run command capture output error uses SystemProcess
+            result = SystemProcess.run(command, shell=True, check=True, capture_output=True) # Conceptual requires shell True capture output bools ok
+            # Conceptual access stdout stderr attributes result object
+            output = result.stdout + result.stderr
+            print("[SUCCESS] Shell command executed captured output") # Punc removed
+            return output.strip() # Return combined output remove extra whitespace
+
+        except SystemProcess.CalledProcessError as e: # Conceptual error type
+            print(f"[ERROR] Shell command failed execution Error {e}") # Punc removed error structure kept
+            return f"Command execution error {e}" # Punc removed return error message
+        except Exception as e: # Catch other potential errors eg command not found
+            print(f"[ERROR] Unexpected error executing command {e}") # Punc removed error structure kept
+            return f"Unexpected error executing command {e}" # Punc removed return error message
+
+    # Renamed avoid conflict top level main function
+    def main_loop(self):
+        # AI_TASK Run main interactive terminal loop handle user input dispatch AI command execution
+        # AI_NOTE Uses conceptual TerminalUI CursesInterface object self stdscr manage screen input output Assumes blocking input getstr
+        try: # Add try block manage potential curses errors cleanup
+             # Setup terminal screen via conceptual interface
+             self.stdscr.clear() # Clear screen
+             self.stdscr.addstr("Welcome TerminAI Type 'exit' quit prefix commands 'cmd '\n") # Punc removed welcome message instructions
+             self.stdscr.addstr("AI How can assist you today\n") # Punc removed initial prompt
+             self.stdscr.echo() # Turn echo on see typing
+             self.stdscr.keypad(True) # Enable special keys keypad easier input conceptual
+             self.stdscr.refresh() # Refresh display show initial messages
+
+             while True:
+                 self.stdscr.addstr("> ") # Display input prompt
+                 self.stdscr.refresh() # Ensure prompt displayed before getting input
+                 # Conceptual get string input handles decoding implicitly assumed
+                 input_str = self.stdscr.getstr().strip()
+
+                 if not input_str: continue # Skip empty input
+
+                 # Log user input display screen
+                 self.stdscr.addstr(f"\nUser {input_str}\n") # Punc removed display user input
+                 self.stdscr.refresh()
+
+                 # Handle commands exit AI query shell command
+                 if input_str == 'exit': # Punc ok string literal compare
+                     self.log_action("User requested exit") # Conceptual log
+                     break # Exit while loop
+
+                 elif input_str.startswith("cmd "): # Check command prefix punc ok code logic space added clarity
+                     command = input_str[len("cmd "):] # Extract command string numeral ok len function
+                     self.log_action(f"Executing command '{command}'") # Conceptual log
+                     output = self.execute_command(command)
+                     self.stdscr.addstr(f"Executed '{command}'\nOutput\n{output}\n") # Punc removed output display
+
+                 else:
+                     # Assume AI query make async call block wait conceptual simple loop
+                     # AI_NOTE This simple loop blocks AI response real GUI async needed better UX
+                     self.log_action(f"Sending query AI '{input_str[:50]}...'") # Conceptual log punc ok slice numeral ok code val
+                     # Conceptual block wait async call simple loop assume wrapper handles event loop if needed
+                     # Or make talk_to_ai synchronous depends language standard library design
+                     # Assuming await works conceptually here if AI Interaction async
+                     response = asyncio.run(self.talk_to_ai(input_str)) # Conceptual run async call synchronously simple example needs proper async handling real framework
+                     self.stdscr.addstr(f"AI {response}\n") # Punc removed output display AI response
+
+                 # Refresh screen show new output prompt next input
+                 self.stdscr.refresh()
+
+             # Exit message after loop breaks
+             self.stdscr.addstr("\nGoodbye TerminAI session ended\n") # Punc removed exit message
+             self.stdscr.refresh()
+             self.stdscr.getch() # Wait key press before exiting window conceptual CursesInterface behaviour
+
+        except Exception as e: # Catch errors during UI loop
+             # Need restore terminal state properly error case Conceptual CursesInterface wrapper handle this
+             print(f"\n[FATAL] Error occurred TerminAI main loop {e}") # Use print if stdscr unusable error state
+
+        finally:
+             # AI_SAFETY Ensure terminal state restored exit conceptual CursesInterface wrapper handles cleanup ideally
+             print("[INFO] TerminAI shutting down restoring terminal") # Punc removed final log
+             # Conceptual cleanup handled wrapper or explicitly needed here
+             # self stdscr keypad False
+             # self stdscr echo False
+             # curses endwin conceptual
+
+    def log_action(self, message):
+         # AI_INTERNAL Simple logging stub replace conceptual logging module use
+         print(f"[LOG] {message}") # Simple print based log
+
+
+# --- Script Execution Block ---
+# AI_TASK Setup run TerminAI agent using conceptual TerminalUI wrapper handle screen setup cleanup
+
+# Define main execution setup function separate script call
+def main_entry(stdscr, api_key): # Conceptual stdscr provided wrapper function
+     # AI_NOTE Entry point called TerminalUI wrapper passes configured screen object api key
+     print("[SCRIPT START] Initializing TerminAI via wrapper...") # Use print before UI starts punc removed
+     # Instantiate TerminAI pass screen object api key starts main loop init
+     TerminAI(stdscr, api_key)
+     print("[SCRIPT END] TerminAI exited normally") # Use print after UI ends punc removed
+
+# Main script execution logic
+if __name__ == "__main__": # Keep pythonic structure conceptual translation might differ
+     # AI_TASK Get API key before initializing UI
+     api_key_main = get_api_key()
+     if api_key_main:
+          # AI_NOTE Use conceptual TerminalUI wrapper start application pass main entry function arguments
+          # This assumes prompt standard library provides equivalent curses wrapper
+          TerminalUI.wrapper(main_entry, api_key_main) # Pass function arguments wrapper
+     else:
+          print("[FATAL] Unable obtain API key cannot start TerminAI") # Punc removed
