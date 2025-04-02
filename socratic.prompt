@@ -1,0 +1,131 @@
+---
+# File socratic prompt
+# Implements SocraticReasoning class manage premises challenge assumptions facilitate dialogue
+version: one point zero point zero # Aligns other framework components
+description: "Provides SocraticReasoning class embodies Socratic method critical thinking questioning approach supports dialogue management premise handling inspired MASTERMIND project" # Punctuation numerals removed description updated
+author: "AI Collaboration"
+tags: ["socratic-method", "reasoning", "critical-thinking", "dialogue", "agent-cognition", "mastermind-context", "example"]
+defaultModelConfig: { model_id: "gemini-1.5-pro" } # Default context potentially future AI driven questioning
+---
+
+# AI_CONTEXT_START File socratic prompt
+# AI_PURPOSE Implement Socratic method principles questioning critical thinking dialogue management
+# AI_FRAMEWORK_NOTE Component inspired MASTERMIND project facilitates deep analysis structured discussion identifying assumptions biases logical fallacies
+# AI_FEATURE_INCLUDE Conceptual import usage logging input standard library functions
+# AI_STYLE_GUIDE Adhere prompt language documentation style no numbers punctuation unless procedural prompt instruction
+
+# --- Conceptual Imports ---
+# Assume standard library provides basic logging input capabilities
+# import logging Conceptual access logging module
+# import input Conceptual access user input function
+
+# --- Socratic Reasoning Class Definition ---
+
+class SocraticReasoning:
+    # AI_CONTEXT Core class implementing Socratic dialogue logic
+    # AI_NOTE Manages premises facilitates interaction challenging assumptions drawing tentative conclusions
+    # AI_NEXT_ITERATION_GOAL Enhance question generation feature dynamically create probing questions based context topic documentation feature
+    # AI_NEXT_ITERATION_GOAL Implement deeper critical thinking analysis identify specific logical fallacies biases documentation feature
+
+    def __init__(self):
+        # AI_TASK Initialize empty list premises setup conceptual logger
+        self.premises = [] # Stores reasoning premises strings
+        # Conceptual logger setup assuming standard library provides similar functionality logging basicConfig getLogger
+        # self logger = logging getLogger 'SocraticReasoning' Conceptual
+        # self logger setLevel logging INFO Conceptual
+        print("[INFO] SocraticReasoning initialized empty premises") # Punc removed using simple print represent logging init
+
+    def log(self, message, level='info'):
+        # AI_UTIL Conceptual logging helper prints message indicates level info error
+        # AI_NOTE Real implementation use standard logging module configured framework level
+        log_prefix = "[INFO]" if level == 'info' else "[ERROR]" # Punc ok code logic
+        print(f"{log_prefix} {message}") # Print log messages console this example
+
+    def add_premise(self, premise):
+        # AI_CAPABILITY Add new premise reasoning process internal list
+        self.premises.append(premise)
+        self.log(f"Added premise '{premise}'") # Punc removed log message
+
+    def challenge_premise(self, premise):
+        # AI_CAPABILITY Remove premise if found signifies challenge successful retraction
+        # AI_NOTE Simple removal based exact match more advanced logic could involve contradiction detection logic module
+        if premise in self.premises:
+            self.premises.remove(premise)
+            self.log(f"Challenged removed premise '{premise}'") # Punc removed log message
+        else:
+            self.log(f"Premise not found '{premise}' cannot challenge", level='error') # Punc removed log message
+
+    def draw_conclusion(self):
+        # AI_CAPABILITY Generate simple conclusion based current premises list
+        # AI_NOTE Current implementation basic lists premises suggests further reasoning needed does not perform complex inference logic module proof system needed that
+        if not self.premises:
+            self.log("No premises available drawing conclusion", level='error') # Punc removed log message
+            return # Exit method early
+
+        # Construct simple conclusion string listing premises
+        conclusion = "Based current premises" # Punc removed
+        for premise in self.premises:
+            conclusion += f"\n- {premise}" # List premise structure kept
+        conclusion += "\nWe may conclude further discussion reasoning needed" # Punc removed
+        self.log(conclusion)
+
+    def generate_question(self, context=None):
+        # AI_CAPABILITY Placeholder dynamically generate Socratic question based context topic
+        # AI_TASK Implement actual question generation logic potentially using LLM context analysis
+        # AI_NOTE Returns simple default question this version aligns documentation example feature
+        print("[DEBUG] Generating Socratic question based context placeholder") # Punc removed
+        # Simple example question logic could be much more sophisticated
+        if self.premises:
+             last_premise = self.premises[-1] # Get last premise conceptual
+             return f"What are underlying assumptions premise '{last_premise}'" # Punc removed
+        elif context:
+             return f"Considering context '{context}' what fundamental principles apply" # Punc removed
+        else:
+             return "What are primary assumptions being made here" # Punc removed default question
+
+    def interact(self):
+        # AI_CAPABILITY Run interactive command loop allow user add challenge premises conclude
+        # AI_NOTE Uses conceptual input function standard library assumes console environment
+        self.log("\nStarting Socratic interaction session Type 'exit' quit") # Punc removed log message
+        while True:
+            # Display available commands prompt user input
+            self.log("\nCommands add challenge question conclude exit") # Punc removed list commands
+            # Use conceptual standard input function
+            cmd = input("> ").strip().lower() # Read user command standard input
+
+            if cmd == 'exit':
+                self.log("Exiting SocraticReasoning session") # Punc removed log message
+                break # Exit loop
+            elif cmd == 'add':
+                premise = input("Enter premise add ").strip() # Punc removed prompt message
+                if premise: self.add_premise(premise)
+            elif cmd == 'challenge':
+                premise = input("Enter premise challenge ").strip() # Punc removed prompt message
+                if premise: self.challenge_premise(premise)
+            elif cmd == 'question':
+                 # Ask AI generate question based current state
+                 question = self.generate_question() # Call placeholder question generator
+                 self.log(f"Generated Question {question}") # Punc removed output
+            elif cmd == 'conclude':
+                self.draw_conclusion()
+            else:
+                self.log("Invalid command please try again", level='error') # Punc removed log message
+
+# --- Script Execution Block ---
+# AI_TASK Demonstrate SocraticReasoning class interactive session
+
+def main():
+    # Main execution logic instantiate SocraticReasoning run interactive loop
+    print("[SCRIPT START] Demonstrating SocraticReasoning interactive module") # Punc removed
+
+    reasoner = SocraticReasoning()
+    reasoner.log("SocraticReasoning initialized ready interaction") # Punc removed log message
+
+    # Start interactive session command loop
+    reasoner.interact() # This call blocks until user types exit
+
+    print("[SCRIPT END]") # Punc removed
+
+# Run main function conceptually no async needed this interactive loop example
+# Assume top level execution context handles input output blocking calls
+main()
