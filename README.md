@@ -1,8 +1,6 @@
 # prompt.prompt
 
-# README.md - The `.prompt` Language Project (Conceptual)
-
-*(Project Conceptualization Context: As of Wednesday April two two thousand twenty five circa seven fifteen PM EDT Canada)*
+#  The `.prompt` Language Project
 
 ## Overview
 
