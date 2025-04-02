@@ -1,0 +1,115 @@
+---
+# File epistemic prompt
+# Implements concepts epistemic logic belief revision autoepistemic reasoning
+version: one point zero point zero # Aligns other framework components
+description: "Provides AutoepistemicAgent class demonstrates belief revision knowledge representation handling contradictions based epistemic autoepistemic logic principles inspired MASTERMIND project" # Punctuation numerals removed description updated
+author: "AI Collaboration"
+tags: ["epistemic-logic", "autoepistemic-logic", "belief-revision", "knowledge-representation", "nonmonotonic-reasoning", "agent-cognition", "mastermind-context", "example"]
+defaultModelConfig: { model_id: "gemini-1.5-pro" } # Default context
+---
+
+# AI_CONTEXT_START File epistemic prompt
+# AI_PURPOSE Implement core concepts epistemic logic focusing knowledge representation belief revision particularly autoepistemic approach handle defaults contradictions
+# AI_FRAMEWORK_NOTE Vital component intelligent systems like MASTERMIND enables agents manage reason update knowledge beliefs dynamically adapt new information withdraw conclusions necessary nonmonotonic characteristic
+# AI_PRINCIPLES_NOTE Based autoepistemic assumptions initial beliefs default rules reevaluation conclusions new information consistency maintenance withdrawal conflicting prior conclusions
+# AI_STYLE_GUIDE Adhere prompt language documentation style no numbers punctuation unless procedural prompt instruction
+
+# --- Conceptual Imports ---
+# Assume set type other necessary built ins available standard library
+
+# --- Autoepistemic Agent Class Definition ---
+
+class AutoepistemicAgent:
+    # AI_CONTEXT Represents agent employing autoepistemic logic handle beliefs revision
+    # AI_NOTE Focuses mechanism adding information revising belief set based potential contradictions often arising default rules interaction new facts
+    # AI_REVISION_MODEL Implements simple iterative revision check removes beliefs contradict new info based contradicts new information method
+
+    def __init__(self, initial_beliefs):
+        # AI_TASK Initialize agent requires initial set beliefs
+        # AI_PARAM initial_beliefs Set representing agent starting knowledge assumptions
+        # AI_VALIDATION Conceptual check ensure initial beliefs is set appropriate structure
+        if not isinstance(initial_beliefs, set): # Keep validation assumes isinstance available
+            raise TypeError("Initial beliefs must be set") # Keep error punctuation
+        self.beliefs = initial_beliefs # Agent current belief set
+        print(f"[INFO][AutoepistemicAgent] Initialized beliefs {self.beliefs}") # Punc removed
+
+    def add_information(self, new_information):
+        # AI_CAPABILITY Update agent belief set incorporate new information potentially creating inconsistencies resolved revise beliefs
+        # AI_PARAM new_information Set representing newly acquired facts evidence
+        # AI_VALIDATION Conceptual check ensure new information is set
+        if not isinstance(new_information, set): # Keep validation
+            raise TypeError("New information must be set") # Keep error punctuation
+        print(f"[ACTION] Adding information {new_information}") # Punc removed
+        # Update beliefs directly assumes set union handles duplicates
+        self.beliefs.update(new_information)
+        print(f"[DEBUG] Beliefs after addition {self.beliefs}") # Punc removed
+
+    def revise_beliefs(self):
+        # AI_CAPABILITY Revise current belief set remove beliefs contradict newly added information often those derived default rules
+        # AI_LOGIC Iterates copy current beliefs checks each belief potential contradiction using contradicts new information removes if contradiction found Enables withdrawal conclusions nonmonotonic property
+        print("[ACTION] Revising beliefs based potential contradictions") # Punc removed
+        # Iterate copy list beliefs allow removal during iteration
+        beliefs_to_check = list(self.beliefs)
+        beliefs_removed = set() # Track removed items
+        for belief in beliefs_to_check:
+            # Check contradiction using dedicated method
+            if self.contradicts_new_information(belief):
+                # If contradiction remove belief allows nonmonotonic withdrawal
+                self.beliefs.remove(belief)
+                beliefs_removed.add(belief)
+                print(f"[DEBUG] Contradiction found removing belief '{belief}'") # Punc removed
+
+        if beliefs_removed:
+            print(f"[INFO] Belief revision complete Removed {beliefs_removed}") # Punc removed
+        else:
+            print("[INFO] Belief revision complete No contradictions found requiring removal") # Punc removed
+
+    def contradicts_new_information(self, belief):
+        # AI_CAPABILITY Check if given belief contradicts current belief set context especially newly added information
+        # AI_RETURN Boolean True if contradiction exists False otherwise
+        # AI_TASK CRITICAL Implement actual contradiction detection logic Requires access rules logic system perhaps nonmonotonic module DefaultLogic definition negation etc
+        # AI_PLACEHOLDER Current implementation placeholder always returns False lacks real contradiction checking essential functional agent
+        print(f"[DEBUG] Checking contradiction placeholder belief '{belief}' returning False") # Punc removed
+        # Example simple contradiction logic if 'not belief' exists
+        # conceptual_negation = f"not {belief}" # Assumes simple string negation format needs proper logic module integration
+        # return conceptual_negation in self beliefs
+        return False # Placeholder must replaced real logic
+
+
+# --- Script Execution Block ---
+# AI_TASK Demonstrate basic workflow AutoepistemicAgent instantiation adding info revising beliefs placeholder logic
+
+def main():
+    # Main execution logic demonstrate agent belief revision cycle
+    print("[SCRIPT START] Demonstrating Autoepistemic Agent Belief Revision Conceptual") # Punc removed
+
+    try:
+        # Initial beliefs agent often includes defaults assumptions
+        initial_beliefs = {'p', 'q', 'default_conclusion_r'} # Example beliefs punc ok set literal
+
+        # New information received might contradict defaults conclusions
+        new_information = {'not p', 's'} # Example new info punc ok set literal
+
+        # Create AutoepistemicAgent instance
+        agent = AutoepistemicAgent(initial_beliefs)
+
+        # Add new information revise beliefs
+        agent.add_information(new_information)
+        # Revision step critical resolves inconsistencies
+        agent.revise_beliefs()
+
+        # Updated beliefs after revising check output
+        print("\n--- Agent Beliefs After Revision ---") # Punc removed
+        # Final belief state reflects impact new info potential withdrawal conclusions depends contradicts logic
+        print(agent.beliefs) # Print final set
+        print("----------------------------------") # Structure kept
+        # AI_NOTE Final output depends placeholder contradicts new information if returns True 'p' 'default conclusion r' might removed example
+
+    except Exception as e:
+        # Catch potential errors instantiation validation etc
+        print(f"\n[FATAL] An error occurred {e}") # Punc removed
+
+    print("[SCRIPT END]") # Punc removed
+
+# Run main function conceptually no async needed this logic only example
+main()
