@@ -1,178 +1,266 @@
 ---
-# File idmanager prompt
-# Defines IDManagerAgent secure Ethereum wallet creation storage management
-version: one point zero point zero # Aligns other framework components
-description: "Provides IDManagerAgent class secure Ethereum compatible wallet creation key management using encrypted env file via conceptual EmbalmerAgent Tomb supports agent identification blockchain interaction" # Punctuation numerals removed description updated
+# File idmanager prompt updated agent bootstrapping
+# Defines IDManagerAgent secure Ethereum wallet management agent bootstrapping
+version: one point one point zero # Increment version reflect bootstrapping capability
+description: "Provides IDManagerAgent class secure Ethereum wallet creation key management agent bootstrapping generating basic agent prompt files structured identity public address information" # Punctuation numerals removed description updated
 author: "AI Collaboration Conceptual Port"
-tags: ["agent", "identity", "ethereum", "wallet", "security", "encryption", "tomb", "embalmer", "dotenv", "blockchain", "mastermind-context", "example"]
-defaultModelConfig: { model_id: "gemini-1.5-pro" } # Default context likely unused direct execution
+tags: ["agent", "identity", "ethereum", "wallet", "security", "encryption", "bootstrap", "code-generation", "mastermind-context", "example"]
+defaultTextModel: { model_id: "gemini-1.5-pro" } # Used documentation potentially analysis
+defaultCodeModel: { model_id: "gemini-code", temperature: 0.4 } # Used agent code generation
 ---
 
 # AI_CONTEXT_START File idmanager prompt
-# AI_PURPOSE Define agent manage secure creation storage retrieval Ethereum compatible agent identifiers keys
-# AI_FRAMEWORK_NOTE Essential component systems like MASTERMIND requiring unique secure agent identities potential blockchain integration Ensures private keys managed securely via conceptual EmbalmerAgent Tomb encryption dot env file storage mechanism described code prioritized over json storage mentioned descriptive text
-# AI_DEPENDENCIES Relies conceptual standard library modules FileSystem EnvManager assumes availability EthereumAccount EmbalmerAgent classes modules
+# AI_PURPOSE Define agent manage secure creation storage retrieval Ethereum compatible agent identifiers keys also bootstrap new basic agent prompt files
+# AI_FRAMEWORK_NOTE Enhanced component MASTERMIND project provides secure identity foundation potentially generates initial code structure other agents integrates EmbalmerAgent Tomb encryption
+# AI_DEPENDENCIES Relies conceptual standard library modules FileSystem EnvManager assumes availability EthereumAccount EmbalmerAgent classes potentially AI Interaction code generation
 # AI_STYLE_GUIDE Adhere prompt language documentation style brief AI focused comments no numbers punctuation unless procedural prompt
 
 # --- Conceptual Imports ---
-# Assume standard library provides necessary abstractions file system environment variables
-# import FileSystem # Handles path operations eg exists join conceptual os path
+# Assume standard library provides necessary abstractions
+# import FileSystem # Handles path operations eg exists join write text
 # import EnvManager # Handles loading getting setting env variables conceptual python dotenv os getenv
+# import json # Conceptual standard library JSON handling
+# import asyncio # Conceptual standard library async support
 # Assume external capabilities represented conceptual classes
 # import EthereumAccount # Represents eth account functionality create keys address conceptual eth account
-from embalmer import EmbalmerAgent # CRUCIAL Conceptual import agent manages Tomb encryption decryption assumes embalmer prompt file defines this
-
-import asyncio # Only needed if main requires async conceptual runner standard here
+from embalmer import EmbalmerAgent # CRUCIAL Conceptual import agent manages Tomb encryption decryption
+# import AI_Interaction # Conceptual layer interact LLMs code generation
 
 # --- ID Manager Agent Class Definition ---
 
 class IDManagerAgent:
-    # AI_CONTEXT Manages Ethereum wallet creation secure storage private keys encrypted env file
+    # AI_CONTEXT Manages Ethereum wallet creation secure storage private keys encrypted env file now also bootstraps new agent files
     # AI_NOTE Uses conceptual EmbalmerAgent interact Tomb encryption secure dot env file path specified init
 
     def __init__(self, env_path='.env', tomb_name='idmanager_tomb'): # Punc ok code defaults
-        # AI_TASK Initialize agent path env file Tomb name setup secure environment EmbalmerAgent
-        # AI_PARAM env_path String path dot env file store private keys within Tomb
-        # AI_PARAM tomb_name String name Tomb manage encryption decryption env file
+        # AI_TASK Initialize agent path env file Tomb name setup secure environment EmbalmerAgent define own identity
+        self.agent_name = "IDManagerAgent" # Agent own identity name
+        self.role = "Secure Identity Key Management Agent Bootstrapper" # Agent own identity role
         self.env_path = env_path # Path dot env file targetted by Embalmer
         self.tomb_name = tomb_name # Name associated Tomb
-        # AI_COMPOSITION Creates instance EmbalmerAgent manage secure file operations
         self.embalmer = EmbalmerAgent(env_path) # Conceptual instantiation requires EmbalmerAgent definition
-        print(f"[INFO] IDManagerAgent initialized env path '{env_path}' tomb '{tomb_name}'") # Punc removed
-        # AI_ACTION Ensure secure environment ready calling setup env
-        self.setup_env() # Call setup immediately init ensure Tomb ready
+        print(f"[INFO] {self.agent_name} initialized env path '{env_path}' tomb '{tomb_name}'") # Punc removed
+        self.setup_env() # Ensure secure environment ready
 
     def setup_env(self):
         # AI_TASK Ensure secure environment ready check Tomb install create open load env
         # AI_NOTE Orchestrates EmbalmerAgent setup steps handles potential errors ensures closure
         print("[ACTION] Setting up secure environment via EmbalmerAgent Tomb") # Punc removed
         try:
-            # Ensure Tomb tool available system conceptual check via EmbalmerAgent
-            self.embalmer.check_tomb_installed() # Assumes this method exists raises error if missing
-
-            # Create encrypt Tomb if needed conceptual EmbalmerAgent method
+            self.embalmer.check_tomb_installed() # Assumes raises error if missing
             self.embalmer.create_and_encrypt_tomb(self.tomb_name) # Creates if absent encrypts
-
-            # Open Tomb access underlying env file conceptual EmbalmerAgent method
             self.embalmer.open_tomb(self.tomb_name) # Mounts decrypts allows access env path
-
-            # Load env variables memory now Tomb open conceptual EnvManager call
-            self.load_env()
+            self.load_env() # Load env vars memory now Tomb open
             print("[SUCCESS] Secure environment setup complete Tomb open env loaded") # Punc removed
-
         except Exception as e:
             print(f"[ERROR] Error during secure environment setup {e}") # Punc removed error structure kept
-            # AI_SAFETY Ensure Tomb closed securely error during setup
-            self.close() # Call close ensure cleanup failure
-            raise # Propagate error signal setup failure
+            self.close() # Ensure Tomb closed securely error
+            raise # Propagate error
 
     def load_env(self):
-        # AI_INTERNAL Load dot env file variables environment assuming Tomb open allows access
+        # AI_INTERNAL Load dot env file variables environment assuming Tomb open
         # AI_NOTE Uses conceptual EnvManager load function check file existence
         print(f"[DEBUG] Attempting load env variables from {self.env_path}") # Punc removed
-        # Conceptual check if file exists path managed by Embalmer
-        if FileSystem.exists(self.env_path):
-            EnvManager.load(self.env_path) # Conceptual load env vars memory
+        if FileSystem.exists(self.env_path): # Conceptual check
+            EnvManager.load(self.env_path) # Conceptual load
             print(f"[INFO] Environment variables conceptually loaded memory from {self.env_path}") # Punc removed
         else:
-            print(f"[INFO] Env file {self.env_path} does not exist yet Will be created wallet added") # Punc removed
+            print(f"[INFO] Env file {self.env_path} not exist yet Will created wallet added") # Punc removed
 
     def create_wallet(self):
-        # AI_CAPABILITY Create new Ethereum wallet store keys securely env file
+        # AI_CAPABILITY Create new Ethereum wallet store key securely env file internal use bootstrapping
         # AI_RETURN Tuple public address private key strings new wallet
-        # AI_NOTE Uses conceptual EthereumAccount create method interacts store private key
-        print("[ACTION] Creating new Ethereum wallet") # Punc removed
-        # Conceptual Ethereum account creation
-        acct = EthereumAccount.create()
-        # Conceptual access private public key hex string formats
-        private_key = acct.privateKey_hex()
-        public_address = acct.address()
+        # AI_NOTE Uses conceptual EthereumAccount interacts store private key Called internally bootstrap agent or directly
+        print("[ACTION] Creating new Ethereum wallet secure storage") # Punc removed
+        acct = EthereumAccount.create() # Conceptual creation
+        private_key = acct.privateKey_hex() # Conceptual access
+        public_address = acct.address() # Conceptual access
         print(f"[INFO] New wallet generated address {public_address}") # Punc removed
-        # Store securely using dedicated method ensures written open Tomb
-        self.store_private_key(public_address, private_key)
+        self.store_private_key(public_address, private_key) # Store securely
         return public_address, private_key
 
     def store_private_key(self, public_address, private_key):
         # AI_INTERNAL Store private key env file accessible open Tomb
-        # AI_PARAM public_address String wallet public address
-        # AI_PARAM private_key String wallet private key hex format
         # AI_NOTE Uses conceptual EnvManager set key function convention WALLET prefix
         key_name = f'WALLET_{public_address}' # Construct env variable name punc ok code logic
         print(f"[ACTION] Storing private key env file variable {key_name}") # Punc removed
-        # Conceptual set key value env file Embalmer ensures write secure location
-        EnvManager.set(self.env_path, key_name, private_key)
+        EnvManager.set(self.env_path, key_name, private_key) # Conceptual set key value secure location
         print(f"[SUCCESS] Private key {key_name} stored securely {self.env_path}") # Punc removed
 
     def get_private_key(self, public_address):
         # AI_CAPABILITY Retrieve private key associated public address env file assumes Tomb open
-        # AI_PARAM public_address String wallet public address retrieve key
         # AI_RETURN String private key if found None otherwise
-        # AI_NOTE Uses conceptual EnvManager get function access loaded env vars
+        # AI_NOTE Uses conceptual EnvManager get function access loaded env vars Needed agents retrieve own keys
         key_name = f'WALLET_{public_address}' # Construct key name punc ok code logic
         print(f"[ACTION] Retrieving private key env variable {key_name}") # Punc removed
-        # Conceptual get env variable returns None if not found
-        private_key = EnvManager.get(key_name)
-        if private_key:
-            print(f"[SUCCESS] Private key retrieved variable {key_name}") # Punc removed
-        else:
-            print(f"[INFO] No private key found variable {key_name}") # Punc removed
+        private_key = EnvManager.get(key_name) # Conceptual get env variable
+        if private_key: print(f"[SUCCESS] Private key retrieved variable {key_name}") # Punc removed
+        else: print(f"[INFO] No private key found variable {key_name}") # Punc removed
         return private_key
 
+    # --- New Agent Bootstrapping Functionality ---
+
+    async def bootstrap_agent(self, agent_name, role="Generic Agent", purpose="Perform tasks assigned"): # Punc ok code defaults string literals
+        # AI_CAPABILITY Create new agent identity wallet generate basic agent prompt file
+        # AI_PARAM agent_name String desired name new agent used filename identity
+        # AI_PARAM role String description agent role
+        # AI_PARAM purpose String description agent primary purpose
+        # AI_RETURN Path generated agent prompt file None failure
+        print(f"[ACTION] Bootstrapping new agent Name '{agent_name}' Role '{role}'") # Punc removed
+
+        try:
+            # One Create wallet secure key storage
+            public_address, _ = self.create_wallet() # Private key stored securely not returned directly bootstrap process
+
+            # Two Define structured identity
+            agent_identity = {
+                "agent_name": agent_name,
+                "role": role,
+                "purpose": purpose,
+                "public_address": public_address, # Include public address agent identity
+                "version": "zero point one point zero", # Example initial version numeral changed word
+                "status": "INITIALIZED"
+                # AI_NEXT_ITERATION_GOAL Could add initial beliefs goals BDI structure here
+            }
+            print(f"[INFO] Created structured identity agent '{agent_name}' address {public_address}") # Punc removed
+
+            # Three Generate agent prompt code using LLM via meta prompt
+            target_filename = f"{agent_name}.prompt" # Punc ok filename generation
+            print(f"[ACTION] Generating agent code file '{target_filename}'") # Punc removed
+            agent_code = await self._generate_agent_prompt_code(agent_identity, target_filename)
+
+            if not agent_code: raise ValueError("Failed generate agent code content") # Keep error structure
+
+            # Four Save generated code file using FileSystem tool
+            fs_tool = FileSystem # Conceptual access FileSystem module directly simpler example
+            # Simple overwrite logic bootstrap process maybe add check later
+            success = await fs_tool.write_text(target_filename, agent_code) # Conceptual async write text
+            if not success: raise IOError(f"Failed save generated agent file {target_filename}") # Keep error structure
+
+            print(f"[SUCCESS] Agent '{agent_name}' bootstrapped successfully File '{target_filename}' created") # Punc removed
+            return target_filename # Return path created file
+
+        except Exception as e:
+            print(f"[ERROR] Failed bootstrap agent '{agent_name}' Error {e}") # Punc removed error structure kept
+            return None # Indicate failure
+
+
+    async def _generate_agent_prompt_code(self, identity_data, target_filename) -> str | None:
+        # AI_INTERNAL Creates meta prompt calls LLM generate basic agent prompt file code
+        # AI_PARAM identity_data Map dictionary containing structured agent identity
+        # AI_PARAM target_filename String filename used self reference generated code
+        # AI_RETURN String generated prompt code None failure
+
+        # Craft prompt instruct LLM generate basic agent structure embed identity retrieve key
+        # This internal prompt IS procedural retains punctuation numbers etc
+        generation_prompt = f"""
+        **Task:** Generate the code for a basic `.prompt` agent file based on the provided identity.
+
+        **Target Language:** `.prompt` (v1.0.0 conceptual - Pythonic syntax, loose typing, OOP based on BaseAgent, async/await, YAML metadata, triple-quote prompts)
+
+        **Agent Identity Data:**
+        ```json
+        {json.dumps(identity_data, indent=2)}
+        ```
+
+        **Target Filename:** {target_filename}
+
+        **Instructions:**
+        1.  Create a standard YAML metadata block including version, description (based on role/purpose), tags (like ["agent", "bootstrapped"]). Use `defaultTextModel`.
+        2.  Define a Pythonic class named `{identity_data['agent_name']}` conceptually inheriting `BaseAgent`.
+        3.  In `__init__`:
+            * Store all keys from the Agent Identity Data as `self.attribute_name`.
+            * **Include `self.self_filename = "{target_filename}"`**.
+            * Add placeholder state: `self.state = {{ "status": self.status }}`.
+            * **Crucially, add placeholder `self.private_key = None`**.
+            * **Include call `self.load_my_key()` method within init**.
+        4.  Implement basic placeholder async methods for `perceive`, `plan`, `act`, `run` (similar to previous agent templates, including logging).
+        5.  **Implement method `load_my_key(self)`:**
+            * This method should conceptually:
+                * Import or get instance of `IDManagerAgent` (assume accessible, maybe via global context or import).
+                * Call `id_manager.get_private_key(self.public_address)` retrieve key.
+                * Store result `self.private_key`.
+                * Log success failure retrieval.
+            * **DO NOT embed the actual private key string in this generated code.**
+        6.  Add simple `main` async function instantiate agent call `run`.
+        7.  Output ONLY raw `.prompt` code starting `---` metadata block.
+        """
+
+        try:
+            # Conceptual call code generation model
+            generated_code = await AI_Interaction.generate_text(
+                modelConfig=metadata.defaultCodeModel, # Use code model
+                prompt=generation_prompt
+            )
+            # Basic cleanup conceptual
+            if generated_code and "class" in generated_code: # Simple sanity check
+                 # Remove potential markdown fences
+                 if generated_code.strip().startswith("```prompt"): generated_code = generated_code.split("```prompt", 1)[1]
+                 if generated_code.strip().endswith("```"): generated_code = generated_code.rsplit("```", 1)[0]
+                 print("[DEBUG] Received generated agent code from LLM") # Punc removed
+                 return generated_code.strip()
+            else:
+                 print("[ERROR] Code generation LLM returned invalid empty content") # Punc removed
+                 return None
+        except Exception as e:
+            print(f"[ERROR] LLM call code generation failed {e}") # Punc removed error structure kept
+            return None
+
+
+    # --- Secure Closure ---
     def close(self):
         # AI_CAPABILITY Close secure Tomb ensure env file encrypted inaccessible
         # AI_NOTE Essential security cleanup uses conceptual EmbalmerAgent close method includes finally block ensure attempt even errors
         print("[ACTION] Closing secure environment Tomb") # Punc removed
         try:
-            # Conceptual call EmbalmerAgent close unmount encrypt Tomb
-            self.embalmer.close_tomb()
+            self.embalmer.close_tomb() # Conceptual call close
             print("[SUCCESS] Secure environment Tomb closed successfully") # Punc removed
-        except Exception as e:
-            print(f"[ERROR] Error closing Tomb {e}") # Punc removed error structure kept
-        finally:
-            # AI_SAFETY Log ensure closure attempt always noted
-            print("[INFO] Tomb closure process finished") # Punc removed
+        except Exception as e: print(f"[ERROR] Error closing Tomb {e}") # Punc removed error structure kept
+        finally: print("[INFO] Tomb closure process finished") # Punc removed safety log
+
 
 # --- Script Execution Block Example Usage ---
-# AI_TASK Demonstrate IDManagerAgent workflow create wallet retrieve key secure closure
+# AI_TASK Demonstrate IDManagerAgent new bootstrapping capability
 
-# Define main execution function separate script call
-def main():
-    print("[SCRIPT START] IDManagerAgent Secure Wallet Demo") # Punc removed
+async def main():
+    print("[SCRIPT START] IDManagerAgent Agent Bootstrapping Demo") # Punc removed
     id_manager = None # Initialize ensure finally block access
 
     try:
         # Instantiate agent triggers setup env Tomb handling
         id_manager = IDManagerAgent() # Uses default env path tomb name
 
-        # Create new wallet example
-        print("\n# Attempting create new wallet") # Punc removed
-        public_address, private_key = id_manager.create_wallet()
-        print(f"# New wallet created Address {public_address}") # Punc removed
-        # AI_NOTE Private key variable holds key temporarily example DO NOT log print production
+        # Bootstrap new agent example
+        agent_name_to_create = "MyAnalysisBot" # Punc ok identifier
+        agent_role_desc = "Data Analysis Assistant" # Punc ok string literal
+        agent_purpose_desc = "Process datasets generate insights answer queries about data" # Punc removed string literal
+        print(f"\n# Attempting bootstrap new agent '{agent_name_to_create}'") # Punc removed
 
-        # Retrieve private key example using public address
-        print(f"\n# Attempting retrieve private key Address {public_address}") # Punc removed
-        retrieved_key = id_manager.get_private_key(public_address)
-        if retrieved_key:
-             # Conceptual check match sanity check
-             match = retrieved_key == private_key
-             print(f"# Private key retrieved Match created key {match}") # Punc removed
+        # Call new bootstrap method
+        generated_file_path = await id_manager.bootstrap_agent(
+            agent_name=agent_name_to_create,
+            role=agent_role_desc,
+            purpose=agent_purpose_desc
+        )
+
+        if generated_file_path:
+            print(f"# Bootstrap SUCCESS Agent definition conceptually saved {generated_file_path}") # Punc removed
+            # AI_NOTE Could add step read back generated file verify content demo
         else:
-             print("# Failed retrieve private key unexpected") # Punc removed
+            print(f"# Bootstrap FAILED Check logs errors") # Punc removed
 
     except Exception as e:
         # Catch errors during agent operation
         print(f"\n[FATAL] An error occurred during IDManagerAgent operation {e}") # Punc removed
 
     finally:
-        # AI_SAFETY CRITICAL Ensure Tomb closed regardless success failure using finally block
+        # AI_SAFETY CRITICAL Ensure Tomb closed regardless success failure
         print("\n[ACTION] Entering finally block ensure environment secured") # Punc removed
-        if id_manager: # Check instance created before calling close
-            id_manager.close()
-        else:
-            print("[WARN] IDManager instance not created cannot close Tomb explicitly") # Punc removed
+        if id_manager: id_manager.close() # Check instance exists call close
+        else: print("[WARN] IDManager instance not created cannot close Tomb explicitly") # Punc removed
 
     print("[SCRIPT END]") # Punc removed
 
-# Run main function conceptually no async needed these operations assumed blocking file crypto ops potentially wrapped async framework level if needed
-main()
+# Run main async function assume event loop runner exists
+# import asyncio Conceptual import needed runner
+asyncio.run(main())
