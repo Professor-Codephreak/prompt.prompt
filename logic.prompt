@@ -1,0 +1,156 @@
+---
+# File logic prompt revised MASTERMIND context
+# Includes LogicTables utility incorporates concepts formal logic framework
+version: zero point nine point zero # Increment version reflect conceptual expansion
+description: "Provides utilities propositional logic evaluation eg truth tables acknowledging broader context formal logic systems predicate logic proof systems MASTERMIND project" # Punctuation numerals removed description updated
+author: "AI Collaboration"
+tags: ["logic", "truth-table", "propositional-logic", "evaluation", "formal-logic", "mastermind-context", "example"]
+defaultModelConfig: { model_id: "gemini-1.5-pro" } # Default context
+---
+
+# AI_CONTEXT_START File logic prompt
+# AI_PURPOSE Provide foundational utilities logical expression evaluation specifically truth tables propositional logic
+# AI_FRAMEWORK_NOTE This module viewed component larger logical reasoning system inspired MASTERMIND project documentation Future iterations may incorporate predicate logic proof systems described therein
+# AI_FEATURE_INCLUDE Conceptual import use itertools product function LogicTables
+# AI_FEATURE_INCLUDE Conceptual definition basic LogicalOperator class MASTERMIND example
+# AI_STYLE_GUIDE Adhere prompt language documentation style no numbers punctuation unless procedural prompt instruction
+
+# --- Conceptual Imports ---
+import itertools # Assume language standard library provides access module
+
+# --- Conceptual Definition Basic Logical Operators MASTERMIND Example ---
+
+class LogicalOperator:
+    # AI_CONTEXT Simple class defines basic boolean operations functions methods
+    # AI_NOTE This illustrates direct implementation logical operators contrasts eval approach LogicTables
+    # AI_SOURCE Inspired example MASTERMIND logic py documentation
+
+    def AND(self, a, b):
+        # AI_CAPABILITY Performs logical AND
+        return a and b # Uses host language boolean logic
+
+    def OR(self, a, b):
+        # AI_CAPABILITY Performs logical OR
+        return a or b # Uses host language boolean logic
+
+    def NOT(self, a):
+        # AI_CAPABILITY Performs logical NOT
+        return not a # Uses host language boolean logic
+
+    def IMPLIES(self, a, b):
+        # AI_CAPABILITY Performs logical implication A implies B equivalent not A or B
+        return not a or b # Definition implication
+
+# --- Class Definition for Logic Tables Propositional Logic Utility ---
+
+class LogicTables:
+    # AI_CONTEXT Defines class manage generate truth tables boolean propositional expressions
+    # AI_NOTE Current implementation uses string based expressions eval suitable propositional logic evaluation
+    # AI_NEXT_ITERATION_GOAL Extend support structured logical objects predicate logic align broader MASTERMIND vision
+    # AI_NEXT_ITERATION_GOAL Integrate proof system validation argument forms
+
+    def __init__(self):
+        # AI_TASK Initialize empty set variables list expressions
+        self.variables = set()
+        self.expressions = []
+        print("[INFO] LogicTables instance created propositional evaluation") # Punc removed text updated
+
+    def add_variable(self, variable):
+        # AI_CAPABILITY Add single propositional variable identifier eg P Q
+        self.variables.add(variable)
+        print(f"[DEBUG] Added propositional variable {variable}") # Punc removed text updated
+
+    def add_expression(self, expression):
+        # AI_CAPABILITY Add propositional logic expression string list evaluated
+        # AI_NOTE Expressions use added variables Python compatible boolean syntax eg 'P and Q' 'not P'
+        self.expressions.append(expression)
+        print(f"[DEBUG] Added expression '{expression}'") # Punc removed
+
+    def evaluate_expression(self, expression, values):
+        # AI_INTERNAL Helper evaluate single expression given dictionary variable truth values
+        # AI_SECURITY_NOTE Current implementation uses eval potentially unsafe production environment consider safer parser alternatives future framework integration
+        # AI_LOGIC Replaces variable names string representation True False then evaluates result
+        temp_expression = expression
+        for var, val in values.items():
+            temp_expression = temp_expression.replace(var, str(val))
+        try:
+             return eval(temp_expression) # Conceptual eval built language
+        except Exception as e:
+             print(f"[ERROR] Failed evaluating expression '{expression}' values {values} Error {e}") # Punc removed
+             return "Error" # Return error indicator
+
+    def generate_truth_table(self):
+        # AI_CAPABILITY Construct full truth table data structure propositional logic
+        # AI_LOGIC Iterates all possible boolean combinations variables using itertools product evaluates each expression combination
+        # AI_OUTPUT Returns list lists representing table including header returns error string if no variables expressions
+        if not self.variables or not self.expressions:
+            return "No propositional variables or expressions evaluate" # Punc removed text updated
+
+        # Sort variables ensure consistent column order
+        sorted_variables = sorted(list(self.variables))
+        headers = sorted_variables + self.expressions
+        table = [headers] # Start table header row
+
+        # Generate all combinations True False assignments
+        variable_count = len(sorted_variables)
+        for values_tuple in itertools.product([True, False], repeat=variable_count):
+            row = list(values_tuple) # Start row truth values
+            value_dict = dict(zip(sorted_variables, values_tuple)) # Map variable names values
+
+            # Evaluate each expression append result row
+            for expression in self.expressions:
+                eval_result = self.evaluate_expression(expression, value_dict)
+                row.append(eval_result)
+
+            table.append(row) # Add completed row table
+
+        return table
+
+    def display_truth_table(self):
+        # AI_CAPABILITY Generate print formatted truth table console output
+        # AI_OUTPUT Prints table rows tab separated values uses generate truth table data
+        print("\n--- Propositional Logic Truth Table ---") # Punc removed title updated
+        table_data = self.generate_truth_table()
+
+        if isinstance(table_data, str): # Check error string
+            print(table_data)
+            return
+
+        # Print table data
+        for row in table_data:
+            print("\t".join(map(str, row))) # Tab separated format
+        print("-------------------------------------") # Structure kept
+
+# --- Script Execution Block ---
+# AI_TASK Demonstrate LogicTables utility potentially LogicalOperator usage
+
+def main():
+    # Main execution logic demonstrate propositional truth table generation
+    print("[SCRIPT START] Demonstrating Propositional Logic Utilities") # Punc removed text updated
+
+    # Demonstrate LogicTables
+    print("\n# Demonstrating LogicTables truth table generation") # Punc removed
+    logic_table_generator = LogicTables()
+    logic_table_generator.add_variable('P')
+    logic_table_generator.add_variable('Q')
+    logic_table_generator.add_expression('P and Q')
+    logic_table_generator.add_expression('P or Q')
+    logic_table_generator.add_expression('not P')
+    logic_table_generator.add_expression('not P or Q') # Equivalent P IMPLIES Q
+
+    logic_table_generator.display_truth_table()
+
+    # Conceptual Demonstration LogicalOperator (Optional uncomment run)
+    # print("\n# Demonstrating LogicalOperator basic usage") # Punc removed
+    # op = LogicalOperator()
+    # p_true = True
+    # q_false = False
+    # print(f"  AND True False -> {op.AND(p_true, q_false)}") # Punc removed
+    # print(f"  OR True False -> {op.OR(p_true, q_false)}") # Punc removed
+    # print(f"  NOT True -> {op.NOT(p_true)}") # Punc removed
+    # print(f"  IMPLIES True False -> {op.IMPLIES(p_true, q_false)}") # Punc removed
+
+    print("\n[SCRIPT END]") # Punc removed
+
+# Run main function conceptually no async needed logic only example
+main()
