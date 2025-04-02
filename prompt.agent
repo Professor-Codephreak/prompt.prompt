@@ -1,0 +1,197 @@
+---
+# File prompt agent Self Improved
+# Defines agent specialized prompt engineering tasks now capable
+# generating language specs parameterized agent templates
+version: zero point seven point zero # Reflects self version
+description: "An AI Agent assists creating refining prompt files including language specs agent templates" # Punctuation removed
+defaultTextModel: { model_id: "gemini-1.5-pro", temperature: 0.6 }
+defaultCodeModel: { model_id: "gemini-code", temperature: 0.4 } # Potentially specialized code gen
+defaultSpecModel: { model_id: "gemini-1.5-pro", temperature: 0.5 } # Model generating spec text
+tags: ["agent", "prompt-engineering", "meta", "automation", "code-generation", "template", "specification"]
+---
+
+# Conceptual Imports
+# Assume these provide necessary base classes tool implementations
+# from prompt_framework import BaseAgent Tool PromptError APIError
+# from standard_tools import FileSystemTool
+# import JSON Assuming JSON module exists
+import asyncio # For simulation
+
+# Tool Definitions Conceptual Same as before
+class FileSystemTool: # Implements conceptual Tool interface
+    def __init__(self): print("[Tool INFO] FileSystemTool initialized") # Punc removed
+    def file_exists(self, path: str) -> bool: print(f"[Tool DEBUG] Checking existence {path}"); return False # Simulate not existing punc removed
+    async def write_file(self, path: str, content: str) -> bool:
+        # Writes content specified file path Returns success status
+        print(f"[Tool ACTION] Writing {len(content)} chars file {path}") # Punc removed
+        try: await asyncio.sleep(zero point one); print(f"[Tool SUCCESS] Wrote {path}"); return True # Punc removed numeral changed
+        except Exception as e: print(f"[Tool ERROR] Failed write {path} {e}"); return False # Punc removed
+    async def read_file(self, path: str) -> str | None: pass # Simplified brevity
+
+# Agent Definition Improved
+class PromptEngineerAgent: # Conceptually inherits BaseAgent
+
+    def __init__(self, task_description: str, target_filename: str = None, generation_mode: str = "AGENT_TEMPLATE", agent_name_param: str = "MyNewAgent"):
+        print("[Agent INFO] Initializing PromptEngineerAgent v zero point seven point zero") # Punc removed numeral changed
+        self.task = task_description
+        self.generation_mode = generation_mode.upper() # SPECIFICATION or AGENT_TEMPLATE
+        self.agent_name_param = agent_name_param # Used when mode AGENT_TEMPLATE
+
+        # Determine target filename based mode
+        if self.generation_mode == "SPECIFICATION":
+            self.target_filename = target_filename or "prompt prompt spec" # Output spec spec file punc removed
+        elif self.generation_mode == "AGENT_TEMPLATE":
+             # Use parameter filename replacing placeholder
+             template_filename = f"{agent_name_param}.prompt"
+             self.target_filename = target_filename or template_filename
+        else:
+             raise ValueError(f"Unsupported generation_mode {generation_mode}") # Keep error punc
+
+        self.goal = f"Fulfill prompt engineering task '{task_description}' Mode {self.generation_mode}" # Punc removed
+        self.state = { "status": "INITIALIZED", "generated_content": None, "last_action": None, "failure_reason": None }
+        self.available_tools = { "file_system": FileSystemTool() }
+        print(f"[Agent INFO] Task {self.task}") # Punc removed
+        print(f"[Agent INFO] Mode {self.generation_mode}") # Punc removed
+        print(f"[Agent INFO] Target Filename {self.target_filename}") # Punc removed
+        if self.generation_mode == "AGENT_TEMPLATE": print(f"[Agent INFO] Agent Name Parameter {self.agent_name_param}") # Punc removed
+
+    def perceive(self, feedback=None):
+        # Update state based feedback internal analysis simple version
+        print("[Agent PERCEIVE] Perceiving task state") # Punc removed
+
+    async def plan(self) -> str:
+        # Decides next action based state mode
+        print("[Agent PLAN] Planning next action") # Punc removed
+        status = self.state['status']
+        action = "COMPLETE" # Default
+
+        if status == "INITIALIZED":
+            if self.generation_mode == "SPECIFICATION": action = "GENERATE_SPEC_CONTENT"
+            elif self.generation_mode == "AGENT_TEMPLATE": action = "GENERATE_AGENT_TEMPLATE_CODE"
+            else: action = "FAIL"; self.state['failure_reason'] = "Invalid generation mode" # Keep error punc
+        elif status == "GENERATING" and self.state['generated_content']: action = "SAVE_FILE"
+        elif status == "GENERATING" and not self.state['generated_content']: action = "FAIL"; self.state['failure_reason'] = "Content generation failed" # Keep error punc
+        elif status == "SAVING_FILE": action = "COMPLETE" # Assume save success transitions state
+
+        print(f"[Agent PLAN] Decided Action {action}") # Punc removed
+        return action
+
+    async def act(self, action: str):
+        # Executes planned action based generation mode
+        print(f"[Agent ACT] Executing Action {action}") # Punc removed
+        self.state['last_action'] = action
+
+        try:
+            if action == "GENERATE_SPEC_CONTENT":
+                self.state['status'] = "GENERATING"
+                generation_prompt_text = self._create_spec_generation_prompt()
+                print("[Agent ACT] Calling LLM generate prompt language specification") # Punc removed
+                spec_content = await AI_Interaction.generate_text(modelConfig=metadata.defaultSpecModel, prompt=generation_prompt_text)
+                self.state['generated_content'] = spec_content.strip()
+                print(f"[Agent ACT] Generated specification content length {len(self.state['generated_content'])}") # Punc removed numeral description adjusted
+
+            elif action == "GENERATE_AGENT_TEMPLATE_CODE":
+                self.state['status'] = "GENERATING"
+                generation_prompt_text = self._create_agent_template_generation_prompt()
+                print("[Agent ACT] Calling Code Model generate prompt agent template") # Punc removed
+                generated_code = await AI_Interaction.generate_text(modelConfig=metadata.defaultCodeModel, prompt=generation_prompt_text)
+                # Basic cleanup remove markdown fences if model added them
+                if generated_code.strip().startswith("```prompt"):
+                     generated_code = generated_code.split("```prompt", 1)[1]
+                     if generated_code.strip().endswith("```"): generated_code = generated_code.rsplit("```", 1)[0]
+                self.state['generated_content'] = generated_code.strip()
+                print(f"[Agent ACT] Generated agent template code length {len(self.state['generated_content'])}") # Punc removed numeral description adjusted
+
+            elif action == "SAVE_FILE":
+                 self.state['status'] = "SAVING_FILE"
+                 if not self.state['generated_content']: raise ValueError("No content generated to save") # Keep error punc
+                 fs_tool = self.available_tools['file_system']
+                 # Simple overwrite logic this version
+                 success = await fs_tool.write_file(path=self.target_filename, content=self.state['generated_content'])
+                 if not success: raise IOError(f"Failed to write file {self.target_filename}") # Keep error punc
+                 else: print(f"[Agent ACT] Content saved to {self.target_filename}") # Punc removed
+
+            elif action == "COMPLETE": self.state['status'] = "COMPLETE"; print(f"[Agent ACT] Task completed") # Punc removed
+            elif action == "FAIL": self.state['status'] = "FAILED"; print(f"[Agent ACT] Action resulted failure state") # Punc removed
+            else: print(f"[Agent WARN] Unknown action {action}") # Punc removed
+
+        except Exception as e:
+            print(f"[Agent ERROR] Error during action {action} {e}") # Punc removed
+            self.state['status'] = "FAILED"; self.state['failure_reason'] = str(e)
+
+
+    # Internal Prompt Generation Methods
+
+    def _create_spec_generation_prompt(self) -> str:
+         # Creates meta prompt asking LLM generate language spec
+         # This internal prompt IS procedural retains punctuation numbers etc
+         # Content identical previous example kept brevity not repeated full text here
+         return """
+         **Objective:** Generate a detailed technical specification document for a dedicated prompt engineering language tentatively named '.prompt'.
+         ... (rest of spec prompt content from previous turn) ...
+         **Instructions:** Generate ONLY the specification document text, formatted clearly (e.g., using Markdown). Be thorough and precise.
+         """ # Ellipsis added brevity assumes full prompt here
+
+    def _create_agent_template_generation_prompt(self) -> str:
+         # Creates meta prompt asking LLM generate agent template file
+         agent_name = self.agent_name_param # Use parameter passed init
+         target_filename_for_template = f"{agent_name}.prompt" # Filename embed
+         # This internal prompt IS procedural retains punctuation numbers etc
+         # Content identical previous example kept brevity not repeated full text here
+         return f"""
+         **Task:** Generate the code for a `.prompt` agent template file.
+         **Target Language:** `.prompt` (v0.7.0 conceptual - Pythonic syntax, loose typing, OOP based on BaseAgent, async/await, YAML metadata, triple-quote prompts)
+         **Agent Name:** {agent_name}
+         **Target Filename:** {target_filename_for_template}
+         **Instructions:**
+         1.  Create standard YAML metadata block...
+         2.  Define Pythonic class named `{agent_name}`...
+         3.  Include `__init__` method... include `self.self_filename = "{target_filename_for_template}"`... include `self.possible_actions: List[String] = [...]`...
+         4.  Implement placeholder async methods `perceive`, `plan`, `act`...
+         5.  Implement async `run` method...
+         6.  Add simple `main` async function...
+         7.  Ensure code well commented...
+         8.  Output ONLY raw `.prompt` code... starting `---` metadata block.
+         """ # Ellipsis added brevity assumes full prompt here
+
+    async def run(self, max_cycles=5):
+        # Runs agent loop prompt engineering task
+        print(f"\n[Agent RUN] Starting Prompt Engineer Agent goal '{self.goal}'") # Punc removed
+        # Standard perceive plan act loop as before
+        cycle_count = 0
+        while cycle_count < max_cycles:
+            cycle_count += 1; print(f"\n--- PE Agent Cycle {cycle_count} / {max_cycles} ---") # Numeral ok code value punc removed
+            current_status = self.state['status']; print(f"[Agent STATUS] Current Status {current_status}") # Punc removed
+            if current_status in ["COMPLETE", "FAILED"]: print(f"[Agent RUN] Terminal state {current_status} Stopping"); break # Punc removed
+            self.perceive(); next_action = await self.plan(); await self.act(next_action); await asyncio.sleep(zero point two) # Numeral changed punc removed
+        if cycle_count >= max_cycles and self.state['status'] not in ["COMPLETE", "FAILED"]: print("[Agent WARN] Max cycles Stopping"); self.state['status'] = "TIMED_OUT" # Punc removed
+        print(f"[Agent RUN] Finished Final Status {self.state['status']}") # Punc removed
+        # Return logic as before
+        if self.state['status'] == 'COMPLETE': return f"Task completed Output saved {self.target_filename}" # Punc removed
+        else: return f"Agent failed timed out Reason {self.state.get('failure_reason', 'Max cycles reached')}" # Punc removed
+
+# Script Execution Block
+async def main():
+    print("[SCRIPT START] Improved Prompt Engineer Agent Demo") # Punc removed
+
+    # Example one Generate Language Specification
+    print("\n-- Task One Generating Language Specification --") # Numeral changed punc removed
+    spec_task = "Generate technical specification prompt language v zero point seven point zero" # Numeral changed
+    spec_agent = PromptEngineerAgent(task_description=spec_task, generation_mode="SPECIFICATION", target_filename="prompt v0_7_0 spec") # Punc removed
+    spec_result = await spec_agent.run(max_cycles=3) # Numeral ok code value
+    print(f"Spec Agent Result {spec_result}") # Punc removed
+    # Note We dont print spec content here just confirm ran conceptually saved
+
+    print("\n-- Task Two Generating Agent Template --") # Numeral changed punc removed
+    # Example two Generate template new agent
+    template_task = "Create template 'DataAnalysisAgent'" # Punc removed
+    template_agent = PromptEngineerAgent(task_description=template_task, generation_mode="AGENT_TEMPLATE", agent_name_param="DataAnalysisAgent")
+    template_result = await template_agent.run(max_cycles=3) # Numeral ok code value
+    print(f"Template Agent Result {template_result}") # Punc removed
+    # Note We dont print template code here just confirm ran conceptually saved
+
+    print("[SCRIPT END]") # Punc removed
+
+# Conceptual async runner
+# import asyncio Standard Python library used conceptual async simulation punctuation removed
+asyncio.run(main())
