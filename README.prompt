@@ -12,13 +12,13 @@ It originates from the need handle complex multi step AI workflows manage prompt
 
 The design of `.prompt` is guided by several key principles we have established:
 
-1.  **Pythonic Foundation:** Leverages familiar Python like syntax for core programming constructs (`class` `def` control flow data structures) reducing learning curve.
-2.  **Object Oriented Structure:** Fundamentally OOP enabling encapsulation modularity and reusability through classes objects conceptual base classes (`BasePrompt` `BaseAgent`).
-3.  **Markdown Like Prompt Readability:** Employs triple quoted strings (`"""..."""` `````...`````) for defining core prompt text minimizing escape characters prioritizing human readability editing natural language instructions.
-4.  **Simple Templating:** Integrates basic `{{ expression }}` syntax seamlessly within prompt text blocks dynamic content injection.
-5.  **Loose Typing:** Adopts dynamic typing runtime flexibility rapid development common AI related tasks where data structures vary.
-6.  **Async Native:** Built with `async` `await` core handle I O bound operations especially AI model API calls efficiently.
-7.  **AI Readable Documentation Style:** Features unique convention documentation elements (`#` comments metadata `description`) avoiding standard punctuation numerals favouring word numerals promote direct machine readability processing potential AI tools analyzing extending code itself.
+**Pythonic Foundation:** Leverages familiar Python like syntax for core programming constructs (`class` `def` control flow data structures) reducing learning curve.
+**Object Oriented Structure:** Fundamentally OOP enabling encapsulation modularity and reusability through classes objects conceptual base classes (`BasePrompt` `BaseAgent`).
+**Markdown Like Prompt Readability:** Employs triple quoted strings (`"""..."""` `````...`````) for defining core prompt text minimizing escape characters prioritizing human readability editing natural language instructions.
+**Simple Templating:** Integrates basic `{{ expression }}` syntax seamlessly within prompt text blocks dynamic content injection.
+**Loose Typing:** Adopts dynamic typing runtime flexibility rapid development common AI related tasks where data structures vary.
+**Async Native:** Built with `async` `await` core handle I O bound operations especially AI model API calls efficiently.
+**AI Readable Documentation Style:** Features unique convention documentation elements (`#` comments metadata `description`) avoiding standard punctuation numerals favouring word numerals promote direct machine readability processing potential AI tools analyzing extending code itself.
 
 ## Key Features (Conceptual)
 
@@ -38,9 +38,9 @@ Based on our iterative development `.prompt` conceptually supports:
 
 A typical `.prompt` file presents hybrid `.md` `.json` feel combining structure readability:
 
-1.  **Metadata Block (YAML):** `---` enclosed header defines `version` `description` `tags` `defaultModelConfig` etc.
-2.  **Conceptual Imports:** Section import other `.prompt` modules standard libraries tools.
-3.  **Logic Block:** Core code definitions classes functions execution logic Pythonic syntax. Contains embedded Markdown like prompt text blocks.
+**Metadata Block (YAML):** `---` enclosed header defines `version` `description` `tags` `defaultModelConfig` etc.
+**Conceptual Imports:** Section import other `.prompt` modules standard libraries tools.
+**Logic Block:** Core code definitions classes functions execution logic Pythonic syntax. Contains embedded Markdown like prompt text blocks.
 
 ## Examples Created So Far
 
