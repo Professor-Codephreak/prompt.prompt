@@ -1,0 +1,149 @@
+# TECHNICAL MD prompt Language Technical Overview Conceptual
+
+**Document Version** one point one point zero # Based prompt conceptual version approximately one point one point zero
+**Status** Conceptual Design Only No Implementation Exists
+*(Generation Context Wednesday April two two thousand twenty five seven thirty five PM EDT Canada)*
+
+## One Introduction
+
+This document provides expanded technical overview conceptual prompt programming language
+It intended potential implementers contributors developers seeking deep understanding internal design architecture
+prompt aims provide dedicated robust developer friendly environment advanced prompt engineering AI interaction management agent development bridging structured programming convenient natural language expression effective AI communication
+We build prompt iteratively exploring features needed achieve this goal
+
+## Two Design Philosophy
+
+Core design choices reflect synthesis familiar programming paradigms specific needs prompt engineering AI interaction
+
+* **Pythonic Foundation Rationale** Leverages syntax conventions similar Python significantly reduce learning curve developers familiar ecosystem Provides solid base control flow object definition basic data structures This choice prioritizes developer velocity ease integration existing Python tooling conceptual level
+
+* **Object Oriented Structure Rationale** Fundamentally OOP enables strong encapsulation manage prompt agent complexity Promotes modularity reuse through classes objects inheritance conceptual base classes BasePrompt BaseAgent critical building scalable maintainable AI systems workflows
+
+* **Prompt Readability Focus Rationale** Prioritizes human readable definition core prompt text via Markdown like triple quoted strings Minimizes escape character noise crucial prompt engineers frequently read modify complex natural language instructions central artifact development process
+
+* **Loose Typing Rationale** Adopts dynamic typing runtime enhance flexibility rapid prototyping common AI development data structures AI model inputs outputs often variable less structured Static typing add boilerplate hinder quick iteration common prompt engineering workflows Trade off compile time safety runtime flexibility deemed acceptable this domain
+
+* **Asynchronous Native Rationale** Built around `async` `await` handle I O bound operations inherently common interacting external AI APIs web services network resources efficiently prevents blocking main execution thread critical responsive agents systems
+
+* **AI Readable Documentation Rationale** Implements unique internal documentation style comments descriptions enhance direct machine readability processing This facilitates potential future AI powered tools automated code analysis refactoring documentation generation quality assurance explained further below
+
+## Three Language Syntax
+
+### Three Point One File Structure
+
+A standard prompt file typically organized follows
+
+one **Metadata Block YAML** Optional recommended YAML block enclosed three dashes `---` file start Defines version description author tags defaultModelConfig other directives Provides structured configuration context analogous JSON frontmatter
+
+two **Conceptual Imports** Section import standard library modules other prompt files tools dependencies Syntax likely Python like `import` `from ... import` requires formal definition
+
+three **Code Body** Contains class definitions function definitions top level script logic Follows Pythonic indentation rules Defines core logic behavior contains embedded prompt text blocks
+
+### Three Point Two Basic Syntax
+
+* **Comments** Hashtag `#` denotes single line comments Ignored interpreter provide explanations context adheres unique documentation style
+
+* **Variables** Assigned using single equals sign `=` No explicit type declaration variable type inferred runtime based assigned value Loose typing principle
+
+* **Control Flow** Standard constructs include `if` `elif` `else` conditional execution `for item in iterable` loop `while condition` loop Blocks defined consistent indentation like Python
+
+* **Operators** Arithmetic `+ - * / % ** //` Comparison `== != < > <= >=` Logical `and or not` Identity `is` `is not` Membership `in` `not in` behave similarly Python semantics
+
+* **Built in Literals** Defines standard literals Strings double quotes single quotes important triple quotes `"""` ````` Numbers integers floats Booleans `True` `False` `None` type Lists square brackets `[...]` Maps Dictionaries curly braces `{key: value ...}`
+
+### Three Point Three Class Function Definitions
+
+* **Classes** Defined `class ClassName:` keyword Supports single inheritance conceptually Constructor defined standard Pythonic `def __init__(self, ...):` `self` required first parameter instance methods reference instance
+
+* **Functions Methods** Defined `def function_name(...):` `async def` defines asynchronous function coroutine `return` statement used return value function method
+
+### Three Point Four Prompt Text Representation Templating
+
+* **Multi line Strings Readability** Triple quotes `"""..."""` `````...````` primary mechanism define core prompt text Enables embedding large blocks natural language easily minimal escaping Focus maximum readability editability prompt engineer
+
+* **Templating Engine Simple Interpolation** Uses `{{ expression }}` syntax string interpolation Evaluates basic variable access simple expressions within current method instance scope Inserts string result into prompt text construction Allows dynamic prompt generation based state parameters `generate_prompt_text` methods typically utilize this Scope rules need formal definition likely access `self` attributes local variables
+
+## Four Type System
+
+* **Dynamic Loose Typing** Core design choice Types determined associated runtime Language interpreter performs type checking operations fail runtime incompatible types No static compile time type checking enforced Benefits include flexibility reduced verbosity potential drawbacks include runtime errors less tooling support compared static languages
+
+* **Core Primitive Types** String Number Int Float Boolean None These fundamental types expected behave standard dynamic language semantics
+
+* **Core Complex Types** List ordered mutable sequence Map Dictionary key value store Set unordered collection unique items Conceptual support based usage examples Pythonic base
+
+* **Conceptual Specialized Types** Language framework assumes existence specialized types represent common concepts `Image` `Audio` `Component` abstract generative element `ModelConfig` structure API parameters `PromptMetadata` file header data `Tool` interface agents `PromptError` related exception classes Likely implemented using built in types classes framework level
+
+## Five Object Oriented Model
+
+* **Conceptual Base Classes** Framework design relies conceptual `BasePrompt` `BaseAgent` classes define common structure interface specific prompt agent implementations Ensures consistency provides hook framework features Methods like `execute` `run` `generate_prompt_text` `perceive` `plan` `act` often defined base or expected subclasses
+
+* **Encapsulation Practice** Achieved standard class structure Convention dictates internal attributes methods intended private implementation details prefixed underscore `_` While runtime may not strictly enforce privacy convention signals developers interact objects via public methods attributes maintains clean interface hides internal complexity
+
+* **Inheritance Conceptual** Single inheritance supported `class Child(Parent):` syntax assumed Provide code reuse specialization prompt agent types Potential future consideration mixins interfaces further enhance modularity
+
+## Six Standard Library Conceptual
+
+A conceptual standard library crucial provide necessary functionality assumed include following modules built ins
+
+* **Built in Functions** `print` `len` `input` `range` `isinstance` type conversion functions `str` `int` `float` `list` `dict` `set` collection functions `map` `zip` boolean functions `any` `all` math functions `abs` `round` etc Behavior mirrors Python equivalents
+
+* **Core Modules Conceptual**
+    * `json` `parse` `stringify` `loads` `dumps` equivalent handle JSON data
+    * `FileSystem` `Path` `exists` `read_text` `write_text` `read_bytes` `mkdir` `chmod` `glob` `join` `stem` etc abstract file system operations `os path` `pathlib` equivalents Need define sandboxing security model
+    * `EnvManager` `load` `get` `set` interact `.env` files store configuration secrets potentially integrated `EmbalmerAgent` conceptual secure storage Requires defined file access permissions
+    * `SystemProcess` `run` execute external shell commands securely Needs robust sandboxing input output handling `subprocess` equivalent Requires careful security design
+    * `SecureInput` `get_password` secure user input without echoing `getpass` equivalent
+    * `logging` Basic logging framework levels output configuration
+    * `itertools` Common iterator tools `product` `combinations` etc
+    * `asyncio` Core event loop `run` `sleep` manage asynchronous tasks
+    * `dataclasses` Conceptual `@dataclass` decorator equivalent simplify data object creation
+    * `DateTime` Date time manipulation `now` `strftime` etc
+    * `Crypto` Abstract cryptographic operations `load_public_key` `verify_signature` `hash` `PSSPadding` Requires integration secure cryptographic backend library
+    * `HTTP` Asynchronous HTTP client requests `get_json` `get_text` `post` `aiohttp` `requests` equivalent Needs configuration proxy timeout error handling
+    * `AI_Interaction` High level abstraction AI model communication Uses `HTTP` `JSON` `ModelConfig` Provides generic methods `generate_text` `generate_image` `generate_chat_completion` Handles provider specific API formats authentication error mapping
+
+* **`ModelConfig` Structure** Standardized Map Dictionary passed `AI_Interaction` Key fields include `provider` string identifier eg openai google anthropic `model_id` string specific model name `api_url` optional specific endpoint `auth_type` string eg Bearer APIKey `api_key_ref` string reference retrieve actual key secure storage `request_format` conceptual template structure map message history other inputs provider specific JSON body `response_parser` conceptual path pointer extract primary content model response eg `choices[0] message content` `default_params` map additional parameters like `temperature` `max_tokens`
+
+## Seven AI Interaction Framework
+
+* **Abstraction Layer** `AI_Interaction` module centralizes external AI API calls Decouples prompt logic specific model providers implementations
+* **Configuration Driven** Relies heavily `ModelConfig` object determine target API endpoint authentication method request payload structure response parsing logic Enables switching models providers modifying configuration not core prompt code
+* **Error Handling** Expected translate provider specific API errors standardized `APIError` exceptions include status codes messages provider info where possible
+* **Asynchronous Operation** All interaction methods designed `async` prevent blocking ensure responsiveness agent systems
+
+## Eight Advanced Features Conceptual
+
+* **Agent Framework** `BaseAgent` provides structure perceive plan act loop State managed instance attributes Tools integrated provide capabilities Planning logic range simple state machines complex LLM based deliberation `mastermind.prompt` example shows orchestration
+* **Tool Usage** Agents utilize `Tool` objects via defined interface execute method Tools represent external capabilities APIs functions databases code execution file IO etc `agent.prompt` `aion.prompt` examples show tool integration conceptual
+* **Multimodality Support** Language anticipates multimodal interaction via specialized types `Image` `Audio` dedicated generation functions `generate_image` `AI_Interaction` layer responsible mapping these calls appropriate multimodal APIs backends
+* **Component Based Generation** Abstract concepts styles data represented `Component` type conceptual `$Variable` syntax prompt text `components=[...]` parameter generation calls allow guiding AI output these abstract elements Needs defined representation mechanism interaction layer mapping
+* **Constraints Rewards** Conceptual syntax `where reward(...) > value` `optimize_for=[...]` allows directing generation specific objectives quality metrics Requires sophisticated `AI_Interaction` layer capable translating these directives backend specific parameters potentially using techniques like RLHF controlled generation APIs if available
+
+## Nine Security Considerations
+
+* **Dynamic Execution Risks `eval` `exec`** Conceptual use `eval` `logic.prompt` `exec` `aion.prompt` extremely high risk Requires robust secure sandboxing environment restricted globals careful validation code being executed Prefer safer alternatives custom DSL parsers interpreters production systems
+* **Secure Input Handling** Conceptual `SecureInput` module critical protecting sensitive user input passwords API keys passphrases Avoid echoing use platform specific secure methods
+* **External Process Execution `SystemProcess`** Running shell commands `embalmer.prompt` `terminai.prompt` poses significant security risks command injection privilege escalation Requires strict input sanitization command validation execution secure sandboxed environment limited permissions Use extreme caution grant this capability
+* **API Key Security** Secure storage transport API keys paramount `idmanager.prompt` conceptual example using encrypted `.env` file `EmbalmerAgent` represents one approach Avoid embedding keys directly code configuration Use secure vaults environment variables secure loading mechanisms
+* **File System Access `FileSystem`** Needs strong permission model sandboxing prevent unauthorized file reads writes directory traversal Protect sensitive system configuration files user data
+* **Dependency Security** Conceptual imports external libraries tools `cryptography` `aiohttp` `tomb` introduce transitive dependencies require vetting security updates vulnerability management
+
+## Ten Unique Documentation Style
+
+* **Rule Summary** Internal documentation `#` comments metadata `description` fields adheres unique style no standard punctuation no numerals prose use word numerals eg `six` not `6`
+* **Exception Details** Rule exempts code syntax eg `class` `def` `[]` `{}` `=` YAML syntax `-` `:` string literal content error messages procedural prompts intended direct execution eg prompts passed `AI_Interaction` module
+* **Rationale Explained** Primary goal enhance direct machine readability allow AI tools systems parse analyze utilize documentation more effectively automated code understanding refactoring quality assurance documentation generation This stylistic choice defining characteristic `.prompt` philosophy
+
+## Eleven Implementation Notes Challenges
+
+* **Parser Interpreter Runtime** Requires significant effort build robust parser handle Pythonic syntax loose typing async model Interpreter runtime needed manage state execute code interact standard library conceptual modules handle errors Requires efficient event loop `asyncio` equivalent
+* **Formal Grammar Definition** Lack formal grammar EBNF ANTLR makes robust parsing difficult ambiguity resolution challenging Essential step concrete implementation
+* **Sandboxing Implementation** Critical security challenge implement effective secure sandboxes `exec` `SystemProcess` file IO network access Prevent prompt code escaping causing harm host system
+* **Standard Library Backends** Concrete implementations needed conceptual standard library modules `AI_Interaction` `FileSystem` `Crypto` `HTTP` etc mapping `.prompt` calls actual Python libraries external tools APIs Requires handling diverse authentication error conditions various services
+* **Module Import System** Needs formally defined system manage dependencies between `.prompt` files import external libraries tools securely handle namespaces potential conflicts
+* **Error Handling Diagnostics** Requires detailed specification error types reporting mechanisms stack traces provide effective debugging experience loose typed async environment challenging
+* **Tooling Ecosystem** Needs development IDE support syntax highlighting static analysis conceptual linting debugging tools testing framework integrate effectively developer workflows
+
+## Twelve Version Note
+
+This document describes conceptual state `.prompt` language approximately version one point one point zero based iterative refinements examples generated so far Further development require formalization stabilization features syntax standard library.
