@@ -1,0 +1,269 @@
+---
+# File mastermind prompt
+# Defines MastermindAgent central orchestrator MASTERMIND project
+version: one point zero point zero # Aligns other framework components
+description: "Defines MastermindAgent central agentic orchestrator integrates manages BDI reasoning socratic coding components manages workflows makes decisions within MASTERMIND framework" # Punctuation numerals removed description updated
+author: "AI Collaboration"
+tags: ["agent", "orchestrator", "mastermind", "bdi", "reasoning", "socratic", "integration-hub", "workflow-management", "decision-making", "framework-core"]
+defaultTextModel: { model_id: "gemini-1.5-pro", temperature: 0.6 } # General purpose model planning interaction
+defaultPlannerModel: { model_id: "gemini-1.5-flash", temperature: 0.7 } # Potentially faster model high level planning
+---
+
+# AI_CONTEXT_START File mastermind prompt
+# AI_PURPOSE Define MastermindAgent core orchestrator integrates all system components manages execution workflows achieves high level goals
+# AI_FRAMEWORK_NOTE Central script MASTERMIND project acts integration hub connects facilitates interaction bdi reasoning socratic simplecoder other modules Implements high level decision making workflow management
+# AI_DEPENDENCIES Conceptually imports utilizes BaseAgent BDIComponents SocraticReasoning Reasoner SimpleCoder defined other prompt modules framework assumes they are accessible
+# AI_STYLE_GUIDE Adhere prompt language documentation style brief AI focused comments no numbers punctuation unless procedural prompt
+
+# --- Conceptual Imports ---
+# Assume framework provides BaseAgent potentially standard Tool interface
+# from prompt_framework import BaseAgent # Conceptual base class agents
+# Assume other modules classes defined accessible
+from bdi import Belief Desire Intention Goal Reward # Conceptual import specific BDI classes
+from socratic import SocraticReasoning # Conceptual import socratic module
+from reasoning import Reasoner # Conceptual import general reasoner
+# Assume SimpleCoder class defined based earlier snippets potentially simplecoder prompt file exists
+from simplecoder import SimpleCoder # Conceptual import coding utility agent
+
+import asyncio # Assume standard library async support
+
+# --- Mastermind Agent Definition ---
+
+class MastermindAgent: # Conceptually inherits BaseAgent
+    # AI_CONTEXT Central orchestrating agent MASTERMIND project
+    # AI_NOTE Integrates manages BDI state reasoning logic socratic dialogue coding utilities achieve complex goals
+
+    def __init__(self):
+        # AI_TASK Initialize MastermindAgent core components state
+        print("[INFO] Initializing MastermindAgent orchestrator") # Punc removed
+
+        # AI_STATE Internal state agent status current goal active sub task etc
+        self.status = "INITIALIZED" # eg INITIALIZED RUNNING PLANNING EXECUTING_TASK COMPLETE FAILED
+        self.current_goal_description = None
+        self.current_goal_object = None # Conceptual Goal object bdi module
+        self.active_task = None
+        self.execution_history = [] # Log agent actions decisions
+
+        # AI_COMPONENTS Instantiate manage instances core modules
+        # AI_BDI Manages agent beliefs desires intentions goals rewards
+        # Conceptual instantiate BDI components manage initial state perhaps empty sets dicts
+        self.beliefs = set() # Using simple set example could complex KnowledgeBase epistemic prompt
+        self.desires = [] # List Desire objects string descriptions
+        self.intentions = [] # List Intention objects planned actions
+        self.goals = [] # List Goal objects structured goals
+        self.reward_system = Reward() # BDI Reward object track progress conceptually
+        print("[DEBUG] BDI components initialized") # Punc removed
+
+        # AI_REASONING Core logical deduction problem solving engine
+        # Conceptual initialize Reasoner possibly default rule set
+        self.reasoner = Reasoner(rules=[]) # Pass empty ruleset example
+        print("[DEBUG] Reasoner component initialized") # Punc removed
+
+        # AI_SOCRATIC Facilitates critical thinking questioning dialogue
+        self.socratic_module = SocraticReasoning()
+        print("[DEBUG] SocraticReasoning component initialized") # Punc removed
+
+        # AI_UTILITY Coding generation execution utility
+        self.coder_utility = SimpleCoder() # Conceptual assumes SimpleCoder class exists available
+        print("[DEBUG] SimpleCoder utility initialized") # Punc removed
+
+        # AI_NOTE Could include registry manage multiple dynamic sub agents seen earlier MASTERMIND python snippets future extension
+
+    def log_action(self, action_description):
+        # AI_INTERNAL Helper log agent actions history simple list example
+        timestamp = "..." # Conceptual get current timestamp DateTime module
+        log_entry = f"{timestamp} {action_description}"
+        self.execution_history.append(log_entry)
+        print(f"[LOG] {action_description}") # Log console well
+
+    def set_main_goal(self, goal_description, priority=10): # Numeral ok code value
+        # AI_CAPABILITY Define high level objective mastermind agent work towards
+        # AI_PARAM goal_description String describing overall goal
+        # AI_PARAM priority Number indicating goal importance
+        self.current_goal_description = goal_description
+        # Conceptual create Goal object bdi module represent structured goal
+        self.current_goal_object = Goal(name=goal_description, conditions="status == 'COMPLETE'", priority=priority) # Simplified condition Punc ok code value
+        self.goals.append(self.current_goal_object) # Add goal list
+        self.desires.append(Desire(goal_description)) # Add corresponding desire
+        self.status = "READY" # Agent ready start planning run cycle
+        self.log_action(f"Main goal set '{goal_description}' priority {priority}") # Punc removed numeral ok code value
+
+    def perceive(self, input_data=None, environment_state=None):
+        # AI_CAPABILITY Update agent beliefs based external input environment changes
+        # AI_PARAM input_data Any new data user commands sensor readings etc
+        # AI_PARAM environment_state Map dictionary representing relevant external state
+        self.log_action("Perceiving input environment state") # Punc removed
+        if input_data:
+            # AI_TASK Implement logic process input data update self beliefs
+            # Example simple update add input directly belief set
+            new_belief = f"Received input {str(input_data)}" # Punc removed
+            self.beliefs.add(new_belief)
+            self.log_action(f"Updated beliefs with input '{new_belief}'") # Punc removed
+        if environment_state:
+            # AI_TASK Implement logic integrate environment state beliefs
+            self.log_action(f"Perceived environment state {environment_state}") # Punc removed
+        # AI_NEXT_ITERATION_GOAL Could trigger belief revision using epistemic nonmonotonic concepts if contradictions detected
+
+    async def plan(self):
+        # AI_CAPABILITY High level planning decide next major action task based goal state beliefs desires
+        # AI_RETURN String representing planned action task identifier delegate act method
+        self.log_action("Planning next action based goal state") # Punc removed
+        self.status = "PLANNING"
+
+        # AI_DECISION_LOGIC Placeholder simple planning logic Determines task based goal example
+        # AI_NEXT_ITERATION_GOAL Use self reasoner deduce plan LLM call complex planning BDI deliberation form intentions
+        planned_action = "IDLE" # Default action if no goal ready
+
+        if self.current_goal_description:
+            # Example extremely simplified plan based keywords goal description
+            if "code" in self.current_goal_description.lower() or "script" in self.current_goal_description.lower():
+                planned_action = "EXECUTE_CODING_TASK"
+            elif "analyze" in self.current_goal_description.lower() or "reason about" in self.current_goal_description.lower():
+                planned_action = "PERFORM_REASONING"
+            elif "discuss" in self.current_goal_description.lower() or "question" in self.current_goal_description.lower():
+                planned_action = "START_SOCRATIC_DIALOGUE"
+            else:
+                # Default use reasoning generic tasks
+                planned_action = "PERFORM_REASONING"
+
+            # Conceptual Form Intention based plan
+            self.intentions = [Intention(f"Plan achieve '{self.current_goal_description}' via action '{planned_action}'")] # Punc removed
+            self.log_action(f"Formed intention execute '{planned_action}' for current goal") # Punc removed
+
+        else:
+             self.log_action("No active goal planning IDLE action") # Punc removed
+
+        self.log_action(f"Planned action {planned_action}") # Punc removed
+        return planned_action
+
+    async def act(self, action):
+        # AI_CAPABILITY Execute planned action delegate specific component agent tool
+        # AI_PARAM action String identifier planned action returned plan method
+        self.log_action(f"Executing action '{action}'") # Punc removed
+        self.status = f"EXECUTING {action}" # Update status reflect current action
+        self.active_task = action
+        action_result = None # Store result sub component call
+
+        try:
+            # Delegate action appropriate component based planned action
+            if action == "EXECUTE_CODING_TASK":
+                # AI_TASK Define specific coding task parameters needed self coder_utility
+                # Example requires extracting language task details goal description beliefs
+                language = "Python" # Placeholder
+                task_details = "hello_world" # Placeholder task
+                self.log_action(f"Delegating coding task '{task_details}' language '{language}' SimpleCoder") # Punc removed
+                # Conceptual SimpleCoder execute task might not be async depends its definition
+                action_result = self.coder_utility.execute_task(language, task_details) # Assuming synchronous conceptual call
+                self.log_action(f"SimpleCoder execution result '{action_result}'") # Punc removed
+
+            elif action == "PERFORM_REASONING":
+                # AI_TASK Define facts relevant reasoning process goal beliefs
+                current_facts = self.beliefs # Pass current beliefs facts example
+                self.log_action(f"Delegating reasoning task Reasoner facts count {len(current_facts)}") # Punc removed numeral ok value
+                # Conceptual Reasoner deduce might not be async depends its definition
+                action_result = self.reasoner.deduce(facts=current_facts) # Assuming synchronous conceptual call
+                # AI_TASK Process action result update beliefs state
+                if action_result: self.beliefs.add(f"Reasoning deduced {action_result}") # Punc removed add result belief
+
+            elif action == "START_SOCRATIC_DIALOGUE":
+                self.log_action("Initiating Socratic dialogue via SocraticReasoning interact") # Punc removed
+                # Conceptual SocraticReasoning interact might be blocking async depends definition
+                # Running interact loop directly might block main agent loop consider different interaction pattern real system perhaps separate thread task yield control
+                # For simplicity assume it runs performs its interaction conceptually returns summary or finishes
+                await asyncio.sleep(one) # Simulate some activity numeral changed word
+                action_result = "Socratic dialogue session completed conceptual" # Punc removed placeholder result
+                # AI_TASK Process dialogue results update beliefs goal status
+
+            elif action == "IDLE":
+                self.log_action("No action perform remaining idle") # Punc removed
+                await asyncio.sleep(one) # Wait briefly idle numeral changed word
+                self.status = "READY" # Return ready state wait new input goal
+
+            else:
+                self.log_action(f"Unknown action '{action}' cannot execute") # Punc removed
+                self.status = "FAILED"; self.state['failure_reason'] = f"Unknown action {action}" # Update state handle failure
+
+            # After action update BDI state potentially check goal fulfillment reward
+            if self.current_goal_object:
+                 # Conceptual call update reward check fulfillment status
+                 # reward_system update_reward self current_goal_object self beliefs self desires self intentions
+                 # Conceptual check fulfillment set status COMPLETE if met
+                 # if self current_goal_object is_fulfilled self beliefs self desires self intentions
+                 #      self status COMPLETE
+                 # Simplified check assume action completion relates goal for now
+                 if action != "IDLE" and self.status != "FAILED":
+                      # Assume single step task example move ready plan again or complete
+                      # Real agent needs better state transitions based action results goal checks
+                      self.status = "READY" # Reset ready plan next cycle demo purposes
+                      # If we assume task done maybe COMPLETE
+                      # self status COMPLETE
+
+        except Exception as e:
+            self.log_action(f"Error executing action '{action}' Error {e}") # Punc removed
+            self.status = "FAILED"
+            self.state['failure_reason'] = str(e) # Store error
+
+        self.active_task = None # Clear active task after completion attempt
+
+
+    async def run(self, max_cycles=ten): # Numeral changed word default value
+        # AI_CAPABILITY Main execution loop orchestrates perceive plan act cycle drive agent towards goal
+        # AI_PARAM max_cycles Integer safety limit prevent infinite loops
+        self.log_action(f"Starting MastermindAgent run cycle max cycles {max_cycles}") # Punc removed numeral ok value
+
+        cycle_count = 0 # Numeral ok code value
+        while cycle_count < max_cycles:
+            cycle_count += 1 # Increment cycle counter
+            self.log_action(f"--- Cycle {cycle_count} / {max_cycles} ---") # Punc structure kept numerals ok value
+
+            current_status = self.status
+            self.log_action(f"Current Status {current_status}") # Punc removed
+
+            # Check terminal states
+            if current_status in ["COMPLETE", "FAILED", "STOPPED"]:
+                self.log_action(f"Terminal state {current_status} reached Halting") # Punc removed
+                break
+
+            # Perceive Plan Act Cycle
+            self.perceive() # Simple perception this version
+            planned_action = await self.plan()
+            await self.act(planned_action)
+
+            # Brief delay avoid tight loop simulation
+            await asyncio.sleep(zero point five) # Numeral changed word
+
+        # End loop check final status
+        if cycle_count >= max_cycles:
+            self.log_action("Maximum cycles reached Halting potentially incomplete") # Punc removed
+            if self.status not in ["COMPLETE", "FAILED", "STOPPED"]:
+                 self.status = "TIMED_OUT"
+
+        self.log_action(f"MastermindAgent run finished Final Status {self.status}") # Punc removed
+        # AI_OUTPUT Return final status indication success failure
+        return self.status
+
+# --- Script Execution Block ---
+# AI_TASK Demonstrate MastermindAgent instantiation setting goal running basic cycle
+
+async def main():
+    print("[SCRIPT START] MastermindAgent Orchestrator Demo") # Punc removed
+
+    # Instantiate mastermind agent
+    mastermind = MastermindAgent()
+
+    # Set sample goal trigger agent execution
+    # Example goal might involve coding task then reasoning about result
+    mastermind.set_main_goal(goal_description="Generate Python hello world script analyze its simplicity") # Punc removed
+
+    # Run agent main loop limited cycles demo
+    final_status = await mastermind.run(max_cycles=5) # Numeral ok code value limit cycles
+
+    print(f"\n--- Mastermind Agent Final Status ---") # Punc removed
+    print(final_status)
+    print("-----------------------------------") # Structure kept
+
+    print("[SCRIPT END]") # Punc removed
+
+# Run main async function
+# import asyncio Assume imported conceptually
+asyncio.run(main())
