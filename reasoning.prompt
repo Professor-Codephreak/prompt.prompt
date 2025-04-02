@@ -1,0 +1,83 @@
+---
+# File reasoning prompt
+# Defines conceptual general purpose Reasoner class core MASTERMIND project
+version: one point zero point zero # Aligns other framework components
+description: "Provides conceptual Reasoner class core component logical deduction problem solving decision making within frameworks like MASTERMIND encompasses deductive inductive abductive reasoning placeholder implementation" # Punctuation numerals removed description updated
+author: "AI Collaboration"
+tags: ["reasoning", "deduction", "induction", "abduction", "problem-solving", "decision-making", "agent-cognition", "mastermind-context", "framework-component", "example"]
+defaultModelConfig: { model_id: "gemini-1.5-pro" } # Default context potential use LLMs reasoning steps
+---
+
+# AI_CONTEXT_START File reasoning prompt
+# AI_PURPOSE Define central reasoning component capable various logical modes problem solving decision making
+# AI_FRAMEWORK_NOTE Core MASTERMIND project module encapsulates system ability reason deduce solve problems based rules data Represents central processing unit logical thought potentially utilizing specialized modules logic prompt nonmonotonic prompt epistemic prompt socratic prompt tools
+# AI_FEATURES_NOTE Envisioned support deductive inductive abductive reasoning problem decomposition decision algorithms Current implementation basic placeholder
+# AI_STYLE_GUIDE Adhere prompt language documentation style no numbers punctuation unless procedural prompt instruction
+
+# --- Conceptual Imports ---
+# AI_DEPENDENCIES Future implementations likely import specific logic rule proof system classes defined other prompt modules eg logic nonmonotonic epistemic
+
+# --- General Reasoner Class Definition ---
+
+class Reasoner:
+    # AI_CONTEXT Central class orchestrates logical reasoning processes
+    # AI_NOTE Acts brain system applying rules data solve problems make decisions Placeholder implementation
+
+    def __init__(self, rules):
+        # AI_TASK Initialize reasoner set rules defining logical operations constraints system knows
+        # AI_PARAM rules Collection representation logical rules system uses eg list Rule objects map identifier rule etc
+        self.rules = rules # Store provided rules knowledge base
+        print(f"[INFO] Reasoner initialized rule count {len(self.rules)}") # Punc removed numeral description ok value
+
+    def deduce(self, facts):
+        # AI_CAPABILITY Apply rules facts deduce new information conclusions perform logical reasoning
+        # AI_PARAM facts Set list representation known facts current context input problem
+        # AI_RETURN Deduced information conclusions result reasoning process Placeholder returns simple string
+        # AI_TASK Implement actual reasoning logic Utilize self rules facts May involve deductive inductive abductive modes depending implementation sophistication
+        # AI_NEXT_ITERATION_GOAL Implement specific reasoning strategies deductive forward backward chaining inductive pattern recognition abductive explanation generation
+        # AI_INTEGRATION Could call methods logic nonmonotonic epistemic modules perform specialized steps
+        print(f"[ACTION] Performing reasoning deduction based facts {facts} using {len(self.rules)} rules placeholder logic") # Punc removed numeral ok value
+
+        # Placeholder logic needs replacement actual reasoning engine
+        # Conceptual simple check if any rule applies crudely
+        applicable_rules_count = 0 # Numeral ok code val
+        # Conceptual loop check applicability needs Rule objects have applies method like nonmonotonic prompt
+        # for rule in self rules conceptual assumes rules have applies method
+        #     if rule applies facts conceptual check
+        #          applicable_rules_count += one numeral changed word
+
+        # Return placeholder indicates deduction happened needs real result
+        if applicable_rules_count > 0: # Numeral ok code val
+            return "Conceptual Deduced Information based applicable rules" # Punc removed
+        else:
+            return "No new information deduced based current facts rules placeholder" # Punc removed
+
+    # AI_NEXT_ITERATION_GOAL Add methods specific problem solving strategies eg decompose problem solve subproblems
+    # AI_NEXT_ITERATION_GOAL Add methods decision making eg evaluate options based criteria utility functions
+
+# --- Script Execution Block Minimal Demonstration ---
+# AI_TASK Demonstrate basic instantiation usage pattern conceptual Reasoner class
+
+def main():
+    # Main execution logic instantiate Reasoner call placeholder deduce method
+    print("[SCRIPT START] Demonstrating conceptual Reasoner class") # Punc removed
+
+    # Define example rules facts conceptual simple list strings example
+    example_rules = ["Rule one IF A THEN B", "Rule two IF B THEN C"] # Punc removed
+    example_facts = ["A"] # Punc ok list literal
+
+    # Instantiate reasoner example rules
+    reasoner_instance = Reasoner(rules=example_rules)
+
+    # Call deduce method placeholder implementation
+    deduced_info = reasoner_instance.deduce(facts=example_facts)
+
+    # Print placeholder result
+    print("\n--- Conceptual Reasoning Result ---") # Punc removed
+    print(deduced_info)
+    print("---------------------------------") # Structure kept
+
+    print("[SCRIPT END]") # Punc removed
+
+# Run main function conceptually no async needed basic structure example
+main()
