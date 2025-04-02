@@ -1,0 +1,178 @@
+---
+# File rules prompt
+# Defines core rules design principles conceptual prompt language
+# This file serves as reference documentation written in the language itself
+version: zero point seven point zero # Version this rule definition applies to
+description: "Core design principles rules conceptual prompt language v zero point seven point zero" # Punctuation removed numeral changed
+author: "AI Collaboration"
+tags: ["rules", "specification", "language-design", "meta"]
+defaultModelConfig: { model_id: "gemini-1.5-pro" } # A default for potential future meta analysis
+---
+
+# Conceptual Language Rules Definition
+# We are building this language together rule by rule
+# Current Time Wednesday April two two thousand twenty five six forty six PM EDT Canada
+
+# Rules stored structured list maps easier processing presentation
+# Note Documentation style applied descriptions no numerals no punctuation unless procedural prompt
+LANGUAGE_RULES = [
+    # --- Core Philosophy Goal ---
+    {
+        "category": "Core Philosophy Goal",
+        "description": "Dedicated Prompt Engineering Language primary purpose facilitate advanced prompt engineering providing structure power readability beyond simple text files general purpose languages"
+    },
+    {
+        "category": "Core Philosophy Goal",
+        "description": "Developer Friendly aims balance powerful programming constructs ease use developers working AI models"
+    },
+    {
+        "category": "Core Philosophy Goal",
+        "description": "AI Collaboration Interface designed effective language humans define complex interactions workflows even autonomous behaviors AI systems"
+    },
+
+    # --- Syntax Structure ---
+    {
+        "category": "Syntax Structure",
+        "description": "Pythonic Base core syntax control flow if for while function method definition def class definition class operators basic data structures closely resembles Python familiarity"
+    },
+    {
+        "category": "Syntax Structure",
+        "description": "Indentation Based Blocks code blocks defined indentation similar Python"
+    },
+    {
+        "category": "Syntax Structure",
+        "description": "File Layout typical dot prompt file comprises three sections top bottom Optional YAML Metadata Block enclosed three dashes Conceptual Import statements Main Logic including class definitions functions script execution code"
+    },
+    {
+        "category": "Syntax Structure",
+        "description": "Metadata Block uses standard YAML format top file Provides file version description author tags default configurations like defaultModelConfig Essential context management"
+    },
+    {
+        "category": "Syntax Structure",
+        "description": "Comments single line comments start hashtag"
+    },
+
+    # --- Typing Data ---
+    {
+        "category": "Typing Data",
+        "description": "Loosely Typed Runtime language employs dynamic typing Variables not required explicit type declarations type checking primarily occurs runtime offering flexibility"
+    },
+    {
+        "category": "Typing Data",
+        "description": "Rich Data Types supports standard primitives String Number Integer Float Boolean None Complex types List Map Dictionary Conceptual support exists specialized types Image Audio Component framework types ModelConfig PromptMetadata etc"
+    },
+
+    # --- Object Oriented Features ---
+    {
+        "category": "Object Oriented Features",
+        "description": "OOP Foundation language fundamentally object oriented using classes objects structure prompts agents related logic"
+    },
+    {
+        "category": "Object Oriented Features",
+        "description": "Class Definition uses class ClassName syntax Constructor defined def init self etc like Python"
+    },
+    {
+        "category": "Object Oriented Features",
+        "description": "Encapsulation classes bundle attributes state methods behavior promoting modularity"
+    },
+    {
+        "category": "Object Oriented Features",
+        "description": "Inheritance Conceptual specific prompts agents conceptually inherit base classes BasePrompt BaseAgent defining common structure interface explicit extends syntax TBD" # TBD kept as is technical acronym
+    },
+    {
+        "category": "Object Oriented Features",
+        "description": "Self Reference keyword self refers instance within class methods like Python"
+    },
+
+    # --- Prompt Specific Features ---
+    {
+        "category": "Prompt Specific Features",
+        "description": "Markdown Like Prompt Text triple quoted strings three double quotes three backticks standard defining multi line natural language prompt text minimizing escaping enhancing readability"
+    },
+    {
+        "category": "Prompt Specific Features",
+        "description": "Simple Templating uses double curly brace expression double curly brace syntax within prompt text strings interpolating variables basic expressions current scope"
+    },
+
+    # --- Asynchronous IO Model Interaction ---
+    {
+        "category": "Asynchronous IO Model Interaction",
+        "description": "Async Native core operations involving external interactions especially AI model calls designed asynchronous using async def methods await calls"
+    },
+    {
+        "category": "Asynchronous IO Model Interaction",
+        "description": "Abstracted Model Interaction conceptual layer module eg AI Interaction handles communication different AI model APIs Provides functions generate text generate image Accepts ModelConfig object promoting backend independence"
+    },
+    {
+        "category": "Asynchronous IO Model Interaction",
+        "description": "Error Handling includes conceptual hierarchy exceptions eg PromptError APIError ParseError ConfigurationError used try except blocks managing runtime issues"
+    },
+
+    # --- Advanced Features ---
+    {
+        "category": "Advanced Features",
+        "description": "Agent Definition supports defining autonomous agents via classes conceptually BaseAgent including state management goals tool usage perceive plan act cycles"
+    },
+    {
+        "category": "Advanced Features",
+        "description": "Tool Use agents can leverage tools defined conceptually via Tool interface base class executed methods await tool execute etc Prompts themselves can act as tools"
+    },
+    {
+        "category": "Advanced Features",
+        "description": "Multimodal Support Conceptual language design accommodates multimodal inputs outputs specialized data types Image Audio Component corresponding generation functions"
+    },
+    {
+        "category": "Advanced Features",
+        "description": "Component Based Generation Conceptual allows defining abstract components eg dollar Style dollar Concept incorporating them generation tasks via prompt text function parameters"
+    },
+    {
+        "category": "Advanced Features",
+        "description": "Constraint Reward Optimization Conceptual includes syntax elements where reward value optimize for list guide AI generation specific objectives quality metrics subject backend support"
+    },
+    {
+        "category": "Advanced Features",
+        "description": "Interactivity Conceptual provides mechanisms standard input function prompts agents request user input during execution"
+    },
+
+    # --- Documentation Style ---
+    {
+        "category": "Documentation Style",
+        "description": "Unique Readability Convention documentation elements comments metadata descriptions etc MUST NOT use numerals write numbers words instead eg five not five Documentation MUST NOT use standard punctuation periods commas question marks etc unless documentation text itself explicitly procedural prompt meant execution Code syntax YAML syntax string literal contents error messages retain standard numbers punctuation rule aims unique stylistic flow explanatory text"
+    }
+]
+
+# Simple class display rules adhering documentation style
+class RuleViewer:
+    def __init__(self, rules_data):
+        self.rules = rules_data
+        self.categories = self._get_categories()
+
+    def _get_categories(self):
+        # Extracts unique categories preserving order conceptually
+        cats = []
+        for rule in self.rules:
+            if rule['category'] not in cats:
+                cats.append(rule['category'])
+        return cats
+
+    def display_rules(self):
+        # Prints rules grouped category using documentation style
+        print("\n# --- prompt Language Rules v zero point seven point zero ---") # Numeral changed punc removed
+        for category in self.categories:
+            print(f"\n## {category}") # Markdown style heading punc removed
+            category_rules = [rule['description'] for rule in self.rules if rule['category'] == category]
+            for description in category_rules:
+                # Print description adhering style slight indent clarity
+                print(f"  - {description}") # Punc removed from helper text
+        print("\n# --- End Rules ---") # Punc removed
+
+# --- Script Execution Block ---
+def main():
+    # Main execution logic displays rules
+    print("[INFO] Loading displaying prompt language rules") # Punc removed
+    viewer = RuleViewer(rules_data=LANGUAGE_RULES)
+    viewer.display_rules()
+    print("[INFO] Rule display complete") # Punc removed
+
+# Run main function conceptually no async needed here
+main()
