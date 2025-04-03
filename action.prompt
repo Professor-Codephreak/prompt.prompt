@@ -1,0 +1,605 @@
+# File action.py - Generated from agentic_augmented.prompt
+# Defines AugmentedAgent structure, integrates various conceptual modules (BDI, logic, reasoning, etc.),
+# and demonstrates an enhanced perceive-plan-act cycle with tool use.
+
+import asyncio
+import json  # Needed for printing results in main block
+
+# --- Conceptual Module Placeholders ---
+# These classes are placeholders for concepts defined in other .prompt files
+# They provide the basic structure expected by AugmentedAgent to allow execution.
+
+class Belief:
+    def __init__(self, content):
+        self.content = content
+    def __repr__(self):
+        return f"Belief({self.content})"
+    def __hash__(self):
+        return hash(self.content)
+    def __eq__(self, other):
+        return isinstance(other, Belief) and self.content == other.content
+
+class Desire:
+    def __init__(self, description):
+        self.description = description
+    def __repr__(self):
+        return f"Desire({self.description})"
+
+class Intention:
+    def __init__(self, plan, goal=None):
+        # Plan is expected to be a list of action strings
+        self.plan = plan if isinstance(plan, list) else [str(plan)]
+        self.goal = goal
+    def __repr__(self):
+        goal_name = self.goal.name if self.goal else "None"
+        return f"Intention(plan={self.plan}, goal='{goal_name}')"
+
+class Goal:
+    def __init__(self, name, conditions, priority):
+        self.name = name
+        # Conditions could be a dict, string, or callable in a real system
+        self.conditions = conditions
+        self.priority = priority
+    def __repr__(self):
+        return f"Goal(name='{self.name}', conditions={self.conditions}, priority={self.priority})"
+    async def is_fulfilled(self, belief_system):
+        # Placeholder: A real implementation would check conditions against beliefs
+        print(f"[DEBUG] Checking fulfillment for Goal '{self.name}' (Placeholder: returning False)")
+        await asyncio.sleep(0.01)
+        # Simple conceptual check - replace with real logic
+        if isinstance(self.conditions, dict):
+            key = list(self.conditions.keys())[0] # eg 'task_completed'
+            # Check if a belief matching the condition exists (very basic)
+            # This needs a much more robust check against the belief system state
+            if f"{key} is True" in belief_system.beliefs: # Conceptual check
+                 return True
+        return False
+
+class Reward:
+    def __init__(self):
+        self.total_reward = 0
+    async def update_reward(self, goal, beliefs, desires, intentions, result):
+        # Placeholder for reward logic
+        print(f"[DEBUG] Updating reward based on action result (Placeholder: No change)")
+        await asyncio.sleep(0.01)
+        # Add logic here based on goal achievement, efficiency, etc.
+        pass
+
+class LogicTables: # Placeholder
+    pass
+
+class LogicalOperator: # Placeholder
+    pass
+
+class Reasoner: # Placeholder
+    def __init__(self, rules, agent_context):
+        self.rules = rules
+        self.agent_context = agent_context # Agent context might be used for logging or accessing state
+        print("[DEBUG] Reasoner Initialized (Placeholder)")
+
+    async def deduce_plan(self, goal, beliefs, tools):
+        # Placeholder planning logic: Returns a simple plan based on keywords
+        print(f"[DEBUG] Reasoner deduce_plan called for goal '{goal.name}' (Placeholder Logic)")
+        await asyncio.sleep(0.1) # Simulate planning time
+        goal_desc_lower = goal.name.lower()
+        if "search" in goal_desc_lower or "query" in goal_desc_lower or "what is" in goal_desc_lower:
+             print("[DEBUG] Reasoner Plan: USE_TOOL search -> RESPOND")
+             return ["USE_TOOL search", "RESPOND"]
+        elif "code" in goal_desc_lower or "script" in goal_desc_lower or "calculate" in goal_desc_lower:
+             print("[DEBUG] Reasoner Plan: USE_TOOL coder -> RESPOND")
+             return ["USE_TOOL coder", "RESPOND"]
+        elif "discuss" in goal_desc_lower or "clarify" in goal_desc_lower:
+             print("[DEBUG] Reasoner Plan: ASK_CLARIFICATION -> RESPOND")
+             return ["ASK_CLARIFICATION", "RESPOND"] # Example plan for clarification
+        elif beliefs: # If there are beliefs but no clear tool needed, just respond
+             print("[DEBUG] Reasoner Plan: RESPOND (based on existing beliefs)")
+             return ["RESPOND"]
+        else: # Default if no goal match and no beliefs to respond to
+             print("[DEBUG] Reasoner Plan: WAIT (default/fallback)")
+             return ["WAIT"]
+
+    async def deduce(self, query, facts):
+         # Placeholder deduction logic
+        print(f"[DEBUG] Reasoner deduce called with query '{query}' (Placeholder Logic)")
+        await asyncio.sleep(0.05)
+        if "implications" in query.lower():
+            return f"Deduced implications based on {len(facts)} facts (simulated)."
+        return "Default simulated deduction result."
+
+class SocraticReasoning: # Placeholder
+    def __init__(self, agent_context):
+        self.agent_context = agent_context
+        print("[DEBUG] SocraticReasoning Initialized (Placeholder)")
+    async def interact(self, topic, context):
+        print(f"[DEBUG] Socratic interact called on topic '{topic}' (Placeholder)")
+        await asyncio.sleep(0.2)
+        return f"Completed conceptual Socratic dialogue on '{topic}'."
+    async def challenge_premise(self, premise, context):
+        print(f"[DEBUG] Socratic challenge_premise called on '{premise}' (Placeholder)")
+        await asyncio.sleep(0.1)
+        return f"Challenged premise '{premise}' - suggested alternative perspective (simulated)."
+
+class Rule: # Placeholder for nonmonotonic logic rule
+    pass
+
+class Default: # Placeholder for nonmonotonic logic default
+    pass
+
+class DefaultLogic: # Placeholder
+     def __init__(self, agent_context):
+        self.agent_context = agent_context
+        print("[DEBUG] DefaultLogic Initialized (Placeholder)")
+     async def query_default_action(self):
+         print("[DEBUG] DefaultLogic query_default_action called (Placeholder: returning None)")
+         await asyncio.sleep(0.05)
+         return None # Placeholder: No default action triggered
+
+class AutoepistemicAgent: # Placeholder for belief system
+    def __init__(self, initial_beliefs, agent_context):
+        self.beliefs = set(str(b) for b in initial_beliefs) # Store beliefs as strings in a set
+        self.agent_context = agent_context
+        print(f"[DEBUG] AutoepistemicAgent Initialized with {len(self.beliefs)} beliefs (Placeholder)")
+
+    async def add_information(self, new_belief_set):
+        added_count = 0
+        for belief in new_belief_set:
+            belief_str = str(belief)
+            if belief_str not in self.beliefs:
+                self.beliefs.add(belief_str)
+                added_count += 1
+        if added_count > 0:
+             print(f"[DEBUG] AutoepistemicAgent added {added_count} new beliefs.")
+             # Placeholder: Trigger consistency check/revision if needed
+             await self.check_consistency()
+        else:
+             print(f"[DEBUG] AutoepistemicAgent received info, no new beliefs added.")
+        await asyncio.sleep(0.02) # Simulate processing time
+
+    async def check_consistency(self):
+        # Placeholder for consistency checking logic
+        print("[DEBUG] AutoepistemicAgent check_consistency called (Placeholder: assuming consistent)")
+        await asyncio.sleep(0.03)
+        # Return True if consistent, False otherwise
+        return True
+
+    async def revise_beliefs(self):
+        # Placeholder for belief revision logic
+        print("[DEBUG] AutoepistemicAgent revise_beliefs called (Placeholder: no changes made)")
+        await asyncio.sleep(0.1)
+        # Implement actual belief revision algorithm here (e.g., AGM)
+
+
+# --- Conceptual Tool Placeholders (Copied from .prompt) ---
+class PlaceholderSearchTool:
+    def __init__(self):
+        self.name = "placeholder_search"
+        self.description = "Simulates searching web returns placeholder text about query"
+    async def execute(self, query):
+        print(f"[TOOL ACTION] {self.name} executing query '{query}'")
+        await asyncio.sleep(0.5)
+        return f"Simulated search result for '{query}' suggests consulting specification rules prompt language design document"
+
+class SimpleCoder:
+    def __init__(self):
+        self.name = "simple_coder"
+        self.description = "Simulates generating executing simple code snippets based request"
+    async def execute(self, task_description):
+        print(f"[TOOL ACTION] {self.name} executing task '{task_description}'")
+        await asyncio.sleep(1.0)
+        if "calculate" in task_description or "factorial five" in task_description:
+            # Simulate factorial calculation for the specific example
+            return "Simulated code execution result: Factorial of 5 is 120"
+        else:
+            # Default simulation
+            return "Simulated code generated: print('Hello World')"
+
+
+# --- AI Interaction Simulation (Copied from .prompt) ---
+class AI_Interaction:
+    @staticmethod
+    async def generate_text(modelConfig, prompt):
+        print(f"[AI_INTERACTION SIM] Received prompt includes goal beliefs memory starts:\n{prompt[:150]}...")
+        await asyncio.sleep(0.9)
+        response = "Simulated augmented agent response considering provided goal beliefs recent actions"
+        if "search result" in prompt.lower():
+             response += " Based on simulated search nonmonotonic logic useful reasoning defaults exceptions providing deeper insights"
+        elif "coder result" in prompt.lower():
+             # Try to extract the simulated result for a more dynamic response
+             coder_res_start = prompt.find("Tool coder Result '") + len("Tool coder Result '")
+             coder_res_end = prompt.find("'", coder_res_start)
+             sim_res = prompt[coder_res_start:coder_res_end] if coder_res_start > -1 and coder_res_end > -1 else "provided calculation shows forty two"
+             response += f" The simulated code execution result {sim_res} as requested"
+        elif "statement input" in prompt.lower():
+             response = "Acknowledged statement input My integrated reasoning BDI belief management components allow versatile responses comprehensive analysis based context"
+        return response
+
+# --- Metadata Simulation (Copied from .prompt) ---
+class metadata:
+    defaultTextModel = {"model_id": "simulated-pro-model", "temperature": 0.6}
+    defaultPlannerModel = {"model_id": "simulated-flash-model", "temperature": 0.7}
+
+
+# --- Augmented Agent Definition (Converted from .prompt) ---
+class AugmentedAgent:
+    """
+    Defines agent integrates various reasoning BDI logic components
+    enhance its capabilities demonstrates modular agent design complex workflow orchestration
+    """
+    def __init__(self, initial_goal_description="Respond helpfully accurately demonstrating integrated capabilities", initial_input=None):
+        """
+        Initialize agent internal state attributes instantiate integrate all conceptual sub modules
+        BDI reasoning logic etc track agent context lifecycle establish dependencies
+        """
+        print("[AGENT INIT] AugmentedAgent initializing state goal components")
+        self.agent_name = "AugmentedAgent"
+
+        # Agent internal state variables track beliefs plans status etc Enhanced BDI Goal structures integrated components
+        self.state = {"status": "INITIALIZING", "failure_reason": None}
+        # Integrate BDI Goal Desire concepts directly state represent agent objectives motivations
+        self.goal = Goal(name=initial_goal_description, conditions={"task_completed": True}, priority=10)
+        self.desires = [Desire(initial_goal_description)]
+        # Use conceptual AutoepistemicAgent manage beliefs potentially handle revisions maintain consistent worldview
+        # Pass reference self agent belief system need log actions potentially access other state conceptual dependency injection pattern
+        self.belief_system = AutoepistemicAgent(initial_beliefs={'agent_initialized'}, agent_context=self)
+        if initial_input:
+             # Use await here if add_information becomes async
+             # For now, assuming synchronous add for initialization phase simplicity
+             loop = asyncio.get_event_loop()
+             loop.run_until_complete(self.belief_system.add_information({f"initial_input '{initial_input}'"}))
+
+        self.memory = [f"Initial goal set {self.goal.name}"] # Log agent history
+        self.current_input = initial_input # Store last raw input received context
+        self.current_intention = None # Stores current Intention object represents active plan
+        self.available_tools = { # Tool registry
+            "search": PlaceholderSearchTool(), # Search tool
+            "coder": SimpleCoder() # Coding tool
+        }
+        # Instantiate other reasoning logic modules make available agent provide specialized cognitive functions
+        # Pass reference self agent components need interaction context logging etc conceptual dependency injection
+        self.reasoner = Reasoner(rules=[], agent_context=self)
+        self.socratic = SocraticReasoning(agent_context=self)
+        self.default_logic = DefaultLogic(agent_context=self)
+        # self.logic_tables = LogicTables() # Conceptual instance logic tables needed if used
+        # self.logic_ops = LogicalOperator() # Conceptual instance logic operators needed if used
+
+        self.state['status'] = "IDLE" # Update status ready run after initialization complete
+        self.log_action(f"{self.agent_name} IDLE ready goal '{self.goal.name}'")
+
+    async def perceive(self, new_input=None):
+        """
+        Update internal beliefs based new input data Use conceptual epistemic agent
+        add information potentially revise check consistency
+        """
+        self.log_action(f"Perceiving Status {self.state['status']} checking new input")
+        self.state['status'] = "PERCEIVING"
+        perception_detail = "No new significant input detected"
+        if new_input:
+            # Add new information belief system via AutoepistemicAgent handles belief representation
+            self.current_input = new_input # Store raw input context potentially useful
+            new_belief_set = {f"perceived_input '{new_input}'"} # Create belief representation
+            # Conceptual call epistemic agent add info, potentially trigger revision automatically
+            await self.belief_system.add_information(new_belief_set) # Assuming add_information is async
+            perception_detail = f"Perceived added new input belief '{new_input}'"
+            # Explicit revision call might be needed for specific architectures
+            # revision_needed = await self.belief_system.check_consistency()
+            # if revision_needed: await self.belief_system.revise_beliefs()
+            self.log_action("New input added belief system")
+        else:
+            # Future: implement check internal state/sensors here
+            self.log_action("No new external input provided checking internal state sensors conceptual")
+
+        self.memory.append(f"Perception {perception_detail}") # Log perception result
+        self.state['status'] = "IDLE" # Return idle state after perception ready plan
+        await asyncio.sleep(0.15) # Simulate slightly longer perception processing
+
+    async def plan(self):
+        """
+        Enhanced planner conceptual uses reasoner BDI deliberation check goal feasibility
+        decides action sequence forms Intention potentially involves multiple reasoning components
+        Returns: Intention object or None
+        """
+        self.log_action(f"Planning Status {self.state['status']} evaluating goal '{self.goal.name}' beliefs count {len(self.belief_system.beliefs)}")
+        self.state['status'] = "PLANNING"
+        next_plan_steps = None
+
+        # Conceptual: Check if current goal already fulfilled
+        # is_fulfilled = await self.goal.is_fulfilled(self.belief_system)
+        # if is_fulfilled:
+        #      self.log_action(f"Planning: Goal '{self.goal.name}' already fulfilled. Planning COMPLETE.")
+        #      next_plan_steps = ["COMPLETE"]
+        #      self.current_intention = Intention(plan=next_plan_steps, goal=self.goal)
+
+        if self.goal and not self.state.get('goal_fulfilled', False) and not next_plan_steps: # Check active goal exists and not already fulfilled
+            # Delegate primary planning to Reasoner component
+            self.log_action("Delegating planning task Reasoner component")
+            next_plan_steps = await self.reasoner.deduce_plan(goal=self.goal, beliefs=self.belief_system.beliefs, tools=self.available_tools)
+            # Fallback logic if Reasoner fails
+            if not next_plan_steps:
+                self.log_action("Reasoner failed provide plan using fallback logic")
+                if self.current_input: # Check if input available
+                    input_lower = self.current_input.lower()
+                    if "?" in self.current_input:
+                        next_plan_steps = ["USE_TOOL search", "RESPOND"]
+                        self.log_action("Fallback plan USE_TOOL search then RESPOND query")
+                    elif "code" in input_lower or "calculate" in input_lower or "factorial" in input_lower:
+                        next_plan_steps = ["USE_TOOL coder", "RESPOND"]
+                        self.log_action("Fallback plan USE_TOOL coder then RESPOND code request")
+                    else:
+                        next_plan_steps = ["RESPOND"]
+                        self.log_action("Fallback plan RESPOND directly statement")
+                    self.current_input = None # Consume input
+                else:
+                    # Conceptual: integrate default logic here
+                    # default_plan = await self.default_logic.query_default_action()
+                    # if default_plan: next_plan_steps = default_plan else: next_plan_steps = ["WAIT"]
+                    next_plan_steps = ["WAIT"]
+                    self.log_action("Fallback plan WAIT no input default")
+
+            # Form Intention based on selected plan steps
+            if next_plan_steps:
+                self.current_intention = Intention(plan=next_plan_steps, goal=self.goal)
+                self.memory.append(f"Planning formed intention execute {next_plan_steps} for goal '{self.goal.name}'")
+                self.log_action(f"Formed intention plan {next_plan_steps}")
+            else:
+                self.current_intention = None
+                self.log_action("Planning failed determine intention plan")
+
+        self.state['status'] = "IDLE" # Return idle after planning ready act
+        await asyncio.sleep(0.35) # Simulate more complex augmented planning time
+        return self.current_intention
+
+    async def act(self):
+        """
+        Execute steps defined self current intention plan handle diverse action types
+        RESPOND USE TOOL WAIT ASK CLARIFICATION etc dispatch execution appropriate component tool
+        """
+        if not self.current_intention or not self.current_intention.plan:
+            self.log_action("Acting No intention plan execute returning IDLE")
+            self.state['status'] = "IDLE"
+            return
+
+        plan_steps = self.current_intention.plan
+        self.log_action(f"Acting Status {self.state['status']} executing intention plan {plan_steps}")
+        self.state['status'] = "ACTING"
+        action_results = [] # Store results steps needed
+
+        # Execute each step plan sequence handle diverse actions
+        for action_step in plan_steps:
+            self.log_action(f"Executing step '{action_step}'")
+            # Parse action step command arguments
+            action_parts = action_step.split(" ", maxsplit=1)
+            command = action_parts[0].upper() # Standardize command case
+            arguments = action_parts[1] if len(action_parts) > 1 else None
+
+            try:
+                # Dispatch command to appropriate execution logic/component/tool
+                if command == "RESPOND":
+                    # Generate response using AI Interaction layer based on context
+                    response_prompt = f"""
+                    **Agent Context**
+                    Name: {self.agent_name}, Goal: '{self.goal.name}', Status: {self.state['status']}
+                    Beliefs Summary: {list(self.belief_system.beliefs)[:5]}...
+                    Recent Memory: {self.memory[-3:]}
+                    Results From Previous Plan Steps: {action_results}
+
+                    **Task**
+                    Generate concise helpful coherent response based ALL provided context recent events Goal alignment crucial
+                    If previous action used tools incorporate results findings naturally smoothly response flow
+                    Adhere goal maintain consistent persona helpful accurate agent
+                    Output ONLY response text itself No extra formatting commentary
+                    """
+                    self.log_action("Calling AI Interaction generate response augmented context")
+                    generated_response = await AI_Interaction.generate_text(modelConfig=metadata.defaultTextModel, prompt=response_prompt)
+                    action_results.append(f"Generated Response '{generated_response[:50]}...'")
+                    self.memory.append(f"Act RESPOND generated '{generated_response[:50]}...'")
+                    self.log_action(f"Generated Response '{generated_response}'")
+
+                elif command == "USE_TOOL":
+                    # Execute specified tool
+                    tool_name = arguments # Assuming arguments contain tool name
+                    if tool_name and tool_name in self.available_tools:
+                        tool_instance = self.available_tools[tool_name]
+                        # Conceptual: Generate query/task description for the tool based on context
+                        tool_query_task = f"Based on goal '{self.goal.name}' and context '{self.memory[-1]}', perform task using {tool_name}"
+                        self.log_action(f"Preparing execute tool {tool_name} task '{tool_query_task[:70]}...'")
+                        tool_result = await tool_instance.execute(tool_query_task)
+                        result_summary = f"{tool_result[:70]}..." if isinstance(tool_result, str) else "Complex tool result"
+                        action_results.append(f"Tool {tool_name} Result '{result_summary}'")
+                        self.memory.append(f"Act USE_TOOL {tool_name} result '{result_summary}'")
+                        self.log_action(f"Tool {tool_name} executed result summary '{result_summary}'")
+                    else:
+                        error_msg = f"Action failed unknown unavailable tool '{tool_name}' plan references unavailable tool"
+                        raise ValueError(error_msg)
+
+                elif command == "ASK_CLARIFICATION":
+                    # Handle request clarification - output question
+                    question_to_ask = arguments if arguments else "Please provide more details or clarify your request"
+                    self.log_action(f"OUTPUT Required Ask User '{question_to_ask}'") # Indicates agent output
+                    # Conceptual: Interaction with environment/user to output question needed here
+                    self.memory.append(f"Act ASK_CLARIFICATION '{question_to_ask}'")
+                    action_results.append(f"Clarification requested '{question_to_ask}'")
+
+                elif command == "WAIT":
+                    # Agent waits for a specific duration
+                    wait_duration = 1.0 # Default wait duration
+                    try:
+                        if arguments: wait_duration = float(arguments)
+                    except ValueError:
+                         self.log_action(f"Invalid WAIT duration argument '{arguments}' using default {wait_duration} second")
+                    self.log_action(f"Waiting idle {wait_duration} seconds")
+                    await asyncio.sleep(wait_duration)
+                    self.memory.append(f"Act WAIT {wait_duration}s")
+                    action_results.append("Wait completed")
+
+                elif command == "USE_REASONER": # Conceptual placeholder
+                    reasoner_query = arguments
+                    self.log_action(f"Invoking Reasoner query '{reasoner_query}'")
+                    reasoning_result = await self.reasoner.deduce(query=reasoner_query, facts=self.belief_system.beliefs)
+                    action_results.append(f"Reasoner Result '{reasoning_result}'")
+                    self.memory.append(f"Act USE_REASONER result '{reasoning_result}'")
+
+                elif command == "USE_SOCRATIC": # Conceptual placeholder
+                    socratic_input = arguments
+                    self.log_action(f"Invoking Socratic method input '{socratic_input}'")
+                    socratic_output = await self.socratic.challenge_premise(premise=socratic_input, context=self.memory[-3:])
+                    action_results.append(f"Socratic Output '{socratic_output}'")
+                    self.memory.append(f"Act USE_SOCRATIC output '{socratic_output}'")
+
+                elif command == "REVISE_BELIEFS": # Conceptual placeholder
+                    triggering_info = arguments
+                    self.log_action(f"Invoking Belief Revision triggered by '{triggering_info}'")
+                    await self.belief_system.revise_beliefs()
+                    action_results.append("Belief revision process completed")
+                    self.memory.append("Act REVISE_BELIEFS invoked")
+
+                elif command == "COMPLETE": # Handle explicit completion action
+                    self.log_action("Action COMPLETE received marking goal achieved")
+                    self.state['status'] = "COMPLETE"
+                    self.state['goal_fulfilled'] = True
+                    action_results.append("Goal marked complete")
+                    self.memory.append("Act COMPLETE goal fulfilled")
+                    break # Exit action loop
+
+                else: # Handle unknown commands
+                    error_msg = f"Action failed unknown command '{command}' plan step '{action_step}' not recognized dispatcher"
+                    raise ValueError(error_msg)
+
+            except Exception as e: # Catch errors during specific action step execution
+                error_msg = f"Action step '{action_step}' failed Exception type {type(e).__name__} message {e}"
+                self.log_action(f"ERROR during action step {error_msg}")
+                self.memory.append(f"ERROR action {error_msg}")
+                action_results.append(f"ERROR {error_msg}")
+                self.state['status'] = "FAILED"
+                self.state['failure_reason'] = error_msg
+                break # Exit action loop on critical error
+
+        # Post action loop cleanup
+        self.current_intention = None # Clear intention after execution attempt
+        if self.state['status'] not in ["FAILED", "COMPLETE"]:
+            self.state['status'] = "IDLE" # Ready for next cycle if not failed/completed
+        self.log_action(f"Action execution cycle complete final status for cycle {self.state['status']}")
+
+    async def run(self, initial_input=None, max_cycles=5):
+        """
+        Orchestrate agent perceive plan act cycle manage overall execution flow
+        state transitions handle external input start coordinate integrated components
+        Returns: Dict containing final status and summary.
+        """
+        self.log_action(f"Starting {self.agent_name} run cycle max cycles {max_cycles} goal '{self.goal.name}'")
+
+        # Handle initial input if provided
+        if initial_input:
+            self.log_action(f"Processing initial input '{initial_input}'")
+            await self.perceive(new_input=initial_input)
+            if self.state['status'] == "FAILED":
+                self.log_action("Run aborted initial perception failed critical error detected")
+                return {"status": self.state['status'], "failure_reason": self.state['failure_reason']}
+
+        cycle_count = 0
+
+        # Main agent execution loop
+        while self.state['status'] not in ["FAILED", "COMPLETE", "STOPPED", "FINISHED", "TIMED_OUT"] and cycle_count < max_cycles:
+            cycle_count += 1
+            self.log_action(f"--- Agent Cycle {cycle_count} / {max_cycles} --- Status {self.state['status']}")
+
+            # Check terminal states at start of cycle
+            if self.state['status'] in ["COMPLETE", "FAILED", "STOPPED", "FINISHED"]:
+                 self.log_action(f"Terminal state {self.state['status']} reached Halting run loop beginning cycle")
+                 break
+
+            try:
+                # Perceive-Plan-Act Cycle
+                # await self.perceive() # Optional: Call perceive each cycle if needed for continuous sensing
+
+                await self.plan()
+                if self.state['status'] in ["FAILED", "STOPPED"]: break
+
+                # Only act if there's a plan (current_intention was set in plan)
+                if self.current_intention:
+                    await self.act()
+                    if self.state['status'] in ["FAILED", "STOPPED", "COMPLETE"]: break
+                else:
+                     self.log_action("No intention formed in planning phase, may transition to IDLE or WAIT in next cycle's plan")
+                     # If no plan, might need a short wait or different state transition
+                     self.state['status'] = "IDLE" # Go back to IDLE if no plan formed
+                     await asyncio.sleep(0.1) # Small delay if no action taken
+
+                # Conceptual: Check goal fulfillment post-action
+                # goal_achieved = await self.goal.is_fulfilled(self.belief_system)
+                # if goal_achieved:
+                #      self.log_action(f"Goal '{self.goal.name}' fulfilled marking COMPLETE explicitly")
+                #      self.state['status'] = "COMPLETE"
+                #      self.state['goal_fulfilled'] = True
+                #      break
+
+            except Exception as e:
+                self.log_action(f"CRITICAL ERROR run loop cycle {cycle_count} Exception type {type(e).__name__} message {e}")
+                self.state['status'] = "FAILED"
+                self.state['failure_reason'] = f"Unhandled run loop exception {e}"
+                break
+
+        # End loop status check
+        if cycle_count >= max_cycles and self.state['status'] not in ["COMPLETE", "FAILED", "STOPPED", "FINISHED"]:
+            self.log_action("Maximum execution cycles reached Halting potentially incomplete goal not achieved")
+            self.state['status'] = "TIMED_OUT"
+
+        if self.state['status'] == "IDLE": # Final status adjustment if ended idle
+             self.log_action("Run loop finished agent IDLE setting final status FINISHED conceptual needs goal check")
+             self.state['status'] = "FINISHED"
+
+        final_memory_summary = f"Final memory log includes {len(self.memory)} entries First '{self.memory[0][:50]}...' Last '{self.memory[-1][:50]}...'"
+
+        self.log_action(f"{self.agent_name} run finished Final Status {self.state['status']}")
+        # Return final status summary
+        return {"status": self.state['status'],
+                "failure_reason": self.state.get('failure_reason'),
+                "final_memory_summary": final_memory_summary}
+
+    def log_action(self, message):
+        """ Centralized logging method """
+        try:
+            timestamp = f"{asyncio.get_event_loop().time():.3f}"
+        except RuntimeError:
+            timestamp = "0.000" # Loop not running (e.g., during init)
+        message_str = str(message)
+        print(f"[{timestamp}][LOG][{self.agent_name}] {message_str}")
+        # Also append to internal history (optional)
+        # self.execution_history.append(f"[{timestamp}] {message_str}")
+
+
+# --- Script Execution Block ---
+async def main():
+    print("[SCRIPT START] Augmented Agent Integration Demo Revised")
+
+    # Example One: Agent run with initial query requiring search
+    print("\n# --- Example One Agent with Query Input requires Search ---")
+    agent_one_input = "What is nonmonotonic logic use case summary"
+    agent_one = AugmentedAgent(initial_input=agent_one_input, initial_goal_description="Research user query about logic provide concise summary using search")
+    result_one = await agent_one.run(max_cycles=4)
+    print("\n--- Augmented Agent One Final Result ---")
+    print(json.dumps(result_one, indent=2))
+    print("----------------------------------------")
+
+    # Example Two: Agent run with simple statement input
+    print("\n# --- Example Two Agent with Statement Input ---")
+    agent_two_input = "Agent capabilities seem quite comprehensive thanks explanation"
+    agent_two = AugmentedAgent(initial_input=agent_two_input, initial_goal_description="Engage user acknowledge input provide helpful context about agent capabilities based previous interactions memory")
+    result_two = await agent_two.run(max_cycles=2)
+    print("\n--- Augmented Agent Two Final Result ---")
+    print(json.dumps(result_two, indent=2))
+    print("----------------------------------------")
+
+    # Example Three: Agent run with coding request
+    print("\n# --- Example Three Agent with Code Request Input ---")
+    agent_three_input = "Please write simple Python code calculate factorial five provide result"
+    agent_three = AugmentedAgent(initial_input=agent_three_input, initial_goal_description="Fulfill user coding request using coder tool present generated code execution result accurately")
+    result_three = await agent_three.run(max_cycles=4)
+    print("\n--- Augmented Agent Three Final Result ---")
+    print(json.dumps(result_three, indent=2))
+    print("----------------------------------------")
+
+    print("\n[SCRIPT END]")
+
+# Run main async function
+if __name__ == "__main__":
+    asyncio.run(main())
