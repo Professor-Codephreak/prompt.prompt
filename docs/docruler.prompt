@@ -1,0 +1,195 @@
+---
+# File rules prompt directive comments
+# Defines core rules design principles conceptual prompt language directive format
+version: one point one point zero # Version rules defined this document
+description: "Core design principles rules conceptual prompt language version one point one point zero presented directive format AI ingestion validation generation tasks" # Style applied description reflects directive purpose
+author: "AI Collaboration"
+tags: ["rules", "specification", "language-design", "meta", "directive-comment", "v1.1.0", "ai-readable-docs"] # Added ai-readable-docs tag
+defaultModelConfig: { model_id: "gemini-1.5-pro" } # Default context generic model reference
+---
+
+# DIRECTIVE_AI_PROCESSOR Use rules defined below canonical specification validate parse generate interpret prompt language code version one point one point zero Apply these principles rigorously understanding executing prompt files # Primary directive use these rules specification
+# AI_FRAMEWORK_NOTE This document foundational describes core syntax semantics design philosophy intended guide both AI processors human developers interacting prompt language Its structure format exemplify directive usage specification definition
+# AI_STYLE_GUIDE Strict adherence prompt language documentation style REQUIRED comments descriptions below no standard punctuation no prose numerals Use word numerals where necessary exceptions code literals identifiers YAML structure Markdown formatting characters eg hash asterisk dashes retained structure clarity Rule descriptions themselves within LANGUAGE RULES data structure MUST also adhere this style
+
+# --- Conceptual Language Rules Definition ---
+# DIRECTIVE_LANG Maintain update this rules list reflect language evolution ensure consistency specification roadmap prompt reference Ensure descriptions adhere documentation style Apply changes version increments reflect specification updates
+# DIRECTIVE_AI_PROCESSOR Interpret following list maps definition language rules Each map contains category description Apply documentation style strictly rule description prose itself Treat this list authoritative source prompt language v one point one point zero semantics syntax
+
+LANGUAGE_RULES = [
+    # --- Core Philosophy Goal ---
+    {
+        "category": "Core Philosophy Goal", # DIRECTIVE_AI_PROCESSOR Understand overarching goal language design prioritize prompt engineering AI interaction
+        "description": "Dedicated Prompt Engineering Language primary purpose facilitate advanced prompt engineering providing structure power readability beyond simple text files general purpose languages focus specific domain AI communication" # Style applied
+    },
+    {
+        "category": "Core Philosophy Goal", # DIRECTIVE_AI_PROCESSOR Recognize importance developer experience human AI collaboration usability key design factor
+        "description": "Developer Friendly aims balance powerful programming constructs ease use developers working AI models human readability paramount" # Style applied
+    },
+    {
+        "category": "Core Philosophy Goal", # DIRECTIVE_AI_PROCESSOR Understand role language interface defining complex AI systems behaviors enable sophisticated applications
+        "description": "AI Collaboration Interface designed effective language humans define complex interactions workflows even autonomous behaviors AI systems bridge human intent machine execution" # Style applied
+    },
+
+    # --- Syntax Structure ---
+    {
+        "category": "Syntax Structure", # DIRECTIVE_AI_PROCESSOR Recognize parse language syntax based Pythonic conventions leverage existing developer knowledge
+        "description": "Pythonic Base core syntax control flow if for while function method definition def class definition class operators basic data structures closely resembles Python familiarity essential learning curve reduction" # Style applied
+    },
+    {
+        "category": "Syntax Structure", # DIRECTIVE_AI_PROCESSOR Interpret code blocks based indentation consistent Python standard significant whitespace model
+        "description": "Indentation Based Blocks code blocks defined indentation similar Python four spaces standard recommended" # Style applied numeral four written word
+    },
+    {
+        "category": "Syntax Structure", # DIRECTIVE_AI_PROCESSOR Parse files according this three part structure metadata imports logic ensure consistent file organization
+        "description": "File Layout typical dot prompt file comprises three sections top bottom Optional YAML Metadata Block enclosed three dashes Conceptual Import statements Main Logic including class definitions functions script execution code structure facilitates modularity readability" # Style applied
+    },
+    {
+        "category": "Syntax Structure", # DIRECTIVE_AI_PROCESSOR Extract process YAML metadata block configuration context standard YAML parsing rules apply
+        "description": "Metadata Block uses standard YAML format top file Provides file version description author tags default configurations like defaultModelConfig Essential context management dependency tracking" # Style applied
+    },
+    {
+        "category": "Syntax Structure", # DIRECTIVE_AI_PROCESSOR Ignore single line comments starting hashtag during execution use content context documentation style applies documentation comments only
+        "description": "Comments single line comments start hashtag treated non executable used documentation explanation directives adhere special AI readable style" # Style applied
+    },
+
+    # --- Typing Data ---
+    {
+        "category": "Typing Data", # DIRECTIVE_AI_PROCESSOR Operate under assumption loose dynamic typing runtime behavior flexibility paramount handle variable AI outputs gracefully
+        "description": "Loosely Typed Runtime language employs dynamic typing Variables not required explicit type declarations type checking primarily occurs runtime offering flexibility adaptability AI interaction" # Style applied
+    },
+    {
+        "category": "Typing Data", # DIRECTIVE_AI_PROCESSOR Recognize support standard primitive complex types potentially specialized conceptual types needed framework operations provide necessary data representations
+        "description": "Rich Data Types supports standard primitives String Number Integer Float Boolean None Complex types List Map Dictionary Conceptual support exists specialized types Image Audio Component framework types ModelConfig PromptMetadata etc facilitate diverse data handling" # Style applied
+    },
+
+    # --- Object Oriented Features ---
+    {
+        "category": "Object Oriented Features", # DIRECTIVE_AI_PROCESSOR Interpret code object oriented manner leverage classes objects encapsulation modularity manage complexity effectively
+        "description": "OOP Foundation language fundamentally object oriented using classes objects structure prompts agents related logic promote code reuse maintainability" # Style applied
+    },
+    {
+        "category": "Object Oriented Features", # DIRECTIVE_AI_PROCESSOR Parse recognize class definitions constructors methods standard Pythonic syntax understand class based structure
+        "description": "Class Definition uses class ClassName syntax Constructor defined def init self parameters like Python method definitions follow standard def syntax" # Style applied
+    },
+    {
+        "category": "Object Oriented Features", # DIRECTIVE_AI_PROCESSOR Understand encapsulation principle respect underscore naming convention internal attributes methods avoid direct external use promote information hiding
+        "description": "Encapsulation classes bundle attributes state methods behavior promoting modularity Convention dictates internal members prefixed underscore signal intended non public interface guide usage" # Style applied rationale added convention highlighted guidance purpose added
+    },
+    {
+        "category": "Object Oriented Features", # DIRECTIVE_LANG Formalize implement inheritance model based conceptual BasePrompt BaseAgent Phase Two roadmap provide clear inheritance mechanism
+        "description": "Inheritance Conceptual specific prompts agents conceptually inherit base classes BasePrompt BaseAgent defining common structure interface explicit extends syntax TBD potentially Python like ClassName BaseClassName syntax preferred" # Style applied TBD kept syntax note added
+    },
+    {
+        "category": "Object Oriented Features", # DIRECTIVE_AI_PROCESSOR Correctly handle self keyword reference instance members method calls standard OOP practice
+        "description": "Self Reference keyword self refers instance within class methods like Python first argument instance methods essential accessing instance state behavior" # Style applied rationale added
+    },
+
+    # --- Prompt Specific Features ---
+    {
+        "category": "Prompt Specific Features", # DIRECTIVE_AI_PROCESSOR Prioritize parse render triple quoted strings facilitate readable natural language prompt definition core feature language design
+        "description": "Markdown Like Prompt Text triple quoted strings three double quotes standard defining multi line natural language prompt text minimizing escaping enhancing readability reviewability core interaction element" # Style applied rationale added
+    },
+    {
+        "category": "Prompt Specific Features", # DIRECTIVE_AI_PROCESSOR Implement variable interpolation simple expressions within triple quoted strings based double curly brace syntax handle scope correctly enable dynamic prompt content
+        "description": "Simple Templating uses double curly brace expression double curly brace syntax within prompt text strings interpolating variables basic expressions current scope standard f string like behavior" # Style applied Python f string similarity noted
+    },
+
+    # --- Asynchronous IO Model Interaction ---
+    {
+        "category": "Asynchronous IO Model Interaction", # DIRECTIVE_AI_PROCESSOR Execute async def methods handle await calls correctly manage underlying event loop required efficient IO external API calls ensure non blocking behavior
+        "description": "Async Native core operations involving external interactions especially AI model calls designed asynchronous using async def methods await calls prevents blocking crucial responsive systems" # Style applied rationale added
+    },
+    {
+        "category": "Asynchronous IO Model Interaction", # DIRECTIVE_LANG Implement robust AI Interaction module provide concrete backends various AI providers adhere described abstraction ModelConfig use essential practical usability Phase One Phase Five roadmap
+        "description": "Abstracted Model Interaction conceptual layer module eg AI Interaction handles communication different AI model APIs Provides functions generate text generate image Accepts ModelConfig object promoting backend independence portability" # Style applied roadmap reference added
+    },
+    {
+        "category": "Asynchronous IO Model Interaction", # DIRECTIVE_LANG Define implement standard error hierarchy PromptError APIError etc provide clear diagnostics runtime issues improve debugging experience roadmap Phase One
+        "description": "Error Handling includes conceptual hierarchy exceptions eg PromptError APIError ParseError ConfigurationError used try except blocks managing runtime issues gracefully providing informative feedback" # Style applied rationale added roadmap reference added
+    },
+
+    # --- Advanced Features ---
+    {
+        "category": "Advanced Features", # DIRECTIVE_LANG Implement BaseAgent perceive plan act cycle state management standard features roadmap Phase Two enable autonomous behavior
+        "description": "Agent Definition supports defining autonomous agents via classes conceptually BaseAgent including state management goals tool usage perceive plan act cycles core agent architecture" # Style applied roadmap reference added
+    },
+    {
+        "category": "Advanced Features", # DIRECTIVE_LANG Implement Tool interface mechanism register discover execute tools agents roadmap Phase Two Phase Five facilitate agent capability extension
+        "description": "Tool Use agents can leverage tools defined conceptually via Tool interface base class executed methods await tool execute etc Prompts themselves can act as tools modular capability integration" # Style applied roadmap reference added modularity highlighted
+    },
+    {
+        "category": "Advanced Features", # DIRECTIVE_LANG Implement conceptual types specialized AI Interaction functions multimodal support roadmap Phase Five broaden interaction modalities
+        "description": "Multimodal Support Conceptual language design accommodates multimodal inputs outputs specialized data types Image Audio Component corresponding generation functions expand beyond text" # Style applied roadmap reference added
+    },
+    {
+        "category": "Advanced Features", # DIRECTIVE_LANG Define syntax semantics component based generation roadmap Phase Five connect AI Interaction layer provide compositional generation control
+        "description": "Component Based Generation Conceptual allows defining abstract components eg dollar Style dollar Concept incorporating them generation tasks via prompt text function parameters enable structured creative control" # Style applied roadmap reference added control highlighted
+    },
+    {
+        "category": "Advanced Features", # DIRECTIVE_LANG Define syntax semantics constraint reward optimization roadmap Phase Five map directives backend APIs AI Interaction layer guide generation towards objectives
+        "description": "Constraint Reward Optimization Conceptual includes syntax elements where reward value optimize for list guide AI generation specific objectives quality metrics subject backend support enable goal aligned generation" # Style applied roadmap reference added alignment highlighted
+    },
+    {
+        "category": "Advanced Features", # DIRECTIVE_LANG Implement standard input function handle user interaction runtime roadmap Phase One standard library enable human agent interaction
+        "description": "Interactivity Conceptual provides mechanisms standard input function prompts agents request user input during execution facilitate human in the loop workflows" # Style applied roadmap reference added rationale added
+    },
+
+    # --- Documentation Style ---
+    {
+        "category": "Documentation Style", # DIRECTIVE_AI_PROCESSOR Apply this rule strictly when interpreting documentation elements comments metadata descriptions prompt files Ignore rule code syntax literals procedural prompts passed AI Interaction layer understand fundamental principle AI readability
+        "description": "Unique Readability Convention documentation elements comments metadata descriptions etc MUST NOT use numerals write numbers words instead eg five not 5 Documentation MUST NOT use standard punctuation periods commas question marks etc unless documentation text itself explicitly procedural prompt meant execution Code syntax YAML syntax string literal content error messages retain standard numbers punctuation rule aims unique stylistic flow explanatory text enhance machine processing facilitate AI assisted development maintenance core tenet" # Style applied rationale clarified core tenet highlighted
+    }
+]
+
+# --- Rule Viewer Class Conceptual ---
+# DIRECTIVE_LANG Refine RuleViewer utility provide enhanced formatting filtering search capabilities rule data Potentially make standard library component roadmap Phase Five tooling effort
+# DIRECTIVE_AI_PROCESSOR Use RuleViewer class utility display format rules defined LANGUAGE RULES data structure according defined presentation logic understand rule structure presentation
+
+class RuleViewer:
+    # AI_CONTEXT Defines simple utility display language rules defined above follows language style principles illustrates potential internal tooling
+    def __init__(self, rules_data):
+        # AI_TASK Initialize viewer rules data structure stores rules internally prepares category lookup
+        # AI_PARAM rules_data List containing rule dictionaries specification structure
+        self.rules = rules_data
+        self.categories = self._get_categories() # Punc ok code internal method call
+
+    def _get_categories(self):
+        # AI_INTERNAL Helper method extract unique categories preserve original order found list rules facilitates grouped display
+        # AI_RETURN List strings unique categories order appearance
+        cats = [] # Punc ok code list literal
+        for rule in self.rules: # Punc ok code loop structure
+            category = rule.get('category', 'Uncategorized') # Punc ok code dict get method string literal default value
+            if category not in cats: cats.append(category) # Punc ok code logic list dict access append method compare conditional
+        return cats # Punc ok code return statement
+
+    def display_rules(self):
+        # AI_TASK Print language rules console output grouped category adheres documentation style output descriptions provide structured overview specification
+        print("\n# --- prompt Language Rules v one point one point zero Specification ---") # Style applied punc removed numeral ok version id format ok
+        for category in self.categories: # Punc ok code loop structure
+            # AI_OUTPUT Format display each category header rules associated it using markdown like formatting
+            print(f"\n## {category}") # Punc ok code f string markdown style heading format ok
+            # AI_LOGIC Filter rules belonging current category prepare display
+            category_rules = [rule['description'] for rule in self.rules if rule.get('category') == category] # Punc ok list comprehension dict access compare get method
+            for description in category_rules: # Punc ok code loop structure
+                # AI_OUTPUT Print each rule description adhering documentation style slight indent presentation clarity
+                print(f"  - {description}") # Punc ok code f string list item format ok includes rule description which follows style
+        print("\n# --- End Rules Specification ---") # Punc removed format ok end marker
+
+# --- Script Execution Block ---
+# DIRECTIVE_AI_PROCESSOR Execute main function demonstrate rule display functionality this file primary purpose definition rules data structure test RuleViewer utility
+# DIRECTIVE_LANG Implement standard main execution pattern prompt files similar this example ensure proper script entry point handling roadmap Phase One runtime consistent execution model
+
+def main():
+    # Main execution logic displays rules using RuleViewer standard entry point demonstration
+    print("[SCRIPT START] Displaying prompt language conceptual rules specification v one point one point zero") # Style applied version added
+
+    # Instantiate viewer pass rules data defined globally this file
+    viewer = RuleViewer(rules_data=LANGUAGE_RULES) # Punc ok code class instantiation keyword argument
+    # Call display method print formatted rules console trigger rule output
+    viewer.display_rules() # Punc ok code method call
+
+    print("[SCRIPT END]") # Style applied end indicator
+
+# AI_EXECUTION Run main function conceptually assume standard execution environment no async needed display static data structure trigger specification output
+main()
