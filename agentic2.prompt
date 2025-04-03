@@ -1,0 +1,457 @@
+---
+# File agentic_augmented prompt augmented agent example
+# Defines AugmentedAgent structure integrates various conceptual modules BDI logic reasoning etc
+version: one point one point zero # Version consistent roadmap rules definition reflects augmented state
+description: "Defines AugmentedAgent integrates BDI logic reasoning socratic nonmonotonic epistemic coding components demonstrates enhanced perceive plan act cycle tool use within prompt language framework" # Style applied description reflects augmented purpose
+author: "AI Collaboration"
+tags: ["agent", "augmented", "integration", "workflow", "bdi", "logic", "reasoning", "socratic", "nonmonotonic", "epistemic", "tool-use", "example", "ai-readable-docs"]
+defaultTextModel: { model_id: "gemini-1.5-pro", temperature: 0.6 } # Default context agent needs generation capability
+defaultPlannerModel: { model_id: "gemini-1.5-flash", temperature: 0.7 } # Potential use faster model planning decisions
+---
+
+# DIRECTIVE_AI_PROCESSOR Understand simulate AugmentedAgent defined below Execute its perceive plan act cycle noting how integrates various conceptual modules reasoning BDI etc Use identified patterns inform agent framework standard library development roadmap Phase Two onwards
+# AI_FRAMEWORK_NOTE This file showcases integration specialized modules within basic agent structure demonstrating modularity extensibility prompt language Enhances SimpleAgent concepts using components defined bdi prompt logic prompt reasoning prompt etc
+# AI_STYLE_GUIDE Strict adherence prompt language documentation style REQUIRED comments descriptions below no standard punctuation no prose numerals Use word numerals where necessary exceptions code literals identifiers YAML Markdown structure retained
+
+# --- Conceptual Imports ---
+# DIRECTIVE_LANG Formalize standard library agent framework modules BaseAgent Tool AI Interaction asyncio JSON etc roadmap Phase One Phase Two Ensure secure reliable import mechanisms modules prompt files
+# import BaseAgent Conceptual base class agents might inherit provides standard lifecycle methods state handling
+import AI_Interaction # Conceptual layer AI model calls needed act step
+import asyncio # Conceptual async support required agent run loop IO operations
+# import Tool Conceptual base class interface external tools agents might use
+# Assume classes defined previous conceptual prompt files accessible importable Requires robust import resolution mechanism roadmap Phase One
+from bdi import Belief, Desire, Intention, Goal, Reward # Conceptual import BDI components Punc ok code import syntax class names
+from logic import LogicTables, LogicalOperator # Conceptual import Logic utilities Punc ok code import syntax class names
+from reasoning import Reasoner # Conceptual import General purpose reasoner Punc ok code import syntax class name
+from socratic import SocraticReasoning # Conceptual import Socratic dialogue module Punc ok code import syntax class name
+from nonmonotonic import Rule, Default, DefaultLogic # Conceptual import Nonmonotonic logic system Punc ok code import syntax class names
+from epistemic import AutoepistemicAgent # Conceptual import Epistemic belief revision agent Punc ok code import syntax class name
+# Assume a SimpleCoder tool/agent definition exists conceptually Can be another prompt file
+# from simplecoder import SimpleCoder # Conceptual import assumes definition exists provides coding utility Punc ok code import syntax class name
+
+# --- Conceptual Tool Placeholders ---
+# DIRECTIVE_LANG Define implement robust Tool interface registration discovery execution mechanism roadmap Phase Two Phase Five Integrate secure execution sandboxing roadmap Phase Six Standardize tool definition packaging
+class PlaceholderSearchTool: # Conceptual Tool example Punc ok class name code identifier
+    # AI_CONTEXT Simple placeholder simulates external tool agent could use fulfills conceptual Tool interface requirement search capability
+    def __init__(self): self.name = "placeholder_search"; self.description = "Simulates searching web returns placeholder text about query" # Style applied punc ok code attribute assignment string literal semicolon ok code compact init
+    async def execute(self, query): # Punc ok code method signature async parameter
+        # AI_TASK Simulate tool execution return fixed response demonstrate interface interaction
+        print(f"[TOOL ACTION] {self.name} executing query '{query}'") # Style applied punc ok brackets identifier f string
+        await asyncio.sleep(zero point five) # Punc ok code await asyncio sleep numeral word ok fractional ok Simulate network delay
+        return f"Simulated search result for '{query}' suggests consulting specification rules prompt language design document" # Style applied punc ok code f string return string literal details added example
+
+class SimpleCoder: # Conceptual Placeholder SimpleCoder tool matches import Punc ok class name code identifier
+    # AI_CONTEXT Placeholder simulates coding tool fulfills conceptual Tool interface requirement code generation execution
+    def __init__(self): self.name = "simple_coder"; self.description = "Simulates generating executing simple code snippets based request" # Style applied punc ok code attribute assignment string literal semicolon ok code compact init
+    async def execute(self, task_description): # Punc ok code method signature async parameter task description expected
+        # AI_TASK Simulate code generation execution return placeholder result
+        print(f"[TOOL ACTION] {self.name} executing task '{task_description}'") # Style applied punc ok brackets identifier f string
+        await asyncio.sleep(one point zero) # Punc ok code await asyncio sleep numeral word ok Simulate coding execution time
+        # Conceptual check task content provide different simulated outputs
+        if "calculate" in task_description: # Punc ok code string literal membership operator simple heuristic
+             return "Simulated code execution result Calculation forty two" # Style applied punc ok code string literal return numeral ok word value specific example
+        else:
+             return "Simulated code generated printed 'Hello World'" # Style applied punc ok code string literal return default example
+
+# --- Augmented Agent Definition ---
+# DIRECTIVE_LANG Refine BaseAgent implementation roadmap Phase Two incorporate robust state management lifecycle methods support component integration dependency injection patterns shown AugmentedAgent Manage component dependencies lifecycles
+class AugmentedAgent: # Punc ok class name code identifier Could conceptually inherit BaseAgent
+    # AI_CONTEXT Defines agent integrates various reasoning BDI logic components enhance its capabilities demonstrates modular agent design complex workflow orchestration
+
+    def __init__(self, initial_goal_description="Respond helpfully accurately demonstrating integrated capabilities", initial_input=None): # Punc ok code method signature defaults None style applied default string
+        # DIRECTIVE_AI_PROCESSOR Initialize agent internal state attributes instantiate integrate all conceptual sub modules BDI reasoning logic etc track agent context lifecycle establish dependencies
+        # AI_PARAM initial_goal_description String high level objective guides agent behavior defines primary Goal
+        # AI_PARAM initial_input String Optional initial data perceived agent startup added beliefs
+        print("[AGENT INIT] AugmentedAgent initializing state goal components") # Style applied punc ok brackets identifier
+        self.agent_name = "AugmentedAgent" # Punc ok code attribute assignment string literal unique agent identifier
+
+        # AI_STATE Agent internal state variables track beliefs plans status etc Enhanced BDI Goal structures integrated components
+        self.state = {"status": "INITIALIZING", "failure_reason": None} # Use state dict manage status other runtime flags punc ok code dict literal string literals None literal
+        # AI_BDI Integrate BDI Goal Desire concepts directly state represent agent objectives motivations
+        self.goal = Goal(name=initial_goal_description, conditions={"task_completed": True}, priority=ten) # Punc ok code Goal instantiation conceptual default condition dict boolean literal priority numeral ok word value ten
+        self.desires = [Desire(initial_goal_description)] # Punc ok code list Desire instantiation wraps goal description
+        # AI_EPISTEMIC Use conceptual AutoepistemicAgent manage beliefs potentially handle revisions maintain consistent worldview
+        # Pass reference self agent belief system need log actions potentially access other state conceptual dependency injection pattern
+        self.belief_system = AutoepistemicAgent(initial_beliefs={'agent_initialized'}, agent_context=self) # Punc ok code instantiation AutoepistemicAgent set literal conceptual initial belief pass self context
+        if initial_input: self.belief_system.add_information({f"initial_input '{initial_input}'"}) # Punc ok code conditional logic method call set literal f string Add initial input beliefs via epistemic agent method
+        self.memory = [f"Initial goal set {self.goal.name}"] # Punc ok code list literal f string Use Goal name memory log agent history
+        self.current_input = initial_input # Store last raw input received context
+        self.current_intention = None # Punc ok code assignment None Stores current Intention object represents active plan
+        self.available_tools = { # Punc ok code dict literal tool registry key value pairs tool name instance
+            "search": PlaceholderSearchTool(), # Punc ok code string literal class instantiation conceptual tool registry search tool
+            # AI_INTEGRATION Include conceptual SimpleCoder tool agent capabilities expands agent functionality
+            "coder": SimpleCoder() # Punc ok code string literal class instantiation conceptual tool registry coding tool
+        }
+        # AI_COMPONENTS Instantiate other reasoning logic modules make available agent provide specialized cognitive functions
+        # Pass reference self agent components need interaction context logging etc conceptual dependency injection
+        self.reasoner = Reasoner(rules=[], agent_context=self) # Conceptual reasoner instance empty rules example pass self context
+        self.socratic = SocraticReasoning(agent_context=self) # Conceptual socratic instance pass self context
+        self.default_logic = DefaultLogic(agent_context=self) # Conceptual default logic instance pass self context
+        # self logic_tables LogicTables Conceptual instance logic tables needed if used planner reasoner
+        # self logic_ops LogicalOperator Conceptual instance logic operators needed if used planner reasoner
+
+        self.state['status'] = "IDLE" # Update status ready run after initialization complete punc ok code dict access assignment string literal
+        self.log_action(f"{self.agent_name} IDLE ready goal '{self.goal.name}'") # Use log method consistent output Style applied punc ok f string
+
+    async def perceive(self, new_input=None): # Punc ok code method signature parameter None default allows calling perceive without new external input check internal state sensors
+        # DIRECTIVE_AI_PROCESSOR Simulate perception add new input belief system potentially trigger belief revision use epistemic agent capabilities manage incoming information consistency
+        # AI_TASK Update internal beliefs based new input data Use conceptual epistemic agent add information potentially revise check consistency
+        # DIRECTIVE_LANG Implement sophisticated perception filtering mechanisms BaseAgent roadmap Phase Four connect sensor streams event listeners integrate epistemic nonmonotonic modules handle inconsistencies manage attention focus
+        self.log_action(f"Perceiving Status {self.state['status']} checking new input") # Use log method Style applied punc ok f string dict access status
+        self.state['status'] = "PERCEIVING" # Update status punc ok code dict access assignment string literal
+        perception_detail = "No new significant input detected" # Punc ok code string literal default value update based outcome
+        if new_input:
+             # AI_EPISTEMIC Add new information belief system via AutoepistemicAgent handles belief representation
+             self.current_input = new_input # Store raw input context potentially useful plan act steps
+             new_belief_set = {f"perceived_input '{new_input}'"} # Punc ok code set literal f string create belief representation specific format might defined epistemic agent needs
+             # Conceptual call epistemic agent add info potentially trigger revision automatically inside add_information depends implementation AutoepistemicAgent
+             await self.belief_system.add_information(new_belief_set) # Assuming add_information might be async if involves complex checks revision
+             perception_detail = f"Perceived added new input belief '{new_input}'" # Punc ok code f string update detail log message
+             # AI_EPISTEMIC Explicit revision call might needed specific architectures control over revision timing
+             # revision_needed = await self belief_system check_consistency Conceptual check before explicit revision
+             # if revision_needed await self belief_system revise_beliefs Conceptual async call revision logic
+             self.log_action("New input added belief system") # Use log method Style applied
+        else:
+             # AI_PERCEPTION Future implement check internal state sensors environment changes beyond direct input here
+             self.log_action("No new external input provided checking internal state sensors conceptual") # Use log method Style applied
+
+        self.memory.append(f"Perception {perception_detail}") # Punc ok code f string append method memory log perception result outcome cycle
+        self.state['status'] = "IDLE" # Return idle state after perception ready plan next cycle punc ok code dict access assignment string literal
+        await asyncio.sleep(zero point one five) # Punc ok code await asyncio sleep numeral word ok fractional ok Simulate slightly longer perception processing augmented agent
+
+    async def plan(self):
+        # DIRECTIVE_AI_PROCESSOR Execute planning logic based current goal beliefs desires using reasoning socratic default logic components determine next intention plan Update self current intention delegate planning complex components
+        # AI_TASK Enhanced planner conceptual uses reasoner BDI deliberation check goal feasibility decides action sequence forms Intention potentially involves multiple reasoning components
+        # DIRECTIVE_LANG Integrate advanced planning BDI deliberation `Reasoner` `DefaultLogic` capabilities roadmap Phase Four create robust goal oriented planning replanning mechanisms handle conflicting goals resource constraints
+        self.log_action(f"Planning Status {self.state['status']} evaluating goal '{self.goal.name}' beliefs count {len(self.belief_system.beliefs)}") # Use log method Style applied punc ok f string len function numeral ok value provides context planning start
+        self.state['status'] = "PLANNING" # Update status punc ok code dict access assignment string literal
+        next_plan_steps = None # Punc ok code assignment None Default no plan determined yet
+
+        # AI_BDI Check if current goal already fulfilled using Goal object method requires Goal is_fulfilled implementation query belief system
+        # Conceptual check goal fulfillment requires concrete Goal class implementation interacting belief system
+        # is_fulfilled = await self goal is_fulfilled self belief_system Conceptual async check if goal conditions met beliefs
+        # if is_fulfilled
+        #      self log_action Planning Goal self goal name already fulfilled Planning COMPLETE
+        #      next_plan_steps ["COMPLETE"]
+        #      self current_intention Intention COMPLETE goal self goal conceptual update intention goal satisfied
+        # else proceed planning achieve active goal
+        if self.goal and not self.state.get('goal_fulfilled', False): # Check active goal exists not already marked fulfilled state dict punc ok code logical operator dict get boolean literal default comparison
+             # AI_REASONING Delegate primary planning Reasoner component provide context goal beliefs tools
+             # Reasoner expected return list action strings plan steps potentially None failure cannot plan
+             self.log_action("Delegating planning task Reasoner component") # Use log method Style applied
+             next_plan_steps = await self.reasoner.deduce_plan(goal=self.goal, beliefs=self.belief_system.beliefs, tools=self.available_tools) # Conceptual async call reasoner planning method pass context expect list strings None
+             # AI_PLANNING_FALLBACK If Reasoner fails returns None implement fallback simpler planning logic placeholder basic input handling
+             if not next_plan_steps:
+                  self.log_action("Reasoner failed provide plan using fallback logic") # Use log method Style applied indicates fallback used
+                  if self.current_input: # Check if input available fallback logic based input
+                       if "?" in self.current_input: # Simple heuristic question implies search punc ok code string literal membership operator
+                            next_plan_steps = ["USE_TOOL search", "RESPOND"] # Punc ok code list literal string literals Fallback plan search respond
+                            self.log_action("Fallback plan USE_TOOL search then RESPOND query") # Use log method Style applied
+                       elif "code" in self.current_input or "calculate" in self.current_input: # Simple heuristic code request punc ok code string literal membership operator logical or
+                            next_plan_steps = ["USE_TOOL coder", "RESPOND"] # Punc ok code list literal string literals Fallback plan use coder respond
+                            self.log_action("Fallback plan USE_TOOL coder then RESPOND code request") # Use log method Style applied
+                       else: # Default fallback respond directly statement input
+                            next_plan_steps = ["RESPOND"] # Punc ok code list literal string literal
+                            self.log_action("Fallback plan RESPOND directly statement") # Use log method Style applied
+                       self.current_input = None # Consume input clear state fallback assumes input handled punc ok assignment None
+                  else: # Fallback if no input available no plan reasoner default WAIT
+                       # AI_NONMONOTONIC Conceptual integrate default logic here check default actions if reasoner fails no input
+                       # default_plan = await self default_logic query_default_action Conceptual query default logic system
+                       # if default_plan next_plan_steps default_plan else next_plan_steps ["WAIT"]
+                       next_plan_steps = ["WAIT"] # Punc ok code list literal string literal Default fallback plan wait
+                       self.log_action("Fallback plan WAIT no input default") # Use log method Style applied
+
+             # AI_BDI Form Intention based selected plan steps regardless source reasoner fallback
+             if next_plan_steps:
+                  self.current_intention = Intention(plan=next_plan_steps, goal=self.goal) # Punc ok code Intention instantiation pass plan steps associate goal link intention goal context
+                  self.memory.append(f"Planning formed intention execute {next_plan_steps} for goal '{self.goal.name}'") # Punc ok code f string append method memory log intention formation details
+                  self.log_action(f"Formed intention plan {next_plan_steps}") # Use log method Style applied
+             else: # Case where even fallback fails produce plan should rare
+                  self.current_intention = None # Punc ok code assignment None Clear intention no plan decided possible error state
+                  self.log_action("Planning failed determine intention plan") # Use log method Style applied indicates planning failure
+
+        self.state['status'] = "IDLE" # Return idle after planning ready act punc ok code dict access assignment string literal
+        await asyncio.sleep(zero point three five) # Punc ok code await asyncio sleep numeral word ok fractional ok Simulate more complex augmented planning time
+        return self.current_intention # Return Intention object contains plan None failure
+
+    async def act(self):
+        # DIRECTIVE_AI_PROCESSOR Execute current intention plan step by step Interact external systems AI models tools required using available components reasoner coder socratic etc Update agent state memory based action outcomes Handle diverse action types dispatch logic
+        # AI_TASK Execute steps defined self current intention plan handle diverse action types RESPOND USE TOOL WAIT ASK CLARIFICATION PERFORM DEFAULT etc dispatch execution appropriate component tool
+        # DIRECTIVE_LANG Enhance action execution provide standard action library error handling feedback mechanisms roadmap Phase Two Phase Five Ensure secure tool execution Phase Six Integrate components effectively action implementations manage action dependencies side effects
+        if not self.current_intention or not self.current_intention.plan: # Punc ok code logical operator attribute access plan check ensures valid intention plan exists
+             self.log_action("Acting No intention plan execute returning IDLE") # Use log method Style applied
+             self.state['status'] = "IDLE" # Update status punc ok code dict access assignment string literal
+             return # Exit if no plan intention found
+
+        plan_steps = self.current_intention.plan # Conceptual access plan steps list from Intention object
+        self.log_action(f"Acting Status {self.state['status']} executing intention plan {plan_steps}") # Use log method Style applied punc ok f string provides context action start
+        self.state['status'] = "ACTING" # Update status punc ok code dict access assignment string literal indicates agent performing actions
+        action_results = [] # Punc ok code list literal store results steps needed subsequent steps provide context response generation etc
+
+        # AI_LOGIC Execute each step plan sequence handle diverse actions dispatch appropriate handler component tool
+        for action_step in plan_steps: # Punc ok code loop structure iterate through planned action steps
+             self.log_action(f"Executing step '{action_step}'") # Use log method Style applied punc ok f string provides detail current step execution
+             # Conceptual parse action step command arguments assume simple space separation first word command rest arguments conceptual robust parser needed real system
+             action_parts = action_step.split(" ", maxsplit=one) # Punc ok code string split method numeral word ok argument maxsplit parse command arguments
+             command = action_parts[zero].upper() # Punc ok code list access numeral word ok index method call upper case standardize command comparison Convert command uppercase consistency robustness handling commands
+             arguments = action_parts[one] if len(action_parts) > one else None # Punc ok code list access numeral word ok index ternary expression len function comparison None Extract arguments if exist
+
+             try:
+                  # AI_DISPATCH Route command appropriate execution logic component tool Use uppercase command match
+                  if command == "RESPOND":
+                       # AI_ACTION Generate response using AI Interaction layer based memory goal beliefs previous results augmented context provide comprehensive response
+                       # DIRECTIVE_AI_PROCESSOR Construct procedural prompt execute AI Interaction generate text capability Use agent comprehensive state information relevant context
+                       # Internal procedural prompt retains structure punctuation guided generation task
+                       response_prompt = f"""
+                       **Agent Context**
+                       Name {self.agent_name} Goal '{self.goal.name}' Status {self.state['status']}
+                       Beliefs Summary {list(self.belief_system.beliefs)[:five]}...
+                       Recent Memory {self.memory[-three:]}
+                       Results From Previous Plan Steps {action_results}
+
+                       **Task**
+                       Generate concise helpful coherent response based ALL provided context recent events Goal alignment crucial
+                       If previous action used tools incorporate results findings naturally smoothly response flow
+                       Adhere goal maintain consistent persona helpful accurate agent
+                       Output ONLY response text itself No extra formatting commentary
+                       """ # Punc ok code f string list slice numerals word ok list conversion conceptual limited context shown prompt join assumed appropriate formatting chr ten etc dict access status check
+                       self.log_action("Calling AI Interaction generate response augmented context") # Use log method Style applied
+                       generated_response = await AI_Interaction.generate_text(modelConfig=metadata.defaultTextModel, prompt=response_prompt) # Punc ok code await conceptual call keyword arguments use default text model
+                       action_results.append(f"Generated Response '{generated_response[:fifty]}...'") # Punc ok code f string append method list slice numeral word ok ellipsis indicate truncation store result context next step
+                       self.memory.append(f"Act RESPOND generated '{generated_response[:fifty]}...'") # Punc ok code f string append method memory log ellipsis indicate truncation log action outcome
+                       self.log_action(f"Generated Response '{generated_response}'") # Use log method Style applied punc ok f string log full response debug trace
+
+                  elif command == "USE_TOOL":
+                       # AI_ACTION Execute specified tool handle arguments results use tool registry available tools dynamic capability execution
+                       tool_name = arguments # Assume arguments contain tool name additional parameters might need parsing punc ok assignment simple case arguments just tool name
+                       if tool_name and tool_name in self.available_tools: # Check tool exists available punc ok code logical operator membership operator dict keys
+                            tool_instance = self.available_tools[tool_name] # Punc ok code dict access variable assignment get tool instance
+                            # AI_REASONING Conceptual generate query task description tool based goal current context plan step requires NLU planning capabilities translate natural language need tool specific input
+                            # Placeholder query generation needs improvement real system use reasoner generate context aware query
+                            tool_query_task = f"Based on goal '{self.goal.name}' and context '{self.memory[-1]}', perform task using {tool_name}" # Punc ok code f string simple query based last memory goal tool name conceptual poor query needs NLU planning
+                            self.log_action(f"Preparing execute tool {tool_name} task '{tool_query_task[:seventy]}...'") # Use log method Style applied punc ok f string numeral ok word value ellipsis indicate truncation log tool call prep
+                            tool_result = await tool_instance.execute(tool_query_task) # Punc ok code await method call execute conceptual tool method pass generated task description query
+                            result_summary = f"{tool_result[:seventy]}..." if isinstance(tool_result, str) else "Complex tool result" # Punc ok code f string slice numeral ok word value ellipsis ternary isinstance check string literal Handle non string results summary
+                            action_results.append(f"Tool {tool_name} Result '{result_summary}'") # Punc ok code f string append method store result summary context
+                            self.memory.append(f"Act USE_TOOL {tool_name} result '{result_summary}'") # Punc ok code f string append method memory log action outcome summary
+                            self.log_action(f"Tool {tool_name} executed result summary '{result_summary}'") # Use log method Style applied punc ok f string log tool result summary
+                       else: # Handle case tool specified plan not found available
+                            error_msg = f"Action failed unknown unavailable tool '{tool_name}' plan references unavailable tool" # Punc ok code f string error message detail added
+                            raise ValueError(error_msg) # Raise error handled below punc ok raise statement standard exception type
+
+                  elif command == "ASK_CLARIFICATION":
+                       # AI_ACTION Handle request clarification potentially output question user interact environment request more information resolve ambiguity uncertainty
+                       # Arguments might contain specific question generated planner socratic module otherwise use default
+                       question_to_ask = arguments if arguments else "Please provide more details or clarify your request" # Punc ok code ternary expression use provided arguments default string literal fallback question
+                       self.log_action(f"OUTPUT Required Ask User '{question_to_ask}'") # Use log method Style applied punc ok f string output tag indicates agent communication external world user
+                       # Conceptual interaction environment output question user wait response separate mechanism perceive response needed real system
+                       self.memory.append(f"Act ASK_CLARIFICATION '{question_to_ask}'") # Punc ok code f string append method memory log action performed
+                       action_results.append(f"Clarification requested '{question_to_ask}'") # Punc ok code f string append method store action outcome context
+
+                  elif command == "WAIT":
+                       # AI_ACTION Agent waits does nothing specific duration useful managing timing control flow waiting external events conditions
+                       wait_duration = one point zero # Punc ok code assignment numeral word ok fractional ok default wait duration one second
+                       try: # Try convert arguments number if provided specify duration punc ok code try block
+                           if arguments: wait_duration = float(arguments) # Punc ok code conditional float conversion handles potential argument string specifying duration
+                       except ValueError: self.log_action(f"Invalid WAIT duration argument '{arguments}' using default {wait_duration} second") # Punc ok code except block ValueError log warning use default f string
+                       self.log_action(f"Waiting idle {wait_duration} seconds") # Use log method Style applied punc ok f string include duration log
+                       await asyncio.sleep(wait_duration) # Punc ok code await asyncio sleep use parsed variable duration
+                       self.memory.append(f"Act WAIT {wait_duration}s") # Punc ok code f string append method memory log include duration
+                       action_results.append("Wait completed") # Punc ok code string literal append method
+
+                  # AI_NEXT_ITERATION_GOAL Add handlers other planned actions generated advanced planner components dispatch respective handlers
+                  elif command == "USE_REASONER": # Conceptual placeholder dispatch reasoner action
+                       reasoner_query = arguments # Assume arguments contain query task reasoner
+                       self.log_action(f"Invoking Reasoner query '{reasoner_query}'") # Use log method Style applied
+                       reasoning_result = await self.reasoner.deduce(query=reasoner_query, beliefs=self.belief_system.beliefs) # Conceptual call reasoner deduce method pass query beliefs async expected
+                       action_results.append(f"Reasoner Result '{reasoning_result}'") # Store result punc ok code f string append method
+                       self.memory.append(f"Act USE_REASONER result '{reasoning_result}'") # Log result punc ok code f string append method
+
+                  elif command == "USE_SOCRATIC": # Conceptual placeholder dispatch socratic action
+                      socratic_input = arguments # Assume arguments contain premise target socratic method
+                      self.log_action(f"Invoking Socratic method input '{socratic_input}'") # Use log method Style applied
+                      socratic_output = await self.socratic.challenge_premise(premise=socratic_input, context=self.memory[-3:]) # Conceptual call socratic challenge method pass input context async expected list slice numeral word ok
+                      action_results.append(f"Socratic Output '{socratic_output}'") # Store result punc ok code f string append method
+                      self.memory.append(f"Act USE_SOCRATIC output '{socratic_output}'") # Log result punc ok code f string append method
+
+                  elif command == "REVISE_BELIEFS": # Conceptual placeholder dispatch belief revision action
+                      triggering_info = arguments # Assume arguments might contain trigger info context revision
+                      self.log_action(f"Invoking Belief Revision triggered by '{triggering_info}'") # Use log method Style applied
+                      await self.belief_system.revise_beliefs() # Conceptual call explicit belief revision epistemic agent async expected
+                      action_results.append("Belief revision process completed") # Store confirmation punc ok code string literal append method
+                      self.memory.append("Act REVISE_BELIEFS invoked") # Log action punc ok code string literal append method
+
+                  elif command == "COMPLETE": # Handle explicit completion action from plan indicates goal achieved
+                       self.log_action("Action COMPLETE received marking goal achieved") # Use log method Style applied
+                       self.state['status'] = "COMPLETE" # Update status punc ok code dict access assignment string literal indicates successful completion run
+                       self.state['goal_fulfilled'] = True # Mark goal fulfilled state dict punc ok code dict access boolean literal assignment
+                       action_results.append("Goal marked complete") # Store result punc ok code string literal append method
+                       self.memory.append("Act COMPLETE goal fulfilled") # Log action punc ok code string literal append method
+                       break # Exit action loop goal complete
+
+                  else: # Handle unknown commands generated planner gracefully log error raise exception
+                       error_msg = f"Action failed unknown command '{command}' plan step '{action_step}' not recognized dispatcher" # Punc ok code f string error message provide details context
+                       raise ValueError(error_msg) # Raise error handled below punc ok raise statement indicates internal inconsistency planning action dispatch
+
+             except Exception as e: # Catch errors during specific action step execution provide robust error handling
+                  error_msg = f"Action step '{action_step}' failed Exception type {type(e).__name__} message {e}" # Punc ok code f string error message exception variable include type name message more context
+                  self.log_action(f"ERROR during action step {error_msg}") # Use log method Style applied error prefix provides detail traceback
+                  self.memory.append(f"ERROR action {error_msg}") # Punc ok code f string append method memory log error prefix log error history
+                  action_results.append(f"ERROR {error_msg}") # Punc ok code f string append method results log error prefix provide context subsequent steps failure analysis
+                  self.state['status'] = "FAILED" # Set agent status failed critical error this step punc ok code dict access assignment string literal
+                  self.state['failure_reason'] = error_msg # Store specific reason failure state dict punc ok code dict access assignment useful debugging reporting
+                  break # Exit action loop critical error this step prevent further actions potentially failed plan inconsistent state
+
+        # Post action loop cleanup logic
+        self.current_intention = None # Clear intention plan after execution attempt regardless success failure reset state next cycle
+        if self.state['status'] not in ["FAILED", "COMPLETE"]: # Check if loop finished normally not due failure completion
+            self.state['status'] = "IDLE" # Return IDLE if not failed completed ready next cycle perception planning punc ok code dict access assignment string literal
+        self.log_action(f"Action execution cycle complete final status for cycle {self.state['status']}") # Use log method Style applied punc ok f string provide summary cycle outcome
+
+    async def run(self, initial_input=None, max_cycles=five): # Punc ok code method signature parameters defaults None numeral word ok default cycles increased augmented agent
+        # DIRECTIVE_AI_PROCESSOR Execute agent main run loop orchestrate perceive plan act cycle specified number times manage agent lifecycle state transitions Use initial input start process provided Handle complex interactions component calls
+        # AI_TASK Orchestrate agent perceive plan act cycle manage overall execution flow state transitions handle external input start coordinate integrated components BDI reasoning etc
+        # AI_PARAM initial_input Optional String data provided agent startup perception cycle one trigger initial processing
+        # AI_PARAM max_cycles Integer maximum number cycles execute prevent infinite loops default five increased augmented agent more steps expected
+        self.log_action(f"Starting {self.agent_name} run cycle max cycles {max_cycles} goal '{self.goal.name}'") # Style applied punc ok f string newline format ok numeral ok value include goal context run start
+
+        # Handle initial input if provided trigger first perception explicitly before first cycle starts
+        if initial_input:
+             self.log_action(f"Processing initial input '{initial_input}'") # Use log method Style applied punc ok f string log initial input handling
+             await self.perceive(new_input=initial_input) # Punc ok code await method call keyword argument handle initial input trigger perception logic
+             if self.state['status'] == "FAILED": # Check if initial perception failed critical error stop run
+                  self.log_action("Run aborted initial perception failed") # Use log method Style applied indicates early termination
+                  return {"status": self.state['status'], "failure_reason": self.state['failure_reason']} # Punc ok code dict literal return value provide failure details
+
+        cycle_count = zero # Punc ok code assignment numeral word ok start cycle counter zero
+
+        # Main agent execution loop perceive plan act cycle management
+        while self.state['status'] not in ["FAILED", "COMPLETE", "STOPPED", "FINISHED", "TIMED_OUT"] and cycle_count < max_cycles: # Punc ok code while loop conditions comparison list literal membership operator negation attribute access numeral word ok max cycle check Include potential terminal states check
+             cycle_count += one # Punc ok code increment numeral word ok cycle counter track execution progress
+
+             self.log_action(f"--- Agent Cycle {cycle_count} / {max_cycles} --- Status {self.state['status']}") # Style applied punc ok f string newline format ok separator ok numerals ok value status included log provides clear cycle boundary context
+
+             try: # Wrap cycle execution try except handle unexpected errors main loop gracefully
+                  # AI_SEQUENCE Execute core agent perceive plan act loop handle transitions errors gracefully coordinate components
+                  # Perception phase check environment changes new inputs internal state sensors conceptual
+                  # For this example perceive mainly reactive input provided run start or subsequent external stimuli conceptual
+                  # If agent needs continuous perception uncomment call here assumes perceive checks environment updates beliefs accordingly
+                  # await self perceive Check environment changes sensors etc conceptual call if needed proactive perception
+                  if self.state['status'] == "FAILED": break # Check status after perceive if called critical error stop punc ok code conditional break statement
+
+                  # Planning phase determine next intention plan based goal beliefs world model components
+                  await self.plan() # Determine next intention plan punc ok code await method call trigger planning logic reasoner etc
+                  if self.state['status'] == "FAILED": break # Check status after plan critical error stop punc ok code conditional break statement
+
+                  # Action phase execute current intention plan interact environment tools AI models components
+                  await self.act() # Execute current intention plan punc ok code await method call trigger action dispatch execution
+                  if self.state['status'] == "FAILED": break # Check status after act critical error stop punc ok code conditional break statement
+
+                  # AI_IMPLEMENTATION_NOTE Post act check explicit goal fulfillment based self goal is_fulfilled method conceptual set status COMPLETE
+                  # Conceptual goal fulfillment check requires concrete implementation Goal class interaction belief system
+                  # goal_achieved = await self goal is_fulfilled self belief_system Conceptual check
+                  # if goal_achieved
+                  #     self log_action Goal self goal name fulfilled marking COMPLETE
+                  #     self state status COMPLETE
+                  #     self state goal_fulfilled True
+                  #     break Exit loop goal achieved
+
+                  # Simple check if agent becomes idle after acting no plan assume finished needs explicit goal check real system
+                  if self.state['status'] == "IDLE" and not self.current_intention: # Check idle no pending plan punc ok code comparison attribute access no intention means nothing do next cycle
+                       self.log_action("Agent idle no further plan assuming goal achieved or cannot proceed this cycle") # Style applied punc ok indicates agent reached quiescent state
+                       # Keep agent running potentially new input arrive future cycles Don't break here unless goal explicitly met requires external input simulate multi turn interaction
+                       # break Exit loop if idle appropriate maybe depends interaction model
+
+             except Exception as e: # Catch unexpected errors main run loop ensure graceful exit log details provide diagnostics
+                  self.log_action(f"CRITICAL ERROR run loop cycle {cycle_count} Exception type {type(e).__name__} message {e}") # Style applied punc ok f string error tag exception variable numeral ok value include type name message
+                  self.state['status'] = "FAILED" # Set status failed ensure termination loop prevent further execution inconsistent state
+                  self.state['failure_reason'] = f"Unhandled run loop exception {e}" # Store reason failure state dict punc ok code f string provide context error
+
+        # End loop check final status provide summary determine overall outcome run
+        if cycle_count >= max_cycles and self.state['status'] not in ["COMPLETE", "FAILED", "STOPPED", "FINISHED"]: # Check timeout condition ran out cycles without reaching terminal state punc ok code comparison numeral ok value list literal membership operator negation
+             self.log_action("Maximum execution cycles reached Halting potentially incomplete") # Style applied punc ok indicates run stopped due cycle limit
+             self.state['status'] = "TIMED_OUT" # Set specific timeout status provide clear outcome reason
+
+        # Ensure final status reflects outcome if loop exited normally without specific terminal state set
+        if self.state['status'] == "IDLE": self.state['status'] = "FINISHED" # Assume IDLE at end means finished normally needs refinement based goal definition punc ok code conditional assignment
+
+        final_memory_summary = f"Final memory log includes {len(self.memory)} entries First '{self.memory[zero][:fifty]}...' Last '{self.memory[-one][:fifty]}...'" # Punc ok code f string len function numeral ok value list access numeral word ok indices slice ellipsis provide summary memory size start end avoid huge log output
+        # Full memory log optional print based verbosity settings
+        # print f Final Memory Log chr ten join self memory Style applied punc ok print formatting optional full log
+
+        self.log_action(f"{self.agent_name} run finished Final Status {self.state['status']}") # Style applied punc ok f string log final outcome run provide summary
+        # AI_OUTPUT Return final status summary result indication success failure outcome provide structured information caller
+        return {"status": self.state['status'], "failure_reason": self.state.get('failure_reason'), "final_memory_summary": final_memory_summary} # Punc ok code dict literal return value provide structured result include failure reason if exists get method None default
+
+    # AI_UTILITY Centralized logging method ensures consistent format includes agent name timestamp conceptual
+    def log_action(self, message): # Define helper method agent logging punc ok code method signature
+         # AI_INTERNAL Simple logging stub replace conceptual logging module use consistent framework logging timestamping levels etc
+         # Conceptual add timestamp log level here
+         timestamp = asyncio.get_event_loop().time() # Get current loop time approximate timestamp punc ok code method calls attribute access
+         print(f"[{timestamp:.2f}][LOG][{self.agent_name}] {message}") # Simple print based log includes agent name timestamp formatted two decimal places punc ok brackets identifier f string format specifier numeral ok value
+
+# --- Script Execution Block ---
+# DIRECTIVE_AI_PROCESSOR Use this block understand instantiate execute AugmentedAgent test case example this prompt definition guidance agent implementation integration components module interactions
+# DIRECTIVE_LANG Implement standard main execution pattern prompt files ensure proper async context management based roadmap Phase One runtime implementation Final directive consider overall execution model interaction async nature components tools
+async def main(): # Define async main function entry point script execution punc ok code async def
+     print("[SCRIPT START] Augmented Agent Integration Demo") # Style applied punc ok brackets identifier script start message
+
+     # Example One Agent run initial query trigger search respond flow using augmented capabilities
+     print("\n# --- Example One Agent with Query Input requires Search ---") # Style applied punc ok brackets identifier newline format ok separator ok numeral word ok indicates test case scenario
+     agent_one_input = "What is nonmonotonic logic use case summary" # Punc ok code string literal question implies search planning logic should delegate reasoner find plan USE_TOOL search
+     # Instantiate agent pass initial goal input trigger planning action sequence
+     agent_one = AugmentedAgent(initial_input=agent_one_input, initial_goal_description="Research user query about logic provide concise summary using search") # Punc ok code class instantiation keyword arguments string literals specific goal guides planning
+     # Run agent limited cycles demonstrate workflow interaction components
+     result_one = await agent_one.run(max_cycles=four) # Punc ok code await method call keyword argument numeral word ok limit cycles demo observe augmented behavior
+
+     print("\n--- Augmented Agent One Final Result ---") # Style applied punc ok brackets identifier newline format ok separator ok numeral word ok result header
+     # Print structured result dictionary conceptually assumes json stringify available pretty print Provides clear summary run outcome
+     print(json.dumps(result_one, indent=two)) # Punc ok code json dumps call keyword argument numeral ok value assumes json imported available standard library JSON pretty print output dict
+     print("----------------------------------------") # Punc ok code separator ok visual separation examples
+
+     # Example Two Agent run simple statement input expect direct response check reasoning acknowledgement flow
+     print("\n# --- Example Two Agent with Statement Input ---") # Style applied punc ok brackets identifier newline format ok separator ok numeral word ok test case scenario
+     agent_two_input = "Agent capabilities seem quite comprehensive" # Punc ok code string literal statement input expect different plan likely RESPOND directly
+     agent_two = AugmentedAgent(initial_input=agent_two_input, initial_goal_description="Engage user acknowledge input provide helpful context about agent capabilities") # Punc ok code class instantiation keyword arguments string literals different goal guides interaction
+     result_two = await agent_two.run(max_cycles=two) # Punc ok code await method call keyword argument numeral word ok limit cycles fewer cycles expected simple interaction
+     print("\n--- Augmented Agent Two Final Result ---") # Style applied punc ok brackets identifier newline format ok separator ok numeral word ok result header
+     print(json.dumps(result_two, indent=two)) # Punc ok code json dumps call keyword argument numeral ok value assumes json imported available pretty print result
+     print("----------------------------------------") # Punc ok code separator ok
+
+     # Example Three Agent run coding request trigger coder tool usage flow
+     print("\n# --- Example Three Agent with Code Request Input ---") # Style applied punc ok brackets identifier newline format ok separator ok numeral word ok test case scenario coder tool
+     agent_three_input = "Please write simple Python code calculate factorial five" # Punc ok code string literal code request input expect plan USE_TOOL coder numeral word ok value five
+     agent_three = AugmentedAgent(initial_input=agent_three_input, initial_goal_description="Fulfill user coding request using coder tool present result") # Punc ok code class instantiation keyword arguments string literals specific goal involves tool use
+     result_three = await agent_three.run(max_cycles=four) # Punc ok code await method call keyword argument numeral word ok limit cycles allow tool use response cycle
+     print("\n--- Augmented Agent Three Final Result ---") # Style applied punc ok brackets identifier newline format ok separator ok numeral word ok result header
+     print(json.dumps(result_three, indent=two)) # Punc ok code json dumps call keyword argument numeral ok value assumes json imported available pretty print result
+     print("----------------------------------------") # Punc ok code separator ok
+
+     print("\n[SCRIPT END]") # Style applied punc ok brackets identifier newline format ok script end message
+
+# --- Conceptual AI Interaction Simulation ---
+# AI_NOTE Simulating AI Interaction layer avoid external dependencies allow conceptual execution This would real implementation interacting actual APIs provides basic canned responses demo purpose reflects augmented nature agent context
+class AI_Interaction: # Punc ok class name code identifier simulation class
+     @staticmethod # Punc ok code decorator static method simulate class level utility
+     async def generate_text(modelConfig, prompt): # Punc ok code static method signature async parameters simulate API call model config prompt input
+         # AI_TASK Simulate LLM call return fixed dynamic response based prompt content simulate generation response tool results summary etc reflect augmented context provided prompt
+         print(f"[AI_INTERACTION SIM] Received prompt includes goal beliefs memory starts:\n{prompt[:one_hundred_fifty]}...") # Style applied punc ok brackets identifier f string slice numeral word ok ellipsis indicate truncation newline format ok Log more context augmented prompt
+         await asyncio.sleep(zero point nine) # Punc ok code await asyncio sleep numeral word ok fractional ok Simulate slightly longer API latency complex prompt response
+         response = "Simulated augmented agent response considering goal beliefs recent actions" # Punc ok code string literal assignment default response
+         # Simple checks prompt content simulate context aware response generation
+         if "search result" in prompt.lower(): response += " Based on simulated search nonmonotonic logic useful reasoning defaults exceptions" # Punc ok code conditional logic concatenation assignment string literal check content prompt simulate incorporating search results
+         elif "coder result" in prompt.lower(): response += f" The simulated code execution result provided calculation shows forty two" # Punc ok code conditional logic concatenation assignment f string check content prompt simulate incorporating coder results numeral word ok value
+         elif "statement input" in prompt.lower(): response = "Acknowledged statement input My integrated reasoning BDI belief management components allow versatile responses comprehensive analysis" # Punc ok code conditional logic assignment string literal check content prompt simulate acknowledging statement referencing capabilities
+         return response # Punc ok code return statement simulated generated text
+
+# AI_NOTE Assume metadata defined YAML block accessible conceptually runtime needed example ModelConfig retrieval though not explicitly shown code here Also assume standard JSON module available system python path configured resolve conceptual module imports placeholders
+class metadata: # Placeholder class Punc ok class name code identifier simulate access metadata block content
+     defaultTextModel = {"model_id": "simulated-pro-model", "temperature": 0.6} # Punc ok code dict literal string literals assignment simulate access default text model config temperature included
+     defaultPlannerModel = {"model_id": "simulated-flash-model", "temperature": 0.7} # Punc ok code dict literal string literals assignment simulate access default planner model config temperature included
+import json # Actual import JSON needed main block output example Punc ok code import statement standard library
+
+# DIRECTIVE_LANG Define implement standard mechanism execute main function prompt files ensure proper async context management based roadmap Phase One runtime implementation Assume top level runner exists handles async main interaction component lifecycles
+# Run main async function standard Python pattern requires asyncio imported run defined ensures async operations scheduled executed correctly
+if __name__ == "__main__": # Punc ok code standard Python main check idiom script entry point guard
+     # AI_EXECUTION Trigger agent simulation runs defined main function using asyncio event loop
+     asyncio.run(main()) # Punc ok code asyncio run call main function execution trigger requires asyncio imported standard library manages async event loop
