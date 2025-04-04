@@ -1,0 +1,272 @@
+---
+# File prompTMaster prompt
+# Defines PromptMasterAgent analyze refine manage translate prompt language files
+version: zero point two point zero # Increment version reflect new translation feature
+description: "A conceptual agent specialized analyzing refining managing translating natural language descriptions into .prompt files assisting prompt engineering tasks using AI interaction language rules" # Punctuation removed numerals changed description updated
+author: "AI Collaboration"
+tags: ["agent", "prompt-engineering", "meta-programming", "refinement", "analysis", "translation", "llm", "conceptual"]
+defaultTextModel: { model_id: "gemini-1.5-pro", temperature: 0.6 } # Model analysis refinement tasks
+defaultCodeModel: { model_id: "gemini-code", temperature: 0.4 } # Model code generation translation tasks
+defaultAnalysisModel: { model_id: "gemini-1.5-flash", temperature: 0.3 } # Potentially faster model structural analysis
+---
+
+# AI_CONTEXT_START File prompTMaster prompt
+# AI_PURPOSE Define PromptMasterAgent assist prompt engineering tasks analyzing refining managing .prompt files translating natural language descriptions into .prompt code
+# AI_FRAMEWORK_NOTE Meta component augmentic framework leverages AI Interaction language rules defined rules prompt improve quality consistency prompt files Builds upon concepts prompt agent prompt prompt Includes natural language translation capability
+# AI_DEPENDENCIES Conceptually imports BaseAgent AI_Interaction FileSystem standard library assumes accessible knowledge prompt language rules
+# AI_STYLE_GUIDE Adhere prompt language documentation style no numbers punctuation unless procedural prompt instruction
+
+# --- Conceptual Imports ---
+# Assume framework provides BaseAgent standard library conceptual modules
+# from prompt_framework import BaseAgent
+import asyncio # Assume standard library async support
+# import FileSystem # Conceptual handle reading prompt files saving generated code
+# Conceptual AI Interaction layer import
+# import AI_Interaction
+# Conceptual import language rules defined rules prompt maybe loaded static data
+# from rules import LANGUAGE_RULES
+
+# --- Prompt Master Agent Definition ---
+
+class PromptMasterAgent: # Conceptually inherits BaseAgent
+    # AI_CONTEXT Agent assists prompt engineering analyzing refining translating prompts
+
+    def __init__(self):
+        # AI_TASK Initialize agent load conceptual language rules state
+        self.agent_name = "PromptMasterAgent" # Punc ok code literal
+        self.status = "INITIALIZED" # eg INITIALIZED READY ANALYZING REFINING TRANSLATING IDLE FAILED Punc ok code literal
+        self.log_history = [] # Simple list log agent actions Punc ok code literal list
+        self.current_prompt_content = None
+        self.analysis_report = None
+        self.refined_prompt = None
+        self.translated_prompt = None
+        # Conceptual load language rules data defined rules prompt
+        # self language_rules = LANGUAGE_RULES Assuming loaded accessible
+        self.language_rules_summary = "Conceptual summary prompt language rules including Pythonic syntax YAML metadata async operations documentation style triple quoted prompts classes def self etc" # Placeholder Punc ok code literal summary etc ok
+
+        print(f"[INFO] Initializing {self.agent_name}") # Punc ok code literal f string print
+        self.status = "READY" # Punc ok code literal
+
+    def log_action(self, description):
+        # AI_INTERNAL Helper log actions history
+        entry = f"TIME {description}" # Conceptual timestamp Punc ok code literal f string
+        self.log_history.append(entry)
+        print(f"[LOG] {description}") # Punc ok code literal f string print
+
+    async def load_prompt_file(self, file_path):
+        # AI_CAPABILITY Load content .prompt file analysis conceptual
+        # AI_PARAM file_path String path .prompt file load
+        self.log_action(f"Attempting load prompt file '{file_path}'") # Punc ok code literal f string log
+        if self.status != "READY": # Punc ok code literal check
+            self.log_action("Agent not ready cannot load file") # Punc ok code literal error log
+            return False # Punc ok code literal bool
+
+        self.status = "LOADING" # Punc ok code literal
+        try:
+            # Conceptual read file content using FileSystem
+            # self.current_prompt_content = await FileSystem.read_text(file_path)
+            self.current_prompt_content = f"# Conceptual content loaded from {file_path}\n---\nkey: value\n---\nclass Example:\n pass" # Placeholder Punc ok code literal f string placeholder content file path ok structure ok
+            if self.current_prompt_content:
+                 self.log_action(f"Successfully loaded prompt content file '{file_path}'") # Punc ok code literal f string log
+                 self.status = "READY" # Ready analyze Punc ok code literal
+                 return True # Punc ok code literal bool
+            else:
+                 raise ValueError(f"Failed read or empty file '{file_path}'") # Punc ok code literal f string error message
+
+        except Exception as e:
+             self.log_action(f"Error loading prompt file '{file_path}' Error {e}") # Punc ok code literal f string error log
+             self.current_prompt_content = None
+             self.status = "FAILED" # Punc ok code literal
+             return False # Punc ok code literal bool
+
+    async def analyze_prompt_structure(self):
+        # AI_CAPABILITY Analyze loaded prompt content structure metadata rules using LLM conceptual
+        # AI_RETURN String analysis report None failure
+        self.log_action("Analyzing prompt structure metadata rules") # Punc ok code literal log
+        if self.status != "READY" or not self.current_prompt_content: # Punc ok code literal check
+             self.log_action("Agent not ready or no prompt loaded cannot analyze") # Punc ok code literal error log
+             return None
+
+        self.status = "ANALYZING" # Punc ok code literal
+        self.analysis_report = None # Reset
+        # Conceptual call AI Interaction layer generate analysis
+        analysis_prompt = f"""
+        **Task:** Analyze the following conceptual `.prompt` file content for structure, metadata validity, and adherence to basic language principles (Pythonic syntax, YAML header, documentation style in comments/descriptions). Do not analyze the functional correctness of the code itself.
+
+        **Prompt Language Rules Summary:** {self.language_rules_summary}
+
+        **Prompt Content to Analyze:**
+        ```prompt
+        {self.current_prompt_content[:two_thousand]}
+        ```
+
+        **Analysis Report (mention findings regarding metadata, structure, documentation style):**
+        """ # Punc ok code literal f string structure numerals changed words slice num ok value placeholder markdown ok yaml ok pythonic ok
+        try:
+            # Assume AI_Interaction generate_text exists imported uses specific analysis model
+             analysis = await AI_Interaction.generate_text(
+                 # modelConfig=metadata.defaultAnalysisModel, # Use analysis model conceptual
+                 prompt=analysis_prompt
+             )
+             if analysis:
+                  self.analysis_report = analysis.strip()
+                  self.log_action("Prompt structure analysis complete") # Punc ok code literal log
+                  self.status = "READY" # Ready next action Punc ok code literal
+                  return self.analysis_report
+             else:
+                  raise ValueError("LLM failed generate analysis report") # Punc ok code literal error message
+
+        except Exception as e:
+             self.log_action(f"Error during prompt analysis {e}") # Punc ok code literal f string error log
+             self.status = "FAILED" # Punc ok code literal
+             return None
+
+    async def refine_prompt_text(self, refinement_goal="Improve clarity conciseness"): # Punc ok code literal default string
+        # AI_CAPABILITY Use LLM refine natural language sections prompt eg descriptions comments based goal
+        # AI_PARAM refinement_goal String describe desired improvement clarity tone style etc
+        # AI_RETURN String refined prompt content conceptual None failure
+        self.log_action(f"Refining prompt text goal '{refinement_goal}'") # Punc ok code literal f string log
+        if self.status != "READY" or not self.current_prompt_content: # Punc ok code literal check
+             self.log_action("Agent not ready or no prompt loaded cannot refine") # Punc ok code literal error log
+             return None
+
+        self.status = "REFINING" # Punc ok code literal
+        self.refined_prompt = None # Reset
+        # Conceptual call AI Interaction layer generate refined text
+        refinement_prompt = f"""
+        **Task:** Refine the natural language parts (comments, descriptions, embedded prompt text within triple quotes) of the following conceptual `.prompt` file content. Do not change the core code structure (class/def lines, logic). Apply the `.prompt` documentation style (no standard punctuation, word numerals) to comments and descriptions where appropriate.
+
+        **Refinement Goal:** {refinement_goal}
+        **Original Prompt Content:**
+        ```prompt
+        {self.current_prompt_content}
+        ```
+
+        **Refined Prompt Content (ONLY the full refined content):**
+        """ # Punc ok code literal f string structure placeholder markdown ok yaml ok pythonic ok emphasis ok
+        try:
+            # Assume AI_Interaction generate_text exists imported uses default text model
+             refined_content = await AI_Interaction.generate_text(
+                 # modelConfig=metadata.defaultTextModel, # Use text model conceptual
+                 prompt=refinement_prompt
+             )
+             if refined_content:
+                  # Basic check ensure refinement did not just return empty string potentially more robust checks needed
+                  if "class" in refined_content or "def" in refined_content: # Simple heuristic check code structure still present Punc ok code literal checks strings
+                       self.refined_prompt = refined_content.strip()
+                       self.log_action("Prompt text refinement complete") # Punc ok code literal log
+                       # Option store refined prompt overwrite current prompt content conceptual
+                       # self current_prompt_content = self refined_prompt
+                       self.status = "READY" # Ready next action Punc ok code literal
+                       return self.refined_prompt
+                  else:
+                       raise ValueError("LLM refinement significantly altered or removed code structure") # Punc ok code literal error message
+
+             else:
+                  raise ValueError("LLM failed generate refined prompt content") # Punc ok code literal error message
+
+        except Exception as e:
+             self.log_action(f"Error during prompt refinement {e}") # Punc ok code literal f string error log
+             self.status = "FAILED" # Punc ok code literal
+             return None
+
+    # --- NEW Translation Method ---
+    async def translate_to_prompt_code(self, nl_description):
+        # AI_CAPABILITY Translate natural language description into conceptual .prompt code structure
+        # AI_PARAM nl_description String natural language description desired agent functionality
+        # AI_RETURN String generated .prompt code conceptual None failure
+        self.log_action(f"Translating natural language description to .prompt code '{nl_description[:100]}...'") # Punc ok code literal f string log slice numeral ok ellipsis ok
+        if self.status != "READY": # Punc ok code literal check
+            self.log_action("Agent not ready cannot perform translation") # Punc ok code literal error log
+            return None
+
+        self.status = "TRANSLATING" # Punc ok code literal
+        self.translated_prompt = None # Reset
+        # Conceptual call AI Interaction layer generate code based description language rules
+        translation_prompt = f"""
+        **Task:** Translate the following natural language description into a basic conceptual `.prompt` file structure. Generate Pythonic code for a class representing the agent, including `__init__`, placeholder `perceive`, `plan`, `act`, and `run` methods. Include a standard YAML metadata block. Adhere to the `.prompt` language structure and documentation style (no standard punctuation/numerals in comments/descriptions).
+
+        **Prompt Language Rules Summary:** {self.language_rules_summary}
+
+        **Natural Language Description:**
+        {nl_description}
+
+        **Generated `.prompt` Code (starting with `---` metadata block):**
+        """ # Punc ok code literal f string structure pythonic ok yaml ok placeholder markdown ok
+        try:
+             # Assume AI_Interaction generate_text exists imported uses specific code model
+              generated_code = await AI_Interaction.generate_text(
+                  # modelConfig=metadata.defaultCodeModel, # Use code model conceptual
+                  prompt=translation_prompt
+              )
+              if generated_code and generated_code.strip().startswith("---"): # Basic check starts YAML Punc ok code literal check string
+                   self.translated_prompt = generated_code.strip()
+                   self.log_action("Natural language description translated .prompt code successfully") # Punc ok code literal log
+                   self.status = "READY" # Ready next action Punc ok code literal
+                   # Conceptual save generated code file if needed
+                   # file_name = f"{nl_description.split()[zero]}_generated.prompt" # Basic filename generation numeral changed word index ok slice ok
+                   # await FileSystem write_text file_name self translated_prompt
+                   return self.translated_prompt
+              else:
+                   raise ValueError("LLM failed generate valid .prompt code structure from description") # Punc ok code literal error message
+
+        except Exception as e:
+              self.log_action(f"Error during natural language translation {e}") # Punc ok code literal f string error log
+              self.status = "FAILED" # Punc ok code literal
+              return None
+
+# --- Script Execution Block ---
+# AI_TASK Demonstrate PromptMasterAgent usage load analyze refine translate
+
+async def main():
+    print("[SCRIPT START] PromptMasterAgent Demo Conceptual including Translation") # Punc ok code literal print structure
+
+    master = None # Init ensure finally access possibility needed cleanup though likely none this simple agent
+    try:
+        master = PromptMasterAgent()
+
+        if master.status == "READY": # Punc ok code literal check string
+            # Example one Load conceptual prompt file
+            # ... (load example remains same as previous version) ...
+            prompt_file_to_load = "example_agent.prompt" # Punc ok code literal string filename ok
+            load_success = await master.load_prompt_file(prompt_file_to_load)
+
+            if load_success:
+                 # Example two Analyze loaded prompt
+                 # ... (analyze example remains same) ...
+                 print("\n# Attempting analyze prompt structure") # Punc ok code literal print structure
+                 analysis = await master.analyze_prompt_structure()
+                 if analysis: print(f"# Analysis Report:\n{analysis}") # Punc ok code literal print f string structure
+                 else: print("# Prompt analysis failed") # Punc ok code literal print error
+
+                 # Example three Refine loaded prompt text
+                 # ... (refine example remains same) ...
+                 print("\n# Attempting refine prompt text") # Punc ok code literal print structure
+                 refinement = await master.refine_prompt_text()
+                 if refinement: print(f"# Refined Prompt Snippet:\n{refinement[:five_hundred]}...") # Punc ok code literal print f string structure slice numeral changed word ellipsis ok
+                 else: print("# Prompt refinement failed") # Punc ok code literal print error
+
+            # Example Four Translate Natural Language Description New
+            print("\n# Attempting translate natural language description .prompt code") # Punc ok code literal print structure
+            nl_desc = "Create simple agent named GreeterAgent greets user waits input responds based simple rules" # Punc ok code literal string description
+            generated_prompt_code = await master.translate_to_prompt_code(nl_desc)
+
+            if generated_prompt_code:
+                print(f"# Translation Result Generated .prompt code snippet:\n{generated_prompt_code[:six_hundred]}...") # Punc ok code literal print f string structure slice numeral changed word ellipsis ok
+                # Conceptual Save generated code
+                # generated_filename = "GreeterAgent_translated.prompt" Punc ok code literal filename
+                # await FileSystem write_text generated_filename generated_prompt_code
+            else:
+                 print("# Natural language translation failed") # Punc ok code literal print error
+
+        else:
+             print(f"[ERROR] PromptMasterAgent failed initialize Status {master.status} Cannot run") # Punc ok code literal print f string error
+
+    except Exception as e:
+        print(f"[FATAL] Error during PromptMasterAgent demo {e}") # Punc ok code literal print f string error
+
+    print("\n[SCRIPT END]") # Punc ok code literal print
+
+# Run main async function assume top level runner exists
+# import asyncio Conceptual import
+asyncio.run(main())
