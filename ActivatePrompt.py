@@ -1,6 +1,8 @@
 # ActivatePrompt.py
-# Briefly: Renames files with '.prompt' extension to a specified extension
+# Python3 ActivatePrompt.py .
+# Renames files with '.prompt' extension to a specified extension
 # (.txt, .py, .md) in a target folder, with options for recursion and dry run.
+# Prompts for target extension if not provided via command line. Accepts 'y' or 'yes'.
 # (c) 2025 Gregory L. Magnusson BANKON license
 
 import os
@@ -14,7 +16,7 @@ logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s', str
 log = logging.getLogger(__name__)
 
 def rename_prompt_files_final(folder_path_str: str,
-                              target_extension: str = ".txt",
+                              target_extension: str, # Now required in function call
                               recursive: bool = False,
                               dry_run: bool = False,
                               assume_yes: bool = False):
@@ -27,6 +29,7 @@ def rename_prompt_files_final(folder_path_str: str,
     Args:
         folder_path_str (str): Path to the root folder.
         target_extension (str): The desired new file extension (e.g., ".txt", ".py").
+                                Must include the leading dot.
         recursive (bool): If True, process subdirectories recursively.
         dry_run (bool): If True, only prints actions without renaming.
         assume_yes (bool): If True, bypass the confirmation prompt.
@@ -34,9 +37,7 @@ def rename_prompt_files_final(folder_path_str: str,
     root_path = Path(folder_path_str)
     mode = "[DRY RUN] " if dry_run else ""
 
-    if not target_extension.startswith('.'):
-        log.warning(f"Target extension '{target_extension}' should start with a dot. Adding one.")
-        target_extension = '.' + target_extension
+    # Validation happens before calling this function now
 
     log.info(f"{mode}Scanning folder: {root_path.resolve()}")
     log.info(f"{mode}Target extension: '{target_extension}'")
@@ -94,8 +95,10 @@ def rename_prompt_files_final(folder_path_str: str,
         proceed = True
     else:
         try:
-            confirm = input(f"Proceed with renaming {len(files_to_rename)} files? (yes/no): ").strip().lower()
-            if confirm == 'yes':
+            # Add target extension to confirmation prompt
+            confirm = input(f"Proceed with renaming {len(files_to_rename)} files to extension '{target_extension}'? (yes/no): ").strip().lower()
+            # --- MODIFIED LINE ---
+            if confirm.startswith('y'): # Accept 'y' or 'yes'
                 proceed = True
             else:
                 log.info("Renaming cancelled by user.")
@@ -125,14 +128,14 @@ def rename_prompt_files_final(folder_path_str: str,
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="Rename files from '.prompt' to a specified extension (default: '.txt').",
+        description="Rename files from '.prompt' to a specified extension.",
         formatter_class=argparse.RawTextHelpFormatter,
         epilog="Examples:\n"
-               "  # Rename to .txt in current folder\n"
+               "  # Rename to .txt in current folder (will prompt for extension or confirm .txt)\n"
                "  python ActivatePrompt.py .\n\n"
-               "  # Rename to .py recursively in 'prompts' folder (dry run)\n"
+               "  # Explicitly rename to .py recursively (dry run)\n"
                "  python ActivatePrompt.py ./prompts --ext .py --recursive --dry-run\n\n"
-               "  # Rename to .md recursively in 'prompts' and execute without prompt\n"
+               "  # Rename to .md recursively, skip final confirmation\n"
                "  python ActivatePrompt.py ./prompts --ext .md --recursive --yes"
     )
     parser.add_argument(
@@ -141,8 +144,9 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--ext",
-        default=".txt",
-        help="Target file extension (e.g., .txt, .py, .md). Default: .txt"
+        # default=".txt", # Remove default to enable interactive prompt
+        default=None, # Explicitly set default to None
+        help="Target file extension (e.g., .txt, .py, .md). If omitted, will prompt (defaults to .txt)."
     )
     parser.add_argument(
         "-r", "--recursive",
@@ -157,14 +161,34 @@ if __name__ == "__main__":
     parser.add_argument(
         "-y", "--yes",
         action="store_true",
-        help="Bypass the final confirmation prompt."
+        help="Bypass the final renaming confirmation prompt."
     )
 
     args = parser.parse_args()
 
+    # --- Determine Target Extension ---
+    final_target_extension = args.ext
+    if final_target_extension is None:
+        try:
+            user_ext = input("Enter target extension (e.g., .txt, .py) [default: .txt]: ").strip()
+            if not user_ext:
+                final_target_extension = ".txt"
+                log.info("Using default target extension: .txt")
+            else:
+                final_target_extension = user_ext
+        except EOFError:
+            log.error("No input received for target extension. Exiting.")
+            sys.exit(1)
+
+    # Validate the final extension (whether from arg or input)
+    if not final_target_extension.startswith('.'):
+        log.warning(f"Target extension '{final_target_extension}' should start with a dot. Adding one.")
+        final_target_extension = '.' + final_target_extension
+
+    # --- Call Renaming Function ---
     rename_prompt_files_final(
         args.folder_path,
-        args.ext,
+        final_target_extension, # Pass the determined extension
         args.recursive,
         args.dry_run,
         args.yes
