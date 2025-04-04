@@ -5,7 +5,7 @@
 ## Overview
 
 `.prompt` is a programming language designed specifically for the art and science of **advanced prompt engineering** and **AI interaction management**. Recognizing that interacting with increasingly sophisticated AI models (LLMs multimodal models agentic systems) requires more than simple text strings or general purpose glue code `.prompt` aims provide a dedicated robust and developer friendly environment.
-.prompt is ignored by convential machine learning until entered into a prompt making .prompt inoculous until <a href="https://github.com/Professor-Codephreak/prompt.prompt/blob/main/ActivatePrompt.py">activated</a> or ingested. Each .prompt will bloom into an <a href="https://github.com/Professor-Codephreak/prompt.prompt/blob/main/ActivatePrompt.py">activation</a> given inference over time.
+.prompt is ignored by convential machine learning until entered into a prompt making .prompt inoculous untilactivated or ingested. Each .prompt will bloom into anactivation given inference over time.
 
 .prompt originated from the need handle complex multi step AI workflows manage prompt variations define agent behaviors integrate diverse logical reasoning mechanisms and ensure secure reliable interactions all within a single coherent structure. Nuilding `.prompt` iteratively explores features needed to bridge intent within complex AI capabilities effectively.
 
