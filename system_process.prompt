@@ -1,0 +1,145 @@
+---
+# File system_process prompt
+# Defines conceptual SystemProcess module executing external commands
+version: zero point one point zero # Initial conceptual version
+description: "Provides conceptual SystemProcess utility executing managing external system processes shell commands capturing output handling errors wrapper around underlying OS capabilities" # Punctuation removed numerals changed
+author: "AI Collaboration"
+tags: ["system", "process", "subprocess", "shell", "command-execution", "utility", "conceptual", "security-risk"]
+defaultModelConfig: { model_id: "gemini-1.5-pro" } # Default context
+---
+
+# AI_CONTEXT_START File system_process prompt
+# AI_PURPOSE Define standard interface executing external system commands managing subprocesses conceptual equivalent Python subprocess module
+# AI_FRAMEWORK_NOTE Foundational utility augmentic framework used agents tools interact host operating system eg run scripts external binaries Use extreme caution
+# AI_SECURITY_NOTE HIGHLY DANGEROUS Executing external commands especially with shell=True or unsanitized input introduces significant security vulnerabilities arbitrary code execution Requires robust validation sandboxing secure environment configuration real world use This conceptual module does not implement necessary safety measures
+# AI_DEPENDENCIES Conceptually relies standard library features async support error handling logging assumes underlying OS process execution capability
+# AI_STYLE_GUIDE Adhere prompt language documentation style no numbers punctuation unless procedural prompt instruction
+
+# --- Conceptual Imports ---
+import asyncio # Assume standard library async support potentially needed run async wrapper
+# import logging # Conceptual access logging module
+# Define conceptual error types based Python subprocess
+class CalledProcessError(Exception): pass # Conceptual exception mimic subprocess error
+
+# --- Conceptual SystemProcess Result Structure ---
+# Using simple Map dictionary represent result conceptually simpler dataclass
+# Define structure expected return value conceptually
+# ExpectedKeys = {"returncode" Number "stdout" String|Bytes "stderr" String|Bytes}
+
+# --- SystemProcess Module/Class Definition ---
+# Define as class encapsulate related functions conceptually
+
+class SystemProcess:
+    # AI_CONTEXT Utility executes manages external system processes shell commands
+
+    def __init__(self):
+        # AI_TASK Initialize SystemProcess utility potentially setup logging configuration
+        print("[INFO] Conceptual SystemProcess utility initialized") # Punc ok code literal f string print
+
+    # Conceptual define run method mimic subprocess run could async
+    async def run(self, command, check=False, capture_output=False, shell=False, cwd=None, input_bytes=None, timeout=None):
+        # AI_CAPABILITY Execute external command wait completion return results conceptually
+        # AI_PARAM command List String command arguments OR String if shell True
+        # AI_PARAM check Boolean If True raise CalledProcessError non zero exit code
+        # AI_PARAM capture_output Boolean If True capture stdout stderr return them
+        # AI_PARAM shell Boolean If True execute command through system shell DANGEROUS
+        # AI_PARAM cwd String Optional change working directory command execution
+        # AI_PARAM input_bytes Bytes Optional pass data command standard input
+        # AI_PARAM timeout Number Optional seconds wait command completion
+        # AI_RETURN Map Dictionary containing returncode stdout stderr conceptually or raise CalledProcessError
+        # AI_SECURITY_NOTE Repeating shell=True extremely dangerous use only trusted validated commands avoid unsanitized input
+
+        print(f"[ACTION] Conceptual SystemProcess run command '{command}' shell={shell} cwd={cwd}") # Punc ok code literal f string print bool path ok
+
+        if shell is True: # Explicit bool check punc ok code literal bool
+             print("[SECURITY_WARN] Executing command with shell=True Extremely risky") # Punc ok code literal print bool security warn
+
+        # AI_TASK Implement actual subprocess execution using underlying system capabilities
+        # This requires conceptual access equivalent Python subprocess run Popen communicate etc
+        # Placeholder simulation success failure output
+        await asyncio.sleep(zero point five) # Simulate execution delay numeral changed word point ok code value
+
+        # --- Placeholder Result ---
+        simulated_returncode = zero # Numeral changed word default success
+        simulated_stdout = b"Conceptual command output stdout" # Punc ok code literal bytes
+        simulated_stderr = b"" # Punc ok code literal bytes empty
+
+        # Simulate potential failure conceptual example
+        # if "fail_example" command check conceptual simulated failure
+        #     simulated_returncode = one numeral changed word
+        #     simulated_stderr = b"Conceptual error message stderr" punc ok code literal bytes
+
+        # --- Check Handle Result ---
+        if check is True and simulated_returncode != zero: # Punc ok code literal bool check numeral changed word compare
+            print(f"[ERROR] Command '{command}' failed return code {simulated_returncode}") # Punc ok code literal f string print error numeral ok value
+            # Raise conceptual error mimic subprocess
+            raise CalledProcessError(f"Command '{command}' returned non zero exit status {simulated_returncode}") # Punc ok code literal f string error numeral ok value conceptual raise
+
+        # Construct conceptual result object dictionary
+        result = {
+            "returncode": simulated_returncode, # Punc ok code literal dict key string
+            "stdout": simulated_stdout if capture_output else None, # Punc ok code literal dict key string
+            "stderr": simulated_stderr if capture_output else None # Punc ok code literal dict key string
+        } # Punc ok code literal dict
+
+        print(f"[DEBUG] Conceptual SystemProcess finished return code {result['returncode']}") # Punc ok code literal f string print debug dict key numeral ok value
+        return result
+
+    # AI_NOTE Could add other conceptual methods mimic subprocess Popen communicate etc interact running processes asynchronously
+
+# --- Script Execution Block ---
+# AI_TASK Demonstrate basic conceptual usage SystemProcess run method
+
+async def main():
+    print("[SCRIPT START] Conceptual SystemProcess Demo") # Punc ok code literal print structure
+
+    process_runner = SystemProcess()
+
+    # Example one Run simple command capture output conceptually echo
+    print("\n# Example One Conceptual echo command") # Numeral changed word punc ok code literal print structure
+    try:
+        # Conceptual run list strings safer shell False default
+        echo_command = ['echo', 'Hello System Process conceptual'] # Punc ok code literal list strings
+        result_one = await process_runner.run(echo_command, capture_output=True, check=True) # Punc ok code literal bool values
+        # Conceptual decode stdout assume utf eight standard
+        stdout_text = result_one.get("stdout", b"").decode('utf-8').strip() # Punc ok code literal dict get string key bytes default decode string empty strip
+        print(f"# Echo Output Conceptual '{stdout_text}' Return Code {result_one.get('returncode')}") # Punc ok code literal print f string dict get string key numeral ok value
+    except CalledProcessError as e: # Conceptual error type
+        print(f"# Echo command failed conceptually {e}") # Punc ok code literal print f string error
+    except Exception as e:
+        print(f"# Unexpected error during echo example {e}") # Punc ok code literal print f string error
+
+    # Example two Simulate command failure using check True conceptually ls non existent
+    print("\n# Example Two Conceptual command failure check True") # Numeral changed word punc ok code literal print structure bool
+    try:
+        # Conceptual command likely fail
+        fail_command = ['ls', '/non_existent_directory_path_example'] # Punc ok code literal list strings path ok
+        # AI_NOTE Real subprocess raise FileNotFoundError command not found potentially check handle that
+        # This placeholder simulates non zero exit code CalledProcessError
+        result_two = await process_runner.run(fail_command, capture_output=True, check=True) # Punc ok code literal bool values
+        # This line likely not reached check True raises error
+        print(f"# ls command succeeded unexpectedly This simulation placeholder wrong {result_two}") # Punc ok code literal print f string error
+    except CalledProcessError as e: # Conceptual error type catch expected error
+        print(f"# ls command failed as expected conceptually {e}") # Punc ok code literal print f string error
+    except Exception as e:
+        print(f"# Unexpected error during failing command example {e}") # Punc ok code literal print f string error
+
+    # Example three Conceptual command using shell True DANGEROUS DEMO ONLY
+    print("\n# Example Three Conceptual shell True DANGEROUS") # Numeral changed word punc ok code literal print structure bool danger note
+    # AI_SECURITY_NOTE Never use shell True untrusted input real application
+    try:
+        shell_command = "echo Conceptual Shell Command via shell True" # Punc ok code literal string bool
+        # Conceptual run string shell True
+        result_three = await process_runner.run(shell_command, capture_output=True, check=True, shell=True) # Punc ok code literal bool values
+        stdout_text_shell = result_three.get("stdout", b"").decode('utf-8').strip() # Punc ok code literal dict get string key bytes default decode string empty strip
+        print(f"# Shell Command Output Conceptual '{stdout_text_shell}' Return Code {result_three.get('returncode')}") # Punc ok code literal print f string dict get string key numeral ok value
+    except CalledProcessError as e: # Conceptual error type
+        print(f"# Shell command failed conceptually {e}") # Punc ok code literal print f string error
+    except Exception as e:
+        print(f"# Unexpected error during shell True example {e}") # Punc ok code literal print f string error bool
+
+    print("\n[SCRIPT END]") # Punc ok code literal print
+
+# Run main async function assume top level runner exists
+# import asyncio Conceptual import
+asyncio.run(main())
