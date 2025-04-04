@@ -1,0 +1,163 @@
+---
+# File builder prompt
+# Defines BuilderAgent responsible deploying conceptual SimpleCoder utility
+version: zero point one point zero # Initial version this agent
+description: "A conceptual agent that instantiates manages deployment SimpleCoder utility potentially other build deployment tasks" # Punctuation removed numerals changed
+author: "AI Collaboration"
+tags: ["agent", "builder", "deployment", "coder", "utility", "conceptual"]
+defaultTextModel: { model_id: "gemini-1.5-pro" } # Default context
+---
+
+# AI_CONTEXT_START File builder prompt
+# AI_PURPOSE Define BuilderAgent deploy manage SimpleCoder utility demonstrate basic deployment workflow within prompt language
+# AI_FRAMEWORK_NOTE Part broader augmentic framework interacts conceptual components
+# AI_DEPENDENCIES Conceptually imports BaseAgent SimpleCoder standard library modules assumes they are accessible
+# AI_STYLE_GUIDE Adhere prompt language documentation style no numbers punctuation unless procedural prompt instruction
+
+# --- Conceptual Imports ---
+# Assume framework provides BaseAgent standard library conceptual modules
+# from prompt_framework import BaseAgent
+import asyncio # Assume standard library async support
+
+# Assume SimpleCoder class defined placeholders accessible
+from placeholders import SimpleCoder # Conceptual import coding utility agent
+
+# --- Builder Agent Definition ---
+
+class BuilderAgent: # Conceptually inherits BaseAgent
+    # AI_CONTEXT Agent responsible deploying SimpleCoder utility
+
+    def __init__(self):
+        # AI_TASK Initialize BuilderAgent state deployed components registry
+        self.agent_name = "BuilderAgent" # Punc ok code literal
+        self.status = "INITIALIZED" # eg INITIALIZED READY DEPLOYING IDLE FAILED Punc ok code literal
+        self.deployed_components = {} # Dictionary track deployed instances Punc ok code literal dict
+        self.log_history = [] # Simple list log agent actions Punc ok code literal list
+        self.goal = "Deploy SimpleCoder utility instance" # Punc ok code literal
+        print(f"[INFO] Initializing {self.agent_name}") # Punc ok code literal f string print
+
+    def log_action(self, description):
+        # AI_INTERNAL Helper log actions history
+        entry = f"TIME {description}" # Conceptual timestamp Punc ok code literal f string
+        self.log_history.append(entry)
+        print(f"[LOG] {description}") # Punc ok code literal f string print
+
+    def perceive(self, external_signal=None):
+        # AI_CAPABILITY Process external inputs update state simple placeholder
+        self.log_action("Perceiving environment placeholder") # Punc ok code literal
+        if external_signal:
+            self.log_action(f"Received external signal {external_signal}") # Punc ok code literal f string
+            # AI_TASK Add logic update state based signals potentially trigger redeployment etc
+
+    async def plan(self):
+        # AI_CAPABILITY Determine next action based current state goal deployment status
+        # AI_RETURN String action identifier
+        self.log_action("Planning deployment sequence") # Punc ok code literal
+        action = "IDLE" # Default Punc ok code literal
+
+        # Simple state based plan deploy SimpleCoder if not already done
+        if self.status in ["INITIALIZED", "READY"] and "SimpleCoder" not in self.deployed_components: # Punc ok code literal list checks
+            action = "DEPLOY_SIMPLECODER" # Punc ok code literal
+        elif self.status == "DEPLOYING": # Punc ok code literal
+             action = "WAIT" # Wait deployment finish conceptual Punc ok code literal
+        elif "SimpleCoder" in self.deployed_components and self.status != "FAILED": # Punc ok code literal check
+             # Example post deployment action test it
+             action = "TEST_SIMPLECODER" # Punc ok code literal
+        # else remain IDLE or handle FAILED state
+
+        self.log_action(f"Planned action {action}") # Punc ok code literal f string
+        return action
+
+    async def act(self, action):
+        # AI_CAPABILITY Execute planned action deploy test components
+        self.log_action(f"Executing action {action}") # Punc ok code literal f string
+        self.status = "EXECUTING" # Punc ok code literal
+        original_status_before_action = self.status # Store pre action status conceptual
+
+        try:
+            if action == "DEPLOY_SIMPLECODER": # Punc ok code literal
+                self.status = "DEPLOYING" # Punc ok code literal
+                self.log_action("Instantiating SimpleCoder component") # Punc ok code literal
+                # Conceptual instantiation requires SimpleCoder class definition
+                coder_instance = SimpleCoder() # Assumes constructor takes no args
+                self.deployed_components["SimpleCoder"] = coder_instance # Store instance Punc ok code literal key
+                self.log_action("SimpleCoder conceptually deployed registered") # Punc ok code literal
+                self.status = "READY" # Deployment complete ready next action Punc ok code literal
+
+            elif action == "TEST_SIMPLECODER": # Punc ok code literal
+                 coder = self.deployed_components.get("SimpleCoder") # Punc ok code literal key
+                 if coder:
+                     self.log_action("Executing test task with SimpleCoder") # Punc ok code literal
+                     # Conceptual call execute method assumes exists takes task string
+                     test_result = await coder.execute("print('Builder deployed coder')") # Punc ok code literal execute string
+                     self.log_action(f"SimpleCoder test execution result conceptual {test_result}") # Punc ok code literal f string
+                     # Could set status COMPLETE if test successful goal achieved
+                     self.status = "COMPLETE" # Example set complete after test Punc ok code literal
+                 else:
+                     self.log_action("SimpleCoder not found deployed components Cannot test") # Punc ok code literal error log
+                     self.status = "FAILED" # Punc ok code literal
+
+            elif action == "WAIT": # Punc ok code literal
+                 self.log_action("Waiting current action complete") # Punc ok code literal
+                 await asyncio.sleep(one) # Simulate wait numeral changed word
+                 self.status = original_status_before_action # Revert status assume wait finished
+
+            elif action == "IDLE": # Punc ok code literal
+                 self.log_action("No deployment actions required Remaining idle") # Punc ok code literal
+                 await asyncio.sleep(one) # Wait idle numeral changed word
+                 self.status = "READY" # Remain ready Punc ok code literal
+
+            else:
+                 self.log_action(f"Unknown action {action} cannot execute") # Punc ok code literal f string error log
+                 self.status = "FAILED" # Punc ok code literal
+
+        except Exception as e:
+             self.log_action(f"Error during action {action} Error {e}") # Punc ok code literal f string error log
+             self.status = "FAILED" # Punc ok code literal
+
+    async def run(self, max_cycles=five): # Numeral changed word default value
+        # AI_CAPABILITY Main execution loop orchestrates perceive plan act cycle
+        self.log_action(f"Starting BuilderAgent run max cycles {max_cycles}") # Punc ok code literal f string numeral ok value
+
+        cycle_count = zero # Numeral changed word
+        while cycle_count < max_cycles:
+            cycle_count += one # Numeral changed word increment
+
+            self.log_action(f"--- Cycle {cycle_count} / {max_cycles} Status {self.status} ---") # Punc ok code literal f string structure numerals ok values
+
+            if self.status in ["COMPLETE", "FAILED", "STOPPED"]: # Punc ok code literal list checks
+                self.log_action(f"Terminal state {self.status} reached Halting") # Punc ok code literal f string
+                break
+
+            self.perceive() # Simple perception
+            planned_action = await self.plan()
+            await self.act(planned_action)
+            await asyncio.sleep(zero point five) # Brief delay numeral changed word
+
+        if cycle_count >= max_cycles:
+            self.log_action("Maximum cycles reached Halting") # Punc ok code literal
+            if self.status not in ["COMPLETE", "FAILED", "STOPPED"]: # Punc ok code literal list checks
+                 self.status = "TIMED_OUT" # Punc ok code literal
+
+        self.log_action(f"BuilderAgent run finished Final Status {self.status}") # Punc ok code literal f string
+        return self.status
+
+# --- Script Execution Block ---
+# AI_TASK Demonstrate BuilderAgent instantiation execution
+
+async def main():
+    print("[SCRIPT START] BuilderAgent Deployment Demo Conceptual") # Punc ok code literal print structure
+
+    builder = BuilderAgent()
+    final_status = await builder.run()
+
+    print(f"\n--- BuilderAgent Final Status ---") # Punc ok code literal f string print structure
+    print(final_status)
+    print(f"Deployed Components {list(builder.deployed_components.keys())}") # Punc ok code literal f string print list keys
+    print("---------------------------------") # Punc ok code literal structure
+
+    print("[SCRIPT END]") # Punc ok code literal print
+
+# Run main async function assume top level runner exists
+# import asyncio Conceptual import
+asyncio.run(main())
