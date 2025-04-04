@@ -1,0 +1,267 @@
+---
+# File marketing prompt
+# Defines MarketingAgent perform market research generate copy manage campaigns
+version: zero point one point zero # Initial version this agent
+description: "A conceptual agent designed perform marketing tasks including market research trend analysis content generation social media updates using available tools" # Punctuation removed numerals changed
+author: "AI Collaboration"
+tags: ["agent", "marketing", "research", "content-generation", "social-media", "tool-use", "conceptual"]
+defaultTextModel: { model_id: "gemini-1.5-pro", temperature: 0.8 } # Slightly creative text gen
+defaultSearchModel: { model_id: "gemini-1.5-flash" } # Faster model research queries maybe
+---
+
+# AI_CONTEXT_START File marketing prompt
+# AI_PURPOSE Define MarketingAgent automate common marketing tasks like research content creation campaign execution
+# AI_FRAMEWORK_NOTE Component augmentic framework utilizes conceptual tools WebSearchTool TweeterAgent AI_Interaction layer requires APIManager key handling underlying tools
+# AI_DEPENDENCIES Conceptually imports BaseAgent APIManager WebSearchTool TweeterAgent AI_Interaction standard library assumes accessible
+# AI_STYLE_GUIDE Adhere prompt language documentation style no numbers punctuation unless procedural prompt instruction
+
+# --- Conceptual Imports ---
+# Assume framework provides BaseAgent standard library conceptual modules
+# from prompt_framework import BaseAgent Tool
+import asyncio # Assume standard library async support
+
+# Assume APIManager class defined api py accessible manage keys
+from api import APIManager # Conceptual import
+
+# Assume Tool implementations or placeholders accessible
+from tools import WebSearchTool # Conceptual assumes functional WebSearchTool exists tools py
+# Assume TweeterAgent exists based previous definition uses TwitterTool internally
+from tweeter import TweeterAgent # Conceptual import agent interact X
+
+# Conceptual AI Interaction layer import
+# import AI_Interaction
+
+# --- Marketing Agent Definition ---
+
+class MarketingAgent: # Conceptually inherits BaseAgent
+    # AI_CONTEXT Agent performs various marketing related tasks
+
+    def __init__(self):
+        # AI_TASK Initialize agent instantiate necessary tools state variables
+        self.agent_name = "MarketingAgent" # Punc ok code literal
+        self.status = "INITIALIZED" # eg INITIALIZED READY RESEARCHING GENERATING POSTING IDLE FAILED Punc ok code literal
+        self.log_history = [] # Simple list log agent actions Punc ok code literal list
+        self.current_campaign_goal = None
+        self.research_findings = None
+        self.generated_copy = None
+        self.tools = {} # Dictionary hold tool instances Punc ok code literal dict
+
+        print(f"[INFO] Initializing {self.agent_name}") # Punc ok code literal f string print
+
+        try:
+            # Instantiate APIManager conceptual load keys needed tools
+            api_manager = APIManager()
+
+            # Instantiate conceptual tools agent needs assumes they exist registered properly
+            # Requires WebSearchTool TweeterAgent definitions exist tools py tweeter py etc
+            self.tools["web_search"] = WebSearchTool(api_key=api_manager.get_api_key("SERPAPI")) # Conceptual assumes key name Punc ok code literal dict key string tool instantiation
+            self.tools["tweeter"] = TweeterAgent(api_manager=api_manager) # Conceptual TweeterAgent uses its own tool Punc ok code literal dict key string tool instantiation
+
+            # Check if tools initialized successfully conceptually
+            if self.tools["web_search"].is_available and self.tools["tweeter"].status == "READY": # Punc ok code literal checks bool string
+                 self.status = "READY" # Punc ok code literal
+                 print(f"[INFO] {self.agent_name} ready with required tools") # Punc ok code literal f string print
+            else:
+                 raise ValueError("MarketingAgent failed initialize required tools WebSearch or Tweeter not ready") # Punc ok code literal error message
+
+        except Exception as e:
+            print(f"[ERROR] Failed initialize MarketingAgent error setting up tools {e}") # Punc ok code literal f string print error
+            self.status = "FAILED_INIT" # Punc ok code literal
+
+    def log_action(self, description):
+        # AI_INTERNAL Helper log actions history
+        entry = f"TIME {description}" # Conceptual timestamp Punc ok code literal f string
+        self.log_history.append(entry)
+        print(f"[LOG] {description}") # Punc ok code literal f string print
+
+    async def set_campaign_goal(self, goal_description):
+        # AI_CAPABILITY Set current marketing campaign goal agent
+        self.current_campaign_goal = goal_description
+        self.log_action(f"Marketing campaign goal set '{goal_description}'") # Punc ok code literal f string log
+        self.status = "READY" # Ready plan execute goal Punc ok code literal
+
+    async def research_market_trends(self, topic, max_results=five): # Numeral changed word default value
+        # AI_CAPABILITY Use WebSearchTool gather information market trends specific topic
+        # AI_PARAM topic String topic research
+        # AI_PARAM max_results Integer max search results process
+        # AI_RETURN String summary findings None failure
+        self.log_action(f"Researching market trends topic '{topic}' max {max_results}") # Punc ok code literal f string log numeral ok value
+        if self.status != "READY" or "web_search" not in self.tools: # Punc ok code literal string check dict key
+            self.log_action("Agent not ready or WebSearchTool unavailable cannot research") # Punc ok code literal error log
+            return None
+
+        self.status = "RESEARCHING" # Punc ok code literal
+        findings_summary = None # Init
+        try:
+            search_tool = self.tools["web_search"] # Punc ok code literal dict key string
+            # Conceptual execute search tool needs await if tool async
+            raw_results_data = await search_tool.execute(args=[topic]) # Assumes tool takes query list single string arg
+            # Extract process results conceptual processing needed turn raw results into usable findings
+            # This might involve another LLM call summarize search snippets
+            if raw_results_data and raw_results_data.get("status") == "OK": # Punc ok code literal dict get string check
+                self.research_findings = raw_results_data.get("processed_output", raw_results_data.get("output", "No processed data")) # Punc ok code literal dict get string keys default string
+                # Conceptual step summarize findings
+                findings_summary = await self.summarize_research(str(self.research_findings), topic) # Call internal helper summarize
+                self.log_action(f"Market research successful summary generated topic '{topic}'") # Punc ok code literal f string log
+                self.status = "READY" # Ready next action Punc ok code literal
+            else:
+                error_msg = raw_results_data.get("error", "Unknown search error") if raw_results_data else "Search tool failed return value" # Punc ok code literal dict get string default strings
+                raise ValueError(f"Web search failed {error_msg}") # Punc ok code literal f string error message
+
+        except Exception as e:
+             self.log_action(f"Error during market research {e}") # Punc ok code literal f string error log
+             self.status = "FAILED" # Punc ok code literal
+
+        return findings_summary
+
+    async def summarize_research(self, text_to_summarize, topic_context):
+         # AI_INTERNAL Helper use LLM summarize research findings
+         self.log_action(f"Summarizing research findings topic '{topic_context}'") # Punc ok code literal f string log
+         # Conceptual call AI Interaction layer requires import works
+         summary_prompt = f"""
+         **Task:** Concisely summarize the key market trends and findings from the following research data related to '{topic_context}'. Focus on actionable insights for a marketing campaign. Maximum three bullet points.
+
+         **Research Data:**
+         ```
+         {text_to_summarize[:two_thousand]}
+         ```
+
+         **Summary (Max three bullet points):**
+         """ # Punc ok code literal f string structure numerals changed words slice num ok value placeholder markdown ok
+         try:
+             # Assume AI_Interaction generate_text exists imported handles model config contextually
+             summary = await AI_Interaction.generate_text(
+                 # modelConfig=metadata.defaultTextModel, # Use default conceptual access
+                 prompt=summary_prompt
+             )
+             return summary.strip() if summary else "Could not summarize research findings" # Punc ok code literal string default message
+         except Exception as e:
+              self.log_action(f"Error during research summarization {e}") # Punc ok code literal f string error log
+              return "Error summarizing research" # Punc ok code literal string error message
+
+    async def generate_ad_copy(self, product_description, target_audience, key_selling_points):
+        # AI_CAPABILITY Use LLM generate marketing advertisement copy
+        # AI_PARAM product_description String details product service
+        # AI_PARAM target_audience String description intended audience
+        # AI_PARAM key_selling_points List String key features benefits highlight
+        # AI_RETURN String generated ad copy None failure
+        self.log_action("Generating advertisement copy via LLM") # Punc ok code literal log
+        if self.status != "READY": # Punc ok code literal check
+             self.log_action("Agent not ready cannot generate copy") # Punc ok code literal error log
+             return None
+
+        self.status = "GENERATING_COPY" # Punc ok code literal
+        ad_copy = None # Init
+        # Conceptual call AI Interaction layer
+        copy_prompt = f"""
+        **Role:** Expert Marketing Copywriter
+        **Product/Service:** {product_description}
+        **Target Audience:** {target_audience}
+        **Key Selling Points:** {', '.join(key_selling_points)}
+        **Task:** Write compelling short advertisement copy (around fifty words) for social media suitable for the target audience highlighting the key selling points. Be persuasive engaging.
+        **Ad Copy:**
+        """ # Punc ok code literal f string structure numerals changed words comma ok join ok
+        try:
+            # Assume AI_Interaction generate_text exists imported handles model config contextually
+             ad_copy = await AI_Interaction.generate_text(
+                 # modelConfig=metadata.defaultTextModel, # Use default conceptual access
+                 prompt=copy_prompt
+             )
+             if ad_copy:
+                  self.generated_copy = ad_copy.strip()
+                  self.log_action(f"Advertisement copy generated '{self.generated_copy[:50]}...'") # Punc ok code literal f string log slice numeral ok ellipsis ok
+                  self.status = "READY" # Ready next action Punc ok code literal
+             else:
+                  raise ValueError("LLM failed generate ad copy") # Punc ok code literal error message
+
+        except Exception as e:
+             self.log_action(f"Error during ad copy generation {e}") # Punc ok code literal f string error log
+             self.status = "FAILED" # Punc ok code literal
+
+        return ad_copy
+
+    async def post_campaign_update(self, update_text):
+        # AI_CAPABILITY Post campaign update social media using TweeterAgent conceptual
+        # AI_PARAM update_text String content post
+        # AI_RETURN Dictionary result TweeterAgent execution None failure
+        self.log_action(f"Posting campaign update via TweeterAgent '{update_text[:50]}...'") # Punc ok code literal f string log slice numeral ok ellipsis ok
+        if self.status != "READY" or "tweeter" not in self.tools: # Punc ok code literal string check dict key
+             self.log_action("Agent not ready or Tweeter tool unavailable cannot post update") # Punc ok code literal error log
+             return None
+
+        self.status = "POSTING_UPDATE" # Punc ok code literal
+        post_result = None # Init
+        try:
+            tweeter_agent = self.tools["tweeter"] # Punc ok code literal dict key string
+            # Conceptual call tweeter agent post method assumes exists takes text
+            post_result = await tweeter_agent.post_tweet(update_text) # Assumes post_tweet method exists tweeter agent
+            if post_result and post_result.get("status") == "OK": # Punc ok code literal dict get string check
+                 self.log_action("Campaign update posted successfully") # Punc ok code literal log
+                 self.status = "READY" # Ready next action Punc ok code literal
+            else:
+                 error_msg = post_result.get("error", "Unknown error from TweeterAgent") if post_result else "TweeterAgent failed return value" # Punc ok code literal dict get string default strings
+                 raise ValueError(f"Failed post campaign update TweeterAgent error {error_msg}") # Punc ok code literal f string error message
+
+        except Exception as e:
+             self.log_action(f"Error during campaign update posting {e}") # Punc ok code literal f string error log
+             self.status = "FAILED" # Punc ok code literal
+
+        return post_result
+
+    # AI_NOTE Add other marketing relevant methods eg analyze campaign results track mentions etc
+
+# --- Script Execution Block ---
+# AI_TASK Demonstrate MarketingAgent usage conceptual research copy post
+
+async def main():
+    print("[SCRIPT START] MarketingAgent Demo Conceptual") # Punc ok code literal print structure
+
+    agent = None # Init ensure finally access possibility needed cleanup though likely none this simple agent
+    try:
+        # Instantiate agent requires APIManager concept pass tool initializations
+        agent = MarketingAgent()
+
+        if agent.status == "READY": # Punc ok code literal check string
+            # Example one Research trends
+            print("\n# Attempting market research") # Punc ok code literal print structure
+            research_summary = await agent.research_market_trends("AI agent platforms", max_results=three) # Punc ok code literal function call string arg numeral changed word
+
+            if research_summary:
+                 print(f"# Market Research Summary:\n{research_summary}") # Punc ok code literal print f string structure
+            else:
+                 print("# Market Research failed Check agent status logs") # Punc ok code literal print error
+
+            # Example two Generate ad copy
+            print("\n# Attempting generate ad copy") # Punc ok code literal print structure
+            ad_copy = await agent.generate_ad_copy(
+                 product_description="Augmentic Agent Framework v two point zero point zero", # Punc ok code literal kwarg string version numeral ok
+                 target_audience="AI researchers developers", # Punc ok code literal kwarg string
+                 key_selling_points=["Modular Architecture", "LLM Planning", "Semantic Memory", "Functional Tools"] # Punc ok code literal kwarg list strings
+            )
+            if ad_copy:
+                 print(f"# Generated Ad Copy:\n{ad_copy}") # Punc ok code literal print f string structure
+            else:
+                 print("# Ad copy generation failed Check agent status logs") # Punc ok code literal print error
+
+            # Example three Post update conceptual uses generated copy
+            print("\n# Attempting post campaign update using generated copy") # Punc ok code literal print structure
+            if agent.generated_copy: # Check copy generated successfully
+                post_status = await agent.post_campaign_update(f"Check out our latest {agent.generated_copy}") # Punc ok code literal function call f string use generated copy
+                if post_status:
+                     print(f"# Campaign Post Result {post_status}") # Punc ok code literal print f string
+                else:
+                     print("# Campaign post failed Check agent status logs") # Punc ok code literal print error
+            else:
+                 print("# Skipping campaign post ad copy not generated") # Punc ok code literal print warn
+
+        else:
+             print(f"[ERROR] MarketingAgent failed initialize Status {agent.status} Cannot perform actions") # Punc ok code literal print f string error
+
+    except Exception as e:
+        print(f"[FATAL] Error during MarketingAgent demo {e}") # Punc ok code literal print f string error
+
+    print("[SCRIPT END]") # Punc ok code literal print
+
+# Run main async function assume top level runner exists
+# import asyncio Conceptual import
+asyncio.run(main())
