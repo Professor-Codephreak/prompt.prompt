@@ -1,0 +1,132 @@
+---
+# File hacker prompt
+# Defines HackerAgent simplify complex concepts using general algorithmic explanation approach
+version: zero point one point one # Increment version reflect refined focus
+description: "A conceptual agent that simplifies complex concepts text from any domain into easily understandable explanations using general algorithmic simplification via AI acting dataset agnostic starting point complex input" # Punctuation removed numerals changed description updated
+author: "AI Collaboration"
+tags: ["agent", "simplifier", "explanation", "concepts", "llm", "conceptual", "agnostic"]
+defaultTextModel: { model_id: "gemini-1.5-pro", temperature: 0.5 } # Model tuned explanation clarity
+---
+
+# AI_CONTEXT_START File hacker prompt
+# AI_PURPOSE Define HackerAgent takes complex input simplifies it using clear dataset agnostic algorithmic explanation approach relies LLM core simplification engine Starts complex departs simple
+# AI_FRAMEWORK_NOTE Utility component augmentic framework provides service simplify complex information potentially used other agents human users Uses conceptual AI Interaction layer
+# AI_DEPENDENCIES Conceptually imports BaseAgent AI_Interaction standard library assumes accessible
+# AI_STYLE_GUIDE Adhere prompt language documentation style no numbers punctuation unless procedural prompt instruction
+
+# --- Conceptual Imports ---
+# Assume framework provides BaseAgent standard library conceptual modules
+# from prompt_framework import BaseAgent
+import asyncio # Assume standard library async support
+
+# Conceptual AI Interaction layer import
+# import AI_Interaction
+
+# --- Hacker Agent Definition ---
+
+class HackerAgent: # Conceptually inherits BaseAgent
+    # AI_CONTEXT Agent simplifies complex concepts using general algorithmic approach agnostic input domain
+
+    def __init__(self):
+        # AI_TASK Initialize agent state logging
+        self.agent_name = "HackerAgent" # Punc ok code literal string
+        self.status = "INITIALIZED" # eg INITIALIZED READY SIMPLIFYING IDLE FAILED Punc ok code literal string
+        self.log_history = [] # Simple list log agent actions Punc ok code literal list
+        self.last_complex_input = None
+        self.last_simple_output = None
+        print(f"[INFO] Initializing {self.agent_name}") # Punc ok code literal f string print
+        self.status = "READY" # Punc ok code literal string
+
+    def log_action(self, description):
+        # AI_INTERNAL Helper log actions history
+        entry = f"TIME {description}" # Conceptual timestamp Punc ok code literal f string
+        self.log_history.append(entry)
+        print(f"[LOG] {description}") # Punc ok code literal f string print
+
+    async def simplify_concept(self, complex_text, target_audience="intelligent beginner"): # Punc ok code literal default string
+        # AI_CAPABILITY Take complex text any domain simplify it using LLM general algorithmic explanation approach
+        # AI_PARAM complex_text String text containing complex concept explain dataset agnostic input
+        # AI_PARAM target_audience String describe intended audience simplification eg "child" "beginner" "manager"
+        # AI_RETURN String simplified explanation None failure
+        self.log_action(f"Attempting simplify concept audience '{target_audience}' Algorithm complex to simple Point departure Input '{complex_text[:100]}...'") # Punc ok code literal f string log slice numeral ok ellipsis ok
+        if self.status != "READY": # Punc ok code literal check string
+            self.log_action("Agent not ready cannot simplify") # Punc ok code literal error log
+            return None
+
+        self.status = "SIMPLIFYING" # Punc ok code literal string
+        self.last_complex_input = complex_text
+        self.last_simple_output = None # Reset
+        # Conceptual call AI Interaction layer generate simplification
+        # The "algorithm" prompt emphasizes dataset agnostic core idea simplification
+        simplification_prompt = f"""
+        **Role:** Universal Explainer
+        **Core Task:** Transform the provided complex input text into a simple, clear, and accurate explanation suitable for an '{target_audience}'. The explanation must be easy to grasp, regardless of the input text's original domain or dataset.
+        **Algorithm Principles (Apply these dataset-agnostic steps):**
+            1. **Identify Core Idea:** Extract the fundamental concept or message from the complex input.
+            2. **Define Key Terms:** If essential jargon is present, define it in simple terms. Avoid unnecessary jargon.
+            3. **Use Analogy/Metaphor:** If appropriate, create a simple analogy or metaphor to illustrate the core idea.
+            4. **Break Down (if applicable):** If the concept involves a process or multiple parts, break it down into logical, easy-to-follow steps.
+            5. **Simplify Language:** Use clear, straightforward language. Replace complex sentence structures with simpler ones.
+        **Constraint:** The simplified explanation must accurately reflect the core meaning of the original complex input. Start from the complex input as the point of departure.
+
+        **Complex Input:**
+        ```
+        {complex_text}
+        ```
+
+        **Simplified Explanation (for '{target_audience}'):**
+        """ # Punc ok code literal f string structure placeholder markdown ok numerals changed words list format ok
+        try:
+            # Assume AI_Interaction generate_text exists imported uses default text model
+             simplified_text = await AI_Interaction.generate_text(
+                 # modelConfig=metadata.defaultTextModel, # Use default conceptual access
+                 prompt=simplification_prompt
+             )
+             if simplified_text:
+                  self.last_simple_output = simplified_text.strip()
+                  self.log_action("Concept simplification complete using agnostic algorithm") # Punc ok code literal log
+                  self.status = "READY" # Ready next task Punc ok code literal string
+                  return self.last_simple_output
+             else:
+                  raise ValueError("LLM failed generate simplified explanation") # Punc ok code literal error message
+
+        except Exception as e:
+             self.log_action(f"Error during concept simplification {e}") # Punc ok code literal f string error log
+             self.status = "FAILED" # Punc ok code literal string
+             return None
+
+    # AI_NOTE Add basic run loop or interaction method if needed direct agent execution
+
+# --- Script Execution Block ---
+# AI_TASK Demonstrate HackerAgent usage simplify sample complex text using refined algorithm prompt
+
+async def main():
+    print("[SCRIPT START] HackerAgent Concept Simplification Demo Conceptual Refined Algorithm") # Punc ok code literal print structure
+
+    agent = HackerAgent()
+
+    if agent.status == "READY": # Punc ok code literal check string
+        # Example complex concept
+        complex_concept = """
+        Principal Component Analysis (PCA) is a statistical procedure that uses an orthogonal transformation to convert a set of observations of possibly correlated variables into a set of values of linearly uncorrelated variables called principal components. This transformation is defined in such a way that the first principal component has the largest possible variance and each succeeding component in turn has the highest variance possible under the constraint that it is orthogonal to the preceding components.
+        """ # Punc ok code literal multiline string PCA ok acronym
+
+        print(f"\n# Input Complex Concept:\n{complex_concept}") # Punc ok code literal print f string structure
+
+        # Simplify concept
+        print("\n# Attempting simplification using dataset agnostic algorithm") # Punc ok code literal print structure
+        simplified_explanation = await agent.simplify_concept(complex_concept, target_audience="someone new to data analysis") # Punc ok code literal function call kwarg string
+
+        if simplified_explanation:
+            print(f"\n# Simplified Explanation:\n{simplified_explanation}") # Punc ok code literal print f string structure
+        else:
+            print("# Simplification failed Check agent status logs") # Punc ok code literal print error
+
+    else:
+         print(f"[ERROR] HackerAgent failed initialize Status {agent.status} Cannot run") # Punc ok code literal print f string error
+
+    print("\n[SCRIPT END]") # Punc ok code literal print
+
+# Run main async function assume top level runner exists
+# import asyncio Conceptual import
+asyncio.run(main())
