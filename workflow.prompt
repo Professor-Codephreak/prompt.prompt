@@ -1,0 +1,242 @@
+---
+# File workflow prompt
+# Defines WorkflowAgent execute predefined sequence tasks using tools agents
+version: zero point one point zero # Initial version this agent
+description: "A conceptual agent that executes predefined workflow steps orchestrating other tools agents eg research generate post" # Punctuation removed numerals changed
+author: "AI Collaboration"
+tags: ["agent", "workflow", "orchestration", "automation", "tool-use", "conceptual"]
+defaultTextModel: { model_id: "gemini-1.5-pro" } # Default context generation steps
+---
+
+# AI_CONTEXT_START File workflow prompt
+# AI_PURPOSE Define WorkflowAgent execute fixed sequence tasks manage state data flow between steps
+# AI_FRAMEWORK_NOTE Component augmentic framework demonstrates structured task execution contrasts dynamic planning MastermindAgent Uses conceptual tools AI Interaction
+# AI_DEPENDENCIES Conceptually imports BaseAgent APIManager WebSearchTool TweeterAgent AI_Interaction standard library assumes accessible
+# AI_STYLE_GUIDE Adhere prompt language documentation style no numbers punctuation unless procedural prompt instruction
+
+# --- Conceptual Imports ---
+# Assume framework provides BaseAgent standard library conceptual modules
+# from prompt_framework import BaseAgent Tool
+import asyncio # Assume standard library async support
+
+# Assume APIManager class defined api py accessible manage keys
+from api import APIManager # Conceptual import
+
+# Assume Tool implementations placeholders accessible
+from tools import WebSearchTool # Conceptual assumes functional WebSearchTool exists tools py
+# Assume TweeterAgent exists based previous definition uses TwitterTool internally
+from tweeter import TweeterAgent # Conceptual import agent interact X
+
+# Conceptual AI Interaction layer import
+# import AI_Interaction
+
+# --- Workflow Agent Definition ---
+
+class WorkflowAgent: # Conceptually inherits BaseAgent
+    # AI_CONTEXT Agent executes predefined workflow Research -> Generate -> Post
+
+    def __init__(self, workflow_input_topic):
+        # AI_TASK Initialize agent define workflow steps instantiate tools state
+        # AI_PARAM workflow_input_topic String initial topic drive workflow
+        self.agent_name = "WorkflowAgent" # Punc ok code literal
+        self.status = "INITIALIZED" # eg INITIALIZED READY RUNNING_STEP_ONE RUNNING_STEP_TWO COMPLETE FAILED Punc ok code literal
+        self.log_history = [] # Simple list log agent actions Punc ok code literal list
+        self.workflow_topic = workflow_input_topic
+        self.workflow_state = {} # Dictionary hold data passed between steps Punc ok code literal dict
+        self.current_step_index = zero # Numeral changed word index steps
+        # AI_WORKFLOW Define sequence steps method names
+        self.workflow_steps = [
+            self._step_research,
+            self._step_generate_content,
+            self._step_post_content
+        ] # Punc ok code literal list method references
+        self.tools = {} # Dictionary hold tool instances Punc ok code literal dict
+
+        print(f"[INFO] Initializing {self.agent_name} topic '{workflow_input_topic}'") # Punc ok code literal f string print
+
+        try:
+            # Instantiate APIManager conceptual load keys needed tools
+            api_manager = APIManager()
+
+            # Instantiate conceptual tools agent needs assumes they exist registered properly
+            self.tools["web_search"] = WebSearchTool(api_key=api_manager.get_api_key("SERPAPI")) # Conceptual assumes key name Punc ok code literal dict key string tool instantiation
+            self.tools["tweeter"] = TweeterAgent(api_manager=api_manager) # Conceptual TweeterAgent Punc ok code literal dict key string tool instantiation
+
+            # Check if tools initialized successfully conceptually
+            if self.tools["web_search"].is_available and self.tools["tweeter"].status == "READY": # Punc ok code literal checks bool string
+                 self.status = "READY" # Punc ok code literal
+                 print(f"[INFO] {self.agent_name} ready execute workflow") # Punc ok code literal f string print
+            else:
+                 raise ValueError("WorkflowAgent failed initialize required tools not ready") # Punc ok code literal error message
+
+        except Exception as e:
+            print(f"[ERROR] Failed initialize WorkflowAgent error setting up tools {e}") # Punc ok code literal f string print error
+            self.status = "FAILED_INIT" # Punc ok code literal
+
+    def log_action(self, description):
+        # AI_INTERNAL Helper log actions history
+        entry = f"TIME {description}" # Conceptual timestamp Punc ok code literal f string
+        self.log_history.append(entry)
+        print(f"[LOG] {description}") # Punc ok code literal f string print
+
+    # --- Workflow Step Methods ---
+
+    async def _step_research(self):
+        # AI_TASK Workflow Step One Perform web search store findings state
+        self.log_action(f"Executing Step One Research topic '{self.workflow_topic}'") # Numeral changed word punc ok code literal f string log
+        search_tool = self.tools.get("web_search") # Punc ok code literal dict get string key
+        if not search_tool: raise ValueError("WebSearchTool not available") # Punc ok code literal error message
+
+        # Conceptual execute search tool
+        raw_results_data = await search_tool.execute(args=[self.workflow_topic])
+        if raw_results_data and raw_results_data.get("status") == "OK": # Punc ok code literal dict get string check
+            # Store raw findings could summarized later if needed
+            self.workflow_state["research_findings"] = raw_results_data.get("processed_output", "No processed data") # Punc ok code literal state key string dict get string keys default string
+            self.log_action("Research step completed findings stored") # Punc ok code literal log
+            return True # Indicate step success Punc ok code literal bool
+        else:
+            error_msg = raw_results_data.get("error", "Unknown search error") if raw_results_data else "Search tool failed return value" # Punc ok code literal dict get string default strings
+            self.log_action(f"Research step failed {error_msg}") # Punc ok code literal f string log error
+            return False # Indicate step failure Punc ok code literal bool
+
+    async def _step_generate_content(self):
+        # AI_TASK Workflow Step Two Generate content based research findings store state
+        self.log_action("Executing Step Two Generate Content") # Numeral changed word punc ok code literal log
+        research_data = self.workflow_state.get("research_findings") # Punc ok code literal state key string
+        if not research_data:
+            self.log_action("Generate step failed Cannot generate content without research findings") # Punc ok code literal error log
+            return False # Punc ok code literal bool
+
+        # Conceptual call AI Interaction layer generate content
+        generation_prompt = f"""
+        **Task:** Based on the following research findings about '{self.workflow_topic}', write a short informative post (two three sentences) suitable for social media.
+
+        **Research Findings:**
+        ```
+        {str(research_data)[:one_thousand]}
+        ```
+
+        **Generated Post:**
+        """ # Punc ok code literal f string structure numerals changed words slice numeral ok value placeholder markdown ok
+        try:
+            # Assume AI_Interaction generate_text exists imported handles model config contextually
+             generated_post = await AI_Interaction.generate_text(
+                 # modelConfig=metadata.defaultTextModel, # Use default conceptual access
+                 prompt=generation_prompt
+             )
+             if generated_post:
+                  self.workflow_state["generated_post"] = generated_post.strip() # Punc ok code literal state key string
+                  self.log_action(f"Content generation step completed Post '{self.workflow_state['generated_post'][:50]}...'") # Punc ok code literal f string log slice numeral ok ellipsis ok
+                  return True # Punc ok code literal bool
+             else:
+                  raise ValueError("LLM failed generate content post") # Punc ok code literal error message
+
+        except Exception as e:
+             self.log_action(f"Error during content generation step {e}") # Punc ok code literal f string error log
+             return False # Punc ok code literal bool
+
+    async def _step_post_content(self):
+        # AI_TASK Workflow Step Three Post generated content using TweeterAgent
+        self.log_action("Executing Step Three Post Content") # Numeral changed word punc ok code literal log
+        post_content = self.workflow_state.get("generated_post") # Punc ok code literal state key string
+        tweeter_agent = self.tools.get("tweeter") # Punc ok code literal dict get string key
+
+        if not post_content:
+            self.log_action("Post step failed Cannot post without generated content") # Punc ok code literal error log
+            return False # Punc ok code literal bool
+        if not tweeter_agent:
+             self.log_action("Post step failed TweeterAgent tool unavailable") # Punc ok code literal error log
+             return False # Punc ok code literal bool
+
+        # Conceptual call tweeter agent post method
+        post_result = await tweeter_agent.post_tweet(post_content)
+        if post_result and post_result.get("status") == "OK": # Punc ok code literal dict get string check
+            self.workflow_state["post_result"] = post_result # Store result eg tweet ID URL Punc ok code literal state key string
+            self.log_action(f"Post step completed successfully Result {post_result.get('tweet_id', 'N/A')}") # Punc ok code literal f string log dict get string key default string N/A ok
+            return True # Punc ok code literal bool
+        else:
+            error_msg = post_result.get("error", "Unknown error from TweeterAgent") if post_result else "TweeterAgent failed return value" # Punc ok code literal dict get string default strings
+            self.log_action(f"Post step failed TweeterAgent error {error_msg}") # Punc ok code literal f string log error
+            return False # Punc ok code literal bool
+
+    # --- Workflow Execution ---
+
+    async def run(self):
+        # AI_CAPABILITY Execute defined workflow sequence step by step
+        self.log_action(f"Starting workflow execution topic '{self.workflow_topic}'") # Punc ok code literal f string log
+        if self.status != "READY": # Punc ok code literal check
+            self.log_action(f"Workflow cannot start agent status {self.status}") # Punc ok code literal error log
+            return False # Indicate failure Punc ok code literal bool
+
+        self.status = "RUNNING" # Punc ok code literal
+        self.current_step_index = zero # Start first step numeral changed word
+
+        while self.current_step_index < len(self.workflow_steps):
+            current_step_method = self.workflow_steps[self.current_step_index]
+            step_name = current_step_method.__name__ # Get method name logging
+            self.log_action(f"--- Starting Workflow Step {self.current_step_index + one} {step_name} ---") # Numeral ok math ok punc ok code literal f string log structure
+
+            try:
+                 step_success = await current_step_method() # Execute step method
+                 if not step_success:
+                     self.log_action(f"Workflow halted step {step_name} failed") # Punc ok code literal f string log error
+                     self.status = "FAILED" # Punc ok code literal
+                     break # Stop workflow failure
+
+                 self.current_step_index += one # Move next step numeral changed word increment
+
+            except Exception as e:
+                 self.log_action(f"Critical error during workflow step {step_name} Error {e}") # Punc ok code literal f string log error
+                 self.status = "FAILED" # Punc ok code literal
+                 break
+
+            await asyncio.sleep(zero point two) # Small delay between steps numeral changed word point ok code value
+
+        if self.status == "RUNNING": # If loop finished without failure
+             self.status = "COMPLETE" # Punc ok code literal
+
+        self.log_action(f"Workflow execution finished Final Status {self.status}") # Punc ok code literal f string log
+        # AI_OUTPUT Return final state data perhaps True/False success
+        return self.status == "COMPLETE" # Punc ok code literal bool comparison
+
+
+# --- Script Execution Block ---
+# AI_TASK Demonstrate WorkflowAgent instantiation execution simple workflow
+
+async def main():
+    print("[SCRIPT START] WorkflowAgent Demo Conceptual") # Punc ok code literal print structure
+
+    workflow_agent = None # Init ensure finally access possibility needed cleanup though likely none this simple agent
+    try:
+        # Define topic workflow
+        topic = "benefits using dedicated prompt languages" # Punc ok code literal string
+
+        # Instantiate agent topic
+        workflow_agent = WorkflowAgent(workflow_input_topic=topic)
+
+        if workflow_agent.status == "READY": # Punc ok code literal check string
+            # Run workflow
+            print(f"\n# Running workflow topic '{topic}'") # Punc ok code literal print f string structure
+            success = await workflow_agent.run()
+
+            if success:
+                 print(f"# Workflow completed successfully") # Punc ok code literal print f string
+                 # Print final generated post conceptually
+                 final_post = workflow_agent.workflow_state.get("generated_post", "Post not generated") # Punc ok code literal state key string default string
+                 print(f"# Final Generated Post:\n{final_post}") # Punc ok code literal print f string structure
+                 post_details = workflow_agent.workflow_state.get("post_result", {}) # Punc ok code literal state key string default dict
+                 print(f"# Final Post Result details {post_details}") # Punc ok code literal print f string details
+            else:
+                 print(f"# Workflow failed Final Status {workflow_agent.status}") # Punc ok code literal print f string error
+
+        else:
+             print(f"[ERROR] WorkflowAgent failed initialize Status {workflow_agent.status} Cannot run") # Punc ok code literal print f string error
+
+    except Exception as e:
+        print(f"[FATAL] Error during WorkflowAgent demo {e}") # Punc ok code literal print f string error
+
+    print("[SCRIPT END]") # Punc ok code literal print
+
+# Run main async function assume top level runner exists
+# import asyncio Conceptual import
+asyncio.run(main())
