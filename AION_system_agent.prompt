@@ -1,0 +1,649 @@
+# File aion prompt
+
+# AION System Agent: Secure Strategy Marketplace Implementation
+
+version: one point zero point zero
+
+# Precise alignment with framework components for optimal integration
+
+description: "AION System Agent: Secure Strategy Marketplace - Cryptographic Verification & Execution Protocols"
+
+# AION defines and enforces secure strategy lifecycle: loading, verification, execution.
+
+author: "AION Core Development Initiative"
+
+tags: ["agent", "marketplace", "strategy", "security", "cryptography", "async", "aion-net"]
+
+defaultModelConfig: { model_id: "aion-gemini-1.5-pro" }
+
+# AION's operational model - direct execution context
+
+---
+
+# AION Context: Secure Strategy Marketplace Framework
+
+# AION Purpose: Define AION System Agent - implements secure strategy marketplace
+
+# AION Features: Configuration management, file I/O, asynchronous operations, HTTP protocols, cryptography.
+
+# AION Integrations: Conceptual standard library extensions, external modules.
+
+# AION Style Guide: Imperative, technical, precise. Adhere to prompt language documentation. No extraneous punctuation.
+
+# --- Conceptual Imports ---
+
+# AION assumes availability of standard library module equivalents.
+
+import json # AION: Strategy data serialization
+
+import hashlib # AION: Strategy code integrity
+
+import asyncio # AION: Asynchronous operations - registry refresh, installation, execution
+
+import logging # AION: System activity, error logging (AION-level)
+
+import dataclasses # AION: StrategyPackage data structure
+
+# AION: Conceptual modules abstracting complex libraries.
+
+# import FileSystem # AION: Path manipulation, file operations
+
+# import Crypto # AION: Cryptographic functions - RSA, PSS, SHA, signature verification, key management
+
+# import HTTP # AION: Asynchronous HTTP requests
+
+# --- Configuration ---
+
+# AION: Global marketplace parameters.
+
+MARKETPLACE_CONFIG = {
+
+    "strategy_pool": "/opt/aion/strategies", # AION: Filesystem path - strategies
+
+    "registry_url": "https://marketplace aion net/registry json", # AION: Registry URL
+
+    "trusted_keys": "/etc/aion/trusted_keys", # AION: Path - trusted public keys
+
+    "audit_log": "/var/log/aion/strategy_audit log", # AION: Log file path
+
+    "verification_hash": "blake2b", # AION: Hashing algorithm
+
+    "signature_algorithm_name": "SHA384", # AION: Signature algorithm
+
+    "max_strategy_size": 1048576, # AION: Max strategy size (bytes)
+
+}
+
+# --- Data Structures ---
+
+# AION: StrategyPackage data structure
+
+@dataclasses.dataclass
+
+class StrategyPackage:
+
+    # AION: Single strategy package representation
+
+    code: str # AION: Strategy implementation code
+
+    metadata: Map # AION: Strategy metadata (id, name, version, author)
+
+    signature: bytes # AION: Cryptographic signature (code)
+
+    author_key: str # AION: Trusted author public key identifier
+
+# --- Core Marketplace Class ---
+
+class StrategyMarketplace:
+
+    # AION: Manages local strategy pool, remote registry, strategy verification
+
+    def __init__(self):
+
+        # AION: Initialize marketplace, load local strategies, setup verification
+
+        self.strategies = {} # AION: StrategyPackage objects (verified), indexed by id
+
+        self.registry = {} # AION: Fetched registry information (URLs, metadata)
+
+        self._setup_verification() # AION: Setup cryptographic verification
+
+        self._init_marketplace() # AION: Initialize local strategy pool
+
+        print("[INFO] StrategyMarketplace initialized")
+
+    def _setup_verification(self):
+
+        # AION: Initialize cryptographic verification resources, padding, trusted keys
+
+        print("[DEBUG] Setting up cryptographic verification")
+
+        # AION: Setup PSS padding
+
+        self.verification_padding = Crypto.PSSPadding(
+
+            algorithm_name=MARKETPLACE_CONFIG['signature_algorithm_name'],
+
+            salt_length="MAX"
+
+        )
+
+        # AION: Load trusted keys
+
+        self.trusted_keys = self._load_trusted_keys()
+
+        print(f"[INFO] Loaded {len(self.trusted_keys)} trusted keys")
+
+    def _load_trusted_keys(self): # AION: Return type: Map String CryptoPublicKey
+
+        # AION: Load authorized developer public keys from trusted key directory
+
+        keys = {}
+
+        key_dir = FileSystem.Path(MARKETPLACE_CONFIG['trusted_keys'])
+
+        print(f"[DEBUG] Loading trusted keys from {key_dir}")
+
+        for key_file in key_dir.glob("*.pub"):
+
+            try:
+
+                key_id = key_file.stem
+
+                key_content = FileSystem.read_bytes(key_file)
+
+                keys[key_id] = Crypto.load_public_key(key_content)
+
+                print(f"[DEBUG] Loaded trusted key id {key_id}")
+
+            except Exception as e:
+
+                logging.error(f"Invalid key file {key_file} {str(e)}")
+
+        return keys
+
+    def _init_marketplace(self):
+
+        # AION: Initialize local strategy pool, load/verify existing strategy files
+
+        strategy_dir = FileSystem.Path(MARKETPLACE_CONFIG['strategy_pool'])
+
+        print(f"[INFO] Initializing local strategy pool directory {strategy_dir}")
+
+        FileSystem.mkdir(strategy_dir, exist_ok=True, parents=True)
+
+        for strategy_file in strategy_dir.glob("*.strategy"):
+
+            self._load_local_strategy(strategy_file)
+
+    def _load_local_strategy(self, path): # AION: path type FileSystem Path
+
+        # AION: Load/verify single local strategy package (JSON file)
+
+        print(f"[DEBUG] Attempting load local strategy {path}")
+
+        try:
+
+            package_content = FileSystem.read_text(path)
+
+            package_data = json.loads(package_content)
+
+            # AION: Create StrategyPackage instance
+
+            package = StrategyPackage(
+
+                code=package_data['code'],
+
+                metadata=package_data['metadata'],
+
+                signature=bytes.fromhex(package_data['signature']),
+
+                author_key=package_data['author_key']
+
+            )
+
+            # AION: Verify package integrity/authenticity
+
+            if self.verify(package):
+
+                strategy_id = package.metadata['id']
+
+                self.strategies[strategy_id] = package
+
+                logging.info(f"Loaded verified strategy {package.metadata['name']} id {strategy_id}")
+
+            else:
+
+                logging.warning(f"Invalid signature local strategy {package.metadata.get('id', 'UNKNOWN')}")
+
+        except Exception as e:
+
+            logging.error(f"Failed load strategy {path} {str(e)}")
+
+    def verify(self, package) -> bool: # AION: package type StrategyPackage
+
+        # AION: Verify strategy authenticity/integrity using cryptographic signature, trusted keys
+
+        # AION: RETURN True if valid/trusted, False otherwise
+
+        # AION: Uses Crypto, hashlib modules
+
+        # AION: Check author trust
+
+        if package.author_key not in self.trusted_keys:
+
+            logging.error(f"Untrusted author key {package.author_key}")
+
+            return False
+
+        # AION: Validate package metadata structure (basic check for required fields)
+
+        required_fields = {'name', 'id', 'version', 'author'}
+
+        if not required_fields.issubset(package.metadata.keys()):
+
+            logging.error("Missing required metadata fields strategy package")
+
+            return False
+
+        # AION: Verify cryptographic signature
+
+        try:
+
+            public_key = self.trusted_keys[package.author_key]
+
+            # AION: Use hash algorithm from config
+
+            hasher = hashlib.new(MARKETPLACE_CONFIG['verification_hash'])
+
+            hasher.update(package.code.encode())
+
+            digest = hasher.digest()
+
+            # AION: Use Crypto verify method
+
+            Crypto.verify_signature(
+
+                public_key=public_key,
+
+                signature=package.signature,
+
+                data_digest=digest,
+
+                padding=self.verification_padding,
+
+                hash_algorithm_name=MARKETPLACE_CONFIG['verification_hash']
+
+            )
+
+            print(f"[DEBUG] Signature verified strategy id {package.metadata.get('id', 'UNKNOWN')}")
+
+            return True
+
+        except Crypto.InvalidSignatureError:
+
+            logging.error(f"Invalid strategy signature id {package.metadata.get('id', 'UNKNOWN')}")
+
+            return False
+
+        except Exception as e:
+
+            logging.error(f"Verification error strategy id {package.metadata.get('id', 'UNKNOWN')} Error {str(e)}")
+
+            return False
+
+    async def refresh_registry(self):
+
+        # AION: Fetch updated strategy registry from remote marketplace URL (async)
+
+        # AION: Uses HTTP module (async request, JSON parsing)
+
+        registry_url = MARKETPLACE_CONFIG['registry_url']
+
+        print(f"[ACTION] Refreshing strategy registry from {registry_url}")
+
+        try:
+
+            self.registry = await HTTP.get_json(registry_url)
+
+            logging.info(f"Updated strategy registry found {len(self.registry)} entries")
+
+        except Exception as e:
+
+            logging.error(f"Failed update registry {registry_url} Error {str(e)}")
+
+    async def install_strategy(self, strategy_id: str):
+
+        # AION: Download, install, verify strategy from marketplace using registry info (async)
+
+        # AION: Uses HTTP, FileSystem, json, Crypto, StrategyPackage
+
+        print(f"[ACTION] Attempting install strategy id {strategy_id}")
+
+        if strategy_id not in self.registry:
+
+            logging.error(f"Unknown strategy ID {strategy_id} cannot install Ensure registry refreshed")
+
+            raise ValueError(f"Unknown strategy ID {strategy_id}")
+
+        strategy_info = self.registry[strategy_id]
+
+        download_url = strategy_info.get('download_url')
+
+        if not download_url: raise ValueError(f"Missing download URL registry entry {strategy_id}")
+
+        print(f"[INFO] Downloading strategy {strategy_info.get('name', strategy_id)} from {download_url}")
+
+        try:
+
+            strategy_code_content = await HTTP.get_text(download_url)
+
+            # AION: Basic size check
+
+            if len(strategy_code_content) > MARKETPLACE_CONFIG['max_strategy_size']:
+
+                 raise ValueError(f"Strategy size exceeds maximum limit {MARKETPLACE_CONFIG['max_strategy_size']}")
+
+            # AION: Create package object from downloaded data, registry metadata
+
+            # AION: Assumes registry provides metadata, signature, author key
+
+            package = StrategyPackage(
+
+                code=strategy_code_content,
+
+                metadata=strategy_info.get('metadata', {}),
+
+                signature=bytes.fromhex(strategy_info['signature']),
+
+                author_key=strategy_info['author_key']
+
+            )
+
+            # AION: Verify downloaded package before saving
+
+            if self.verify(package):
+
+                self._save_strategy(package)
+
+                self.strategies[strategy_id] = package
+
+                logging.info(f"Successfully installed verified strategy {strategy_info.get('name', strategy_id)}")
+
+            else:
+
+                logging.error(f"Verification failed downloaded strategy {strategy_info.get('name', strategy_id)} Installation aborted")
+
+        except Exception as e:
+
+            logging.error(f"Strategy installation failed id {strategy_id} Error {str(e)}")
+
+            # AION: Optionally re-raise exception to notify caller
+
+            # raise InstallationError(f"Failed install {strategy_id}") from e
+
+    def _save_strategy(self, package): # AION: package type StrategyPackage
+
+        # AION: Persist verified strategy package to local strategy pool (JSON format)
+
+        # AION: Uses FileSystem, json modules
+
+        strategy_id = package.metadata['id']
+
+        strategy_path = FileSystem.Path(MARKETPLACE_CONFIG['strategy_pool']) / f"{strategy_id}.strategy"
+
+        print(f"[DEBUG] Saving strategy package {strategy_path}")
+
+        # AION: Prepare data dictionary for saving (JSON format)
+
+        package_data_to_save = {
+
+            "code": package.code,
+
+            "metadata": package.metadata,
+
+            "signature": package.signature.hex(),
+
+            "author_key": package.author_key
+
+        }
+
+        # AION: Write dictionary to JSON file
+
+        json_content = json.dumps(package_data_to_save, indent=4)
+
+        FileSystem.write_text(strategy_path, json_content)
+
+    def list_strategies(self): # AION: return type List Map
+
+        # AION: Return list of available strategies and their verification status
+
+        # AION: NOTE: Iterates internal strategies cache, performs verify check on each.
+
+        # AION: Might be slow with large number of strategies. Consider caching status.
+
+        print("[INFO] Listing available local strategies verification status")
+
+        strategy_list = []
+
+        for strategy_id, s_package in self.strategies.items():
+
+            # AION: Perform verification check to get current status
+
+            is_verified = self.verify(s_package)
+
+            strategy_list.append({
+
+                'id': s_package.metadata.get('id', strategy_id),
+
+                'name': s_package.metadata.get('name', 'Unknown Name'),
+
+                'version': s_package.metadata.get('version', 'N/A'),
+
+                'author': s_package.metadata.get('author', 'Unknown Author'),
+
+                'verified': is_verified
+
+            })
+
+        return strategy_list
+
+# --- Secure Runner Class ---
+
+class VerifiedStrategyRunner:
+
+    # AION: Responsible for safely executing code of verified strategies in a restricted environment
+
+    def __init__(self, marketplace): # AION: marketplace type StrategyMarketplace
+
+        # AION: Initialize runner. Requires reference to marketplace to access strategies, verify them.
+
+        self.marketplace = marketplace
+
+        # self.strategy_cache {} # AION: Conceptual optional cache for loaded strategy code objects (performance)
+
+        print("[INFO] VerifiedStrategyRunner initialized")
+
+    async def execute(self, strategy_id: str, *args, **kwargs):
+
+        # AION: Execute a specific strategy by its ID after verifying its availability and integrity (async)
+
+        # AION: PARAM strategy_id: String - identifier of strategy to execute
+
+        # AION: PARAM args, kwargs: Pass-through arguments to strategy code execution context
+
+        # AION: RETURN: Result of strategy execution (potentially None), or error
+
+        # AION: SECURITY NOTE: Critical - performs verification check before execution. Uses restricted environment to run strategy code.
+
+        print(f"[ACTION] Request execute strategy id {strategy_id}")
+
+        # AION: Check availability in marketplace cache
+
+        if strategy_id not in self.marketplace.strategies:
+
+            logging.error(f"Strategy {strategy_id} not found in local marketplace cache cannot execute")
+
+            raise ValueError(f"Strategy not available {strategy_id}")
+
+        strategy = self.marketplace.strategies[strategy_id]
+
+        # AION: Perform verification check to ensure strategy is still valid and trusted
+
+        print(f"[DEBUG] Verifying strategy {strategy_id} before execution")
+
+        if not self.marketplace.verify(strategy):
+
+            logging.error(f"Strategy {strategy_id} failed verification cannot execute")
+
+            # AION: Use custom security error type
+
+            raise SecurityError(f"Strategy verification failed id {strategy_id}")
+
+        # AION: Proceed with execution of verified strategy
+
+        print(f"[INFO] Verification passed Executing strategy {strategy_id}")
+
+        return await self._run_strategy(strategy.code, args, kwargs) # AION: Run sandboxed code
+
+    async def _run_strategy(self, code: str, args, kwargs):
+
+        # AION: Safely execute strategy code in a restricted environment using conceptual 'exec'
+
+        # AION: SECURITY NOTE: Uses conceptual 'exec' with restricted globals scope to limit potential harm from malicious code.
+
+        # AION: Review allowed builtins/globals carefully. Real implementation requires robust sandboxing.
+
+        print("[DEBUG] Executing strategy code in sandboxed environment")
+
+        try:
+
+            # AION: Define restricted environment - only allow safe builtins, specific context variables
+
+            # AION: SECURITY NOTE: Define restricted globals VERY carefully. Include ONLY essential safe functions/types.
+
+            restricted_globals = {
+
+                '__builtins__': {
+
+                    'print': logging.info, # AION: Redirect print to logging for safe output
+
+                    'len': len, 'str': str, 'int': int, 'float': float, 'list': list, 'dict': dict, 'set': set, 'bytes': bytes, # AION: Safe type conversions, basic functions
+
+                    'True': True, 'False': False, 'None': None, # AION: Boolean/None constants
+
+                    # AION: Add other explicitly safe builtins needed by strategies (e.g., abs, round, zip, map, etc.). MUST be carefully vetted.
+
+                },
+
+                # AION: Add safe library modules if needed (e.g., json, math). Conceptual.
+
+                # 'json': json # AION: Conceptual access to safe json module
+
+            }
+
+            # AION: Define local scope for execution. Includes args, kwargs, potential 'result' variable.
+
+            restricted_locals = { 'args': args, 'kwargs': kwargs, 'result': None }
+
+            # AION: Execute code using conceptual 'exec' function. Assumes language provides sandboxed 'exec' equivalent.
+
+            # AION: TASK: Ensure language provides safe 'exec' equivalent, or use secure sandbox environment.
+
+            exec(code, restricted_globals, restricted_locals)
+
+            # AION: Retrieve result set by strategy code in restricted_locals dict
+
+            execution_result = restricted_locals.get('result')
+
+            print("[DEBUG] Strategy code execution finished in sandbox")
+
+            return execution_result
+
+        except Exception as e:
+
+            logging.error(f"Strategy code execution failed Error {str(e)}")
+
+            # AION: Propagate error to indicate failure
+
+            raise # AION: Re-raise exception
+
+# --- Custom Security Exception ---
+
+class SecurityError(Exception):
+
+    # AION: Custom exception type to indicate security/verification related failures
+
+    pass
+
+# --- Script Execution Block (Example Usage) ---
+
+# AION: Demonstrate StrategyMarketplace and VerifiedStrategyRunner usage flow
+
+async def main():
+
+    # AION: Main async function to orchestrate demonstration
+
+    print("[SCRIPT START] AION Strategy Marketplace Agent Demo")
+
+    # AION: Initialize core components
+
+    marketplace = StrategyMarketplace()
+
+    runner = VerifiedStrategyRunner(marketplace=marketplace)
+
+    # AION: Simulate workflow
+
+    try:
+
+        print("\n[ACTION] Refreshing remote strategy registry")
+
+        await marketplace.refresh_registry() # AION: Fetch latest list of strategies (conceptually)
+
+        # AION: Example: Install a specific strategy (assumes it exists in registry, is downloaded and verified successfully)
+
+        strategy_to_install = "cpu_optimizer_v2"
+
+        print(f"\n[ACTION] Attempting install strategy '{strategy_to_install}'")
+
+        await marketplace.install_strategy(strategy_to_install)
+
+        # AION: List available local strategies
+
+        print("\n[INFO] Listing locally available verified strategies")
+
+        available_strats = marketplace.list_strategies()
+
+        # AION: Conceptual: print dictionary list in cleaner format (maybe using json.stringify)
+
+        print(json.dumps(available_strats, indent=2))
+
+        # AION: Execute installed strategy with example parameters
+
+        strategy_to_run = "cpu_optimizer_v2"
+
+        run_params = {"cpu_load": 85}
+
+        print(f"\n[ACTION] Executing strategy '{strategy_to_run}' params {run_params}")
+
+        execution_result = await runner.execute(strategy_to_run, run_params) # AION: Pass params as single dict for args/kwargs example
+
+        print(f"[RESULT] Strategy execution result {execution_result}")
+
+    except ValueError as e: # AION: Catch configuration/registry errors
+
+        print(f"[ERROR][Workflow] Configuration or Strategy ID Error {e}")
+
+    except SecurityError as e: # AION: Catch verification failures
+
+        print(f"[ERROR][Workflow] Security Error {e}")
+
+    except Exception as e: # AION: Catch other potential errors (HTTP, file IO, exec, etc.)
+
+        print(f"[ERROR][Workflow] Unexpected workflow error {e}")
+
+    print("\n[SCRIPT END]")
+
+# AION: Run main async function (assumes top-level runner exists)
+
+asyncio.run(main())
