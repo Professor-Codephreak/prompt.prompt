@@ -47,19 +47,19 @@ A typical `.prompt` file presents hybrid `.md` `.json` feel combining structure 
 
 During conceptualization we have designed several example `.prompt` files illustrating capabilities:
 
-* `encapsulation.prompt`: Demonstrates OOP encapsulation principle.
-* `logic.prompt`: Shows conditional logic shortcode truth table utility context broader logic systems.
-* `bdi.prompt`: Defines core Belief Desire Intention components agent cognition.
-* `socratic.prompt`: Implements Socratic dialogue reasoning structure.
-* `nonmonotonic.prompt`: Provides Default Logic implementation handling uncertainty.
-* `epistemic.prompt`: Focuses belief revision knowledge representation autoepistemic concepts.
-* `reasoning.prompt`: Outlines general purpose reasoning engine concept.
-* `aion.prompt`: Represents complex secure strategy marketplace agent.
-* `prediction.prompt`: Defines standard ML prediction workflow.
-* `agent.prompt`: Example autonomous research agent structure tool use.
-* `prompt.agent`: Meta agent specialized generating refining `.prompt` files itself.
-* `prompt.prompt`: Meta prompt generates language specification document.
-* `rules.prompt`: Self documenting file listing language rules data structure.
+* `encapsulation.prompt`: Demonstrates OOP encapsulation principle
+* `logic.prompt`: Shows conditional logic shortcode truth table utility context broader logic systems
+* `bdi.prompt`: Defines core Belief Desire Intention components agent cognition
+* `socratic.prompt`: Implements Socratic dialogue reasoning structure
+* `nonmonotonic.prompt`: Provides Default Logic implementation handling uncertainty
+* `epistemic.prompt`: Focuses belief revision knowledge representation autoepistemic concepts
+* `reasoning.prompt`: Outlines general purpose reasoning engine concept
+* `aion.prompt`: Represents complex secure strategy marketplace agent
+* `prediction.prompt`: Defines standard ML prediction workflow
+* `agent.prompt`: Example autonomous research agent structure tool use
+* `prompt.agent`: Meta agent specialized generating refining `.prompt` files itself
+* `prompt.prompt`: Meta prompt generates language specification document
+* `rules.prompt`: Self documenting file listing language rules data structure
 
 ## Unique Documentation Style Explained
 
