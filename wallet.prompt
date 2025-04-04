@@ -1,0 +1,157 @@
+---
+# File wallet prompt
+# Defines WalletGeneratorAgent leverage IDManagerAgent secure wallet operations
+version: zero point one point zero # Initial version this agent
+description: "A conceptual agent that orchestrates secure wallet generation retrieval for other agents using the IDManagerAgent service" # Punctuation removed numerals changed
+author: "AI Collaboration"
+tags: ["agent", "wallet", "ethereum", "idmanager", "security", "conceptual"]
+defaultTextModel: { model_id: "gemini-1.5-pro" } # Default context
+---
+
+# AI_CONTEXT_START File wallet prompt
+# AI_PURPOSE Define WalletGeneratorAgent interface interact IDManagerAgent create retrieve agent wallets securely
+# AI_FRAMEWORK_NOTE Component augmentic framework relies IDManagerAgent embalmer prompt underlying secure storage key management
+# AI_DEPENDENCIES Conceptually imports BaseAgent IDManagerAgent standard library modules assumes they are accessible
+# AI_STYLE_GUIDE Adhere prompt language documentation style no numbers punctuation unless procedural prompt instruction
+
+# --- Conceptual Imports ---
+# Assume framework provides BaseAgent standard library conceptual modules
+# from prompt_framework import BaseAgent
+import asyncio # Assume standard library async support
+
+# Assume IDManagerAgent class defined accessible via import
+from idmanager import IDManagerAgent # Conceptual import agent handles secure wallet ops
+
+# --- Wallet Generator Agent Definition ---
+
+class WalletGeneratorAgent: # Conceptually inherits BaseAgent
+    # AI_CONTEXT Agent orchestrates wallet creation retrieval via IDManagerAgent
+
+    def __init__(self):
+        # AI_TASK Initialize agent instantiate connection IDManagerAgent conceptual
+        self.agent_name = "WalletGeneratorAgent" # Punc ok code literal
+        self.status = "INITIALIZED" # eg INITIALIZED READY GENERATING FAILED Punc ok code literal
+        self.log_history = [] # Simple list log agent actions Punc ok code literal list
+        # Conceptual instantiation IDManagerAgent assumes available global context imported module
+        try:
+            # IDManagerAgent itself handles Embalmer setup Tomb operations
+            self.id_manager = IDManagerAgent() # Assumes IDManagerAgent init handles secure setup
+            print(f"[INFO] Initializing {self.agent_name} connected IDManagerAgent") # Punc ok code literal f string print
+            self.status = "READY" # Punc ok code literal
+        except Exception as e:
+             print(f"[ERROR] Failed initialize WalletGeneratorAgent could not connect IDManager {e}") # Punc ok code literal f string print error
+             self.status = "FAILED_INIT" # Punc ok code literal
+
+    def log_action(self, description):
+        # AI_INTERNAL Helper log actions history
+        entry = f"TIME {description}" # Conceptual timestamp Punc ok code literal f string
+        self.log_history.append(entry)
+        print(f"[LOG] {description}") # Punc ok code literal f string print
+
+    async def create_new_wallet_for_agent(self, target_agent_name="GeneratedAgent"): # Punc ok code literal default
+        # AI_CAPABILITY Trigger creation new wallet via IDManagerAgent return public address
+        # AI_PARAM target_agent_name String conceptual name associated agent wallet used key naming potentially
+        # AI_RETURN String public address new wallet None failure
+        self.log_action(f"Requesting new wallet creation via IDManager for conceptual agent '{target_agent_name}'") # Punc ok code literal f string log
+        if self.status != "READY" or not self.id_manager: # Punc ok code literal checks
+            self.log_action("Agent not ready or IDManager unavailable cannot create wallet") # Punc ok code literal error log
+            return None
+
+        self.status = "GENERATING" # Punc ok code literal
+        public_address = None # Init
+        try:
+            # Conceptual call IDManager create_wallet method assume returns address private key stored securely
+            # IDManager create_wallet returns tuple address key we only need address here key stored securely IDManager
+            address_key_tuple = self.id_manager.create_wallet() # Assumes synchronous conceptual call
+            if address_key_tuple and len(address_key_tuple) == two: # Numeral changed word check tuple length
+                public_address = address_key_tuple[zero] # Get address numeral changed word index
+                self.log_action(f"IDManager successfully created wallet address {public_address}") # Punc ok code literal f string log
+                self.status = "READY" # Return ready after successful creation Punc ok code literal
+            else:
+                 raise ValueError("IDManager create wallet failed return expected value") # Punc ok code literal error message
+
+        except Exception as e:
+            self.log_action(f"Error during wallet creation via IDManager {e}") # Punc ok code literal f string error log
+            self.status = "FAILED" # Punc ok code literal
+
+        return public_address
+
+    async def get_agent_private_key(self, public_address):
+        # AI_CAPABILITY Request private key associated public address from IDManagerAgent conceptually assumes Tomb open required access
+        # AI_PARAM public_address String public address retrieve key for
+        # AI_RETURN String private key None if not found error
+        # AI_SECURITY_NOTE This method exposes private key requester careful handling required Intended agent retrieve own key perhaps
+        self.log_action(f"Requesting private key via IDManager for address {public_address}") # Punc ok code literal f string log
+        if self.status != "READY" or not self.id_manager: # Punc ok code literal checks
+            self.log_action("Agent not ready or IDManager unavailable cannot retrieve key") # Punc ok code literal error log
+            return None
+
+        private_key = None # Init
+        try:
+            # Conceptual call IDManager get_private_key method
+            private_key = self.id_manager.get_private_key(public_address) # Assumes synchronous conceptual call
+            if private_key:
+                 self.log_action(f"IDManager successfully retrieved private key address {public_address}") # Punc ok code literal f string log
+            else:
+                 self.log_action(f"Private key not found IDManager address {public_address}") # Punc ok code literal f string log warn
+                 # Status remains READY even if key not found retrieval itself did not fail
+
+        except Exception as e:
+             self.log_action(f"Error during private key retrieval via IDManager {e}") # Punc ok code literal f string error log
+             self.status = "FAILED" # Punc ok code literal retrieval mechanism failed
+
+        # AI_SECURITY_NOTE Return private key directly sensitive ensure calling code handles securely
+        return private_key
+
+    # AI_NEXT_ITERATION_GOAL Add methods interact blockchain conceptually perhaps via IDManager or dedicated tool using retrieved key
+
+# --- Script Execution Block ---
+# AI_TASK Demonstrate WalletGeneratorAgent usage create wallet retrieve key conceptually
+
+async def main():
+    print("[SCRIPT START] WalletGeneratorAgent Demo Conceptual") # Punc ok code literal print structure
+
+    wallet_gen = None # Init ensure finally access
+    created_address = None # Store created address example
+
+    try:
+        wallet_gen = WalletGeneratorAgent()
+
+        if wallet_gen.status == "READY": # Punc ok code literal check
+            # Create new wallet
+            print("\n# Attempting create new wallet") # Punc ok code literal print structure
+            created_address = await wallet_gen.create_new_wallet_for_agent(target_agent_name="MyNewBot") # Punc ok code literal function call
+
+            if created_address:
+                 print(f"# Wallet created successfully Address {created_address}") # Punc ok code literal print f string
+
+                 # Attempt retrieve private key associated address conceptually
+                 print(f"\n# Attempting retrieve private key address {created_address}") # Punc ok code literal print f string
+                 retrieved_key = await wallet_gen.get_agent_private_key(created_address)
+
+                 if retrieved_key:
+                     # SECURITY WARNING DO NOT log actual private keys real systems
+                     print(f"# Private key retrieved conceptually length {len(retrieved_key)}") # Punc ok code literal print f string length check
+                 else:
+                     print(f"# Failed retrieve private key address {created_address}") # Punc ok code literal print f string error
+
+            else:
+                 print("# Wallet creation failed") # Punc ok code literal print error
+
+        else:
+             print(f"[ERROR] WalletGeneratorAgent failed initialize Status {wallet_gen.status}") # Punc ok code literal print f string error
+
+    except Exception as e:
+        print(f"[FATAL] Error during WalletGeneratorAgent demo {e}") # Punc ok code literal print f string error
+
+    finally:
+        # AI_SAFETY Ensure IDManager resources potentially Embalmer Tomb closed if WalletGenerator holds reference might need explicit close method IDManager propagate
+        print("\n[INFO] Demo finished Conceptual cleanup IDManager resources needed") # Punc ok code literal print structure
+        # if wallet_gen and wallet_gen id_manager conceptual call close if exists needed
+        #     wallet_gen id_manager close()
+
+    print("[SCRIPT END]") # Punc ok code literal print
+
+# Run main async function assume top level runner exists
+# import asyncio Conceptual import
+asyncio.run(main())
