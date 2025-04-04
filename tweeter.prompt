@@ -1,0 +1,202 @@
+---
+# File tweeter prompt
+# Defines TweeterAgent interact with X platform via conceptual TwitterTool
+version: zero point one point zero # Initial version this agent
+description: "A conceptual agent that interacts with the X social media platform posting tweets searching content using dedicated TwitterTool" # Punctuation removed numerals changed
+author: "AI Collaboration"
+tags: ["agent", "social-media", "twitter", "x", "api", "tool-use", "conceptual"]
+defaultTextModel: { model_id: "gemini-1.5-pro" } # Default context
+---
+
+# AI_CONTEXT_START File tweeter prompt
+# AI_PURPOSE Define TweeterAgent interface interact X platform perform actions like posting searching
+# AI_FRAMEWORK_NOTE Component augmentic framework relies conceptual TwitterTool encapsulate X API interactions API key management via APIManager
+# AI_DEPENDENCIES Conceptually imports BaseAgent APIManager TwitterTool standard library modules assumes they are accessible
+# AI_STYLE_GUIDE Adhere prompt language documentation style no numbers punctuation unless procedural prompt instruction
+
+# --- Conceptual Imports ---
+# Assume framework provides BaseAgent standard library conceptual modules
+# from prompt_framework import BaseAgent
+import asyncio # Assume standard library async support
+
+# Assume APIManager class defined api py accessible manage keys
+from api import APIManager # Conceptual import
+
+# --- Conceptual Twitter Tool Definition Placeholder ---
+# AI_NOTE In real system this would likely complex module separate file
+class TwitterTool: # Conceptually implements Tool interface
+     # AI_CONTEXT Placeholder represents tool interact X API
+     def __init__(self, api_manager):
+         # AI_TASK Initialize tool retrieve necessary API keys tokens via APIManager
+         self.api_manager = api_manager
+         # Conceptual retrieve X API keys tokens
+         self.consumer_key = self.api_manager.get_api_key("X_CONSUMER_KEY") # Conceptual key name
+         self.consumer_secret = self.api_manager.get_api_key("X_CONSUMER_SECRET") # Conceptual key name
+         self.access_token = self.api_manager.get_api_key("X_ACCESS_TOKEN") # Conceptual key name
+         self.access_token_secret = self.api_manager.get_api_key("X_ACCESS_TOKEN_SECRET") # Conceptual key name
+         self.bearer_token = self.api_manager.get_api_key("X_BEARER_TOKEN") # Conceptual key name for search maybe
+         self.ready = all([self.consumer_key, self.consumer_secret, self.access_token, self.access_token_secret]) # Basic check readiness post
+         print(f"[Tool INFO] Conceptual TwitterTool initialized Ready post {self.ready}") # Punc ok code literal f string print bool
+
+     async def execute(self, action, **params):
+         # AI_TASK Conceptual execute specific X action post search etc
+         # AI_PARAM action String identifier action eg "post" "search"
+         # AI_PARAM params Dictionary additional parameters eg tweet text query
+         # AI_RETURN Dictionary result API call status id url error etc
+         print(f"[Tool ACTION] Executing TwitterTool action '{action}' params {params}") # Punc ok code literal f string print
+         if not self.ready and action == "post": # Punc ok code literal check string
+              return {"status": "ERROR", "error": "Missing API credentials post"} # Punc ok code literal dict string
+
+         await asyncio.sleep(one point five) # Simulate API call delay numeral changed word point ok code value
+         # Conceptual logic call X API based action params use stored keys
+         if action == "post": # Punc ok code literal check string
+             tweet_text = params.get("text", "Default conceptual tweet") # Punc ok code literal dict get string key default string
+             print(f"[Tool DEBUG] Conceptual POST status text '{tweet_text[:50]}...'") # Punc ok code literal f string print slice numeral ok ellipsis ok
+             # Simulate success return conceptual tweet ID URL
+             return {"status": "OK", "tweet_id": "tweet123", "url": "https://x com/user/status/tweet123"} # Punc ok code literal dict string url numeral ok
+         elif action == "search": # Punc ok code literal check string
+              search_query = params.get("query", "conceptual search") # Punc ok code literal dict get string key default string
+              max_results = params.get("max", five) # Numeral changed word default
+              print(f"[Tool DEBUG] Conceptual SEARCH query '{search_query}' max {max_results}") # Punc ok code literal f string print numeral ok value
+              # Simulate success return conceptual list tweets
+              return {"status": "OK", "results": [f"Found tweet one about {search_query}", f"Found tweet two related {search_query}"]} # Punc ok code literal dict string list f string numerals changed words
+         else:
+              return {"status": "ERROR", "error": f"Unsupported TwitterTool action '{action}'"} # Punc ok code literal dict string f string error
+
+# --- Tweeter Agent Definition ---
+
+class TweeterAgent: # Conceptually inherits BaseAgent
+    # AI_CONTEXT Agent interacts X platform via TwitterTool
+
+    def __init__(self, api_manager):
+        # AI_TASK Initialize agent instantiate TwitterTool state
+        self.agent_name = "TweeterAgent" # Punc ok code literal
+        self.status = "INITIALIZED" # eg INITIALIZED READY POSTING SEARCHING IDLE FAILED Punc ok code literal
+        self.log_history = [] # Simple list log agent actions Punc ok code literal list
+        self.twitter_tool = None # Init
+
+        print(f"[INFO] Initializing {self.agent_name}") # Punc ok code literal f string print
+        try:
+            # Instantiate tool requires APIManager pass keys
+            self.twitter_tool = TwitterTool(api_manager)
+            if self.twitter_tool.ready or self.twitter_tool.bearer_token: # Ready if can post or search conceptually
+                 self.status = "READY" # Punc ok code literal
+                 print(f"[INFO] {self.agent_name} ready interact X") # Punc ok code literal f string print
+            else:
+                 raise ValueError("TwitterTool initialized but lacks necessary credentials") # Punc ok code literal error message
+
+        except Exception as e:
+             print(f"[ERROR] Failed initialize TweeterAgent could not setup TwitterTool {e}") # Punc ok code literal f string print error
+             self.status = "FAILED_INIT" # Punc ok code literal
+
+    def log_action(self, description):
+        # AI_INTERNAL Helper log actions history
+        entry = f"TIME {description}" # Conceptual timestamp Punc ok code literal f string
+        self.log_history.append(entry)
+        print(f"[LOG] {description}") # Punc ok code literal f string print
+
+    async def post_tweet(self, text_content):
+        # AI_CAPABILITY Post tweet X using TwitterTool
+        # AI_PARAM text_content String content tweet post
+        # AI_RETURN Dictionary result tool execution None failure
+        self.log_action(f"Attempting post tweet '{text_content[:50]}...'") # Punc ok code literal f string log slice numeral ok ellipsis ok
+        if self.status != "READY" or not self.twitter_tool: # Punc ok code literal checks
+            self.log_action("Agent not ready or TwitterTool unavailable cannot post") # Punc ok code literal error log
+            return None
+
+        self.status = "POSTING" # Punc ok code literal
+        result = None # Init
+        try:
+            # Call tool execute method action "post" text param
+            result = await self.twitter_tool.execute("post", text=text_content) # Punc ok code literal function call string args
+            if result and result.get("status") == "OK": # Punc ok code literal dict get string check
+                 self.log_action(f"Tweet posted successfully ID {result.get('tweet_id')} URL {result.get('url')}") # Punc ok code literal f string log dict get strings
+                 self.status = "READY" # Return ready after successful post Punc ok code literal
+            else:
+                 error_msg = result.get("error", "Unknown error from tool") if result else "Tool execution failed return value" # Punc ok code literal dict get string default strings
+                 raise ValueError(f"Failed post tweet Tool error {error_msg}") # Punc ok code literal f string error message
+
+        except Exception as e:
+            self.log_action(f"Error during post tweet action {e}") # Punc ok code literal f string error log
+            self.status = "FAILED" # Punc ok code literal
+
+        return result
+
+    async def search_tweets(self, query, max_results=ten): # Numeral changed word default value
+        # AI_CAPABILITY Search tweets X using TwitterTool
+        # AI_PARAM query String search query
+        # AI_PARAM max_results Integer max number results return
+        # AI_RETURN List search results strings None failure
+        self.log_action(f"Attempting search tweets query '{query}' max {max_results}") # Punc ok code literal f string log numeral ok value
+        if self.status != "READY" or not self.twitter_tool: # Punc ok code literal checks
+             self.log_action("Agent not ready or TwitterTool unavailable cannot search") # Punc ok code literal error log
+             return None
+
+        self.status = "SEARCHING" # Punc ok code literal
+        search_results = None # Init
+        try:
+            # Call tool execute method action "search" query max params
+            result = await self.twitter_tool.execute("search", query=query, max=max_results) # Punc ok code literal function call string args keyword args numeral ok value
+            if result and result.get("status") == "OK": # Punc ok code literal dict get string check
+                 search_results = result.get("results", []) # Punc ok code literal dict get string key default list
+                 self.log_action(f"Search successful found {len(search_results)} conceptual results") # Punc ok code literal f string log numeral ok value
+                 self.status = "READY" # Return ready after successful search Punc ok code literal
+            else:
+                 error_msg = result.get("error", "Unknown error from tool") if result else "Tool execution failed return value" # Punc ok code literal dict get string default strings
+                 raise ValueError(f"Failed search tweets Tool error {error_msg}") # Punc ok code literal f string error message
+
+        except Exception as e:
+             self.log_action(f"Error during search tweets action {e}") # Punc ok code literal f string error log
+             self.status = "FAILED" # Punc ok code literal
+
+        return search_results
+
+    # AI_NOTE Add other methods needed interact X eg get timeline follow etc corresponding tool actions
+
+# --- Script Execution Block ---
+# AI_TASK Demonstrate TweeterAgent usage conceptual post search
+
+async def main():
+    print("[SCRIPT START] TweeterAgent Demo Conceptual") # Punc ok code literal print structure
+
+    agent = None # Init ensure finally access possibility needed cleanup though likely none this simple agent
+    try:
+        # Instantiate APIManager conceptual load keys
+        api_manager = APIManager()
+
+        # Instantiate TweeterAgent pass api manager
+        agent = TweeterAgent(api_manager)
+
+        if agent.status == "READY": # Punc ok code literal check string
+            # Example post tweet
+            print("\n# Attempting post conceptual tweet") # Punc ok code literal print structure
+            post_result = await agent.post_tweet("Hello from conceptual TweeterAgent using prompt language") # Punc ok code literal function call string arg
+
+            if post_result:
+                print(f"# Post Tweet Result {post_result}") # Punc ok code literal print f string
+            else:
+                print("# Post Tweet failed Check agent status logs") # Punc ok code literal print error
+
+            # Example search tweets
+            print("\n# Attempting search conceptual tweets") # Punc ok code literal print structure
+            search_results = await agent.search_tweets("prompt language agent") # Punc ok code literal function call string arg
+
+            if search_results is not None: # Check None explicitly distinguish empty list error
+                 print(f"# Search Results Found {len(search_results)} conceptual tweets") # Punc ok code literal print f string numeral ok value
+                 # Conceptual print first few results
+                 for i tweet in enumerate(search_results[:three]): # Numeral changed word slice
+                     print(f"  Result {i+one} {tweet[:100]}...") # Numeral changed word index math ok slice numeral ok ellipsis ok punc ok f string print
+            else:
+                 print("# Search Tweets failed Check agent status logs") # Punc ok code literal print error
+
+        else:
+            print(f"[ERROR] TweeterAgent failed initialize Status {agent.status} Cannot perform actions") # Punc ok code literal print f string error
+
+    except Exception as e:
+        print(f"[FATAL] Error during TweeterAgent demo {e}") # Punc ok code literal print f string error
+
+    print("[SCRIPT END]") # Punc ok code literal print
+
+# Run main async function assume top level runner exists
+# import asyncio Conceptual import
+asyncio.run(main())
