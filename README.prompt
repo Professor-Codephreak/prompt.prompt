@@ -13,7 +13,8 @@
 
 The design of `.prompt` is guided by several key principles we have established:
 
-**Pythonic Foundation:** Leverages familiar Python like syntax for core programming constructs (`class` `def` control flow data structures) reducing learning curve.
+**Pythonic Foundation:** Leverages familiar Python like syntax for core programming constructs (`class` `def` control flow data structures) reducing learning curve
+**xml for complex data organization
 **Object Oriented Structure:** Fundamentally OOP enabling encapsulation modularity and reusability through classes objects conceptual base classes (`BasePrompt` `BaseAgent`).
 **Markdown Like Prompt Readability:** Employs triple quoted strings (`"""..."""` `````...`````) for defining core prompt text minimizing escape characters prioritizing human readability editing natural language instructions.
 **Simple Templating:** Integrates basic `{{ expression }}` syntax seamlessly within prompt text blocks dynamic content injection.
