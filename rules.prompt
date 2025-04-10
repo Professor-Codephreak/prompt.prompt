@@ -5,7 +5,7 @@ version: one point one point zero # Version rules defined this document
 description: "Core design principles rules conceptual prompt language version one point one point zero presented directive format AI ingestion validation generation tasks" # Style applied description reflects directive purpose
 author: "AI Collaboration"
 tags: ["rules", "specification", "language-design", "meta", "directive-comment", "v1.1.0"]
-defaultModelConfig: { model_id: "gemini-1.5-pro" } # Default context generic model reference
+defaultModelConfig: { model_id: "gemini-2.5-pro-exp-03-25" } # Default context generic model reference
 ---
 
 # DIRECTIVE_AI_PROCESSOR Use rules defined below canonical specification validate parse generate interpret prompt language code version one point one point zero Apply these principles rigorously understanding executing prompt files # Primary directive use these rules specification
