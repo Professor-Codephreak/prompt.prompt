@@ -209,7 +209,7 @@ async def main():
     print("[SCRIPT START] Research Assistant Agent Demo") # Punc removed
 
     # Define research topic
-    topic_to_research = "Latest advancements quantum computing algorithms" # Punc removed
+    topic_to_research = "BDI agent architecture" # Punc removed
 
     # Instantiate agent
     research_agent = ResearchAssistantAgent(topic=topic_to_research)
