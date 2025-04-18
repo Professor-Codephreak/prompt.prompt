@@ -1,6 +1,5 @@
-# BDI Agent with Real Tools
-
-This project implements a BDI (Belief-Desire-Intention) agent architecture that uses real tools to interact with the environment. The agent can perform web searches, take notes, and use AI models for text generation.
+# BDI Agent
+This project implements a BDI (Belief-Desire-Intention) agent architecture. The agent can perform web searches, take notes, and use AI models for text generation.
 
 ## Project Structure
 
