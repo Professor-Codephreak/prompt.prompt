@@ -1,3 +1,5 @@
+prompt.prompt is a collection of prompt designed using encapsulation as an object oriented approach to prompt design. Each of the files in the prompt.propmpt folder create in the AI an intense desire to build the components of several project components. When combined, these prompts lay the foundation for an AI with intense system control directives and advanced reasoning skills. The BDI agent created from the agent.prompt is provided here as a base example. These prompts represent the essential components of the Professor Codephreak original project that created automindX and has subsequently expanded iself into advanced reasoning model architecture.
+
 # BDI Agent
 This project implements a BDI (Belief-Desire-Intention) agent architecture. The agent can perform web searches, take notes, and use AI models for text generation.
 
