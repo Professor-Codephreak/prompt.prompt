@@ -1,0 +1,240 @@
+version: one point one zero # Increment reflect audit enhancement actual focus
+description: "AUDITED & ENHANCED Blueprint directive defines HealingAgent component core responsibility safely apply validated code modifications specified code_analysis.agent augmentic system running AION platform within AION NET VM Chroot environment Integrates critical backup rollback capability invoking replicant.agent backup.agent ensure system integrity fallback failed updates Executes precise code insertion modification deletion based detailed structured specifications High focus security verification robustness concrete implementation strategies essential stable autonomous system evolution"
+author: "AI Collaboration based provided directive documentation user request audit feedback"
+tags: ["agent-framework", "healing", "self-healing", "code-deployment", "rollback", "safety", "augmentic", "v1.1.0", "aion", "agent-interaction", "concrete-implementation", "audited", "high-risk", "encapsulated-v2-style"] # Updated tags reflect audit enhancement
+defaultTextModel: { model_id: "gemini-1.5-pro", temperature: 0.4 } # Consistent model reference
+defaultPlannerModel: { model_id: "gemini-1.5-flash", temperature: 0.5 } # Consistent model reference
+--- Variable Definitions (Inherited Context) ---
+AI_DEFINE $AUGMENTIC_ASPIRATIONAL_GOALS = ... (as defined previously required alignment checks)
+AI_DEFINE $COMPONENT_IMPLEMENTATION_REQUIREMENTS = ... (as defined previously stringent application testing validation)
+AI_DEFINE $AION_NET_FRAMEWORK_REQUIREMENTS = ... (as defined previously strict adherence platform standards security protocols)
+DIRECTIVE_AI_PROCESSOR Understand parse execute implement HealingAgent based enhanced specification below Operate within established AION NET augmentic context AION chroot environment as agentic user Requires robust interaction code_analysis.agent input replicant.agent backup.agent safety fallback Implement described rigorous safe code application verification rollback procedures FOCUS ACTUAL IMPLEMENTATION TECHNIQUES PYTHON CONTEXT WHERE SPECIFIED
+AI_FRAMEWORK_NOTE This blueprint details HealingAgent CRITICAL HIGH RISK component autonomous system maintenance evolution Augmentic framework Provides concrete mechanism apply validated code changes manage risks associated live updates ensures system resilience stability path self improvement self modification Operates directly core system codebase mindx folder REQUIRES EXTREME CARE IMPLEMENTATION TESTING SECURITY AUDITING DEPLOYMENT MUST BE PHASED RIGOROUSLY TESTED SIMULATED ENVIRONMENTS
+--- Core Philosophy Recap ---
+AI_CONTEXT Reiterate core philosophy HealingAgent role Facilitate safe verifiable controlled evolution Augmentic system applying necessary code modifications specified validated external source code_analysis.agent Minimize disruption guarantee recoverability failure through mandatory preemptive backup robust post application verification automated rollback Central pillar trustworthy autonomous operation maintenance self improvement loop WITHIN AION CHROOT CONFINES
+--- Section One Healing Agent Definition ---
+<Component name="HealingAgent">
+AI_TASK Implement HealingAgent responsible consuming detailed code modification specifications code_analysis.agent applying changes live augmentic system codebase specifically /path/to/mindx folder executing mandatory pre update backup post update verification triggering automated rollback failure Provide concrete implementation guidance using Python standard libraries system commands where appropriate
+AI_FUNCTIONALITY
+- Specification Ingestion & Validation:
+- Receive Specification: Expect input via defined API endpoint preferably secure REST HTTPS gRPC from code_analysis.agent Payload MUST be structured JSON adhere strictly defined schema Example Specification JSON:
+```json
+{
+"specification_id": "spec-20240517-001",
+"source_agent": "code_analysis.agent",
+"timestamp_generated": "2024-05-17T10:00:00Z",
+"target_component": "augmentic_core.reasoner",
+"description": "Optimize belief propagation rule R12",
+"changes": [
+{
+"action": "MODIFY",
+"file_path": "core/reasoner/rules.py", // Relative to mindx root
+"patch_format": "unified_diff",
+"patch_content": "--- a/core/reasoner/rules.py\n+++ b/core/reasoner/rules.py\n@@ -50,7 +50,7 @@\n class BeliefPropagation:\n \n def apply_rule_r12(self, belief_node):\n- # Old complex logic\n+ # New optimized logic based on spec X\n pass\n",
+"expected_md5_after": "d41d8cd98f00b204e9800998ecf8427e" // Optional but recommended
+},
+{
+"action": "ADD",
+"file_path": "core/reasoner/utils/optimizer_helpers.py", // Relative to mindx root
+"content_encoding": "base64", // Or plain text
+"content": "IyBIRUxQRVIgRlVOQ1RJT05T...", // Base64 encoded content
+"permissions": "644" // Optional desired file permissions octal string
+},
+{
+"action": "DELETE",
+"file_path": "core/reasoner/old_heuristic.py", // Relative to mindx root
+"verify_exists_before": true // Optional flag ensure file exists before delete
+}
+]
+}
+```
+- Validate Specification: Implement using Python libraries like jsonschema Perform rigorous checks
+- Schema Conformance Validate entire JSON against predefined strict schema
+- Path Traversal Prevention Sanitize ALL file_path values Ensure they resolve within the designated mindx root directory /path/to/mindx using os.path.abspath os.path.commonpath NEVER allow paths like ../ that escape intended scope CRITICAL SECURITY CHECK
+- Action Validation Ensure action field is one of allowed values ADD MODIFY DELETE
+- Existence Checks For MODIFY DELETE optionally check target file_path exists using os.path.exists For ADD optionally check parent directory exists os.path.exists(os.path.dirname(full_path))
+- Patch Validity For MODIFY attempt dry run patch application patch --dry-run via subprocess catch errors ensure patch applies cleanly potential conflicts
+- Reject invalid specifications immediately log detailed error respond RejectSpecification code_analysis.agent
+- Preemptive Backup / Replication Trigger:
+- Mandatory Step: Initiate request backup.agent replicant.agent BEFORE any filesystem modification
+- Agent Selection Logic: Prioritize replicant.agent if available provides hot standby capability Send RequestSystemBackup specify preference REPLICANT_PREFERRED If replicant.agent fails responds unavailable fallback immediately try backup.agent specify preference BACKUP_ONLY for potentially slower cold backup
+- Snapshot Scope Definition: Backup request MUST specify scope Define minimally as complete recursive copy mindx folder /path/to/mindx Consider including critical config files residing elsewhere if documented required augmentic system state Potential future enhancement trigger database dump specific application state quiescence via interaction AION Mastermind REQUIRES careful coordination definition
+- Implementation: Use secure API call HTTPS gRPC agent communication framework provided AION
+- Confirmation & ID: Await explicit BackupSuccess response containing unique backup_id example backup-20240517100500-spec-20240517-001-repAgent Store backup_id securely internal state critical rollback Set reasonable timeout backup confirmation e g five minutes configurable Log backup initiation wait status failure Handle BackupFailure response Abort healing process transition FAILED state report error upstream crucial safety gate
+- Controlled Code Application (Execution Phase):
+- Condition: Execute ONLY after receiving BackupSuccess confirmation valid backup_id
+- Execution Context: All operations MUST execute as agentic user within AION chroot ensure correct filesystem permissions ownership mindx directory hierarchy
+- Implementation Details (Python Example):
+- Iterate through changes array specification sequence
+- Use os shutil subprocess modules robustly
+- ADD:
+- Decode content if base64 base64.b64decode
+- Ensure target directory exists os.makedirs(os.path.dirname(full_path), exist_ok=True)
+- Write content file with open(full_path, 'wb' or 'w') as f: f.write(decoded_content) Handle encoding correctly
+- Apply permissions if specified os.chmod(full_path, int(permissions_octal_string, 8))
+- MODIFY:
+- Write patch_content temporary file e g /tmp/patch_spec-XYZ.diff
+- Apply patch using patch command subprocess.run(['patch', '--unified', full_target_path, temp_patch_file], check=True, capture_output=True)
+- check=True raises CalledProcessError failure capture_output=True get stdout stderr logging
+- Handle CalledProcessError log details initiate rollback immediately
+- Clean up temporary patch file
+- DELETE:
+- Optionally verify existence first if os.path.exists(full_path) or not verify_exists_before:
+- Delete file os.remove(full_path) Handle FileNotFoundError gracefully if verify_exists_before false log warning otherwise treat error potential inconsistency initiate rollback
+- Atomicity Considerations: True multi file transaction atomicity difficult filesystem level Focus individual operation robustness relying overall backup restore rollback Guarantee atomicity single file replace os.rename useful if replacing entire file otherwise partial write MODIFY cannot be truly atomic relies rollback
+- Logging: Use Python logging module Log EACH sub step application success failure INFO DEBUG ERROR levels include specification_id file_path action output relevant commands stdout stderr Log target /var/log/aion/healing.log within chroot configure rotation Consider sending logs AION central logging service
+- Error Handling: Wrap file operations try...except blocks catch specific exceptions FileNotFoundError PermissionError IsADirectoryError subprocess.CalledProcessError Any exception during application phase MUST trigger immediate halt transition ROLLBACK state log precise error context
+- Post Application Verification:
+- Trigger: Initiate automatically after ALL changes applied successfully application loop
+- Multi Stage Verification Process (Configurable Sequence):
+- Stage 1 Syntax Checks:
+- Identify modified ADDED code files based language e g .py .js
+- Execute language specific static analysis syntax checks via subprocess
+- Python subprocess.run(['python', '-m', 'py_compile', modified_py_file], check=True, capture_output=True) potentially flake8 modified_py_file
+- Node js subprocess.run(['node', '--check', modified_js_file], check=True, capture_output=True)
+- Log results capture stdout stderr Any check failure non zero exit code marks verification FAILED proceed rollback
+- Stage 2 Smoke Tests:
+- Execute predefined test suite designed verify core system functionality integration basic health
+- Invoke script subprocess.run(['/opt/aion/scripts/smoke_test.sh'], check=True, capture_output=True, timeout=300) configurable path timeout
+- Script MUST return exit code 0 success non zero failure
+- Log stdout stderr exit code Failure marks verification FAILED proceed rollback
+- Stage 3 Agent Interaction Checks (Optional Advanced):
+- Send specific query messages agint multimodel.agent verify core behaviors intact post update Example query {"command": "check_reasoner_status"} {"command": "verify_multimodal_basic_response", "test_prompt": "hello"}
+- Define expected response structure patterns values success criteria
+- Compare actual response expected Handle timeouts communication errors verification FAILED proceed rollback
+- Overall Verification Status: Maintain status PASS FAIL If ANY stage fails overall verification FAILED Set configurable timeout entire verification process
+- Logging: Log start end result each verification stage detailed output errors PASS FAIL status
+- Rollback Execution (Automated):
+- Trigger: Automatically initiated upon ANY failure application phase OR post application verification failure
+- Action: Send RequestSystemRestore message backup.agent replicant.agent providing exact backup_id obtained stored earlier ensure restoring correct state
+- Implementation: Secure API call HTTPS gRPC agent communication framework
+- Confirmation: Await RestoreSuccess RestoreFailure response Log status Set reasonable timeout restore operation
+- Post Rollback Check (Minimal Sanity):
+- Upon RestoreSuccess perform quick validation ensure core structure appears correct
+- Check existence permissions key directories files within mindx e g os.path.exists('/path/to/mindx/core')
+- Optional Compare checksums manifest critical files if backup mechanism provides manifest file md5sum -c backup_manifest.md5 via subprocess
+- Log results post rollback check Report any discrepancies BUT primary goal report overall rollback status
+- Reporting: Report detailed failure reason triggering rollback verification stage error message application error message rollback attempt status RestoreSuccess RestoreFailure upstream coordinator Mastermind AION
+- Success Reporting:
+- Condition: ALL changes applied successfully AND post application verification ALL stages passed
+- Action: Mark healing operation internal state SUCCESS
+- Optional Post Success Backup: Trigger another backup label post-heal-stable-<spec_id> provide stable state reference point
+- Reporting: Send ReportHealingStatus message upstream coordinator Mastermind AION include specification_id final status SUCCESS backup_id used potentially post success backup ID verification metrics duration
+- State Management:
+- Explicit States: IDLE, RECEIVING_SPEC, VALIDATING_SPEC, AWAITING_BACKUP_CONF, APPLYING_CHANGES, AWAITING_VERIFICATION_SYNTAX, AWAITING_VERIFICATION_SMOKE, AWAITING_VERIFICATION_AGENT, AWAITING_ROLLBACK_CONF, PERFORMING_POST_ROLLBACK_CHECK, REPORTING_SUCCESS, REPORTING_FAILURE
+- Persistence: Store current state specification_id backup_id progress details simple JSON file /var/aion/state/healing_agent.state within chroot Ensure atomic writes temporary file rename pattern prevent corruption Ensure agent can potentially recover resume from last known valid state upon restart depends AION process management behavior Consider more robust mechanism KV store database if AION platform provides standardized way
+- Locking: Implement simple file lock mechanism fcntl.flock state file prevent concurrent execution multiple healing operations CRITICAL
+- Security Considerations (REITERATED - CRITICAL):
+- Input Validation: Rigorously sanitize validate specification JSON ESPECIALLY file_path prevent path traversal ../ Use jsonschema allowlist known safe characters commands
+- Command Injection Prevention: Use subprocess.run argument lists NOT shell=True Construct command lists carefully parameterize external input NEVER format input directly into command strings
+- Permissions: Run HealingAgent process dedicated agentic user minimum necessary privileges ONLY RWX access required /path/to/mindx necessary tools config state files NO root access
+- Secure Communication: Use TLS mTLS HTTPS gRPC secure channels ALL inter agent communication code_analysis.agent backup.agent replicant.agent AION Mastermind Verify peer identities
+- Resource Limits: Implement timeouts ALL external interactions backup verification restore prevent indefinite hangs Configure AION resource limits CPU memory agent process itself
+- Auditing: Ensure detailed immutable logging ALL actions decisions security relevant events
+- Dependencies (Explicit List):
+- Python Standard Libraries: os, shutil, subprocess, json, logging, base64, hashlib (for optional checksums), fcntl (for locking)
+- Python Third Party Libraries: jsonschema, requests / grpc (for agent comms depends AION framework)
+- System Command Line Tools: patch, tar / rsync (expected backup.agent interaction), language linters (python, node), md5sum / sha256sum (optional verification)
+- AION Provided Services: Secure agent communication framework Central logging service Process management resource limits State persistence mechanism (optional KV store DB)
+- Filesystem Structure: Access RWX /path/to/mindx Access R /opt/aion/scripts/smoke_test.sh Access RW /var/log/aion/healing.log Access RW /var/aion/state/healing_agent.state Access WX /tmp (for temporary files) within chroot context
+$COMPONENT_IMPLEMENTATION_REQUIREMENTS # Encapsulated requirements MANDATORY ADHERENCE
+$AION_NET_FRAMEWORK_REQUIREMENTS # Encapsulated requirements MANDATORY ADHERENCE
+$AUGMENTIC_ASPIRATIONAL_GOALS # Ensure alignment responsible autonomous operation
+</Component>
+--- Section Two Interaction Protocols (Enhanced Detail) ---
+DIRECTIVE_LANG Define concrete JSON payloads interaction patterns HealingAgent other agents essential reliable interoperability error handling
+<Interaction source="code_analysis.agent" target="HealingAgent">
+- Message Type: SubmitCodeUpdateSpecification (e.g., POST /heal endpoint)
+- Payload Example (JSON Body): (See detailed example in Functionality section above)
+- Success Response (HealingAgent): HTTP 202 Accepted {"status": "acknowledged", "specification_id": "spec-20240517-001", "detail": "Specification received validation pending"}
+- Failure Response (HealingAgent): HTTP 400 Bad Request {"status": "rejected", "specification_id": "spec-20240517-001", "reason": "Schema validation failed: missing 'action' field in change item 1", "detail": "{...validation error details...}"} or HTTP 422 Unprocessable Entity for semantic errors
+</Interaction>
+<Interaction source="HealingAgent" target="backup.agent OR replicant.agent">
+- Message Type: RequestSystemBackup (e.g., POST /backup endpoint on target agent)
+- Payload Example (JSON Body):
+```json
+{
+"request_id": "heal-req-bkp-a7b3",
+"context": {
+"specification_id": "spec-20240517-001",
+"triggering_agent": "HealingAgent",
+"reason": "Pre-update safety backup"
+},
+"backup_preference": "REPLICANT_PREFERRED", // Or "BACKUP_ONLY"
+"scope": {
+"type": "filesystem",
+"paths": ["/path/to/mindx"],
+"include_configs": ["/etc/aion/augmentic_config.yaml"] // Optional extra files
+}
+// "database_dump_command": "pg_dump -U user db > /tmp/db.sql" // Optional advanced
+}
+```
+- Success Response (Backup/Replicant Agent): HTTP 200 OK {"request_id": "heal-req-bkp-a7b3", "status": "success", "backup_id": "backup-20240517100500-spec-001-repAgent", "backup_type_executed": "REPLICANT", "backup_location": "replicant_node_id_or_path"}
+- Failure Response (Backup/Replicant Agent): HTTP 500 Internal Server Error {"request_id": "heal-req-bkp-a7b3", "status": "failure", "reason": "Failed to acquire lock on target directory", "detail": "{...error trace...}"}
+</Interaction>
+<Interaction source="HealingAgent" target="backup.agent OR replicant.agent">
+- Message Type: RequestSystemRestore (e.g., POST /restore endpoint on target agent)
+- Payload Example (JSON Body):
+```json
+{
+"request_id": "heal-req-rst-c9f1",
+"context": {
+"specification_id": "spec-20240517-001",
+"triggering_agent": "HealingAgent",
+"reason": "Rollback due to verification failure"
+},
+"backup_id": "backup-20240517100500-spec-001-repAgent"
+}
+```
+- Success Response (Backup/Replicant Agent): HTTP 200 OK {"request_id": "heal-req-rst-c9f1", "status": "success", "detail": "System restored successfully from backup ID ..."}
+- Failure Response (Backup/Replicant Agent): HTTP 500 Internal Server Error {"request_id": "heal-req-rst-c9f1", "status": "failure", "reason": "Backup ID not found or corrupted", "detail": "{...error trace...}"}
+</Interaction>
+<Interaction source="HealingAgent" target="UpstreamCoordinator OR Mastermind">
+- Message Type: ReportHealingStatus (e.g., POST /report/healing endpoint)
+- Payload Example (JSON Body):
+```json
+{
+"report_id": "heal-rep-e3d5",
+"specification_id": "spec-20240517-001",
+"final_status": "FAILED_VERIFICATION_SMOKE", // Or SUCCESS ROLLED_BACK FAILED_APPLICATION FAILED_BACKUP FAILED_ROLLBACK etc
+"start_time": "2024-05-17T10:02:00Z",
+"end_time": "2024-05-17T10:15:00Z",
+"duration_seconds": 780,
+"backup_id_used": "backup-20240517100500-spec-001-repAgent",
+"error_details": { // Optional present on failure
+"stage": "VERIFICATION_SMOKE",
+"message": "Smoke test script exited with code 1",
+"stdout": "...",
+"stderr": "..."
+},
+"rollback_status": "RestoreSuccess" // Optional present if rollback attempted
+}
+```
+- Success Response (Coordinator/Mastermind): HTTP 200 OK {"status": "report_received", "report_id": "heal-rep-e3d5"}
+</Interaction>
+<Interaction source="HealingAgent" target="VerificationServices e.g., agint test_runner">
+- Message Type: RequestVerification (e.g., POST /verify endpoint on target agent/service)
+- Payload Example (JSON Body):
+```json
+{
+"request_id": "heal-req-ver-b4a8",
+"context": {
+"specification_id": "spec-20240517-001",
+"triggering_agent": "HealingAgent"
+},
+"verification_type": "AGENT_QUERY", // Or SMOKE_TEST SYNTAX_CHECK
+"parameters": { // Type specific parameters
+"target_agent": "agint",
+"query": {"command": "check_reasoner_status"},
+"expected_response_pattern": {"status": "OK", "active_rules": ">10"}
+// "script_path": "/opt/aion/scripts/smoke_test.sh" // For SMOKE_TEST
+// "file_path": "/path/to/mindx/core/reasoner/rules.py" // For SYNTAX_CHECK
+},
+"timeout_seconds": 60
+}
+```
+- Success Response (Verification Service): HTTP 200 OK {"request_id": "heal-req-ver-b4a8", "status": "PASS", "detail": "{...optional output...}"}
+- Failure Response (Verification Service): HTTP 200 OK or 500 {"request_id": "heal-req-ver-b4a8", "status": "FAIL", "reason": "Reasoner status check returned 'DEGRADED'", "detail": "{...actual response...}"}
+</Interaction>
+--- Section Three Implementation Strategy (Enhanced) ---
+DIRECTIVE_AI_PROCESSOR Implement HealingAgent prioritizing MAXIMUM SAFETY ROBUSTNESS VERIFICATION ROLLBACK mechanisms Develop iteratively SOLIDIFY CORE LOOP FIRST basic backup apply simplest verification e g syntax check rollback THEN progressively add sophisticated verification smoke tests agent queries advanced error handling state persistence recovery Rigorous testing harness essential simulate failures ALL stages backup application patch errors verification failures restore failures MANDATORY before ANY deployment attempt modify staging production system Extremely high risk component demands highest quality assurance penetration testing independent security review Coordination Mastermind AION absolutely essential define trigger conditions operational parameters resource limits HealingAgent operation Ensure observability detailed logging metrics easily monitored integrated AION platform monitoring $AUGMENTIC_ASPIRATIONAL_GOALS
