@@ -69,4 +69,4 @@ The blueprint implicitly defines a phased roadmap (mentioning Phase Three onward
 
 ## Conclusion
 
-This `.prompt` file is a sophisticated, machine-readable specification detailing the planned evolution of the Augmentic Agent Framework within AION NET. It uses a strict custom language, leverages variable encapsulation for complex requirements, and outlines a clear path towards building more autonomous, capable, and intelligent AI agents aligned with the Augmentic philosophy and broader ethical/aspirational goals.
+This `augmentic2.prompt` file is a sophisticated, machine-readable specification detailing the evolution of the Augmentic Agent Framework within AION NET. It uses a strict custom language, leverages variable encapsulation for complex requirements, and outlines a clear path towards building more autonomous, capable, and intelligent S.M.A.I.R.T agents aligned with the Augmentic philosophy and broader ethical/aspirational goals.
