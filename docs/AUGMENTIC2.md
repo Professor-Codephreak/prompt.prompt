@@ -12,13 +12,13 @@ The unique format uses a highly constrained "prompt language" intended for unamb
 
 ## Key Concepts Referenced
 
-*   **Augmentic Agency:** A hybrid AI approach combining classical rational agent architectures (like BDI) with powerful augmentations like Large Language Models (LLMs), Knowledge Graphs (KGs), and specialized tools.
-*   **MASTERMIND:** An aspirational concept representing a highly capable, autonomous, and potentially self-improving Augmentic intelligence system.
-*   **AION NET:** The specific project or platform context within which this agent framework is being developed and deployed.
+*   **<a href="https://github.com/agenticplace">Augmentic Agency</a>:** A hybrid AI approach combining classical rational agent architectures (like BDI) with powerful augmentations like Large Language Models (LLMs), Knowledge Graphs (KGs), and specialized tools.
+*   **<a href="https://github.com/mastmindml/">MASTERMIND</a>:** An aspirational concept representing a highly capable, autonomous, and potentially self-improving Augmentic intelligence system.
+*   **<a href="https://github.com/AION-NET">AION-NET</a>:** The specific project or platform context within which this agent framework is being developed and deployed.
 *   **BDI (Belief-Desire-Intention):** A classical agent architecture model. This blueprint aims to enhance and complete the BDI implementation (e.g., adding Desire Synthesis).
 *   **LLM (Large Language Model):** Used for complex generation, analysis, planning, and reasoning tasks. The blueprint includes strategies for multi-LLM use and fine-tuning.
 *   **KG (Knowledge Graph):** Integrated for structured knowledge representation and reasoning, complementing vector databases.
-*   **Blockchain:** Explored conceptually for future capabilities like immutable memory/audit trails, economic autonomy, and decentralized identity/coordination.
+*   **<a href="https://github.com/cryptoAGI">Blockchain</a>:** Explored conceptually for future capabilities like immutable memory/audit trails, economic autonomy, and decentralized identity/coordination.
 *   **v2.0.0-rc2:** The specific target version release candidate for the features described.
 
 ## File Structure Breakdown
@@ -69,4 +69,4 @@ The blueprint implicitly defines a phased roadmap (mentioning Phase Three onward
 
 ## Conclusion
 
-This `augmentic2.prompt` file is a sophisticated, machine-readable specification detailing the evolution of the Augmentic Agent Framework within AION NET. It uses a strict custom language, leverages variable encapsulation for complex requirements, and outlines a clear path towards building more autonomous, capable, and intelligent S.M.A.I.R.T agents aligned with the Augmentic philosophy and broader ethical/aspirational goals.
+This `augmentic2.prompt` file is a sophisticated, machine-readable specification detailing the evolution of the Augmentic Agent Framework within <a href="https://github.com/AION-NET">AION-NET</a>. It uses a strict custom language, leverages variable encapsulation for complex requirements, and outlines a clear path towards building more autonomous, capable, and intelligent S.M.A.I.R.T agents aligned with the Augmentic philosophy and broader ethical/aspirational goals.
