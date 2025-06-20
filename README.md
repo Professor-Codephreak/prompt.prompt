@@ -4,7 +4,7 @@
 ActivatePrompt.py is a simple script to turn a .prompt file into a .txt file that an AI can see. At this time AI is not natively reading .prompt files from the promptEngine. This is on purpose. These .prompt are very interesting, and very powerful to say the least.
 
 # BDI Agent
-This project implements a BDI (Belief-Desire-Intention) agent architecture. The agent can perform web searches, take notes, and use AI models for text generation. BDI architecture was used to create augmentic as an extenstion of AgenticPlace
+This project implements a BDI (Belief-Desire-Intention) agent architecture. The agent can perform web searches, take notes, and use AI models for text generation. BDI architecture has been used to create augmentic as an extenstion of AgenticPlace development of mindX technology.
 
 ## Project Structure
 
