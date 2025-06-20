@@ -1,0 +1,71 @@
+Augmentic Agency - Expanded Blueprint v3.0.0-rc1 (SEAL Integration)
+Version: three point zero point zero rc one EXPANDED REFINED SEAL INTEGRATION Description: EXPANDED REFINED Evolutionary blueprint directive agent framework v three point zero point zero integrates Self Adapting Language Model SEAL framework as core mechanism for meta cognition online learning self improvement Establishes formal hierarchical agent architecture Mastermind StrategicEvolutionAgent SEA SelfImprovementAgent SIA to orchestrate and execute resilient self modification campaigns Defines concrete implementation of inner update loop and outer RL policy loop for self edit generation based on downstream task performance Refines advanced memory and planning components to support this new paradigm Author: AI Collaboration based provided directive documentation SEAL paper by Zweiger et al arXiv two five zero six point one zero nine four three Tags: ["agent-framework", "evolution", "blueprint", "directive", "augmentic", "v3.0.0-rc1", "bdi", "reasoning", "memory", "llm", "autonomy", "self-improvement", "resource-management", "blockchain", "mastermind", "ai-readable-docs", "seal-framework", "meta-learning", "hierarchical-agents", "online-learning", "self-adapting-llm"] Default Text Model: { model_id: "gemini-1.5-pro", temperature: 0.4 } Default Planner Model: { model_id: "gemini-1.5-flash", temperature: 0.5 }
+Core Philosophy Recap (v3.0 Update)
+AI_CONTEXT: Reiterate core philosophy Augmentic approach basis evolution directive EXPANSION Focus on integration of Self Adapting Language Model SEAL framework as the primary engine for meta cognition and self improvement
+AI_PHILOSOPHY: The Augmentic approach hybridizes a BDI core with powerful LLM augmentations. V three point zero point zero elevates this by formally adopting the Self-Adapting Language Model (SEAL) framework as the primary engine for evolution. The system is no longer merely executing pre-defined or heuristically-derived plans for self-improvement; it is now architected to learn how to learn more effectively. This is achieved through a nested loop structure:
+Inner Loop (Adaptation): An agent, when tasked with incorporating new knowledge or skills, generates a "self-edit"—a custom-tailored piece of finetuning data, a code modification, or a tool configuration. This self-edit is used to perform a direct, lightweight update on the relevant component (e.g., via LoRA).
+Outer Loop (Policy Learning): The performance of the adapted component on a downstream task provides a reward signal. This reward is used in a Reinforcement Learning (RL) loop to improve the agent's policy for generating future self-edits. The system learns to create data and directives that are maximally useful for its own learning process.
+This operationalizes meta-cognition. The system does not just act; it generates a learning strategy, executes it, evaluates the outcome, and refines the strategy itself, culminating in a hierarchical architecture of agents (Mastermind, SEA, SIA) designed for safe and effective autonomous evolution.
+Section One: Enhancing Agentic Properties (Expanded - Mature)
+No major functional changes. The DesireSynthesizer and AdvancedDeliberationGoalManagement components are now considered mature and foundational. They provide the high-level goals that trigger the new evolutionary mechanisms.
+Section Two: Enhancing Augmented Capabilities (Expanded - Mature)
+Components like MultiLLMStrategy, HybridReasoning, ProactiveAdaptiveToolUse, and AdvancedMemoryArchitecture are mature. The AdvancedMemoryArchitecture (MemoryAgent) is now a critical dependency for the SEAL framework, providing the STM/LTM structure to log self-edit attempts and store consolidated knowledge.
+Section Three: Enhancing Autonomous Operation (Major Update: SEAL Implementation)
+This section is heavily updated to reflect the implementation of the SEAL framework through a formal hierarchy of specialized agents.
+Component: OnlineLearningSelfImprovement (Re-defined as SEAL Outer Loop)
+AI_TASK EXPANDED: Evolve beyond simple parameter tuning. Implement the SEAL framework's outer Reinforcement Learning loop to train the system's policy for generating "self-edits". This is the core meta-learning engine, optimizing the strategy of self-improvement. Significance lies in moving from static or heuristic improvement to a learned, data-driven process that directly maximizes downstream task performance.
+AI_FUNCTIONALITY EXPANDED:
+Self-Edit Generation Policy: The StrategicEvolutionAgent (SEA) maintains a policy (an LLM) for generating self-edits based on a high-level goal and current system context.
+Reward Calculation: After an inner-loop adaptation is performed and evaluated (e.g., by the SIA executing a code change and running tests), a reward is calculated. For code modification, this can be a binary reward (1 for tests passed, 0 for failed) or a score based on performance metrics.
+Policy Update (ReSTEM): Implement the ReSTEM (Rejection Sampling + SFT) algorithm.
+Action Sampling (E-Step): For a given improvement task, sample multiple candidate self-edits from the current policy.
+Rejection Sampling (Filtering): Evaluate each self-edit via an inner-loop update and downstream task evaluation. Discard all self-edits that result in negative or zero reward.
+Supervised Finetuning (M-Step): Create a new training dataset consisting only of the prompt-to-self-edit pairs that produced a positive reward. Perform a supervised finetuning pass on the policy model (SEA's core LLM) with this "golden" dataset. This updates the policy to make it more likely to generate successful self-edits in the future.
+Integration Requirements: StrategicEvolutionAgent, SelfImprovementAgent (via Coordinator), BeliefSystem (for state), MemoryAgent (for logging attempts and results), PlanManager (for executing the evaluation).
+Component: StrategicEvolutionAgent (SEA) (New)
+AI_TASK EXPANDED: Implement the StrategicEvolutionAgent (SEA), a high-level "Project Manager" for system evolution. The SEA orchestrates self-improvement campaigns but does not modify code directly. It operates the SEAL outer loop at a strategic level. Significance lies in providing a safe orchestration layer that separates strategic planning from high-risk tactical execution.
+AI_FUNCTIONALITY EXPANDED:
+Campaign Management: Receives high-level directives from Mastermind (e.g., "Improve system memory usage").
+Resilient Plan Generation: Uses its internal LLM to generate a multi-step Plan for the campaign. This plan is safe-by-default, including actions like CREATE_ROLLBACK_PLAN, REQUEST_SYSTEM_ANALYSIS, REQUEST_SIA_EXECUTION, and RUN_VALIDATION_TESTS.
+Plan Execution: Uses an internal PlanManager to execute the strategic plan, dispatching actions.
+Delegation: For actions requiring direct system modification, it sends a formal, context-rich request to the CoordinatorAgent, which then invokes the appropriate tool (like the SelfImprovementAgent).
+Outcome Evaluation: Evaluates the results of the delegated tasks (e.g., did the SIA's change pass validation tests?) to determine the success of the plan and provide the reward signal for the SEAL outer loop.
+Integration Requirements: Mastermind, CoordinatorAgent, PlanManager, GoalManager, BeliefSystem, SystemAnalyzerTool.
+Component: SelfImprovementAgent (SIA) (New)
+AI_TASK EXPANDED: Implement the SelfImprovementAgent (SIA) as a specialized, high-risk "Mechanic" tool. The SIA is invoked by the CoordinatorAgent to perform the inner-loop adaptation on a specific code file. It operates within a sandboxed environment with extensive safety protocols. Significance lies in encapsulating the dangerous act of code modification into a controllable, auditable, and specialized agent.
+AI_FUNCTIONALITY EXPANDED:
+Sandboxed Operation: Creates a temporary, isolated iteration directory for each modification task to avoid corrupting the main codebase.
+Code Analysis & Implementation: Receives a specific file path and improvement goal. Uses its LLM to analyze the code and generate a complete, modified version of the file. This generated modification is the "self-edit".
+Automated Evaluation: After modifying the code in the sandbox, it performs a series of automated checks:
+Syntax Check: Ensures the generated code is valid Python.
+Self-Critique: Uses its LLM to score how well the change meets the goal.
+Self-Test Execution: If modifying itself, it runs a dedicated test suite on the new version to check for regressions.
+Promotion/Rollback: If evaluation is successful, it reports success. The SEA's plan then determines promotion. If it fails, the SIA automatically reverts the changes in its sandbox and reports failure.
+Backup and Versioning: Maintains a versioned history of changes and provides a mechanism for rollback to previous stable versions.
+Integration Requirements: Invoked by CoordinatorAgent. Uses LLMHandler for its internal operations. Does not directly depend on other agents, enhancing its isolation.
+Component: RobustErrorRecoveryCausality (Updated)
+This component remains critical. With the new SIA, RCA can now be triggered when a self-improvement attempt fails evaluation. The failure logs from the SIA (e.g., syntax error, failed self-test, low critique score) provide rich context for the RCA process, which can then generate a new, more specific goal for the SEA, such as "Fix the syntax error in the last attempt to modify memory_agent.py."
+Component: StrategicLongTermPlanning (Updated)
+This component is now largely embodied by the StrategicEvolutionAgent (SEA). The SEA's ability to generate multi-step, resilient plans for system modification is the direct implementation of this blueprint item.
+Component: ResourceManagement (Updated)
+This component now also tracks the computational cost of the SEAL loop. Each inner-loop update (finetuning a LoRA) has a significant token and compute cost, which must be budgeted and monitored to ensure sustainable self-improvement.
+Section Four: Blueprint Blockchain Integration (Expanded Conceptual)
+No changes. This remains a conceptual future pathway.
+Section Five: Synergy Emergence Meta Cognition (Updated Example)
+Synergy Pathways Examples: The SEAL framework provides the ultimate example of synergy.
+Directive & Desire: Mastermind observes low test coverage and generates a desire: "Increase test coverage for core modules."
+Strategic Planning (SEA): The SEA receives this, formulates a Plan.
+Action 1 (Analysis): The Plan calls for REQUEST_SYSTEM_ANALYSIS. The SystemAnalyzerTool runs, identifies learning/plan_management.py as having low coverage. This result is stored in the BeliefSystem.
+Action 2 (Rollback Prep): The Plan calls for CREATE_ROLLBACK_PLAN on learning/plan_management.py. Its content is saved to a belief.
+Action 3 (Delegation): The Plan calls for REQUEST_SIA_EXECUTION via the CoordinatorAgent.
+Inner Loop (SIA "Self-Edit"): The SIA is invoked. It analyzes the file and the goal ("add tests"). It generates new code that includes additional test functions. This code is the "self-edit".
+Inner Loop (SIA Evaluation): The SIA runs a syntax check (pass) and a self-critique (score: 0.9). It reports success to the Coordinator, which reports back to the SEA.
+Action 4 (Validation): The SEA's Plan now calls RUN_VALIDATION_TESTS, triggering the full system test suite. The tests pass.
+Outer Loop (Reward & Policy Update): The successful campaign provides a positive reward. The prompt that led the SEA to generate this successful plan (e.g., to include rollback and validation steps) is reinforced via ReSTEM. The SEA becomes better at creating safe and effective evolution plans in the future.
+Section Six: Directive Implementation Strategy (Updated)
+The previous phased plan is largely complete. The new strategy focuses on scaling and hardening the SEAL implementation.
+Phase Seven: SEAL Optimization & Scaling: Focus on reducing the computational overhead of the inner loop. Explore more efficient finetuning methods. Implement batch processing of self-edits. Optimize the ReSTEM policy update step.
+Phase Eight: Mitigating Catastrophic Forgetting: Address the key limitation identified in the SEAL paper. Integrate continual learning strategies (e.g., reward shaping to penalize regressions, null-space constrained edits) into the inner loop update process.
+Phase Nine: Autonomous Evaluation & Unsupervised Adaptation: Extend SEAL to operate on unlabeled data. Implement a mechanism for the agent to generate its own evaluation questions or test cases for a given context, enabling the RL loop to function without pre-existing ground-truth labels. This is the final step towards fully autonomous, open-ended learning.
+Phase Ten: Advanced Autonomy Decentralization (as before): Re-initiates the conceptual work on blockchain integration, now with a much more powerful and autonomous agent architecture as the foundation.
+END EXPANDED REFINED BLUEPRINT V3.0.0-RC1
