@@ -1,107 +1,159 @@
-version: 0.7.0  # Reflects self version
-
-description: "An AI Agent that assists in creating and refining prompt files, including language specifications and parameterized agent templates."
-
-defaultTextModel:
-model_id: "gemini-1.5-pro"
-temperature: 0.6
-defaultCodeModel:
-model_id: "gemini-code"
-temperature: 0.4
-defaultSpecModel:
-model_id: "gemini-1.5-pro"
-temperature: 0.5
-tags:
-
-agent
-
-prompt-engineering
-
-meta
-
-automation
-
-code-generation
-
-template
-
-specification
-
 prompt-prompt
 
-prompt-prompt is a toolkit for defining and running .prompt agents—specialized AI-driven prompt engineering tools. It includes:
 
-PromptEngineerAgent: Generate language specifications and agent template files.
 
-Utility scripts for converting and activating prompts.
+
+
+prompt-prompt is a framework for authoring, refining, and running .prompt-based AI agents. It provides:
+
+PromptEngineerAgent: An AI agent that generates technical language specifications and parameterized agent templates.
+
+Utility scripts for converting, activating, and managing .prompt files.
+
+Table of Contents
+
+Features
 
 Installation
 
+Quickstart
+
+Using PromptEngineerAgent
+
+Command-Line Interface
+
+Project Structure
+
+Configuration
+
+Development
+
+Testing
+
+Linting & Formatting
+
+Contributing
+
+License
+
+Features
+
+Agent Templates: Generate .prompt agent files programmatically.
+
+Language Specifications: Produce detailed technical specs for the .prompt DSL.
+
+Extensible CLI: Run agents directly from the command line.
+
+Script Utilities: Convert and validate prompt files.
+
+Test Suite: Ready-to-use pytest tests for core functionality.
+
+Installation
+
+Clone the repository and install with pip:
+
+git clone https://github.com/Professor-Codephreak/prompt.prompt.git
+cd prompt.prompt
 pip install .
 
-Usage
+Or install directly from GitHub:
 
-PromptEngineerAgent
+pip install git+https://github.com/Professor-Codephreak/prompt.prompt.git
 
-Import and run the agent from the promptengineer package:
+Quickstart
+
+Using PromptEngineerAgent
+
+The PromptEngineerAgent can generate specification or template files:
 
 from promptengineer.agent import PromptEngineerAgent
 import asyncio
 
 async def main():
-    # Spec generation example
-    agent = PromptEngineerAgent(
-        task_description="Generate technical specification for prompt language v0.7.0",
-        generation_mode="SPECIFICATION",
+    # Generate a language specification
+    spec_agent = PromptEngineerAgent(
+        task_description="Generate .prompt spec v0.7.0",  
+        generation_mode="SPECIFICATION",  
         target_filename="prompt_spec_v0_7_0.md"
     )
-    result = await agent.run()
-    print(result)
+    print(await spec_agent.run())
 
-    # Template generation example
-    agent = PromptEngineerAgent(
-        task_description="Create template 'DataAnalysisAgent'",
+    # Generate an agent template
+    tmpl_agent = PromptEngineerAgent(
+        task_description="Create agent template 'DataAnalysisAgent'",
         generation_mode="AGENT_TEMPLATE",
         agent_name_param="DataAnalysisAgent"
     )
-    result = await agent.run()
-    print(result)
+    print(await tmpl_agent.run())
 
 if __name__ == "__main__":
     asyncio.run(main())
 
-Scripts
+Command-Line Interface
 
-Use the provided CLI entrypoint to run agents directly:
+A script is provided to run agents without writing code:
 
-# Specification mode
+# Run specification mode
 scripts/engineer_agent.py SPECIFICATION --file prompt_spec_v0_7_0.md
 
-# Template mode
+# Run template mode
 scripts/engineer_agent.py AGENT_TEMPLATE --name DataAnalysisAgent
+
+Project Structure
+
+prompt.prompt/               # Repository root
+├── promptengineer/          # Core agent package
+│   └── agent.py             # PromptEngineerAgent implementation
+├── prompts/                 # Sample .prompt files
+├── scripts/                 # CLI entry points
+│   └── engineer_agent.py    # Run the PromptEngineerAgent
+├── tests/                   # Pytest suites
+├── pyproject.toml           # Project metadata & dependencies
+├── README.md                # Project documentation
+└── LICENSE                  # Open source license
+
+Configuration
+
+Certain features require API keys or configuration variables. Copy and edit the example environment file:
+
+cp config/.env.example config/.env
+
+Populate the following variables in config/.env:
+
+LLM_API_KEY — API key for your language model provider
+
+OTHER_SETTING — Description of other settings
+
+Development
+
+Testing
+
+Run the full test suite with coverage:
+
+pytest --cov=promptengineer
+
+Linting & Formatting
+
+Ensure code quality with:
+
+flake8
+black .
+mypy promptengineer
 
 Contributing
 
-Fork the repository and create a feature branch.
+Fork the repository.
 
-Add or update tests in tests/.
+Create a feature branch (git checkout -b feature/my-feature).
 
-Submit a pull request with clear description of changes.
+Develop and add tests.
+
+Submit a pull request with a clear description of changes.
+
+Please follow the Contributor Covenant code of conduct.
 
 License
 
 This project is licensed under the MIT License. See LICENSE for details.
 
-Metadata
-
-Version: 0.7.0
-
-Models:
-
-Text: gemini-1.5-pro (temp=0.6)
-
-Code: gemini-code (temp=0.4)
-
-Spec: gemini-1.5-pro (temp=0.5)
-
-Tags: agent, prompt-engineering, meta, automation, code-generation, template, specification
+Version 0.7.0 — Generated by PromptEngineerAgent.
